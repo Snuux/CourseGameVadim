@@ -39,6 +39,8 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagment
 
             sceneBootstrap.ProcessRegistrations(sceneContainer, sceneArgs);
 
+            sceneContainer.Initialize();
+
             yield return sceneBootstrap.Initialize();
 
             _loadingScreen.Hide();
