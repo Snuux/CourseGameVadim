@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _Project.Develop.Runtime.Gameplay.Feature.GameCycle;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -12,6 +13,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
     {
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
+        
+        private GameCycleHandler _gameCycle;
+        private bool _running;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -27,9 +31,13 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         public override IEnumerator Initialize()
         {
-            Debug.Log($"Вы попали на уровень {_inputArgs.LevelNumber}");
+            Debug.Log($"Вы попали на уровень. " +
+                      $"Необходимо ввести последовательность из: {_inputArgs.Symbols}" +
+                      $"Кол-во символов: {_inputArgs.Length}");
 
             Debug.Log("Инициализация геймплейной сцены");
+            
+            _gameCycle = _container.Resolve<GameCycleHandler>();
 
             yield break;
         }
@@ -37,16 +45,15 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         public override void Run()
         {
             Debug.Log("Старт геймплейной сцены");
+            
+            _gameCycle.Run();
+            _running = true;
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
-            }
+            if (_running)
+                _gameCycle.Update(Time.deltaTime);
         }
     }
 }

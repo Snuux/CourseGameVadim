@@ -2,6 +2,7 @@
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -18,6 +19,10 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
         private PlayerDataProvider _playerDataProvider;
         private ICoroutinesPerformer _coroutinesPerformer;
+        
+        private ChangeSceneByLevelTypeService _changeSceneByLevelTypeService;
+        
+        private bool _running;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -35,17 +40,21 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             _playerDataProvider = _container.Resolve<PlayerDataProvider>();
             _coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
 
+            _changeSceneByLevelTypeService = _container.Resolve<ChangeSceneByLevelTypeService>();
+
             yield break;
         }
 
         public override void Run()
         {
             Debug.Log("Старт сцены меню");
+
+            _running = true;
         }
 
         private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F))
+        { 
+            /*if (Input.GetKeyDown(KeyCode.F))
             {
                 SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
@@ -71,7 +80,10 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             {
                 _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
                 Debug.Log("Сохранение было вызвано");
-            }
+            }*/
+            
+            if (_running)
+                _changeSceneByLevelTypeService.Update(Time.deltaTime);
         }
     }
 }
