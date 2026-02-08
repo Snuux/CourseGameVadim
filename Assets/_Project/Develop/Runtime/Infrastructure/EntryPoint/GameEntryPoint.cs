@@ -40,6 +40,8 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             SceneSwitcherService sceneSwitcherService = container.Resolve<SceneSwitcherService>();
             PlayerDataProvider playerDataProvider = container.Resolve<PlayerDataProvider>();
 
+            Debug.Log("Открытие окна загрузки");
+            
             loadingScreen.Show();
 
             Debug.Log("Начинается инициализация сервисов");

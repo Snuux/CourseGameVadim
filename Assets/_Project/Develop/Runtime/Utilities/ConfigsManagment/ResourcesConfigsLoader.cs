@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
 
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
-            {typeof(StartWalletConfig), "Configs/Meta/Wallet/StartWalletConfig" }
+            { typeof(StartWalletConfig), "Configs/Meta/Wallet/StartWalletConfig" },
+            { typeof(LevelsConfig), "Configs/LevelsConfig" }
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)
@@ -27,7 +29,9 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
 
             foreach (KeyValuePair<Type, string> configResourcesPath in _configsResourcesPaths)
             {
-                ScriptableObject config = _resources.Load<ScriptableObject>(configResourcesPath.Value);
+                ScriptableObject config = _resources
+                    .Load<ScriptableObject>(configResourcesPath.Value);
+                
                 loadedConfigs.Add(configResourcesPath.Key, config);
                 yield return null;
             }
