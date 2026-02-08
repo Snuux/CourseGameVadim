@@ -1,16 +1,18 @@
 ﻿using System.Collections;
-using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Infrastructure
 {
-    public class MainMenuBootstrap : SceneBootstrap
+    public partial class MainMenuBootstrap : SceneBootstrap
     {
         private DIContainer _container;
+        private ChangeSceneByLevelTypeService _changeSceneByLevelTypeService;
+        
+        private bool _running;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -21,24 +23,25 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
         public override IEnumerator Initialize()
         {
-            Debug.Log("Инициализация сцены меню");
+            Debug.Log("Initialization of meta scene");
+
+            _changeSceneByLevelTypeService = _container.Resolve<ChangeSceneByLevelTypeService>();
 
             yield break;
         }
 
         public override void Run()
         {
-            Debug.Log("Старт сцены меню");
+            Debug.Log("Start of meta scene");
+            Debug.Log("Enter 1 or 2 for load sequence with Letters or Digits:");
+
+            _running = true;
         }
 
-        private void Update()
+        public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2)));
-            }
+            if (_running)
+                _changeSceneByLevelTypeService.Update(Time.deltaTime);
         }
     }
 }

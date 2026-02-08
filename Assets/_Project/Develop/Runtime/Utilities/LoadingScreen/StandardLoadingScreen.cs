@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Utilities.LoadingScreen
 {
@@ -12,8 +13,8 @@ namespace _Project.Develop.Runtime.Utilities.LoadingScreen
             DontDestroyOnLoad(this);
         }
 
-        public void Hide() => gameObject.SetActive(false);
-
         public void Show() => gameObject.SetActive(true);
+
+        public void Hide() => gameObject.SetActive(false);
     }
 }

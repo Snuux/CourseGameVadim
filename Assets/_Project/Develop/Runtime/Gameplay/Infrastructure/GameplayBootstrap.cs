@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
+using _Project.Develop.Runtime.Gameplay.Feature.GameCycle;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
 using UnityEngine;
 
@@ -13,12 +13,15 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
 
+        private GameCycleHandler _gameCycle;
+        private bool _running;
+
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
             _container = container;
 
             if (sceneArgs is not GameplayInputArgs gameplayInputArgs)
-                throw new ArgumentException($"{nameof(sceneArgs)} is not match with {typeof(GameplayInputArgs)} type");
+                throw new ArgumentException($"{nameof(sceneArgs)} is not match {typeof(GameplayInputArgs)} type");
 
             _inputArgs = gameplayInputArgs;
 
@@ -27,26 +30,25 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         public override IEnumerator Initialize()
         {
-            Debug.Log($"Вы попали на уровень {_inputArgs.LevelNumber}");
+            Debug.Log("Initialization of gameplay scene");
 
-            Debug.Log("Инициализация геймплейной сцены");
+            _gameCycle = _container.Resolve<GameCycleHandler>();
 
             yield break;
         }
 
         public override void Run()
         {
-            Debug.Log("Старт геймплейной сцены");
+            Debug.Log("Start of gameplay scene");
+
+            _gameCycle.Run();
+            _running = true;
         }
 
-        private void Update()
+        public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
-            }
+            if (_running)
+                _gameCycle.Update(Time.deltaTime);
         }
     }
 }

@@ -12,12 +12,10 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
     {
         private void Awake()
         {
-            Debug.Log("Старт проекта, сетап настроек");
-
+            Debug.Log("Start of the project, setup app settings");
             SetupAppSettings();
 
-            Debug.Log("Процесс регистрации сервисов всего проекта");
-
+            Debug.Log("Process of registration of all services");
             DIContainer projectContainer = new DIContainer();
 
             ProjectContextRegistrations.Process(projectContainer);
@@ -35,18 +33,23 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             ILoadingScreen loadingScreen = container.Resolve<ILoadingScreen>();
             SceneSwitcherService sceneSwitcherService = container.Resolve<SceneSwitcherService>();
+            
+            Debug.Log("Open loading screen");
 
             loadingScreen.Show();
-
-            Debug.Log("Начинается инициализация сервисов");
+            
+            Debug.Log("Process of initialization of all services");
 
             yield return container.Resolve<ConfigsProviderService>().LoadAsync();
 
             yield return new WaitForSeconds(1f);
-
-            Debug.Log("Завершается инициализация сервисов");
-
+            
+            Debug.Log("End of initialization of all services");
+            
+            Debug.Log("Close loading screen");
             loadingScreen.Hide();
+            
+            Debug.Log("Started new scene...");
 
             yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
         }

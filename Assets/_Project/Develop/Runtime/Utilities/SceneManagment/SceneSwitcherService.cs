@@ -11,10 +11,10 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagment
     {
         private readonly SceneLoaderService _sceneLoaderService;
         private readonly ILoadingScreen _loadingScreen;
-        private readonly DIContainer _projectContainer;
+        private readonly DIContainer _projectContainer; // его нужно передавать в сцену
 
         public SceneSwitcherService(
-            SceneLoaderService sceneLoaderService, 
+            SceneLoaderService sceneLoaderService,
             ILoadingScreen loadingScreen,
             DIContainer projectContainer)
         {
@@ -30,20 +30,20 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagment
             yield return _sceneLoaderService.LoadAsync(Scenes.Empty);
             yield return _sceneLoaderService.LoadAsync(sceneName);
 
-            SceneBootstrap sceneBootstrap = Object.FindObjectOfType<SceneBootstrap>();
+            SceneBootstrap sceneBoostrap = Object.FindObjectOfType<SceneBootstrap>();
 
-            if (sceneBootstrap == null)
-                throw new NullReferenceException(nameof(sceneBootstrap) + " not found");
+            if (sceneBoostrap == null)
+                throw new NullReferenceException(nameof(sceneBoostrap) + "not found");
 
             DIContainer sceneContainer = new DIContainer(_projectContainer);
-
-            sceneBootstrap.ProcessRegistrations(sceneContainer, sceneArgs);
-
-            yield return sceneBootstrap.Initialize();
+            
+            sceneBoostrap.ProcessRegistrations(sceneContainer, sceneArgs);
+            
+            yield return sceneBoostrap.Initialize();
 
             _loadingScreen.Hide();
-
-            sceneBootstrap.Run();
+            
+            sceneBoostrap.Run();
         }
     }
 }

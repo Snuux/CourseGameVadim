@@ -10,14 +10,14 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagment
         {
             AsyncOperation wait = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
 
-            yield return new WaitWhile(() => wait.isDone == false);
+            yield return new WaitWhile(() => wait?.isDone == false);
         }
 
         public IEnumerator UnloadAsync(string sceneName)
         {
             AsyncOperation wait = SceneManager.UnloadSceneAsync(sceneName);
 
-            yield return new WaitWhile(() => wait.isDone == false);
+            yield return new WaitWhile(() => wait?.isDone == false);
         }
     }
 }
