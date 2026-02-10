@@ -1,6 +1,11 @@
-﻿using _Project.Develop.Runtime.Gameplay.Feature.GameCycle;
-using _Project.Develop.Runtime.Gameplay.Feature.Levels;
+﻿using _Project.Develop.Runtime.Configs;
+using _Project.Develop.Runtime.Configs.Meta.Levels;
+using _Project.Develop.Runtime.Gameplay.Features.GameCycle;
+using _Project.Develop.Runtime.Gameplay.Features.Sequences;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Statistics;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
+using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
 using UnityEngine;
@@ -17,7 +22,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameCycle);
             container.RegisterAsSingle(CreateGameFinishStateHandler);
             container.RegisterAsSingle(CreateInputSequenceHandler);
-            container.RegisterAsSingle(CreateSequenceCheckService);
         }
 
         private static RandomSymbolsSequenceGenerationService CreateRandomSymbolsSequenceService(DIContainer c, GameplayInputArgs args)
@@ -25,31 +29,35 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             return new RandomSymbolsSequenceGenerationService(args.Length, args.Symbols);
         }
 
-        private static GameCycleHandler CreateGameCycle(DIContainer c)
+        private static GameRunningStateHandler CreateGameCycle(DIContainer c)
         {
-            return new GameCycleHandler(
+            LevelsRewardConfig levelsRewardConfig 
+                = c.Resolve<ConfigsProviderService>().GetConfig<LevelsRewardConfig>();
+            
+            return new GameRunningStateHandler(
                 c.Resolve<RandomSymbolsSequenceGenerationService>(),
                 c.Resolve<GameFinishStateHandler>(),
-                c.Resolve<InputSequenceHandler>(),
+                c.Resolve<InputSequenceService>(),
                 c.Resolve<ICoroutinesPerformer>(),
                 c.Resolve<SceneSwitcherService>(),
-                c.Resolve<SequenceCheckService>()
+                c.Resolve<GameStatisticsService>(),
+                c.Resolve<WalletService>(),
+                levelsRewardConfig
                 );
         }
 
         private static GameFinishStateHandler CreateGameFinishStateHandler(DIContainer c)
         {
-            return new GameFinishStateHandler();
+            RandomSymbolsSequenceGenerationService service = c.Resolve<RandomSymbolsSequenceGenerationService>();
+            
+            Debug.Log("--- " + service.Sequence + " " + service.Length);
+            
+            return new GameFinishStateHandler(service.Length, service.Sequence);
         }
 
-        private static InputSequenceHandler CreateInputSequenceHandler(DIContainer c)
+        private static InputSequenceService CreateInputSequenceHandler(DIContainer c)
         {
-            return new InputSequenceHandler();
-        }
-        
-        private static SequenceCheckService CreateSequenceCheckService(DIContainer c)
-        {
-            return new SequenceCheckService();
+            return new InputSequenceService();
         }
     }
 }

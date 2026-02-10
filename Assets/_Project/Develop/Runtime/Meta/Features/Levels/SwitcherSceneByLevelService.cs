@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Configs;
+using _Project.Develop.Runtime.Configs.Meta.Levels;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -7,13 +8,13 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Features.Levels
 {
-    class ChangeSceneByLevelTypeService
+    class SwitcherSceneByLevelService
     {
         private ConfigsProviderService _configsProviderService;
         private SceneSwitcherService _sceneSwitcherService;
         private ICoroutinesPerformer _coroutinesPerformer;
 
-        public ChangeSceneByLevelTypeService(ConfigsProviderService configsProviderService, SceneSwitcherService sceneSwitcherService, ICoroutinesPerformer coroutinesPerformer)
+        public SwitcherSceneByLevelService(ConfigsProviderService configsProviderService, SceneSwitcherService sceneSwitcherService, ICoroutinesPerformer coroutinesPerformer)
         {
             _configsProviderService = configsProviderService;
             _sceneSwitcherService = sceneSwitcherService;
@@ -33,11 +34,14 @@ namespace _Project.Develop.Runtime.Meta.Features.Levels
         {
             LevelsConfig levelsConfig = _configsProviderService.GetConfig<LevelsConfig>();
             LevelConfig levelConfig = levelsConfig.GetLevelConfigBy(type);
+            
+            LevelsRewardConfig levelsesRewardConfig = _configsProviderService.GetConfig<LevelsRewardConfig>();
 
             _coroutinesPerformer.StartPerform(_sceneSwitcherService.ProcessSwitchTo(
                 Scenes.Gameplay, new GameplayInputArgs(
                     levelConfig.Length,
-                    levelConfig.Symbols
+                    levelConfig.Symbols,
+                    levelsesRewardConfig.Value
                 )));
         }
     }

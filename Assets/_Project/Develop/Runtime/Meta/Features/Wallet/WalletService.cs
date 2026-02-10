@@ -12,7 +12,7 @@ namespace _Project.Develop.Runtime.Meta.Features.Wallet
         private readonly Dictionary<CurrencyTypes, ReactiveVariable<int>> _currencies;
 
         public WalletService(
-            Dictionary<CurrencyTypes, ReactiveVariable<int>> currencies, 
+            Dictionary<CurrencyTypes, ReactiveVariable<int>> currencies,
             PlayerDataProvider playerDataProvider)
         {
             _currencies = new Dictionary<CurrencyTypes, ReactiveVariable<int>>(currencies);
@@ -49,6 +49,17 @@ namespace _Project.Develop.Runtime.Meta.Features.Wallet
                 throw new ArgumentOutOfRangeException(nameof(amount));
 
             _currencies[type].Value -= amount;
+        }
+        
+        public void Sub(CurrencyTypes type, int amount)
+        {
+            if (amount < 0)
+                throw new ArgumentOutOfRangeException(nameof(amount));
+            
+            if (Enough(type, amount) == false)
+                _currencies[type].Value = 0;
+            else
+                _currencies[type].Value -= amount;
         }
 
         public void ReadFrom(PlayerData data)

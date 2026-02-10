@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using _Project.Develop.Runtime.Gameplay.Feature.GameCycle;
+using _Project.Develop.Runtime.Gameplay.Features.GameCycle;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -14,7 +14,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
         
-        private GameCycleHandler _gameCycle;
+        private GameRunningStateHandler _gameplayCycle;
         private bool _running;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
@@ -37,7 +37,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
             Debug.Log("Инициализация геймплейной сцены");
             
-            _gameCycle = _container.Resolve<GameCycleHandler>();
+            _gameplayCycle = _container.Resolve<GameRunningStateHandler>();
 
             yield break;
         }
@@ -46,14 +46,14 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         {
             Debug.Log("Старт геймплейной сцены");
             
-            _gameCycle.Run();
+            _gameplayCycle.Run();
             _running = true;
         }
 
         private void Update()
         {
             if (_running)
-                _gameCycle.Update(Time.deltaTime);
+                _gameplayCycle.Update(Time.deltaTime);
         }
     }
 }

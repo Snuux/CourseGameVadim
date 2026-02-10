@@ -47,9 +47,13 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             Debug.Log("Начинается инициализация сервисов");
 
             yield return container.Resolve<ConfigsProviderService>().LoadAsync();
+            yield return new WaitForSeconds(1f);
 
+            Debug.Log("Завершается инициализация сервисов");
+            
+            Debug.Log("Загружается/инициализируеются данные сейва");
+            
             bool isPlayerDataSaveExists = false;
-
             yield return playerDataProvider.Exists(result => isPlayerDataSaveExists = result);
 
             if (isPlayerDataSaveExists)
@@ -57,11 +61,9 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             else
                 playerDataProvider.Reset();
 
-            yield return new WaitForSeconds(1f);
-
-            Debug.Log("Завершается инициализация сервисов");
-
             loadingScreen.Hide();
+            
+            Debug.Log("Закрытие окна загрузки");
 
             yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
         }

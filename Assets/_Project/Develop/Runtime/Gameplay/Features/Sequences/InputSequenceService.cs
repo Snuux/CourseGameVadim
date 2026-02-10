@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Feature.Levels
+namespace _Project.Develop.Runtime.Gameplay.Features.Sequences
 {
-    public class InputSequenceHandler
+    public class InputSequenceService
     {
-        public string InputSymbols { get; private set; }
-
         public void ProcessInputKeys()
         {
             if (Input.inputString.Length > 0 && Input.anyKeyDown)
@@ -16,6 +14,8 @@ namespace _Project.Develop.Runtime.Gameplay.Feature.Levels
                 Debug.Log(InputSymbols);
             }
         }
+        
+        public string InputSymbols { get; private set; }
 
         public void Clear() => InputSymbols = "";
     }

@@ -16,13 +16,13 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateChangeSceneByLevelTypeService);
         }
         
-        private static ChangeSceneByLevelTypeService CreateChangeSceneByLevelTypeService(DIContainer c)
+        private static SwitcherSceneByLevelService CreateChangeSceneByLevelTypeService(DIContainer c)
         {
             ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
             SceneSwitcherService sceneSwitcherService = c.Resolve<SceneSwitcherService>();
             ICoroutinesPerformer coroutinesPerformer = c.Resolve<ICoroutinesPerformer>();
 
-            return new ChangeSceneByLevelTypeService(configsProviderService, sceneSwitcherService, coroutinesPerformer);
+            return new SwitcherSceneByLevelService(configsProviderService, sceneSwitcherService, coroutinesPerformer);
         }
     }
 }
