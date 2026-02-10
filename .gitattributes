@@ -1,2 +1,33 @@
-# Auto detect text files and perform LF normalization
 * text=auto
+
+# Unity YAML/text assets
+*.cs        text
+*.shader    text
+*.cginc     text
+*.hlsl      text
+*.compute   text
+*.json      text
+*.xml       text
+*.yml       text
+*.yaml      text
+*.md        text
+*.txt       text
+*.meta      text
+*.unity     text
+*.prefab    text
+*.mat       text
+*.asset     text
+*.anim      text
+*.controller text
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.psd binary
+*.fbx binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.zip binary
