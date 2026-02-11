@@ -15,7 +15,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
     {
         public static void Process(DIContainer container, GameplayInputArgs args)
         {
-            Debug.Log("Process of services registration in gameplay scene");
+            Debug.Log("Процесс регистрации геймплейных сервисов");
 
             container.RegisterAsSingle(c => CreateRandomSymbolsSequenceService(c, args));
             container.RegisterAsSingle(CreateGameCycle);
