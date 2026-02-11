@@ -50,12 +50,12 @@ namespace _Project.Develop.Runtime.Meta.Features.Wallet
 
             _currencies[type].Value -= amount;
         }
-        
+
         public void Sub(CurrencyTypes type, int amount)
         {
             if (amount < 0)
                 throw new ArgumentOutOfRangeException(nameof(amount));
-            
+
             if (Enough(type, amount) == false)
                 _currencies[type].Value = 0;
             else
@@ -82,6 +82,16 @@ namespace _Project.Develop.Runtime.Meta.Features.Wallet
                 else
                     data.WalletData.Add(currency.Key, currency.Value.Value);
             }
+        }
+
+        public string AsString()
+        {
+            string result = "";
+
+            foreach (CurrencyTypes currencyTypes in AvailableCurrencies)
+                result += $"{currencyTypes.ToString()}: {GetCurrency(currencyTypes).Value} ";
+
+            return result;
         }
     }
 }

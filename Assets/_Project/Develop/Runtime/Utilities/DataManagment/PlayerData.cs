@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 

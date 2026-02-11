@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
@@ -77,7 +76,13 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             foreach (GameStatisticsTypes currencyType in Enum.GetValues(typeof(GameStatisticsTypes)))
                 gameStatistics[currencyType] = new ReactiveVariable<int>();
 
-            return new GameStatisticsService(gameStatistics, c.Resolve<PlayerDataProvider>());
+            ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
+
+            return new GameStatisticsService(
+                gameStatistics, 
+                configsProviderService, 
+                c.Resolve<PlayerDataProvider>()
+                );
         }
 
         private static SceneSwitcherService CreateSceneSwitcherService(DIContainer c)

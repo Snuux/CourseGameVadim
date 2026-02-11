@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Project.Develop.Runtime.Configs.Meta.GameStatistics;
+using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using _Project.Develop.Runtime.Utilities.Reactive;
@@ -10,12 +12,16 @@ namespace _Project.Develop.Runtime.Meta.Features.Statistics
     public class GameStatisticsService : IDataReader<PlayerData>, IDataWriter<PlayerData>
     {
         private readonly Dictionary<GameStatisticsTypes, ReactiveVariable<int>> _gameStatistics;
+        private readonly ConfigsProviderService _configsProviderService;
 
         public GameStatisticsService(
             Dictionary<GameStatisticsTypes, ReactiveVariable<int>> gameStatistics,
+            ConfigsProviderService configsProviderService,
             PlayerDataProvider playerDataProvider)
         {
             _gameStatistics = new Dictionary<GameStatisticsTypes, ReactiveVariable<int>>(gameStatistics);
+            _configsProviderService = configsProviderService;
+            
             playerDataProvider.RegisterWriter(this);
             playerDataProvider.RegisterReader(this);
         }
@@ -29,12 +35,17 @@ namespace _Project.Develop.Runtime.Meta.Features.Statistics
             _gameStatistics[type].Value += amount;
         }
 
-        public void Sub(GameStatisticsTypes type, int amount = 1)
+        public void Reset(GameStatisticsTypes type)
         {
-            if (amount < 0)
-                throw new ArgumentOutOfRangeException(nameof(amount));
-
-            _gameStatistics[type].Value -= amount;
+            _gameStatistics[type].Value = _configsProviderService
+                .GetConfig<StartGameStatisticsConfig>().GetValueFor(type);
+        }
+        
+        public void ResetAll()
+        {
+            foreach (GameStatisticsTypes gameStatisticsTypes in Enum.GetValues(typeof(GameStatisticsTypes)))
+                _gameStatistics[gameStatisticsTypes].Value 
+                    = _configsProviderService.GetConfig<StartGameStatisticsConfig>().GetValueFor(gameStatisticsTypes);
         }
 
         public void ReadFrom(PlayerData data)
@@ -57,6 +68,15 @@ namespace _Project.Develop.Runtime.Meta.Features.Statistics
                 else
                     data.GameStatisticsData.Add(gameStatistics.Key, gameStatistics.Value.Value);
             }
+        }
+        
+        public string AsString()
+        {
+            string result = "";
+            foreach (GameStatisticsTypes gameStatisticsTypes in AllGameStatistics)
+                result += $"{gameStatisticsTypes.ToString()}: {GetGameStatistics(gameStatisticsTypes).Value} ";
+
+            return result;
         }
     }
 }

@@ -2,20 +2,20 @@
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Sequences
 {
-    public class RandomSymbolsSequenceGenerationService
+    public class SequenceGenerationService
     {
-        public RandomSymbolsSequenceGenerationService(int length, string symbols)
+        public SequenceGenerationService(int length, string symbols)
         {
             Length = length;
             Symbols = symbols;
-            Sequence = GenerateSequence();
+            Sequence = GenerateRandomSequence();
         }
 
         public string Symbols { get; private set; }
         public string Sequence { get; private set; }
         public int Length { get; private set; }
         
-        private string GenerateSequence()
+        private string GenerateRandomSequence()
         {
             string sequence = "";
 

@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Configs.Meta.Levels
 {
-    [CreateAssetMenu(menuName = "Configs/LevelsRewardConfig", fileName = "LevelsRewardConfig")]
-    public class LevelsRewardConfig : ScriptableObject
+    [CreateAssetMenu(menuName = "Configs/ResetPriceConfig", fileName = "ResetPriceConfig")]
+    public class ResetPriceConfig : ScriptableObject
     {
         [field: SerializeField] public CurrencyTypes CurrencyType { get; private set; }
         [field: SerializeField] public int Value { get; private set; }

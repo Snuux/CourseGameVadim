@@ -1,4 +1,4 @@
-﻿namespace _Project.Develop.Runtime.Gameplay.Features.GameCycle
+﻿namespace _Project.Develop.Runtime.Gameplay.Features.Gameplay
 {
     public enum GameFinishState
     {
