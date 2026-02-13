@@ -20,7 +20,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
         {
             if (IsAlreadyRegister<T>())
                 throw new InvalidOperationException($"{typeof(T)} already register");
-            
+
             Registration registration = new Registration(container => creator.Invoke(container));
             _container.Add(typeof(T), registration);
             return registration;
@@ -33,7 +33,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
 
             if (_parent != null)
                 return _parent.IsAlreadyRegister<T>();
-                
+
             return false;
         }
 
@@ -66,7 +66,15 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             {
                 if (registration.IsNonLazy)
                     registration.CreateInstanceFrom(this);
+
+                registration.OnInitialize();
             }
+        }
+
+        public void Dispose()
+        {
+            foreach (Registration registration in _container.Values)
+                registration.OnDispose();
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
+using _Project.Develop.Runtime.UI;
+using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -42,6 +44,20 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
+
+            container.RegisterAsSingle(CreateProjectPresenterFactory);
+            
+            container.RegisterAsSingle(CreateViewsFactory);
+        }
+
+        private static ViewsFactory CreateViewsFactory(DIContainer c)
+        {
+            return new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
+        }
+
+        private static ProjectPresenterFactory CreateProjectPresenterFactory(DIContainer c)
+        {
+            return new ProjectPresenterFactory(c);
         }
 
         private static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
@@ -125,5 +141,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             return Object.Instantiate(standardLoadingScreenPrefab);
         }
+        
+        
     }
 }

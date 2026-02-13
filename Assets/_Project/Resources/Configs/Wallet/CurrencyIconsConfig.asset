@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e808a53df901f084885a1fae42d8c155, type: 3}
-  m_Name: StartWalletConfig
+  m_Script: {fileID: 11500000, guid: 6b875cffce8d4676b8d02e1138a7266e, type: 3}
+  m_Name: CurrencyIconsConfig
   m_EditorClassIdentifier: 
-  _values:
+  _configs:
   - <Type>k__BackingField: 0
-    <Value>k__BackingField: 100
+    <Sprite>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000,
+      type: 0}
   - <Type>k__BackingField: 1
-    <Value>k__BackingField: 50
+    <Sprite>k__BackingField: {fileID: 10911, guid: 0000000000000000f000000000000000,
+      type: 0}

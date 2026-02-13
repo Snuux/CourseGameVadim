@@ -19,7 +19,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             { typeof(StartWalletConfig), "Configs/Wallet/StartWalletConfig" },
             { typeof(StartGameStatisticsConfig), "Configs/Statistics/StartGameStatisticsConfig" },
             { typeof(LevelsRewardConfig), "Configs/Levels/LevelsRewardConfig" },
-            { typeof(ResetPriceConfig), "Configs/Wallet/ResetPriceConfig" }
+            { typeof(ResetPriceConfig), "Configs/Wallet/ResetPriceConfig" },
+            { typeof(CurrencyIconsConfig), "Configs/Wallet/CurrencyIconsConfig" }
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

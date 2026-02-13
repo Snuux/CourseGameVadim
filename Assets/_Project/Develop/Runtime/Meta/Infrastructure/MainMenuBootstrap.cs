@@ -2,6 +2,11 @@
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Menu;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
+using _Project.Develop.Runtime.UI;
+using _Project.Develop.Runtime.UI.CommonViews;
+using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
 using UnityEngine;
 
@@ -30,6 +35,9 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
             _mainMenuSwitcherSceneService = _container.Resolve<MainMenuSwitcherSceneService>();
             _mainMenuRunningService = _container.Resolve<MainMenuRunningService>();
+            
+            //
+            
 
             yield break;
         }
@@ -50,6 +58,8 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
             _mainMenuSwitcherSceneService.Update(Time.deltaTime);
             _mainMenuRunningService.Update(Time.deltaTime);
+
+            
         }
     }
 }
