@@ -5,7 +5,10 @@ using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.CommonViews;
+using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.MainMenu;
 using _Project.Develop.Runtime.UI.Wallet;
+using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -22,8 +25,10 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
             container.RegisterAsSingle(CreateChangeSceneByLevelTypeService);
             container.RegisterAsSingle(CreateMainMenuRunningService);
-
-            container.RegisterAsSingle(CreateWalletPresenter).NonLazy();
+            
+            container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
+            container.RegisterAsSingle(CreateMainMenuPresenterFactory);
+            container.RegisterAsSingle(CreateMainMenuScreenPresenter).NonLazy();
         }
 
         private static MainMenuSwitcherSceneService CreateChangeSceneByLevelTypeService(DIContainer c)
@@ -45,13 +50,35 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
                 c.Resolve<ConfigsProviderService>().GetConfig<ResetPriceConfig>()
             );
         }
-
-        private static WalletPresenter CreateWalletPresenter(DIContainer c)
+        
+        private static MainMenuUIRoot CreateMainMenuUIRoot(DIContainer c)
         {
-            IconTextListView walletView = Object.FindObjectOfType<IconTextListView>();
-            WalletPresenter walletPresenter = c.Resolve<ProjectPresenterFactory>().CreateWalletPresenter(walletView);
+            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
 
-            return walletPresenter;
+            MainMenuUIRoot mainMenuUIRoot = resourcesAssetsLoader
+                .Load<MainMenuUIRoot>("UI/MainMenu/MainMenuUIRoot");
+
+            return Object.Instantiate(mainMenuUIRoot);
+        }
+
+        public static MainMenuPresenterFactory CreateMainMenuPresenterFactory(DIContainer c)
+        {
+            return new MainMenuPresenterFactory(c);
+        }
+
+        private static MainMenuScreenPresenter CreateMainMenuScreenPresenter(DIContainer c)
+        {
+            MainMenuUIRoot uiRoot = c.Resolve<MainMenuUIRoot>();
+
+            MainMenuScreenView view = c
+                .Resolve<ViewsFactory>()
+                .Create<MainMenuScreenView>(ViewIDs.MainMenuScreen, uiRoot.HUDLayer);
+
+            MainMenuScreenPresenter presenter = c
+                .Resolve<MainMenuPresenterFactory>()
+                .CreateMainMenuScreen(view);
+
+            return presenter;
         }
     }
 }

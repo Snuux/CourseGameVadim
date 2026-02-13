@@ -9,11 +9,11 @@ using _Project.Develop.Runtime.Utilities.Reactive;
 
 namespace _Project.Develop.Runtime.UI
 {
-    public class ProjectPresenterFactory
+    public class ProjectPresentersFactory
     {
         private readonly DIContainer _container;
 
-        public ProjectPresenterFactory(DIContainer container)
+        public ProjectPresentersFactory(DIContainer container)
         {
             _container = container;
         }

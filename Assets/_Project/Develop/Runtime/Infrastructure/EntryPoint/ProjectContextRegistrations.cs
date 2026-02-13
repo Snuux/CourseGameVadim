@@ -55,9 +55,9 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             return new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
         }
 
-        private static ProjectPresenterFactory CreateProjectPresenterFactory(DIContainer c)
+        private static ProjectPresentersFactory CreateProjectPresenterFactory(DIContainer c)
         {
-            return new ProjectPresenterFactory(c);
+            return new ProjectPresentersFactory(c);
         }
 
         private static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
