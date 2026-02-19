@@ -1,6 +1,6 @@
 ﻿namespace _Project.Develop.Runtime.UI.CommonViews
 {
-    public class IconTextListView : ElementListView<IconTextView>
+    public class IconTextListView : ElementsListView<IconTextView>
     {
         
     }

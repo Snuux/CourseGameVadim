@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
@@ -48,6 +49,8 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateProjectPresenterFactory);
             
             container.RegisterAsSingle(CreateViewsFactory);
+
+            container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
         }
 
         private static ViewsFactory CreateViewsFactory(DIContainer c)
@@ -141,7 +144,10 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             return Object.Instantiate(standardLoadingScreenPrefab);
         }
-        
-        
+
+        private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
+        {
+            return new LevelsProgressionService(c.Resolve<PlayerDataProvider>());
+        }
     }
 }

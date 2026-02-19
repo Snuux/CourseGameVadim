@@ -1,11 +1,16 @@
 ﻿using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.Core.TestPopup;
+using _Project.Develop.Runtime.UI.LevelsMenuPopup;
 using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.Reactive;
+using _Project.Develop.Runtime.Utilities.SceneManagment;
 
 namespace _Project.Develop.Runtime.UI
 {
@@ -37,6 +42,34 @@ namespace _Project.Develop.Runtime.UI
                 _container.Resolve<WalletService>(),
                 this,
                 _container.Resolve<ViewsFactory>(), 
+                view);
+        }
+
+        public TestPopupPresenter CreateTestPopupPresenter(TestPopupView view)
+        {
+            return new TestPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                view);
+        }
+        
+        public LevelTilePresenter CreateLevelTilePresenter(LevelTileView view, int levelNumber)
+        {
+            return new LevelTilePresenter(
+                _container.Resolve<LevelsProgressionService>(),
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<SceneSwitcherService>(),
+                levelNumber,
+                view
+                );
+        }
+
+        public LevelsMenuPopupPresenter LevelsMenuPopupPresenter(LevelsMenuPopupView view)
+        {
+            return new LevelsMenuPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<ConfigsProviderService>(),
+                this,
+                _container.Resolve<ViewsFactory>(),
                 view);
         }
     }

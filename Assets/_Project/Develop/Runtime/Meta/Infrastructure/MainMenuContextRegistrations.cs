@@ -4,10 +4,8 @@ using _Project.Develop.Runtime.Meta.Features.Menu;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
-using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.MainMenu;
-using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -29,6 +27,15 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
             container.RegisterAsSingle(CreateMainMenuPresenterFactory);
             container.RegisterAsSingle(CreateMainMenuScreenPresenter).NonLazy();
+            container.RegisterAsSingle(CreateMainMenuPopupService);
+        }
+
+        private static MainMenuPopupService CreateMainMenuPopupService(DIContainer c)
+        {
+            return new MainMenuPopupService(
+                c.Resolve<ViewsFactory>(),
+                c.Resolve<ProjectPresentersFactory>(),
+                c.Resolve<MainMenuUIRoot>());
         }
 
         private static MainMenuSwitcherSceneService CreateChangeSceneByLevelTypeService(DIContainer c)

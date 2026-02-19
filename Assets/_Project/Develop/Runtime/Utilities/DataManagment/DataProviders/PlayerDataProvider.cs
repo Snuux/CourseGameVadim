@@ -24,7 +24,8 @@ namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
             return new PlayerData()
             {
                 WalletData = InitWalletData(),
-                GameStatisticsData = InitGameStatisticsData()
+                GameStatisticsData = InitGameStatisticsData(),
+                CompletedLevels = new()
             };
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.UI.CommonViews
 {
-    public class ElementListView<TElement> : MonoBehaviour, IView where TElement : MonoBehaviour, IView
+    public class ElementsListView<TElement> : MonoBehaviour, IView where TElement : MonoBehaviour, IView
     {
         [SerializeField] private Transform _parent;
 
