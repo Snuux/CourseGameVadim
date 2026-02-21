@@ -1,4 +1,4 @@
-﻿using _Project.Develop.Runtime.Configs.Gameplay.GameEnd;
+﻿
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Infrastructure.DI;
@@ -34,19 +34,6 @@ namespace _Project.Develop.Runtime.UI
                 currency,
                 currencyType,
                 _container.Resolve<ConfigsProviderService>().GetConfig<CurrencyIconsConfig>(),
-                iconTextView);
-        }
-        
-        public SingleGameEndPresenter CreateSingleGameEndPresenter(
-            IconTextView iconTextView,
-            IReadOnlyVariable<int> gameEnd,
-            GameEndTypes gameEndType
-        )
-        {
-            return new SingleGameEndPresenter(
-                gameEnd,
-                gameEndType,
-                _container.Resolve<ConfigsProviderService>().GetConfig<GameEndIconsConfig>(),
                 iconTextView);
         }
 

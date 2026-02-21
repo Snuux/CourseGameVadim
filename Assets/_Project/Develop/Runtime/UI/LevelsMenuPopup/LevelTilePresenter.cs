@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -34,7 +35,13 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
 
         public void Initialize()
         {
+            LevelsConfig levelsConfig = _configsProviderService.GetConfig<LevelsConfig>();
+            LevelConfig levelConfig = levelsConfig.GetLevelConfigBy(_levelType);
             
+            _view.SetSymbols(levelConfig.Symbols);
+            _view.SetLength(levelConfig.Length);
+            _view.SetDefeatPenalty(CurrencyTypes.Gold, levelConfig.DefeatPenalty.Value);
+            _view.SetWinReward(CurrencyTypes.Gold, levelConfig.WinReward.Value);
         }
 
         public void Subscribe()
@@ -56,7 +63,7 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
                 Scenes.Gameplay, new GameplayInputArgs(
                     levelConfig.Length,
                     levelConfig.Symbols,
-                    (levelConfig.WinReward.Type, levelConfig.WinReward.Value) ,
+                    (levelConfig.WinReward.Type, levelConfig.WinReward.Value),
                     (levelConfig.DefeatPenalty.Type, levelConfig.DefeatPenalty.Value) 
                 )));
         }

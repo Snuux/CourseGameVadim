@@ -3,6 +3,7 @@
     public enum CurrencyTypes
     {
         Gold,
-        Diamond
+        Win,
+        Defeat
     }
 }

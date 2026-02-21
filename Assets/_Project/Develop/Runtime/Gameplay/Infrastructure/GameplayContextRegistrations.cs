@@ -51,8 +51,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<InputSequenceService>(),
                 args.WinRewardGold,
                 args.DefeatPenaltyGold,
-                c.Resolve<WalletService>(),
-                c.Resolve<LevelOutcomeService>()
+                c.Resolve<WalletService>()
             );
         }
 

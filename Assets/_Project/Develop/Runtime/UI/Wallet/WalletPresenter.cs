@@ -15,7 +15,6 @@ namespace _Project.Develop.Runtime.UI.Wallet
         private readonly IconTextListView _view;
         
         private readonly List<SingleCurrencyPresenter> _currencyPresenters = new();
-        private readonly List<SingleGameEndPresenter> _gameEndPresenters = new();
         
         public WalletPresenter(
             WalletService walletService,
@@ -31,22 +30,6 @@ namespace _Project.Develop.Runtime.UI.Wallet
 
         public void Initialize()
         {
-            foreach (CurrencyTypes currencyType in _walletService.AvailableCurrencies)
-            {
-                IconTextView currencyView = _viewsFactory.Create<IconTextView>(ViewIDs.CurrencyView);
-
-                _view.Add(currencyView); 
-                
-                SingleCurrencyPresenter singleCurrencyPresenter = _presentersFactory.CreateCurrencyPresenter(
-                    currencyView,
-                    _walletService.GetCurrency(currencyType),
-                    currencyType);
-                
-                singleCurrencyPresenter.Initialize();
-                
-                _currencyPresenters.Add(singleCurrencyPresenter);
-            }
-            
             foreach (CurrencyTypes currencyType in _walletService.AvailableCurrencies)
             {
                 IconTextView currencyView = _viewsFactory.Create<IconTextView>(ViewIDs.CurrencyView);

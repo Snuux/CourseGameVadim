@@ -1,9 +1,6 @@
 {
   "CurrenciesData": {
-    "Gold": 220,
-    "Diamond": 0
-  },
-  "GameEndData": {
+    "Gold": 215,
     "Win": 2,
     "Defeat": 1
   }

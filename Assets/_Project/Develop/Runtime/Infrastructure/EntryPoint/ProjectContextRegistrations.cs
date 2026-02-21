@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Develop.Runtime.Configs.Gameplay.GameEnd;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
@@ -38,8 +37,6 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
             container.RegisterAsSingle(CreateWalletService).NonLazy();
-            
-            container.RegisterAsSingle(CreateLevelOutcomeService).NonLazy();
 
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
@@ -88,38 +85,6 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             return new WalletService(currencies, c.Resolve<PlayerDataProvider>());
         }
-        
-        private static LevelOutcomeService CreateLevelOutcomeService(DIContainer c)
-        {
-            Dictionary<GameEndTypes, ReactiveVariable<int>> gameEnds = new();
-
-            foreach (GameEndTypes currencyType in Enum.GetValues(typeof(GameEndTypes)))
-                gameEnds[currencyType] = new ReactiveVariable<int>();
-
-            ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
-
-            return new LevelOutcomeService(
-                gameEnds, 
-                configsProviderService, 
-                c.Resolve<PlayerDataProvider>()
-                );
-        }
-        
-        /*private static WalletService CreateWalletService(DIContainer c)
-        {
-            Dictionary<CurrencyTypes, ReactiveVariable<int>> gameRewards = new();
-
-            foreach (CurrencyTypes currencyType in Enum.GetValues(typeof(GameEndTypes)))
-                gameRewards[currencyType] = new ReactiveVariable<int>();
-
-            ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
-
-            return new WalletService(
-                gameRewards,
-                configsProviderService, 
-                c.Resolve<PlayerDataProvider>()
-            );
-        }*/
 
         private static SceneSwitcherService CreateSceneSwitcherService(DIContainer c)
         {

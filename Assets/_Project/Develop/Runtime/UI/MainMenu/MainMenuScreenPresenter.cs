@@ -38,7 +38,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _screen.LoadButtonClicked += OnLoadButtonClicked;
             _screen.ClearButtonClicked += OnClearSaveButtonClicked;
             
-            
             CreateWallet();
 
             foreach (IPresenter presenter in _childPresenters)

@@ -1,5 +1,4 @@
-﻿using _Project.Develop.Runtime.Configs.Gameplay.GameEnd;
-using _Project.Develop.Runtime.Configs.Meta.Wallet;
+﻿using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Gameplay.Features.Sequences;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Gameplay
         private readonly GameplayStateService _gameplayStateService;
         private readonly InputSequenceService _inputSequenceService;
         private readonly WalletService _walletService;
-        private readonly LevelOutcomeService _levelOutcomeService;
         
         private readonly (CurrencyTypes, int) _winRewardGold;
         private readonly (CurrencyTypes, int) _defeatPenaltyGold;
@@ -21,15 +19,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Gameplay
             InputSequenceService inputSequenceService,
             (CurrencyTypes, int) winRewardGold,
             (CurrencyTypes, int) defeatPenaltyGold, 
-            WalletService walletService, 
-            LevelOutcomeService levelOutcomeService)
+            WalletService walletService)
         {
             _gameplayStateService = gameplayStateService;
             _inputSequenceService = inputSequenceService;
             _winRewardGold = winRewardGold;
             _defeatPenaltyGold = defeatPenaltyGold;
             _walletService = walletService;
-            _levelOutcomeService = levelOutcomeService;
         }
 
         public void Run()
@@ -55,7 +51,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Gameplay
             {
                 case GameplayState.Win:
                     _walletService.Add(_winRewardGold.Item1, _winRewardGold.Item2);
-                    _levelOutcomeService.Add(GameEndTypes.Win);
+                    _walletService.Add(CurrencyTypes.Win, 1);
                     _inputSequenceService.Clear();
                     
                     _gameplayStateService.SetStopState();
@@ -63,7 +59,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Gameplay
                     break;
                 case GameplayState.Defeat:
                     _walletService.Sub(_defeatPenaltyGold.Item1, _defeatPenaltyGold.Item2);
-                    _levelOutcomeService.Add(GameEndTypes.Defeat);
+                    _walletService.Add(CurrencyTypes.Defeat, 1);
                     _inputSequenceService.Clear();
                     
                     _gameplayStateService.SetStopState();

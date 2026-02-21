@@ -15,10 +15,10 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         {
             base.ModifyShowAnimation(animation);
 
-            animation
-                .Append(_infoText
-                    .DOFade(1, .2f)
-                    .From(0));
+            //animation
+            //    .Append(_infoText
+            //        .DOFade(1, .2f)
+            //        .From(0));
         }
     }
 }
