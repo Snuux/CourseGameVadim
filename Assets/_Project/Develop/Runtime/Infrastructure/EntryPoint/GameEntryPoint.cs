@@ -13,11 +13,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
     {
         private void Awake()
         {
-            Debug.Log("Старт проекта, сетап настроек");
-
             SetupAppSettings();
-
-            Debug.Log("Процесс регистрации сервисов всего проекта");
 
             DIContainer projectContainer = new DIContainer();
 
@@ -39,19 +35,12 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             ILoadingScreen loadingScreen = container.Resolve<ILoadingScreen>();
             SceneSwitcherService sceneSwitcherService = container.Resolve<SceneSwitcherService>();
             PlayerDataProvider playerDataProvider = container.Resolve<PlayerDataProvider>();
-
-            Debug.Log("Открытие окна загрузки");
             
             loadingScreen.Show();
 
-            Debug.Log("Начинается инициализация сервисов");
-
             yield return container.Resolve<ConfigsProviderService>().LoadAsync();
-            yield return new WaitForSeconds(1f);
-
-            Debug.Log("Завершается инициализация сервисов");
             
-            Debug.Log("Загружается/инициализируеются данные сейва");
+            yield return new WaitForSeconds(1f);
             
             bool isPlayerDataSaveExists = false;
             yield return playerDataProvider.Exists(result => isPlayerDataSaveExists = result);
@@ -62,8 +51,6 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
                 playerDataProvider.Reset();
 
             loadingScreen.Hide();
-            
-            Debug.Log("Закрытие окна загрузки");
 
             yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
         }

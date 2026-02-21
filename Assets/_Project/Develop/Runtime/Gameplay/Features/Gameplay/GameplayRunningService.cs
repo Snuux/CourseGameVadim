@@ -1,67 +1,75 @@
-﻿using _Project.Develop.Runtime.Gameplay.Features.Sequences;
+﻿using _Project.Develop.Runtime.Configs.Gameplay.GameEnd;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Gameplay.Features.Sequences;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Gameplay
 {
     public class GameplayRunningService
     {
-        private readonly GameplaySetFinishStateService _gameplaySetFinishStateService;
+        private readonly GameplayStateService _gameplayStateService;
         private readonly InputSequenceService _inputSequenceService;
-        private readonly GameplayGetRewardService _gameplayGetRewardService;
-        private readonly GameplaySwitcherSceneService _gameplaySwitcherSceneService;
-
-        private readonly string _generatedSequence;
+        private readonly WalletService _walletService;
+        private readonly LevelOutcomeService _levelOutcomeService;
+        
+        private readonly (CurrencyTypes, int) _winRewardGold;
+        private readonly (CurrencyTypes, int) _defeatPenaltyGold;
 
         public GameplayRunningService(
-            string generatedSequence,
-            GameplaySetFinishStateService gameplaySetFinishStateService,
+            GameplayStateService gameplayStateService,
             InputSequenceService inputSequenceService,
-            GameplayGetRewardService gameplayGetRewardService,
-            GameplaySwitcherSceneService gameplaySwitcherSceneService
-        )
+            (CurrencyTypes, int) winRewardGold,
+            (CurrencyTypes, int) defeatPenaltyGold, 
+            WalletService walletService, 
+            LevelOutcomeService levelOutcomeService)
         {
-            _generatedSequence = generatedSequence;
-            _gameplaySetFinishStateService = gameplaySetFinishStateService;
+            _gameplayStateService = gameplayStateService;
             _inputSequenceService = inputSequenceService;
-            _gameplayGetRewardService = gameplayGetRewardService;
-            _gameplaySwitcherSceneService = gameplaySwitcherSceneService;
+            _winRewardGold = winRewardGold;
+            _defeatPenaltyGold = defeatPenaltyGold;
+            _walletService = walletService;
+            _levelOutcomeService = levelOutcomeService;
         }
 
         public void Run()
         {
-            _inputSequenceService.Clear();
-
-            Debug.Log($"Сгенерированная последовательность: <color=red> {_generatedSequence} </color>. Повторите:");
         }
 
         public void Update(float deltaTime)
         {
-            if (_gameplaySetFinishStateService.State == GameFinishState.Running)
+            if (_gameplayStateService.State == GameplayState.Run)
             {
-                ProcessInput();
-                UpdateStateFromInput();
-                ProcessFinish();
+                string input = _inputSequenceService.GetCurrentInput();
+                _gameplayStateService.StateCompute(input);
             }
             else
             {
-                _gameplaySwitcherSceneService.Update(Time.deltaTime);
+                SetOutcomeState();
             }
         }
 
-        private void ProcessFinish()
+        private void SetOutcomeState()
         {
-            if (_gameplaySetFinishStateService.State != GameFinishState.Running)
+            switch (_gameplayStateService.State)
             {
-                if (_gameplaySetFinishStateService.State == GameFinishState.Win)
-                    _gameplayGetRewardService.WinProcess();
-                else if (_gameplaySetFinishStateService.State == GameFinishState.Defeat)
-                    _gameplayGetRewardService.DefeatProcess();
+                case GameplayState.Win:
+                    _walletService.Add(_winRewardGold.Item1, _winRewardGold.Item2);
+                    _levelOutcomeService.Add(GameEndTypes.Win);
+                    _inputSequenceService.Clear();
+                    
+                    _gameplayStateService.SetStopState();
+                    
+                    break;
+                case GameplayState.Defeat:
+                    _walletService.Sub(_defeatPenaltyGold.Item1, _defeatPenaltyGold.Item2);
+                    _levelOutcomeService.Add(GameEndTypes.Defeat);
+                    _inputSequenceService.Clear();
+                    
+                    _gameplayStateService.SetStopState();
+                    
+                    break;
             }
         }
-
-        private void UpdateStateFromInput()
-            => _gameplaySetFinishStateService.SetStateByEquality(_inputSequenceService.InputSymbols);
-
-        private void ProcessInput() => _inputSequenceService.ProcessInputKeys();
     }
 }

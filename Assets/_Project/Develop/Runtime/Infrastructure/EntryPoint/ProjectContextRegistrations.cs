@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Gameplay.GameEnd;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
-using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
-using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -40,7 +39,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreateWalletService).NonLazy();
             
-            container.RegisterAsSingle(CreateGameStatisticsService).NonLazy();
+            container.RegisterAsSingle(CreateLevelOutcomeService).NonLazy();
 
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
@@ -49,8 +48,6 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateProjectPresenterFactory);
             
             container.RegisterAsSingle(CreateViewsFactory);
-
-            container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
         }
 
         private static ViewsFactory CreateViewsFactory(DIContainer c)
@@ -64,7 +61,11 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         }
 
         private static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
-            => new PlayerDataProvider(c.Resolve<ISaveLoadSerivce>(), c.Resolve<ConfigsProviderService>());
+        {
+            return new PlayerDataProvider(
+                c.Resolve<ISaveLoadSerivce>(),
+                c.Resolve<ConfigsProviderService>());
+        }
 
         private static SaveLoadService CreateSaveLoadService(DIContainer c)
         {
@@ -88,27 +89,45 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             return new WalletService(currencies, c.Resolve<PlayerDataProvider>());
         }
         
-        private static GameStatisticsService CreateGameStatisticsService(DIContainer c)
+        private static LevelOutcomeService CreateLevelOutcomeService(DIContainer c)
         {
-            Dictionary<GameStatisticsTypes, ReactiveVariable<int>> gameStatistics = new();
+            Dictionary<GameEndTypes, ReactiveVariable<int>> gameEnds = new();
 
-            foreach (GameStatisticsTypes currencyType in Enum.GetValues(typeof(GameStatisticsTypes)))
-                gameStatistics[currencyType] = new ReactiveVariable<int>();
+            foreach (GameEndTypes currencyType in Enum.GetValues(typeof(GameEndTypes)))
+                gameEnds[currencyType] = new ReactiveVariable<int>();
 
             ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
 
-            return new GameStatisticsService(
-                gameStatistics, 
+            return new LevelOutcomeService(
+                gameEnds, 
                 configsProviderService, 
                 c.Resolve<PlayerDataProvider>()
                 );
         }
+        
+        /*private static WalletService CreateWalletService(DIContainer c)
+        {
+            Dictionary<CurrencyTypes, ReactiveVariable<int>> gameRewards = new();
+
+            foreach (CurrencyTypes currencyType in Enum.GetValues(typeof(GameEndTypes)))
+                gameRewards[currencyType] = new ReactiveVariable<int>();
+
+            ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
+
+            return new WalletService(
+                gameRewards,
+                configsProviderService, 
+                c.Resolve<PlayerDataProvider>()
+            );
+        }*/
 
         private static SceneSwitcherService CreateSceneSwitcherService(DIContainer c)
-            => new SceneSwitcherService(
+        {
+            return new SceneSwitcherService(
                 c.Resolve<SceneLoaderService>(),
                 c.Resolve<ILoadingScreen>(),
                 c);
+        }
 
         private static SceneLoaderService CreateSceneLoaderService(DIContainer c)
             => new SceneLoaderService();
@@ -143,11 +162,6 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
                 .Load<StandardLoadingScreen>("Utilities/StandardLoadingScreen");
 
             return Object.Instantiate(standardLoadingScreenPrefab);
-        }
-
-        private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
-        {
-            return new LevelsProgressionService(c.Resolve<PlayerDataProvider>());
         }
     }
 }

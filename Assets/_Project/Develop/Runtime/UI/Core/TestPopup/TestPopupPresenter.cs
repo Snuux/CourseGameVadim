@@ -1,5 +1,4 @@
 ﻿using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using UnityEngine;
 
 namespace _Project.Develop.Runtime.UI.Core.TestPopup
 {

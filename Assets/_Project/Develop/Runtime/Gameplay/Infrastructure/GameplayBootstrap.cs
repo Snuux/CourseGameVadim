@@ -13,7 +13,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
         
-        private GameplayRunningService _gameplayCycle;
+        private GameplayRunningService _gameplayRunningService;
         private bool _running;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
@@ -21,7 +21,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _container = container;
 
             if (sceneArgs is not GameplayInputArgs gameplayInputArgs)
-                throw new ArgumentException($"{nameof(sceneArgs)} is not match with {typeof(GameplayInputArgs)} type");
+                throw new ArgumentException(
+                    $"{nameof(sceneArgs)} is not match with {typeof(GameplayInputArgs)} type");
 
             _inputArgs = gameplayInputArgs;
 
@@ -30,29 +31,24 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         public override IEnumerator Initialize()
         {
-            Debug.Log($"Вы попали на уровень. " +
-                      $"Необходимо ввести последовательность из: {_inputArgs.Symbols}" +
-                      $"Кол-во символов: {_inputArgs.Length}");
-
-            Debug.Log("Инициализация геймплейной сцены");
+            _gameplayRunningService = _container.Resolve<GameplayRunningService>();
             
-            _gameplayCycle = _container.Resolve<GameplayRunningService>();
-
             yield break;
         }
 
         public override void Run()
         {
-            Debug.Log("Старт геймплейной сцены");
+            _gameplayRunningService.Run();
             
-            _gameplayCycle.Run();
             _running = true;
         }
 
         private void Update()
         {
-            if (_running)
-                _gameplayCycle.Update(Time.deltaTime);
+            if (_running == false)
+                return;
+            
+            _gameplayRunningService.Update(Time.deltaTime);
         }
     }
 }

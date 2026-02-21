@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Develop.Runtime.Configs.Meta.GameStatistics;
+using _Project.Develop.Runtime.Configs.Gameplay.GameEnd;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
-using _Project.Develop.Runtime.Meta.Features.Statistics;
-using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 
 namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
@@ -23,33 +21,32 @@ namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
         {
             return new PlayerData()
             {
-                WalletData = InitWalletData(),
-                GameStatisticsData = InitGameStatisticsData(),
-                CompletedLevels = new()
+                CurrenciesData = InitWalletData(),
+                GameEndData = InitGameEndData()
             };
         }
 
-        private Dictionary<GameStatisticsTypes, int> InitGameStatisticsData()
+        private Dictionary<GameEndTypes, int> InitGameEndData()
         {
-            Dictionary<GameStatisticsTypes, int> gameStatisticsData = new();
+            Dictionary<GameEndTypes, int> initGameEndData = new();
 
-            StartGameStatisticsConfig gameStatisticsesConfig 
-                = _configsProviderService.GetConfig<StartGameStatisticsConfig>();
+            StartGameEndValuesConfig startGameEndValuesConfig 
+                = _configsProviderService.GetConfig<StartGameEndValuesConfig>();
 
-            foreach (GameStatisticsTypes gameStatisticsTypes in Enum.GetValues(typeof(GameStatisticsTypes)))
-                gameStatisticsData[gameStatisticsTypes] = gameStatisticsesConfig.GetValueFor(gameStatisticsTypes);
+            foreach (GameEndTypes gameEndTypes in Enum.GetValues(typeof(GameEndTypes)))
+                initGameEndData[gameEndTypes] = startGameEndValuesConfig.GetValueFor(gameEndTypes);
 
-            return gameStatisticsData;
+            return initGameEndData;
         }
 
         private Dictionary<CurrencyTypes, int> InitWalletData()
         {
             Dictionary<CurrencyTypes, int> walletData = new();
 
-            StartWalletConfig walletConfig = _configsProviderService.GetConfig<StartWalletConfig>();
+            StartCurrenciesConfig currenciesConfig = _configsProviderService.GetConfig<StartCurrenciesConfig>();
 
             foreach (CurrencyTypes currencyType in Enum.GetValues(typeof(CurrencyTypes)))
-                walletData[currencyType] = walletConfig.GetValueFor(currencyType);
+                walletData[currencyType] = currenciesConfig.GetValueFor(currencyType);
 
             return walletData;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.UI.Core.TestPopup;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.UI.LevelsMenuPopup;
 using UnityEngine;
 
@@ -41,13 +42,26 @@ namespace _Project.Develop.Runtime.UI.Core
                 ViewsFactory.Create<LevelsMenuPopupView>(ViewIDs.LevelsMenuPopup, _popupLayer);
 
             LevelsMenuPopupPresenter levelsMenuPopupPresenter =
-                _presentersFactory.LevelsMenuPopupPresenter(levelsMenuPopupView);
+                _presentersFactory.CreateLevelsMenuPopupPresenter(levelsMenuPopupView);
             
             OnPopupCreated(levelsMenuPopupPresenter, levelsMenuPopupView, closedCallback);
 
             return levelsMenuPopupPresenter;
         }
+        
+        public GameplayOutcomePopupPresenter OpenGameplayOutcomePopupPresenter(string text, Action closedCallback = null)
+        {
+            GameplayOutcomePopupView gameplayOutcomePopupView =
+                ViewsFactory.Create<GameplayOutcomePopupView>(ViewIDs.GameplayOutcomePopup, _popupLayer);
 
+            GameplayOutcomePopupPresenter outcomePopupPresenter =
+                _presentersFactory.CreateGameplayOutcomePopupPresenter(gameplayOutcomePopupView, text);
+            
+            OnPopupCreated(outcomePopupPresenter, gameplayOutcomePopupView, closedCallback);
+
+            return outcomePopupPresenter;
+        }
+        
         public void ClosePopup(PopupPresenterBase popup)
         {
             popup.CloseRequest -= ClosePopup;

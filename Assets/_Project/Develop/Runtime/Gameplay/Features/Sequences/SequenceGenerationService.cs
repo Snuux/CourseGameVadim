@@ -8,24 +8,24 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sequences
         {
             Length = length;
             Symbols = symbols;
-            Sequence = GenerateRandomSequence();
         }
 
         public string Symbols { get; private set; }
         public string Sequence { get; private set; }
         public int Length { get; private set; }
         
-        private string GenerateRandomSequence()
+        public void GenerateRandomSequence()
         {
             string sequence = "";
 
             for (int i = 0; i < Length; i++)
             {
                 char randomSymbol = Symbols[Random.Range(0, Symbols.Length)];
+                
                 sequence += randomSymbol;
             }
 
-            return sequence;
+            Sequence = sequence;
         }
     }
 }

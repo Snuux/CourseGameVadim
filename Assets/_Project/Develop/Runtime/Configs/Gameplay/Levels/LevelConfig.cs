@@ -1,12 +1,15 @@
-﻿using System;
-using _Project.Develop.Runtime.Configs.Meta.Levels;
+﻿using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Configs.Gameplay.Levels
+namespace _Project.Develop.Runtime.Configs.Gameplay.Levels   
 {
-    [CreateAssetMenu(menuName = "Configs/LevelConfig1", fileName = "LevelConfig1")]
-    public class LevelConfig1 : ScriptableObject
+    [CreateAssetMenu(menuName = "Configs/LevelConfig", fileName = "LevelConfig")]
+    public class LevelConfig : ScriptableObject
     {
-        //добавить позже настройки для уровня
+        [field: SerializeField] public string Symbols { get; private set; }
+        [field: SerializeField] public int Length { get; private set; }
+        
+        [field: SerializeField] public CurrencyConfig WinReward { get; private set; }
+        [field: SerializeField] public CurrencyConfig DefeatPenalty { get; private set; }
     }
 }

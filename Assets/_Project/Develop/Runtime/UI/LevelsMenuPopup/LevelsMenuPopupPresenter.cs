@@ -39,7 +39,7 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
 
             _view.SetTitle(TitleName);
 
-            LevelsListConfig levelsListConfig = _configsProviderService.GetConfig<LevelsListConfig>();
+            LevelsConfig levelsListConfig = _configsProviderService.GetConfig<LevelsConfig>();
 
             for (int i = 0; i < levelsListConfig.Levels.Count; i++)
             {
@@ -48,7 +48,7 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
                 _view.LevelTilesListView.Add(levelTileView);
 
                 LevelTilePresenter levelTilePresenter =
-                    _presentersFactory.CreateLevelTilePresenter(levelTileView, i + 1);
+                    _presentersFactory.CreateLevelTilePresenter(levelTileView, levelsListConfig.Levels[i].LevelType);
 
                 levelTilePresenter.Initialize();
                 

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Gameplay.GameEnd;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
-using _Project.Develop.Runtime.Configs.Meta.GameStatistics;
-using _Project.Develop.Runtime.Configs.Meta.Levels;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using UnityEngine;
@@ -17,13 +16,11 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
             { typeof(LevelsConfig), "Configs/Levels/LevelsConfig" },
-            { typeof(StartWalletConfig), "Configs/Wallet/StartWalletConfig" },
-            { typeof(StartGameStatisticsConfig), "Configs/Statistics/StartGameStatisticsConfig" },
-            { typeof(LevelsRewardConfig), "Configs/Levels/LevelsRewardConfig" },
-            { typeof(ResetPriceConfig), "Configs/Wallet/ResetPriceConfig" },
-            { typeof(CurrencyIconsConfig), "Configs/Wallet/CurrencyIconsConfig" },
-            { typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" }
-            
+            { typeof(StartCurrenciesConfig), "Configs/Currencies/StartCurrenciesConfig" },
+            { typeof(StartGameEndValuesConfig), "Configs/GameEnd/StartGameEndValuesConfig" },
+            { typeof(ResetPriceConfig), "Configs/Currencies/ResetPriceConfig" },
+            { typeof(CurrencyIconsConfig), "Configs/Currencies/CurrencyIconsConfig" },
+            { typeof(CurrencyIconsConfig), "Configs/GameEnd/GameEndIconsConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

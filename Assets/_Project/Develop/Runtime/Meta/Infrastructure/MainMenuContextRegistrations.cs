@@ -1,7 +1,6 @@
-﻿using _Project.Develop.Runtime.Configs.Meta.Levels;
+﻿using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Menu;
-using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.Core;
@@ -19,14 +18,14 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
     {
         public static void Process(DIContainer container)
         {
-            Debug.Log("Процесс регистрации сервисов на сцене меню");
-
             container.RegisterAsSingle(CreateChangeSceneByLevelTypeService);
-            container.RegisterAsSingle(CreateMainMenuRunningService);
             
             container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
+            
             container.RegisterAsSingle(CreateMainMenuPresenterFactory);
+            
             container.RegisterAsSingle(CreateMainMenuScreenPresenter).NonLazy();
+            
             container.RegisterAsSingle(CreateMainMenuPopupService);
         }
 
@@ -45,17 +44,6 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             ICoroutinesPerformer coroutinesPerformer = c.Resolve<ICoroutinesPerformer>();
 
             return new MainMenuSwitcherSceneService(configsProviderService, sceneSwitcherService, coroutinesPerformer);
-        }
-
-        private static MainMenuRunningService CreateMainMenuRunningService(DIContainer c)
-        {
-            return new MainMenuRunningService(
-                c.Resolve<WalletService>(),
-                c.Resolve<GameStatisticsService>(),
-                c.Resolve<PlayerDataProvider>(),
-                c.Resolve<ICoroutinesPerformer>(),
-                c.Resolve<ConfigsProviderService>().GetConfig<ResetPriceConfig>()
-            );
         }
         
         private static MainMenuUIRoot CreateMainMenuUIRoot(DIContainer c)

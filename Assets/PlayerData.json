@@ -1,11 +1,10 @@
 {
-  "WalletData": {
-    "Gold": 100,
-    "Diamond": 50
+  "CurrenciesData": {
+    "Gold": 220,
+    "Diamond": 0
   },
-  "GameStatisticsData": {
-    "Win": 0,
-    "Defeat": 0
-  },
-  "CompletedLevels": [1, 2]
+  "GameEndData": {
+    "Win": 2,
+    "Defeat": 1
+  }
 }

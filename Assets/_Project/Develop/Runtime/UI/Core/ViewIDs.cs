@@ -7,5 +7,7 @@
         public const string TestPopup = nameof(TestPopup);
         public const string LevelTile = nameof(LevelTile);
         public const string LevelsMenuPopup = nameof(LevelsMenuPopup);
+        public const string GameplayScreen = nameof(GameplayScreen);
+        public const string GameplayOutcomePopup = nameof(GameplayOutcomePopup);
     }
 }

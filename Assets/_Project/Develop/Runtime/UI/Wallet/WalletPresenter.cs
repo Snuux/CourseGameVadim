@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
@@ -13,7 +14,8 @@ namespace _Project.Develop.Runtime.UI.Wallet
 
         private readonly IconTextListView _view;
         
-        private readonly List<CurrencyPresenter> _currencyPresenters = new();
+        private readonly List<SingleCurrencyPresenter> _currencyPresenters = new();
+        private readonly List<SingleGameEndPresenter> _gameEndPresenters = new();
         
         public WalletPresenter(
             WalletService walletService,
@@ -35,20 +37,36 @@ namespace _Project.Develop.Runtime.UI.Wallet
 
                 _view.Add(currencyView); 
                 
-                CurrencyPresenter currencyPresenter = _presentersFactory.CreateCurrencyPresenter(
+                SingleCurrencyPresenter singleCurrencyPresenter = _presentersFactory.CreateCurrencyPresenter(
                     currencyView,
                     _walletService.GetCurrency(currencyType),
                     currencyType);
                 
-                currencyPresenter.Initialize();
+                singleCurrencyPresenter.Initialize();
                 
-                _currencyPresenters.Add(currencyPresenter);
+                _currencyPresenters.Add(singleCurrencyPresenter);
+            }
+            
+            foreach (CurrencyTypes currencyType in _walletService.AvailableCurrencies)
+            {
+                IconTextView currencyView = _viewsFactory.Create<IconTextView>(ViewIDs.CurrencyView);
+
+                _view.Add(currencyView); 
+                
+                SingleCurrencyPresenter singleCurrencyPresenter = _presentersFactory.CreateCurrencyPresenter(
+                    currencyView,
+                    _walletService.GetCurrency(currencyType),
+                    currencyType);
+                
+                singleCurrencyPresenter.Initialize();
+                
+                _currencyPresenters.Add(singleCurrencyPresenter);
             }
         }
 
         public void Dispose()
         {
-            foreach (CurrencyPresenter presenter in _currencyPresenters)
+            foreach (SingleCurrencyPresenter presenter in _currencyPresenters)
             {
                 _view.Remove(presenter.View);
                 _viewsFactory.Release(presenter.View);

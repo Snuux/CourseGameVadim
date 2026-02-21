@@ -5,30 +5,26 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sequences
 {
     public class InputSequenceService
     {
-        public string InputSymbols { get; private set; }
+        public event Action<string> InputPress;
         
-        public void ProcessInputKeys()
+        private string _inputSymbols = "";
+
+        public string GetCurrentInput()
         {
+            string oldInput = _inputSymbols;
+            
             if (Input.inputString.Length > 0 && Input.anyKeyDown)
             {
                 foreach (char character in Input.inputString)
-                    InputSymbols += character;
-
-                Debug.Log(InputSymbols);
+                    _inputSymbols += character;
             }
+            
+            if (oldInput?.Equals(_inputSymbols) == false)
+                InputPress?.Invoke(_inputSymbols);
+
+            return _inputSymbols;
         }
 
-        public void Clear() => InputSymbols = "";
-        
-        public static bool IsSame(string sequenceTarget, string sequenceSource)
-        {
-            if (sequenceSource.Length != sequenceTarget.Length || sequenceTarget.Length == 0)
-                throw new InvalidOperationException("Wrong length of sequence!");
-
-            if (sequenceSource.Length == 0)
-                throw new InvalidOperationException("Not generated sequence! Please generate first");
-
-            return sequenceTarget.Equals(sequenceSource);
-        }
+        public void Clear() => _inputSymbols = "";
     }
 }

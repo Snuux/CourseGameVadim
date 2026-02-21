@@ -18,11 +18,11 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
         {
             base.ModifyShowAnimation(animation);
 
-            foreach (LevelTileView levelTileView in _levelTilesListView.Elements)
-            {
-                animation.Append(levelTileView.Show());
-                animation.AppendInterval(0.1f);
-            }
+            //foreach (LevelTileView levelTileView in _levelTilesListView.Elements)
+            //{
+            //    animation.Append(levelTileView.Show());
+            //    animation.AppendInterval(0.1f);
+            //}
         }
     }
 }
