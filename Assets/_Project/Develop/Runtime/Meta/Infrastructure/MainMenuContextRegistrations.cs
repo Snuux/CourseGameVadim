@@ -1,15 +1,8 @@
-﻿using _Project.Develop.Runtime.Configs.Gameplay.Levels;
-using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Meta.Features.Menu;
-using _Project.Develop.Runtime.Meta.Features.Wallet;
+﻿using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.MainMenu;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
-using _Project.Develop.Runtime.Utilities.ConfigsManagment;
-using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using _Project.Develop.Runtime.Utilities.SceneManagment;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Infrastructure
@@ -18,14 +11,9 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
     {
         public static void Process(DIContainer container)
         {
-            container.RegisterAsSingle(CreateChangeSceneByLevelTypeService);
-            
             container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
-            
-            container.RegisterAsSingle(CreateMainMenuPresenterFactory);
-            
+            container.RegisterAsSingle(CreateMainMenuPresentersFactory);
             container.RegisterAsSingle(CreateMainMenuScreenPresenter).NonLazy();
-            
             container.RegisterAsSingle(CreateMainMenuPopupService);
         }
 
@@ -37,28 +25,19 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
                 c.Resolve<MainMenuUIRoot>());
         }
 
-        private static MainMenuSwitcherSceneService CreateChangeSceneByLevelTypeService(DIContainer c)
-        {
-            ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
-            SceneSwitcherService sceneSwitcherService = c.Resolve<SceneSwitcherService>();
-            ICoroutinesPerformer coroutinesPerformer = c.Resolve<ICoroutinesPerformer>();
-
-            return new MainMenuSwitcherSceneService(configsProviderService, sceneSwitcherService, coroutinesPerformer);
-        }
-        
         private static MainMenuUIRoot CreateMainMenuUIRoot(DIContainer c)
         {
             ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
 
-            MainMenuUIRoot mainMenuUIRoot = resourcesAssetsLoader
+            MainMenuUIRoot mainMenuUIRootPrefab = resourcesAssetsLoader
                 .Load<MainMenuUIRoot>("UI/MainMenu/MainMenuUIRoot");
 
-            return Object.Instantiate(mainMenuUIRoot);
+            return Object.Instantiate(mainMenuUIRootPrefab);
         }
 
-        public static MainMenuPresenterFactory CreateMainMenuPresenterFactory(DIContainer c)
+        private static MainMenuPresentersFactory CreateMainMenuPresentersFactory(DIContainer c)
         {
-            return new MainMenuPresenterFactory(c);
+            return new MainMenuPresentersFactory(c);
         }
 
         private static MainMenuScreenPresenter CreateMainMenuScreenPresenter(DIContainer c)
@@ -70,7 +49,7 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
                 .Create<MainMenuScreenView>(ViewIDs.MainMenuScreen, uiRoot.HUDLayer);
 
             MainMenuScreenPresenter presenter = c
-                .Resolve<MainMenuPresenterFactory>()
+                .Resolve<MainMenuPresentersFactory>()
                 .CreateMainMenuScreen(view);
 
             return presenter;

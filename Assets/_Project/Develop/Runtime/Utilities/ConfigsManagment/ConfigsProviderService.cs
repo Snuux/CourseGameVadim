@@ -8,7 +8,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
     public class ConfigsProviderService
     {
         private readonly Dictionary<Type, object> _configs = new();
-        private readonly IConfigsLoader[]  _loaders;
+
+        private readonly IConfigsLoader[] _loaders;
 
         public ConfigsProviderService(params IConfigsLoader[] loaders)
         {
@@ -18,17 +19,17 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
         public IEnumerator LoadAsync()
         {
             _configs.Clear();
-            
-            foreach (var loader in _loaders)
-                yield return loader.LoadAsync(loadedConfigs =>_configs.AddRange(loadedConfigs));
+
+            foreach (IConfigsLoader loader in _loaders)
+                yield return loader.LoadAsync(loadedConfigs => _configs.AddRange(loadedConfigs));
         }
 
         public T GetConfig<T>() where T : class
         {
             if (_configs.ContainsKey(typeof(T)) == false)
-                throw new InvalidOperationException($"Not found config {typeof(T)}");
-            
-            return (T) _configs[typeof(T)];
+                throw new InvalidOperationException($"Not found config by {typeof(T)}");
+
+            return (T)_configs[typeof(T)];
         }
     }
 }

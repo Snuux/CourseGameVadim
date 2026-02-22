@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 
 namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
@@ -20,7 +21,8 @@ namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
         {
             return new PlayerData()
             {
-                CurrenciesData = InitWalletData(),
+                WalletData = InitWalletData(),
+                CompletedLevels = new()
             };
         }
 
@@ -28,10 +30,10 @@ namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
         {
             Dictionary<CurrencyTypes, int> walletData = new();
 
-            StartCurrenciesConfig currenciesConfig = _configsProviderService.GetConfig<StartCurrenciesConfig>();
+            StartWalletConfig walletConfig = _configsProviderService.GetConfig<StartWalletConfig>();
 
             foreach (CurrencyTypes currencyType in Enum.GetValues(typeof(CurrencyTypes)))
-                walletData[currencyType] = currenciesConfig.GetValueFor(currencyType);
+                walletData[currencyType] = walletConfig.GetValueFor(currencyType);
 
             return walletData;
         }

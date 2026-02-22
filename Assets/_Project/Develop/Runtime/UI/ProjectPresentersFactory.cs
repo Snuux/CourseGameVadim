@@ -1,11 +1,10 @@
-﻿
-using _Project.Develop.Runtime.Configs.Gameplay.Levels;
-using _Project.Develop.Runtime.Configs.Meta.Wallet;
+﻿using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI.CommonViews;
+using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Core.TestPopup;
-using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.UI.LevelsMenuPopup;
 using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -24,17 +23,16 @@ namespace _Project.Develop.Runtime.UI
             _container = container;
         }
 
-        public SingleCurrencyPresenter CreateCurrencyPresenter(
-            IconTextView iconTextView,
+        public CurrencyPresenter CreateCurrencyPresenter(
+            IconTextView view,
             IReadOnlyVariable<int> currency,
-            CurrencyTypes currencyType
-        )
+            CurrencyTypes currencyType)
         {
-            return new SingleCurrencyPresenter(
+            return new CurrencyPresenter(
                 currency,
                 currencyType,
                 _container.Resolve<ConfigsProviderService>().GetConfig<CurrencyIconsConfig>(),
-                iconTextView);
+                view);
         }
 
         public WalletPresenter CreateWalletPresenter(IconTextListView view)
@@ -42,26 +40,25 @@ namespace _Project.Develop.Runtime.UI
             return new WalletPresenter(
                 _container.Resolve<WalletService>(),
                 this,
-                _container.Resolve<ViewsFactory>(), 
+                _container.Resolve<ViewsFactory>(),
                 view);
         }
 
         public TestPopupPresenter CreateTestPopupPresenter(TestPopupView view)
         {
             return new TestPopupPresenter(
-                _container.Resolve<ICoroutinesPerformer>(),
-                view);
+                view,
+                _container.Resolve<ICoroutinesPerformer>());
         }
-        
-        public LevelTilePresenter CreateLevelTilePresenter(LevelTileView view, LevelTypes levelType)
+
+        public LevelTilePresenter CreateLevelTilePresenter(LevelTileView view, int levelNumber)
         {
             return new LevelTilePresenter(
-                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<LevelsProgressionService>(),
                 _container.Resolve<SceneSwitcherService>(),
-                view,
-                levelType,
-                _container.Resolve<ConfigsProviderService>()
-                );
+                _container.Resolve<ICoroutinesPerformer>(),
+                levelNumber,
+                view);
         }
 
         public LevelsMenuPopupPresenter CreateLevelsMenuPopupPresenter(LevelsMenuPopupView view)
@@ -72,15 +69,6 @@ namespace _Project.Develop.Runtime.UI
                 this,
                 _container.Resolve<ViewsFactory>(),
                 view);
-        }
-        
-        public GameplayOutcomePopupPresenter CreateGameplayOutcomePopupPresenter(GameplayOutcomePopupView view, string text)
-        {
-            return new GameplayOutcomePopupPresenter(
-                _container.Resolve<ICoroutinesPerformer>(),
-                view,
-                text,
-                _container.Resolve<SceneSwitcherService>());
         }
     }
 }

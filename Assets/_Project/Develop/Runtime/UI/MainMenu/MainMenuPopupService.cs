@@ -8,13 +8,14 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         private readonly MainMenuUIRoot _uiRoot;
 
         public MainMenuPopupService(
-            ViewsFactory viewsFactory, 
-            ProjectPresentersFactory presentersFactory, MainMenuUIRoot uiRoot) 
+            ViewsFactory viewsFactory,
+            ProjectPresentersFactory presentersFactory,
+            MainMenuUIRoot uiRoot)
             : base(viewsFactory, presentersFactory)
         {
             _uiRoot = uiRoot;
         }
 
-        protected override Transform _popupLayer => _uiRoot.PopupsLayer;
+        protected override Transform PopupLayer => _uiRoot.PopupsLayer;
     }
 }

@@ -9,9 +9,9 @@ namespace _Project.Develop.Runtime.UI.Core
     public abstract class PopupPresenterBase : IPresenter
     {
         public event Action<PopupPresenterBase> CloseRequest;
-        
-        private  ICoroutinesPerformer _coroutinesPerformer;
-        
+
+        private readonly ICoroutinesPerformer _coroutinesPerformer;
+
         private Coroutine _process;
 
         protected PopupPresenterBase(ICoroutinesPerformer coroutinesPerformer)
@@ -27,41 +27,40 @@ namespace _Project.Develop.Runtime.UI.Core
 
         public virtual void Dispose()
         {
-            PopupView.CloseRequest -= OnCloseRequest; //если перешли на другую сцену..
+            KillProcess();
+
+            PopupView.CloseRequest -= OnCloseRequest;
         }
 
         public void Show()
         {
             KillProcess();
-            
+
             _process = _coroutinesPerformer.StartPerform(ProcessShow());
         }
 
         public void Hide(Action callback = null)
         {
             KillProcess();
-            
+
             _process = _coroutinesPerformer.StartPerform(ProcessHide(callback));
         }
 
+        protected virtual void OnPostShow() { }
 
         protected virtual void OnPreShow()
         {
             PopupView.CloseRequest += OnCloseRequest;
         }
 
-        protected virtual void OnPostShow()
-        {
-        }
+        protected virtual void OnPostHide() { }
 
         protected virtual void OnPreHide()
         {
             PopupView.CloseRequest -= OnCloseRequest;
         }
 
-        protected virtual void OnPostHide()
-        {
-        }
+        protected void OnCloseRequest() => CloseRequest?.Invoke(this);
 
         private IEnumerator ProcessShow()
         {
@@ -80,11 +79,8 @@ namespace _Project.Develop.Runtime.UI.Core
 
             OnPostHide();
 
-            callback?.Invoke(); //нужен для того чтобы исполнить код после закрытия
+            callback?.Invoke();
         }
-        
-        //protected чтобы дочерние классы могли дергать метод и событие срабатывало
-        protected void OnCloseRequest() => CloseRequest?.Invoke(this);
 
         private void KillProcess()
         {

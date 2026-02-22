@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3664641095261163462
+--- !u!1 &1865570729058155713
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1225383837914648112}
-  - component: {fileID: 6739625016669698167}
-  - component: {fileID: 537549557393393001}
+  - component: {fileID: 806475608141834439}
+  - component: {fileID: 7538671466334454439}
+  - component: {fileID: 5756793533834964380}
   m_Layer: 5
   m_Name: WalletView
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1225383837914648112
+--- !u!224 &806475608141834439
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664641095261163462}
+  m_GameObject: {fileID: 1865570729058155713}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -37,13 +37,13 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6739625016669698167
+--- !u!114 &7538671466334454439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664641095261163462}
+  m_GameObject: {fileID: 1865570729058155713}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
@@ -63,16 +63,16 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &537549557393393001
+--- !u!114 &5756793533834964380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3664641095261163462}
+  m_GameObject: {fileID: 1865570729058155713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f80a7750f3b2442fae482ca50602dc30, type: 3}
+  m_Script: {fileID: 11500000, guid: 02f72ac39b3375f45874a911ed412646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parent: {fileID: 1225383837914648112}
+  _parent: {fileID: 806475608141834439}

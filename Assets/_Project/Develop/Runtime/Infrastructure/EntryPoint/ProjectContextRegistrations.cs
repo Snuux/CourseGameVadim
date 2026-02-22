@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
+using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -40,29 +41,26 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
+            container.RegisterAsSingle(CreateProjectPresentersFactory);
+
+            container.RegisterAsSingle(CreateViewsFactory);
+
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
 
-            container.RegisterAsSingle(CreateProjectPresenterFactory);
-            
-            container.RegisterAsSingle(CreateViewsFactory);
+            container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
         }
+
+        private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
+            => new LevelsProgressionService(c.Resolve<PlayerDataProvider>());
 
         private static ViewsFactory CreateViewsFactory(DIContainer c)
-        {
-            return new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
-        }
+            => new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
 
-        private static ProjectPresentersFactory CreateProjectPresenterFactory(DIContainer c)
-        {
-            return new ProjectPresentersFactory(c);
-        }
+        private static ProjectPresentersFactory CreateProjectPresentersFactory(DIContainer c)
+            => new ProjectPresentersFactory(c);
 
         private static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
-        {
-            return new PlayerDataProvider(
-                c.Resolve<ISaveLoadSerivce>(),
-                c.Resolve<ConfigsProviderService>());
-        }
+            => new PlayerDataProvider(c.Resolve<ISaveLoadSerivce>(), c.Resolve<ConfigsProviderService>());
 
         private static SaveLoadService CreateSaveLoadService(DIContainer c)
         {
@@ -87,12 +85,10 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         }
 
         private static SceneSwitcherService CreateSceneSwitcherService(DIContainer c)
-        {
-            return new SceneSwitcherService(
+            => new SceneSwitcherService(
                 c.Resolve<SceneLoaderService>(),
                 c.Resolve<ILoadingScreen>(),
                 c);
-        }
 
         private static SceneLoaderService CreateSceneLoaderService(DIContainer c)
             => new SceneLoaderService();

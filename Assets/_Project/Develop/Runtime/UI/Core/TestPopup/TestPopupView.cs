@@ -16,7 +16,7 @@ namespace _Project.Develop.Runtime.UI.Core.TestPopup
 
             animation
                 .Append(_text
-                    .DOFade(1, .2f)
+                    .DOFade(1, 0.2f)
                     .From(0));
         }
     }

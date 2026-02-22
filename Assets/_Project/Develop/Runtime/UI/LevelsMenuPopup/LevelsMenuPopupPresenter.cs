@@ -19,10 +19,10 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
         private readonly List<LevelTilePresenter> _levelTilePresenters = new();
 
         public LevelsMenuPopupPresenter(
-            ICoroutinesPerformer coroutinesPerformer,
-            ConfigsProviderService configsProviderService,
-            ProjectPresentersFactory presentersFactory,
-            ViewsFactory viewsFactory,
+            ICoroutinesPerformer coroutinesPerformer, 
+            ConfigsProviderService configsProviderService, 
+            ProjectPresentersFactory presentersFactory, 
+            ViewsFactory viewsFactory, 
             LevelsMenuPopupView view) : base(coroutinesPerformer)
         {
             _configsProviderService = configsProviderService;
@@ -39,7 +39,7 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
 
             _view.SetTitle(TitleName);
 
-            LevelsConfig levelsListConfig = _configsProviderService.GetConfig<LevelsConfig>();
+            LevelsListConfig levelsListConfig = _configsProviderService.GetConfig<LevelsListConfig>();
 
             for (int i = 0; i < levelsListConfig.Levels.Count; i++)
             {
@@ -47,11 +47,10 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
 
                 _view.LevelTilesListView.Add(levelTileView);
 
-                LevelTilePresenter levelTilePresenter =
-                    _presentersFactory.CreateLevelTilePresenter(levelTileView, levelsListConfig.Levels[i].LevelType);
+                LevelTilePresenter levelTilePresenter = _presentersFactory.CreateLevelTilePresenter(levelTileView, i + 1);
 
                 levelTilePresenter.Initialize();
-                
+
                 _levelTilePresenters.Add(levelTilePresenter);
             }
         }
@@ -60,14 +59,13 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
         {
             base.Dispose();
 
-            foreach (LevelTilePresenter presenter in _levelTilePresenters)
+            foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
             {
-                _view.LevelTilesListView.Remove(presenter.View);
-                _viewsFactory.Release(presenter.View);
-                
-                presenter.Dispose();
+                _view.LevelTilesListView.Remove(levelTilePresenter.View);
+                _viewsFactory.Release(levelTilePresenter.View);
+                levelTilePresenter.Dispose();
             }
-            
+
             _levelTilePresenters.Clear();
         }
 
@@ -75,7 +73,7 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
         {
             base.OnPreShow();
 
-            foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters) 
+            foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
                 levelTilePresenter.Subscribe();
         }
 
@@ -83,7 +81,7 @@ namespace _Project.Develop.Runtime.UI.LevelsMenuPopup
         {
             base.OnPreHide();
 
-            foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters) 
+            foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
                 levelTilePresenter.Unsubscribe();
         }
     }

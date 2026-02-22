@@ -10,32 +10,33 @@ namespace _Project.Develop.Runtime.UI.Core
         public static Sequence CreateShowAnimation(
             CanvasGroup body,
             Image anticlicker,
-            PopupAnimationTypes animationTypes,
+            PopupAnimationTypes animationType,
             float anticlickerMaxAlpha)
         {
-            switch (animationTypes)
+            switch (animationType)
             {
                 case PopupAnimationTypes.None:
                     return DOTween.Sequence();
+
                 case PopupAnimationTypes.Expand:
                     return DOTween.Sequence()
-                        .Append(
-                            anticlicker
-                                .DOFade(anticlickerMaxAlpha, .2f)
-                                .From(0))
+                        .Append(anticlicker
+                            .DOFade(anticlickerMaxAlpha, 0.2f)
+                            .From(0))
                         .Join(body.transform
-                            .DOScale(1, .5f)
+                            .DOScale(1, 0.5f)
                             .From(0)
                             .SetEase(Ease.OutBack));
+
                 default:
-                    throw new ArgumentException(nameof(animationTypes));
+                    throw new ArgumentException(nameof(animationType));
             }
         }
 
         public static Sequence CreateHideAnimation(
             CanvasGroup body,
             Image anticlicker,
-            PopupAnimationTypes animationTypes,
+            PopupAnimationTypes animationType,
             float anticlickerMaxAlpha)
         {
             return DOTween.Sequence();

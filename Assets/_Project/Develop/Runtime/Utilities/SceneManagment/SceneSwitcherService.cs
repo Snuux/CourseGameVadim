@@ -12,7 +12,7 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagment
         private readonly SceneLoaderService _sceneLoaderService;
         private readonly ILoadingScreen _loadingScreen;
         private readonly DIContainer _projectContainer;
-        
+
         private DIContainer _currentSceneContainer;
 
         public SceneSwitcherService(
@@ -28,7 +28,7 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagment
         public IEnumerator ProcessSwitchTo(string sceneName, IInputSceneArgs sceneArgs = null)
         {
             _loadingScreen.Show();
-            
+
             _currentSceneContainer?.Dispose();
 
             yield return _sceneLoaderService.LoadAsync(Scenes.Empty);
@@ -42,7 +42,7 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagment
             _currentSceneContainer = new DIContainer(_projectContainer);
 
             sceneBootstrap.ProcessRegistrations(_currentSceneContainer, sceneArgs);
-            
+
             _currentSceneContainer.Initialize();
 
             yield return sceneBootstrap.Initialize();

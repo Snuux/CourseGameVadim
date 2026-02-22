@@ -1,6 +1,6 @@
 ﻿using System;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project.Develop.Runtime.UI.Core
@@ -13,7 +13,7 @@ namespace _Project.Develop.Runtime.UI.Core
         [SerializeField] private Image _anticlicker;
         [SerializeField] private CanvasGroup _body;
 
-        [SerializeField] private PopupAnimationTypes _animationTypes;
+        [SerializeField] private PopupAnimationTypes _animationType;
 
         private float _anticlickerDefaultAlpha;
 
@@ -21,11 +21,9 @@ namespace _Project.Develop.Runtime.UI.Core
 
         private void Awake()
         {
-            _mainGroup.alpha = 0;
             _anticlickerDefaultAlpha = _anticlicker.color.a;
+            _mainGroup.alpha = 0;
         }
-
-        private void OnDestroy() => KillCurrentAnimation();
 
         public void OnCloseButtonClicked() => CloseRequest?.Invoke();
 
@@ -35,14 +33,14 @@ namespace _Project.Develop.Runtime.UI.Core
 
             OnPreShow();
 
+            //тут потом появятся анимации
             _mainGroup.alpha = 1;
 
-            Sequence animation =
-                PopupAnimationsCreator.CreateShowAnimation(_body, _anticlicker, _animationTypes,
-                    _anticlickerDefaultAlpha);
+            Sequence animation = PopupAnimationsCreator
+                .CreateShowAnimation(_body, _anticlicker, _animationType, _anticlickerDefaultAlpha);
 
             ModifyShowAnimation(animation);
-            
+
             animation.OnComplete(OnPostShow);
 
             return _currentAnimation = animation.SetUpdate(true).Play();
@@ -54,42 +52,28 @@ namespace _Project.Develop.Runtime.UI.Core
 
             OnPreHide();
 
-            Sequence animation = PopupAnimationsCreator.CreateHideAnimation(_body, _anticlicker, _animationTypes,
-                _anticlickerDefaultAlpha);
-            
-            ModifyShowAnimation(animation);
-            
+            Sequence animation = PopupAnimationsCreator
+                .CreateHideAnimation(_body, _anticlicker, _animationType, _anticlickerDefaultAlpha);
+
+            ModifyHideAnimation(animation);
+
             animation.OnComplete(OnPostHide);
 
             return _currentAnimation = animation.SetUpdate(true).Play();
         }
 
-        protected virtual void ModifyShowAnimation(Sequence animation)
-        {
-            
-        }
-        
-        protected virtual void ModifyHideAnimation(Sequence animation)
-        {
-            
-        }
+        protected virtual void ModifyShowAnimation(Sequence animation) { }
+        protected virtual void ModifyHideAnimation(Sequence animation) { }
 
-        protected virtual void OnPreShow()
-        {
-        }
+        protected virtual void OnPostShow() { }
 
-        protected virtual void OnPostShow()
-        {
-        }
+        protected virtual void OnPreShow() { }
 
-        protected virtual void OnPreHide()
-        {
-        }
+        protected virtual void OnPostHide() { }
 
-        protected virtual void OnPostHide()
-        {
-        }
+        protected virtual void OnPreHide() { }
 
+        private void OnDestroy() => KillCurrentAnimation();
 
         private void KillCurrentAnimation()
         {

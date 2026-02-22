@@ -6,6 +6,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
     public class DIContainer
     {
         private readonly Dictionary<Type, Registration> _container = new();
+
         private readonly List<Type> _requests = new();
 
         private readonly DIContainer _parent;
@@ -47,7 +48,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             try
             {
                 if (_container.TryGetValue(typeof(T), out Registration registration))
-                    return (T)registration.CreateInstanceFrom((this));
+                    return (T)registration.CreateInstanceFrom(this);
 
                 if (_parent != null)
                     return _parent.Resolve<T>();
@@ -57,7 +58,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
                 _requests.Remove(typeof(T));
             }
 
-            throw new InvalidOperationException($"Registration for {typeof(T)} not found");
+            throw new InvalidOperationException($"Registration for {typeof(T)} not exists");
         }
 
         public void Initialize()

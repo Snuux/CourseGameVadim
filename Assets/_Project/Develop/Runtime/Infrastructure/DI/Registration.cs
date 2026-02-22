@@ -5,7 +5,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
     public class Registration : IRegistrationOptions
     {
         private Func<DIContainer, object> _creator;
-        private object _cashedInstance;
+        private object _cachedInstance;
 
         public bool IsNonLazy { get; private set; }
 
@@ -13,28 +13,28 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
 
         public object CreateInstanceFrom(DIContainer container)
         {
-            if (_cashedInstance != null)
-                return _cashedInstance;
+            if (_cachedInstance != null)
+                return _cachedInstance;
 
             if (_creator == null)
                 throw new InvalidOperationException("Not has instance or creator");
 
-            _cashedInstance = _creator.Invoke(container);
+            _cachedInstance = _creator.Invoke(container);
 
-            return _cashedInstance;
+            return _cachedInstance;
         }
 
         public void OnInitialize()
         {
-            if (_cashedInstance != null)
-                if (_cashedInstance is IInitializable initializable)
+            if (_cachedInstance != null)
+                if (_cachedInstance is IInitializable initializable)
                     initializable.Initialize();
         }
 
         public void OnDispose()
         {
-            if (_cashedInstance != null)
-                if (_cashedInstance is IDisposable disposable)
+            if (_cachedInstance != null)
+                if (_cachedInstance is IDisposable disposable)
                     disposable.Dispose();
         }
 

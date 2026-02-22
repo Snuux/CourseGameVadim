@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.UI.Core.TestPopup;
-using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.UI.LevelsMenuPopup;
 using UnityEngine;
 
@@ -23,53 +22,38 @@ namespace _Project.Develop.Runtime.UI.Core
             _presentersFactory = presentersFactory;
         }
 
-        protected abstract Transform _popupLayer { get; }
+        protected abstract Transform PopupLayer { get; }
 
         public TestPopupPresenter OpenTestPopup(Action closedCallback = null)
         {
-            TestPopupView view = ViewsFactory.Create<TestPopupView>(ViewIDs.TestPopup, _popupLayer);
-            
+            TestPopupView view = ViewsFactory.Create<TestPopupView>(ViewIDs.TestPopup, PopupLayer);
+
             TestPopupPresenter popup = _presentersFactory.CreateTestPopupPresenter(view);
-            
+
             OnPopupCreated(popup, view, closedCallback);
 
             return popup;
         }
 
-        public LevelsMenuPopupPresenter OpenLevelsMenuPopupPresenter(Action closedCallback = null)
+        public LevelsMenuPopupPresenter OpenLevelsMenuPopup()
         {
-            LevelsMenuPopupView levelsMenuPopupView =
-                ViewsFactory.Create<LevelsMenuPopupView>(ViewIDs.LevelsMenuPopup, _popupLayer);
+            LevelsMenuPopupView view = ViewsFactory.Create<LevelsMenuPopupView>(ViewIDs.LevelsMenuPopup, PopupLayer);
 
-            LevelsMenuPopupPresenter levelsMenuPopupPresenter =
-                _presentersFactory.CreateLevelsMenuPopupPresenter(levelsMenuPopupView);
-            
-            OnPopupCreated(levelsMenuPopupPresenter, levelsMenuPopupView, closedCallback);
+            LevelsMenuPopupPresenter popup = _presentersFactory.CreateLevelsMenuPopupPresenter(view);
 
-            return levelsMenuPopupPresenter;
+            OnPopupCreated(popup, view);
+
+            return popup;
         }
-        
-        public GameplayOutcomePopupPresenter OpenGameplayOutcomePopupPresenter(string text, Action closedCallback = null)
-        {
-            GameplayOutcomePopupView gameplayOutcomePopupView =
-                ViewsFactory.Create<GameplayOutcomePopupView>(ViewIDs.GameplayOutcomePopup, _popupLayer);
 
-            GameplayOutcomePopupPresenter outcomePopupPresenter =
-                _presentersFactory.CreateGameplayOutcomePopupPresenter(gameplayOutcomePopupView, text);
-            
-            OnPopupCreated(outcomePopupPresenter, gameplayOutcomePopupView, closedCallback);
-
-            return outcomePopupPresenter;
-        }
-        
         public void ClosePopup(PopupPresenterBase popup)
         {
             popup.CloseRequest -= ClosePopup;
-            
+
             popup.Hide(() =>
             {
                 _presenterToInfo[popup].ClosedCallback?.Invoke();
-                
+
                 DisposeFor(popup);
                 _presenterToInfo.Remove(popup);
             });
@@ -82,14 +66,18 @@ namespace _Project.Develop.Runtime.UI.Core
                 popup.CloseRequest -= ClosePopup;
                 DisposeFor(popup);
             }
-            
+
             _presenterToInfo.Clear();
         }
 
-        protected void OnPopupCreated(PopupPresenterBase popup, PopupViewBase view, Action closedCallback = null)
+        protected void OnPopupCreated(
+            PopupPresenterBase popup,
+            PopupViewBase view,
+            Action closedCallback = null)
         {
-            _presenterToInfo.Add(popup, new PopupInfo(view, closedCallback));
-            
+            PopupInfo popupInfo = new PopupInfo(view, closedCallback);
+
+            _presenterToInfo.Add(popup, popupInfo);
             popup.Initialize();
             popup.Show();
 
@@ -104,14 +92,14 @@ namespace _Project.Develop.Runtime.UI.Core
 
         private class PopupInfo
         {
-            public PopupViewBase View { get; }
-            public Action ClosedCallback { get; }
-
             public PopupInfo(PopupViewBase view, Action closedCallback)
             {
                 View = view;
                 ClosedCallback = closedCallback;
             }
+
+            public PopupViewBase View { get; }
+            public Action ClosedCallback { get; }
         }
     }
 }

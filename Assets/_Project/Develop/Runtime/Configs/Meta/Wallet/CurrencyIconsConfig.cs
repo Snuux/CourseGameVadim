@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Configs.Meta.Wallet
 {
-    [CreateAssetMenu(menuName = "Configs/Meta/Wallet/CurrencyIconConfig", fileName = "CurrencyIconConfig")]
+    [CreateAssetMenu(menuName = "Configs/Meta/Wallet/NewCurrencyIconsConfig", fileName = "CurrencyIconsConfig")]
     public class CurrencyIconsConfig : ScriptableObject
     {
-        [SerializeField] private List<CurrencyToSpriteConfig> _configs;
+        [SerializeField] private List<CurrencyConfig> _configs;
 
         public Sprite GetSpriteFor(CurrencyTypes currencyType)
             => _configs.First(config => config.Type == currencyType).Sprite;
 
         [Serializable]
-        private class CurrencyToSpriteConfig
+        private class CurrencyConfig
         {
             [field: SerializeField] public CurrencyTypes Type { get; private set; }
             [field: SerializeField] public Sprite Sprite { get; private set; }

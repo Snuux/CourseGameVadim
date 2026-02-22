@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
@@ -14,10 +14,9 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
 
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
-            { typeof(LevelsConfig), "Configs/Levels/LevelsConfig" },
-            { typeof(StartCurrenciesConfig), "Configs/Currencies/StartCurrenciesConfig" },
-            { typeof(ResetPriceConfig), "Configs/Currencies/ResetPriceConfig" },
-            { typeof(CurrencyIconsConfig), "Configs/Currencies/CurrencyIconsConfig" }
+            {typeof(StartWalletConfig), "Configs/Meta/Wallet/StartWalletConfig" },
+            {typeof(CurrencyIconsConfig), "Configs/Meta/Wallet/CurrencyIconsConfig" },
+            {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)
@@ -31,9 +30,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
 
             foreach (KeyValuePair<Type, string> configResourcesPath in _configsResourcesPaths)
             {
-                ScriptableObject config = _resources
-                    .Load<ScriptableObject>(configResourcesPath.Value);
-
+                ScriptableObject config = _resources.Load<ScriptableObject>(configResourcesPath.Value);
                 loadedConfigs.Add(configResourcesPath.Key, config);
                 yield return null;
             }

@@ -6,10 +6,7 @@ namespace _Project.Develop.Runtime.UI.Core.TestPopup
     {
         private readonly TestPopupView _view;
 
-        public TestPopupPresenter(
-            ICoroutinesPerformer coroutinesPerformer, 
-            TestPopupView view) 
-            : base(coroutinesPerformer)
+        public TestPopupPresenter(TestPopupView view, ICoroutinesPerformer coroutinesPerformer) : base (coroutinesPerformer)
         {
             _view = view;
         }
@@ -19,7 +16,7 @@ namespace _Project.Develop.Runtime.UI.Core.TestPopup
         public override void Initialize()
         {
             base.Initialize();
-            
+
             _view.SetText("TEST TITLE");
         }
     }

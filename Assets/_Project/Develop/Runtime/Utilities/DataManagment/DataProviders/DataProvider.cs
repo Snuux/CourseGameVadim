@@ -60,13 +60,6 @@ namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
             SendDataToReaders();
         }
 
-        public IEnumerator Remove()
-        {
-            _saveLoadSerivce.Remove<TData>();
-            yield return Save();
-            Reset();
-        }
-
         protected abstract TData GetOriginData();
 
         private void SendDataToReaders()
