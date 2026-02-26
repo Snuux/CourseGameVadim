@@ -21,21 +21,52 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _monoEntityFactory = container.Resolve<MonoEntityFactory>();
         }
 
-        public Entity CreateTestEntity(Vector3 position)
+        public Entity CreateTestEntityRigidbody(Vector3 position)
         {
             Entity entity = CreateEntity();
 
-            _monoEntityFactory.Create(entity, position, "Entities/TestEntity");
+            _monoEntityFactory.Create(entity, position, "Entities/TestEntityRigidbody");
+            
             entity
                 .AddMoveDirection()
-                .AddMoveSpeed(new ReactiveVariable<float>(10));
+                .AddMoveSpeed(new ReactiveVariable<float>(10))
+                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.identity))
+                .AddRotationSpeed(new ReactiveVariable<float>(900))
+                .AddPosition();
 
-            entity.AddSystem(new RigidbodyMovementSystem());
+            entity
+                .AddSystem(new RigidbodyMovementSystem())
+                .AddSystem(new RigidbodyRotationSystem())
+                .AddSystem(new RigidbodyPositionSystem());
 
             _entitiesLifeContext.Add(entity);
 
             return entity;
         }
+        
+        public Entity CreateTestEntityCharacterController(Vector3 position)
+        {
+            Entity entity = CreateEntity();
+
+            _monoEntityFactory.Create(entity, position, "Entities/TestEntityCharacterController");
+            
+            entity
+                .AddMoveDirection()
+                .AddMoveSpeed(new ReactiveVariable<float>(10))
+                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.identity))
+                .AddRotationSpeed(new ReactiveVariable<float>(900))
+                .AddPosition();
+
+            entity
+                .AddSystem(new CharacterControllerMovementSystem())
+                .AddSystem(new CharacterControllerRotationSystem())
+                .AddSystem(new CharacterControllerPositionSystem());
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+
 
         private Entity CreateEntity() => new Entity();
     }
