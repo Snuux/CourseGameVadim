@@ -15,7 +15,8 @@ namespace _Project.Develop.Editor
         private const string AssemblyName = "Assembly-CSharp";
 
         private static string OutputPath
-            => Path.Combine(Application.dataPath, "_Project/Develop/Runtime/Gameplay/EntitiesCore/Generated/EntityAPI.cs");
+            => Path.Combine(Application.dataPath,
+                "_Project/Develop/Runtime/Gameplay/EntitiesCore/Generated/EntityAPI.cs");
 
         [InitializeOnLoadMethod]
         [MenuItem("Tools/GenerateEntityAPI")]
@@ -45,10 +46,11 @@ namespace _Project.Develop.Editor
                 sb.AppendLine($"\t\tpublic {fullTypeName} {modifiedComponentName} => GetComponent<{fullTypeName}>();");
                 sb.AppendLine();
 
-                if(HasSingleField(componentType, out FieldInfo field) && field.Name == "Value")
+                if (HasSingleField(componentType, out FieldInfo field) && field.Name == "Value")
                 {
                     // Свойство для получения поля из компонента
-                    sb.AppendLine($"\t\tpublic {GetValidTypeName(field.FieldType)} {componentName} => {modifiedComponentName}.{field.Name};");
+                    sb.AppendLine(
+                        $"\t\tpublic {GetValidTypeName(field.FieldType)} {componentName} => {modifiedComponentName}.{field.Name};");
                     sb.AppendLine();
 
                     //метод TryGet 
@@ -135,7 +137,7 @@ namespace _Project.Develop.Editor
         {
             FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
-            if(fields.Length != 1)
+            if (fields.Length != 1)
             {
                 field = null;
                 return false;
@@ -160,8 +162,8 @@ namespace _Project.Develop.Editor
             return assembly
                 .GetTypes()
                 .Where(type => type.IsInterface == false
-                    && type.IsAbstract == false
-                    && typeof(IEntityComponent).IsAssignableFrom(type));
+                               && type.IsAbstract == false
+                               && typeof(IEntityComponent).IsAssignableFrom(type));
         }
 
         public static string GetValidTypeName(Type type)
