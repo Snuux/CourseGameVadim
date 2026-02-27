@@ -11,8 +11,8 @@ namespace _Project.Develop.Editor
             if (EditorBuildSettings.scenes.Length == 0)
                 return;
 
-            EditorSceneManager.playModeStartScene =
-                AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorBuildSettings.scenes[0].path);
+            EditorSceneManager.playModeStartScene = AssetDatabase
+                .LoadAssetAtPath<SceneAsset>(EditorBuildSettings.scenes[0].path);
         }
     }
 }

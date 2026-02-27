@@ -3,5 +3,5 @@
     public interface IDisposableSystem : IEntitySystem
     {
         void OnDispose();
-    };
+    }
 }

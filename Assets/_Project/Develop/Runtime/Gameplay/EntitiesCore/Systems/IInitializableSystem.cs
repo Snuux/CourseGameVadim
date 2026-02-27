@@ -1,7 +1,7 @@
 ﻿namespace _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems
 {
-    public interface IInitializableSystem : IEntitySystem
+    public interface IInitializableSystem: IEntitySystem
     {
         void OnInit(Entity entity);
-    };
+    }
 }

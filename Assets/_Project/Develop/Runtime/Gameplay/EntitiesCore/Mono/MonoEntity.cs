@@ -15,7 +15,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
 
         public void Cleanup(Entity entity)
         {
-            
+
         }
     }
 }

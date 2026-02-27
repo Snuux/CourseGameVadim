@@ -56,13 +56,13 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             else
                 playerDataProvider.Reset();
 
-            //yield return new WaitForSeconds(1f);  
+            yield return new WaitForSeconds(1f);
 
             Debug.Log("Завершается инициализация сервисов");
 
             loadingScreen.Hide();
 
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1)); //Scenes.MainMenu);
+            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
         }
     }
 }

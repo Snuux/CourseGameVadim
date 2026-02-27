@@ -1,5 +1,4 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using _Project.Develop.Runtime.Gameplay.EntitiesCore.Common;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
@@ -22,7 +21,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         public void OnUpdate(float deltaTime)
         {
             Vector3 velocity = _moveDirection.Value.normalized * _moveSpeed.Value;
-            
+
             _rigidbody.velocity = velocity;
         }
     }
