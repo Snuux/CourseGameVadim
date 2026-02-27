@@ -5,20 +5,20 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
 {
-    public class RigidbodyPositionSystem : IInitializableSystem, IUpdatableSystem
+    public class CharacterControllerPositionSyncSystem : IInitializableSystem, IUpdatableSystem
     {
         private ReactiveVariable<Vector3> _position;
-        private Rigidbody _rigidbody;
+        private CharacterController _characterController;
 
         public void OnInit(Entity entity)
         {
             _position = entity.Position;
-            _rigidbody = entity.Rigidbody;
+            _characterController = entity.CharacterController;
         }
 
         public void OnUpdate(float deltaTime)
         {
-            _position.Value = _rigidbody.transform.position;
+            _position.Value = _characterController.transform.position;
         }
     }
 }
