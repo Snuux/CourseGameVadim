@@ -38,7 +38,5 @@ namespace _Project.Develop.Runtime.Gameplay
             if (_isRunning == false)
                 return;
         }
-
-        
     }
 }
