@@ -18,4 +18,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
     {
         public Buffer<Collider> Value;
     }
+    
+    public class ContactEntitiesBuffer : IEntityComponent
+    {
+        public Buffer<Entity> Value;
+    }
 }

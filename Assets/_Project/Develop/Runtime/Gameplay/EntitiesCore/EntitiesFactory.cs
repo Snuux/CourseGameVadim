@@ -2,6 +2,7 @@
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
+using _Project.Develop.Runtime.Gameplay.Features.Sensors;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities;
 using _Project.Develop.Runtime.Utilities.Conditions;
@@ -14,6 +15,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
     {
         private readonly DIContainer _container;
         private readonly EntitiesLifeContext _entitiesLifeContext;
+        private readonly CollidersRegistryService _collidersRegistryService;
 
         private readonly MonoEntitiesFactory _monoEntitiesFactory;
 
@@ -22,6 +24,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _container = container;
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _monoEntitiesFactory = _container.Resolve<MonoEntitiesFactory>();
+            _collidersRegistryService = _container.Resolve<CollidersRegistryService>();
         }
 
         public Entity CreateGhost(Vector3 position)
@@ -44,7 +47,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTakeDamageEvent()
                 .AddTakeDamageRequest()
                 .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
-                .AddContactCollidersBuffer(new Buffer<Collider>(64));
+                .AddContactCollidersBuffer(new Buffer<Collider>(64))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(64));
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
@@ -71,6 +75,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidbodyRotationSystem())
+                .AddSystem(new BodyContactDetectionSystem())
+                .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
