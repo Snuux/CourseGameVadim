@@ -21,7 +21,8 @@ namespace _Project.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            _entity = _entitiesFactory.CreateTestEntity(Vector3.zero);
+            _entity = _entitiesFactory.CreateGhost(Vector3.zero);
+            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
 
             _isRunning = true;
         }
@@ -31,9 +32,12 @@ namespace _Project.Develop.Runtime.Gameplay
             if (_isRunning == false)
                 return;
 
-            Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            if (Input.GetKeyDown(KeyCode.Space)) 
+                _entity.TakeDamageRequest.Invoke(50);
 
+            Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             _entity.MoveDirection.Value = input;
+            _entity.RotationDirection.Value = input;
         }
     }
 }
