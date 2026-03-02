@@ -19,7 +19,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
             _body = entity.BodyCollider;
         }
 
-
         public void OnUpdate(float deltaTime)
         {
             _contacts.Count = Physics.OverlapCapsuleNonAlloc(
@@ -32,7 +31,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
             
             RemoveSelfFromContacts();
             
-            Debug.Log($"Контакты: " + _contacts.Count);
+            //Debug.Log($"Контакты: " + _contacts.Count);
         }
 
         private void RemoveSelfFromContacts()

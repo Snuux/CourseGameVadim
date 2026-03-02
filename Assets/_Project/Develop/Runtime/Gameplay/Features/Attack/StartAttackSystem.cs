@@ -1,0 +1,48 @@
+﻿using System;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
+using _Project.Develop.Runtime.Utilities.Conditions;
+using _Project.Develop.Runtime.Utilities.Reactive;
+using UnityEngine;
+
+namespace _Project.Develop.Runtime.Gameplay.Features.Attack
+{
+    public class StartAttackSystem : IInitializableSystem, IDisposableSystem
+    {
+        private ReactiveEvent _startAttackRequest;
+        private ReactiveEvent _startAttackEvent;
+        private ICompositeCondition _canStartAttack;
+        private ReactiveVariable<bool> _inAttackProcess;
+
+        private IDisposable _attackRequestDispose;
+        
+        public void OnInit(Entity entity)
+        {
+            _startAttackRequest = entity.StartAttackRequest;
+            _startAttackEvent = entity.StartAttackEvent;
+            _canStartAttack = entity.CanStartAttack;
+            _inAttackProcess = entity.InAttackProcess;
+
+            _attackRequestDispose = _startAttackRequest.Subscribe(OnAttackRequest);
+        }
+
+        public void OnDispose()
+        {
+            _attackRequestDispose?.Dispose();
+        }
+
+        private void OnAttackRequest()
+        {
+            if (_canStartAttack.Evaluate())
+            {
+                _inAttackProcess.Value = true;
+                _startAttackEvent.Invoke();
+                Debug.Log("Старт атаки");
+            }
+            else
+            {
+                Debug.Log("не могу атаковать");
+            }
+        }
+    }
+}

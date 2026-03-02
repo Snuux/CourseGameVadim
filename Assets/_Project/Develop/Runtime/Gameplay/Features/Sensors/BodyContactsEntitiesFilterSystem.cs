@@ -40,7 +40,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
                 }
             }
 
-            Debug.Log($"Контакты сущностей: {_contactsEntities.Count}");
+            //Debug.Log($"Контакты сущностей: {_contactsEntities.Count}");
         }
     }
 }
