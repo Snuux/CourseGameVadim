@@ -8,8 +8,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot
 {
     public class InstantShootSystem : IInitializableSystem, IDisposableSystem
     {
+
         private readonly EntitiesFactory _entitiesFactory;
-        
         private ReactiveEvent _attackDelayEvent;
 
         private ReactiveVariable<float> _damage;
@@ -39,6 +39,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot
         private void OnAttackDelayEnd()
         {
             _entitiesFactory.CreateProjectile(_shootPoint.position, _shootPoint.forward, _damage.Value);
+            
             Debug.Log($"Выстрел, урон: {_damage.Value}, точка выстрела: {_shootPoint.position}");
         }
     }

@@ -22,7 +22,9 @@ namespace _Project.Develop.Runtime.Gameplay
         public void Run()
         {
             _entity = _entitiesFactory.CreateHero(Vector3.zero);
-            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 6);
+
+            _entitiesFactory.CreateMage(Vector3.zero + Vector3.forward * 3);
 
             _isRunning = true;
         }
@@ -32,10 +34,7 @@ namespace _Project.Develop.Runtime.Gameplay
             if (_isRunning == false)
                 return;
 
-            if (Input.GetKeyDown(KeyCode.Space)) 
-                _entity.TakeDamageRequest.Invoke(50);
-
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.T))
                 _entity.StartAttackRequest.Invoke();
 
             Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));

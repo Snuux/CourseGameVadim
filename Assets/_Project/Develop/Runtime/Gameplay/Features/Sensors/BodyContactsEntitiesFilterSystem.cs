@@ -27,7 +27,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
         {
             _contactsEntities.Count = 0;
 
-            for (int i = 0; i < _contacts.Count; i++) //TODO: почему for, не foreach, это специально так?
+            for (int i = 0; i < _contacts.Count; i++)
             {
                 Collider collider = _contacts.Items[i];
 
