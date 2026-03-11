@@ -12,10 +12,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
         private Entity _source;
         private Transform _sourceTransform;
 
-        public NearestDamageableTargetSelector(Entity source)
+        public NearestDamageableTargetSelector(Entity entity)
         {
-            _source = source;
-            _sourceTransform = source.Transform;
+            _source = entity;
+            _sourceTransform = entity.Transform;
         }
 
         public Entity SelectTargetFrom(IEnumerable<Entity> targets)
@@ -24,13 +24,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
             {
                 bool result = target.HasComponent<TakeDamageRequest>();
 
-                if (target.TryGetCanApplyDamage(out ICompositeCondition canApplyDamage))
+                if(target.TryGetCanApplyDamage(out ICompositeCondition canApplyDamage))
                 {
                     result = result && canApplyDamage.Evaluate();
                 }
 
                 result = result && (target != _source);
-                
+
                 return result;
             });
 
@@ -44,13 +44,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
             {
                 float distance = GetDistanceTo(target);
 
-                if (distance < minDistance)
+                if(distance < minDistance)
                 {
                     minDistance = distance;
                     closestTarget = target;
                 }
             }
-            
+
             return closestTarget;
         }
 

@@ -14,22 +14,22 @@ namespace _Project.Develop.Runtime.Utilities.Timer
 
         private ReactiveVariable<float> _currentTime;
 
-        private ICoroutinesPerformer _coroutinesPerformer;
+        private ICoroutinesPerformer _coroutinePerformer;
         private Coroutine _cooldownProcess;
 
-        public TimerService(float cooldown, ICoroutinesPerformer coroutinesPerformer)
+        public TimerService(
+            float cooldown,
+            ICoroutinesPerformer coroutinePerformer)
         {
             _cooldown = cooldown;
-            _coroutinesPerformer = coroutinesPerformer;
+            _coroutinePerformer = coroutinePerformer;
 
             _cooldownEnded = new ReactiveEvent();
             _currentTime = new ReactiveVariable<float>();
         }
 
-        public ReactiveEvent CooldownEnded => _cooldownEnded;
-
-        public ReactiveVariable<float> CurrentTime => _currentTime;
-
+        public IReadOnlyEvent CooldownEnded => _cooldownEnded;
+        public IReadOnlyVariable<float> CurrentTime => _currentTime;
         public bool IsOver => _currentTime.Value <= 0;
 
         public void Dispose()
@@ -39,15 +39,15 @@ namespace _Project.Develop.Runtime.Utilities.Timer
 
         public void Stop()
         {
-            if (_cooldownProcess != null) 
-                _coroutinesPerformer.StopPerform(_cooldownProcess);
+            if (_cooldownProcess != null)
+                _coroutinePerformer.StopPerform(_cooldownProcess);
         }
 
         public void Restart()
         {
             Stop();
 
-            _cooldownProcess = _coroutinesPerformer.StartPerform(CooldownProcess());
+            _cooldownProcess = _coroutinePerformer.StartPerform(CooldownProcess());
         }
 
         private IEnumerator CooldownProcess()
@@ -59,7 +59,7 @@ namespace _Project.Develop.Runtime.Utilities.Timer
                 _currentTime.Value -= Time.deltaTime;
                 yield return null;
             }
-            
+
             _cooldownEnded.Invoke();
         }
     }

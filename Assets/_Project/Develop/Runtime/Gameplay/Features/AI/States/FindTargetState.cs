@@ -10,7 +10,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
         private EntitiesLifeContext _entitiesLifeContext;
         private ReactiveVariable<Entity> _currentTarget;
 
-        public FindTargetState(ITargetSelector targetSelector, EntitiesLifeContext entitiesLifeContext, Entity entity)
+        public FindTargetState(
+            ITargetSelector targetSelector,
+            EntitiesLifeContext entitiesLifeContext,
+            Entity entity)
         {
             _targetSelector = targetSelector;
             _entitiesLifeContext = entitiesLifeContext;

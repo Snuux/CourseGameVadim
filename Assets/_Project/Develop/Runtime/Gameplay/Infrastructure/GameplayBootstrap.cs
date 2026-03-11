@@ -20,7 +20,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         [SerializeField] private TestGameplay _testGameplay;
         private EntitiesLifeContext _entitiesLifeContext;
-
         private AIBrainsContext _brainsContext;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
@@ -42,6 +41,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log("Инициализация геймплейной сцены");
 
             _walletService = _container.Resolve<WalletService>();
+
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainsContext = _container.Resolve<AIBrainsContext>();
 
@@ -60,7 +60,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private void Update()
         {
             _brainsContext?.Update(Time.deltaTime);
-            
             _entitiesLifeContext?.Update(Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.F))

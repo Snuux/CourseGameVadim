@@ -46,14 +46,14 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreateViewsFactory);
 
+            container.RegisterAsSingle(CreateTimerService);
+
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
 
             container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
-
-            container.RegisterAsSingle(CreateTimerService);
         }
 
-        private static TimerServiceFactory CreateTimerService(DIContainer c) 
+        private static TimerServiceFactory CreateTimerService(DIContainer c)
             => new TimerServiceFactory(c);
 
         private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)

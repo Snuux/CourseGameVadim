@@ -6,23 +6,22 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
     public class AttackTriggerState : State, IUpdatableState
     {
-        private ReactiveEvent _attackRequst;
+        private ReactiveEvent _attackRequest;
 
         public AttackTriggerState(Entity entity)
         {
-            _attackRequst = entity.StartAttackRequest;
+            _attackRequest = entity.StartAttackRequest;
         }
 
         public override void Enter()
         {
             base.Enter();
-            
-            _attackRequst.Invoke();
+
+            _attackRequest.Invoke();
         }
 
         public void Update(float deltaTime)
         {
-            
         }
     }
 }

@@ -4,7 +4,7 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 {
     public abstract class ParallelState<TState> : State where TState : class, IState
     {
-        private readonly List<TState> _states;
+        private List<TState> _states;
 
         public ParallelState(params TState[] states)
         {
@@ -17,15 +17,15 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
         {
             base.Enter();
 
-            foreach (TState state in _states) 
+            foreach (TState state in _states)
                 state.Enter();
         }
-        
+
         public override void Exit()
         {
             base.Exit();
 
-            foreach (TState state in _states) 
+            foreach (TState state in _states)
                 state.Exit();
         }
     }

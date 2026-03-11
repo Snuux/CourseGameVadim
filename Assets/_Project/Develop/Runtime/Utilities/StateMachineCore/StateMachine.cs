@@ -5,9 +5,9 @@ using _Project.Develop.Runtime.Utilities.Conditions;
 
 namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 {
-    public abstract class StateMachine<TState> : State, IUpdatableState, IDisposable where TState : class, IState
+    public abstract class StateMachine<TState> : State, IDisposable, IUpdatableState where TState : class, IState
     {
-        private readonly List<StateNode<TState>> _states = new();
+        private List<StateNode<TState>> _states = new();
 
         private StateNode<TState> _currentState;
 
@@ -26,8 +26,8 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 
         public void AddTransition(TState fromState, TState toState, ICondition condition)
         {
-            StateNode<TState> from = _states.First(node => node.State == fromState);
-            StateNode<TState> to = _states.First(node => node.State == toState);
+            StateNode<TState> from = _states.First(stateNode => stateNode.State == fromState);
+            StateNode<TState> to = _states.First(stateNode => stateNode.State == toState);
 
             from.AddTransition(new StateTransition<TState>(to, condition));
         }
@@ -45,7 +45,7 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
                     break;
                 }
             }
-            
+
             UpdateLogic(deltaTime);
         }
 
@@ -56,25 +56,23 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
             _isRunning = false;
 
             foreach (StateNode<TState> stateNode in _states)
-                if (stateNode.State is IDisposable disposable)
-                    disposable.Dispose();
+                if (stateNode.State is IDisposable disposableState)
+                    disposableState.Dispose();
 
             _states.Clear();
-            
-            foreach (IDisposable disposable in _disposables) 
+
+            foreach (IDisposable disposable in _disposables)
                 disposable.Dispose();
-            
+
             _disposables.Clear();
         }
 
         public override void Enter()
         {
             base.Enter();
-            
+
             if (_currentState == null)
                 SwitchState(_states[0]);
-            else
-                _currentState.State.Enter();
 
             _isRunning = true;
         }
@@ -82,7 +80,7 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
         public override void Exit()
         {
             base.Exit();
-            
+
             _currentState?.State.Exit();
 
             _isRunning = false;

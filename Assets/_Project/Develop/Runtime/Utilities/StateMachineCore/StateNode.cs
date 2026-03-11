@@ -4,7 +4,7 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 {
     public class StateNode<TState> where TState : class, IState
     {
-        private readonly List<StateTransition<TState>> _transitions = new();
+        private List<StateTransition<TState>> _transitions = new();
 
         public StateNode(TState state)
         {
@@ -12,6 +12,7 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
         }
 
         public TState State { get; }
+
         public IReadOnlyList<StateTransition<TState>> Transitions => _transitions;
 
         public void AddTransition(StateTransition<TState> transition) => _transitions.Add(transition);

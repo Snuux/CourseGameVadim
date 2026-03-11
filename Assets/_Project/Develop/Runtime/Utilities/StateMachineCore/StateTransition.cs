@@ -11,7 +11,6 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
         }
 
         public StateNode<TState> ToState { get; }
-
         public ICondition Condition { get; }
     }
 }

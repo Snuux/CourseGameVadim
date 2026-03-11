@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using UnityEditor;
 using UnityEngine;
-using System.Reflection;
-using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 
-namespace Assets._Project.Develop.Editor
+namespace _Project.Develop.Editor
 {
     public class EntityAPIGenerator
     {
         private const string AssemblyName = "Assembly-CSharp";
 
         private static string OutputPath
-            => Path.Combine(Application.dataPath,
-                "_Project/Develop/Runtime/Gameplay/EntitiesCore/Generated/EntityAPI.cs");
+            => Path.Combine(Application.dataPath, "_Project/Develop/Runtime/Gameplay/EntitiesCore/Generated/EntityAPI.cs");
 
         [InitializeOnLoadMethod]
         [MenuItem("Tools/GenerateEntityAPI")]
@@ -47,13 +45,13 @@ namespace Assets._Project.Develop.Editor
                 sb.AppendLine($"\t\tpublic {fullTypeName} {modifiedComponentName} => GetComponent<{fullTypeName}>();");
                 sb.AppendLine();
 
-                if (HasSingleField(componentType, out FieldInfo field) && field.Name == "Value")
+                if(HasSingleField(componentType, out FieldInfo field) && field.Name == "Value")
                 {
                     // Свойство для получения поля из компонента
-                    sb.AppendLine(
-                        $"\t\tpublic {GetValidTypeName(field.FieldType)} {componentName} => {modifiedComponentName}.{field.Name};");
+                    sb.AppendLine($"\t\tpublic {GetValidTypeName(field.FieldType)} {componentName} => {modifiedComponentName}.{field.Name};");
                     sb.AppendLine();
 
+                    //метод TryGet 
                     sb.AppendLine($"\t\tpublic bool TryGet{componentName}(out {GetValidTypeName(field.FieldType)} {GetVariableNameFrom(field.Name)})");
                     sb.AppendLine("\t\t{");
                     sb.AppendLine($"\t\t\tbool result = TryGetComponent(out {fullTypeName} component);");
@@ -137,7 +135,7 @@ namespace Assets._Project.Develop.Editor
         {
             FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
-            if (fields.Length != 1)
+            if(fields.Length != 1)
             {
                 field = null;
                 return false;
@@ -162,8 +160,8 @@ namespace Assets._Project.Develop.Editor
             return assembly
                 .GetTypes()
                 .Where(type => type.IsInterface == false
-                               && type.IsAbstract == false
-                               && typeof(IEntityComponent).IsAssignableFrom(type));
+                    && type.IsAbstract == false
+                    && typeof(IEntityComponent).IsAssignableFrom(type));
         }
 
         public static string GetValidTypeName(Type type)

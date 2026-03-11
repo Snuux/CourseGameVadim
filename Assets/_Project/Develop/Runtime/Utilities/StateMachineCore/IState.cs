@@ -6,7 +6,7 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
     {
         IReadOnlyEvent Entered { get; }
         IReadOnlyEvent Exited { get; }
-        
+
         void Enter();
         void Exit();
     }

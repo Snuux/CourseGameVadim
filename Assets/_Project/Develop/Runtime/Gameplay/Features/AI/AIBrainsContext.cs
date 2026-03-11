@@ -10,14 +10,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
         public void SetFor(Entity entity, IBrain brain)
         {
-            foreach (EntityToBrain entityToBrain in _entityToBrains)
+            foreach (EntityToBrain item in _entityToBrains)
             {
-                if (entityToBrain.Entity == entity)
+                if(item.Entity == entity)
                 {
-                    entityToBrain.Brain.Disable();
-                    entityToBrain.Brain.Dispose();
-                    entityToBrain.Brain = brain;
-                    entityToBrain.Brain.Enable();
+                    item.Brain.Disable();
+                    item.Brain.Dispose();
+                    item.Brain = brain;
+                    item.Brain.Enable();
                     return;
                 }
             }
@@ -34,7 +34,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
                 {
                     int lastIndex = _entityToBrains.Count - 1;
 
-                    _entityToBrains[i].Brain.Disable();
+                    _entityToBrains[i].Brain.Dispose();
                     _entityToBrains[i] = _entityToBrains[lastIndex];
                     _entityToBrains.RemoveAt(lastIndex);
                     i--;
@@ -47,11 +47,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
         public void Dispose()
         {
-            foreach (EntityToBrain entityToBrain in _entityToBrains) 
+            foreach (EntityToBrain entityToBrain in _entityToBrains)
                 entityToBrain.Brain.Dispose();
-            
+
             _entityToBrains.Clear();
         }
+
 
         private class EntityToBrain
         {

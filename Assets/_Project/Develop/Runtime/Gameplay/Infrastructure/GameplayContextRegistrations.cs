@@ -12,23 +12,34 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         public static void Process(DIContainer container, GameplayInputArgs args)
         {
             container.RegisterAsSingle(CreateEntitiesFactory);
+
             container.RegisterAsSingle(CreateEntitiesLifeContext);
+
             container.RegisterAsSingle(CreateCollidersRegistryService);
+
             container.RegisterAsSingle(CreateBrainsFactory);
+
             container.RegisterAsSingle(CreateAIBrainsContext);
+
             container.RegisterAsSingle<IInputService>(CreateDesktopInput);
 
             container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
         }
 
         private static DesktopInput CreateDesktopInput(DIContainer c)
-            => new DesktopInput();
-        
+        {
+            return new DesktopInput();
+        }
+
         private static AIBrainsContext CreateAIBrainsContext(DIContainer c)
-            => new AIBrainsContext();
+        {
+            return new AIBrainsContext();
+        }
 
         private static BrainsFactory CreateBrainsFactory(DIContainer c)
-            => new BrainsFactory(c);
+        {
+            return new BrainsFactory(c);
+        }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c)
         {

@@ -10,7 +10,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
         {
         }
 
-        public AIStateMachine() : base(new List<IDisposable>())
+        public AIStateMachine() : base (new List<IDisposable>())
         {
         }
 

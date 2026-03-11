@@ -9,14 +9,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
     public class PlayerInputMovementState : State, IUpdatableState
     {
         private IInputService _inputService;
-
         private ReactiveVariable<Vector3> _movementDirection;
         private ReactiveVariable<Vector3> _rotationDirection;
 
-        public PlayerInputMovementState(Entity entity, IInputService inputService)
+        public PlayerInputMovementState(
+            Entity entity,
+            IInputService inputService)
         {
             _inputService = inputService;
-
             _movementDirection = entity.MoveDirection;
             _rotationDirection = entity.RotationDirection;
         }
