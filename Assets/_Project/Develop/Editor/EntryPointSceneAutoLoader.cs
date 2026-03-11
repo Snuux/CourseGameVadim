@@ -1,7 +1,7 @@
-using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEditor;
 
-namespace _Project.Develop.Editor
+namespace Assets._Project.Develop.Editor
 {
     [InitializeOnLoad]
     public static class EntryPointSceneAutoLoader

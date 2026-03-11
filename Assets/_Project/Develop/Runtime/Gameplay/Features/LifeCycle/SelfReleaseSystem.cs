@@ -1,7 +1,6 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using _Project.Develop.Runtime.Utilities.Conditions;
-using _Project.Develop.Runtime.Utilities.Reactive;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
 {
@@ -10,6 +9,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
         private readonly EntitiesLifeContext _entitiesLifeContext;
         
         private Entity _entity;
+
         private ICompositeCondition _mustSelfRelease;
 
         public SelfReleaseSystem(EntitiesLifeContext entitiesLifeContext)
@@ -25,7 +25,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
 
         public void OnUpdate(float deltaTime)
         {
-            if (_mustSelfRelease.Evaluate()) 
+            if (_mustSelfRelease.Evaluate())
                 _entitiesLifeContext.Release(_entity);
         }
     }

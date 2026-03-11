@@ -4,7 +4,6 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Utilities;
 using _Project.Develop.Runtime.Utilities.Reactive;
-using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage
 {
@@ -29,16 +28,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage
             {
                 Entity contactEntity = _contacts.Items[i];
 
-                if (_processedEntities.Contains(contactEntity) == false)
+                if(_processedEntities.Contains(contactEntity) == false)
                 {
                     _processedEntities.Add(contactEntity);
 
                     if (contactEntity.HasComponent<TakeDamageRequest>())
-                    {
                         contactEntity.TakeDamageRequest.Invoke(_damage.Value);
-                        
-                        Debug.Log("TakeDamageRequest");
-                    }
                 }
             }
 
@@ -47,7 +42,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage
                     _processedEntities.RemoveAt(i);
         }
 
-        private bool ContainInContacts(Entity entity)
+        public bool ContainInContacts(Entity entity)
         {
             for (int i = 0; i < _contacts.Count; i++)
                 if (_contacts.Items[i] == entity)

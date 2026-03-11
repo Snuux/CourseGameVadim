@@ -7,10 +7,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
 {
     public class BodyContactsEntitiesFilterSystem : IInitializableSystem, IUpdatableSystem
     {
-        private readonly CollidersRegistryService _collidersRegistryService;
-
         private Buffer<Collider> _contacts;
         private Buffer<Entity> _contactsEntities;
+
+        private readonly CollidersRegistryService _collidersRegistryService;
 
         public BodyContactsEntitiesFilterSystem(CollidersRegistryService collidersRegistryService)
         {
@@ -33,14 +33,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
 
                 Entity contactEntity = _collidersRegistryService.GetBy(collider);
 
-                if (contactEntity != null)
+                if(contactEntity != null)
                 {
                     _contactsEntities.Items[_contactsEntities.Count] = contactEntity;
                     _contactsEntities.Count++;
                 }
             }
-
-            //Debug.Log($"Контакты сущностей: {_contactsEntities.Count}");
         }
     }
 }

@@ -22,7 +22,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ApplyDamage
         {
             _damageRequest = entity.TakeDamageRequest;
             _damageEvent = entity.TakeDamageEvent;
+
             _health = entity.CurrentHealth;
+
             _canApplyDamage = entity.CanApplyDamage;
 
             _requestDisposable = _damageRequest.Subscribe(OnDamageRequest);
@@ -43,8 +45,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ApplyDamage
 
             _health.Value = MathF.Max(_health.Value - damage, 0);
             _damageEvent.Invoke(damage);
-
-            Debug.Log($"Я получил урон {damage}");
+            Debug.Log("Я получил урон!");
         }
     }
 }

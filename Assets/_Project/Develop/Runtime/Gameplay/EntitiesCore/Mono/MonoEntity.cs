@@ -8,12 +8,12 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
 
         private Entity _linkedEntity;
 
+        public Entity LinkedEntity => _linkedEntity;
+
         public void Initialize(CollidersRegistryService collidersRegistryService)
         {
             _collidersRegistryService = collidersRegistryService;
         }
-
-        public Entity LinkedEntity => _linkedEntity;
 
         public void Link(Entity entity)
         {
@@ -25,15 +25,16 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
                 foreach (MonoEntityRegistrator registrator in registrators)
                     registrator.Register(entity);
 
-            foreach (Collider collider1 in GetComponentsInChildren<Collider>())
-                _collidersRegistryService.Register(collider1, entity);
+            foreach (Collider collider in GetComponentsInChildren<Collider>())
+                _collidersRegistryService.Register(collider, entity);
         }
 
         public void Cleanup(Entity entity)
         {
+            foreach (Collider collider in GetComponentsInChildren<Collider>())
+                _collidersRegistryService.Unregister(collider);
+
             _linkedEntity = null;
-            foreach (Collider collider1 in GetComponentsInChildren<Collider>())
-                _collidersRegistryService.Unregister(collider1);
         }
     }
 }

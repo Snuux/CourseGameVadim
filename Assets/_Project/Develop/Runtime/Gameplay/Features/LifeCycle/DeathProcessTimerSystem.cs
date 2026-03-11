@@ -13,7 +13,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
         private ReactiveVariable<float> _currentTime;
 
         private IDisposable _isDeadChangedDisposable;
-        
+
         public void OnInit(Entity entity)
         {
             _isDead = entity.IsDead;
@@ -30,7 +30,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
                 return;
 
             _currentTime.Value -= deltaTime;
-            
+
             if (CooldownIsOver())
                 _inDeathProcess.Value = false;
         }

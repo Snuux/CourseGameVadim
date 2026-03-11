@@ -15,16 +15,16 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         public ReactiveVariable<float> Value;
     }
 
+    public class IsMoving : IEntityComponent
+    {
+        public ReactiveVariable<bool> Value;
+    }
+
     public class CanMove : IEntityComponent
     {
-        public ICompositeCondition Value; 
+        public ICompositeCondition Value;
     }
-    
-    public class CanRotate : IEntityComponent
-    {
-        public ICompositeCondition Value; 
-    }
-    
+
     public class RotationDirection : IEntityComponent
     {
         public ReactiveVariable<Vector3> Value;
@@ -34,9 +34,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
     {
         public ReactiveVariable<float> Value;
     }
-    
-    public class IsMoving : IEntityComponent
+
+    public class CanRotate : IEntityComponent
     {
-        public ReactiveVariable<bool> Value;
+        public ICompositeCondition Value;
     }
 }

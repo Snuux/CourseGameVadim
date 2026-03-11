@@ -8,9 +8,6 @@ namespace _Project.Develop.Runtime.Utilities.Conditions
         private List<ICondition> _conditions = new();
         private Func<bool, bool, bool> _standardLogicOperation;
 
-        //напр.: var andCondition = new CompositeCondition((a, b) => a && b);
-        //напр.: var orCondition = new CompositeCondition((a, b) => a || b);
-
         public CompositeCondition(Func<bool, bool, bool> standardLogicOperation)
         {
             _standardLogicOperation = standardLogicOperation;
@@ -18,6 +15,13 @@ namespace _Project.Develop.Runtime.Utilities.Conditions
 
         public CompositeCondition() : this(LogicOperations.And)
         {
+
+        }
+
+        public ICompositeCondition Add(ICondition condition)
+        {
+            _conditions.Add(condition);
+            return this;
         }
 
         public bool Evaluate()
@@ -27,7 +31,7 @@ namespace _Project.Develop.Runtime.Utilities.Conditions
 
             bool result = _conditions[0].Evaluate();
 
-            for (int i = 0; i < _conditions.Count; i++)
+            for (int i = 1; i < _conditions.Count; i++)
             {
                 ICondition condition = _conditions[i];
 
@@ -35,12 +39,6 @@ namespace _Project.Develop.Runtime.Utilities.Conditions
             }
 
             return result;
-        }
-
-        public ICompositeCondition Add(ICondition condition)
-        {
-            _conditions.Add(condition);
-            return this;
         }
 
         public ICompositeCondition Remove(ICondition condition)

@@ -11,7 +11,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         private ReactiveVariable<Vector3> _moveDirection;
         private ReactiveVariable<float> _moveSpeed;
         private Rigidbody _rigidbody;
-
         private ReactiveVariable<bool> _isMoving;
 
         private ICompositeCondition _canMove;
@@ -21,8 +20,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
             _moveDirection = entity.MoveDirection;
             _moveSpeed = entity.MoveSpeed;
             _rigidbody = entity.Rigidbody;
-            _canMove = entity.CanMove;
             _isMoving = entity.IsMoving;
+
+            _canMove = entity.CanMove;
         }
 
         public void OnUpdate(float deltaTime)
@@ -35,7 +35,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
 
             Vector3 velocity = _moveDirection.Value.normalized * _moveSpeed.Value;
 
-            _isMoving.Value = velocity.magnitude > 0; //двигаемся ли мы
+            _isMoving.Value = velocity.magnitude > 0;
 
             _rigidbody.velocity = velocity;
         }

@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using System.Reflection;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 
-namespace _Project.Develop.Editor
+namespace Assets._Project.Develop.Editor
 {
     public class EntityAPIGenerator
     {
         private const string AssemblyName = "Assembly-CSharp";
 
         private static string OutputPath
-            => Path.Combine(Application.dataPath, "_Project/Develop/Runtime/Gameplay/EntitiesCore/Generated/EntityAPI.cs");
+            => Path.Combine(Application.dataPath,
+                "_Project/Develop/Runtime/Gameplay/EntitiesCore/Generated/EntityAPI.cs");
 
         [InitializeOnLoadMethod]
         [MenuItem("Tools/GenerateEntityAPI")]
@@ -45,10 +47,22 @@ namespace _Project.Develop.Editor
                 sb.AppendLine($"\t\tpublic {fullTypeName} {modifiedComponentName} => GetComponent<{fullTypeName}>();");
                 sb.AppendLine();
 
-                if(HasSingleField(componentType, out FieldInfo field) && field.Name == "Value")
+                if (HasSingleField(componentType, out FieldInfo field) && field.Name == "Value")
                 {
                     // Свойство для получения поля из компонента
-                    sb.AppendLine($"\t\tpublic {GetValidTypeName(field.FieldType)} {componentName} => {modifiedComponentName}.{field.Name};");
+                    sb.AppendLine(
+                        $"\t\tpublic {GetValidTypeName(field.FieldType)} {componentName} => {modifiedComponentName}.{field.Name};");
+                    sb.AppendLine();
+
+                    sb.AppendLine($"\t\tpublic bool TryGet{componentName}(out {GetValidTypeName(field.FieldType)} {GetVariableNameFrom(field.Name)})");
+                    sb.AppendLine("\t\t{");
+                    sb.AppendLine($"\t\t\tbool result = TryGetComponent(out {fullTypeName} component);");
+                    sb.AppendLine($"\t\t\tif(result)");
+                    sb.AppendLine($"\t\t\t\t{GetVariableNameFrom(field.Name)} = component.{field.Name};");
+                    sb.AppendLine($"\t\t\telse");
+                    sb.AppendLine($"\t\t\t\t{GetVariableNameFrom(field.Name)} = default({GetValidTypeName(field.FieldType)});");
+                    sb.AppendLine($"\t\t\treturn result;");
+                    sb.AppendLine("\t\t}");
                     sb.AppendLine();
 
                     //метод add если есть одно поле с пустым конструктором
@@ -123,7 +137,7 @@ namespace _Project.Develop.Editor
         {
             FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
-            if(fields.Length != 1)
+            if (fields.Length != 1)
             {
                 field = null;
                 return false;
@@ -148,8 +162,8 @@ namespace _Project.Develop.Editor
             return assembly
                 .GetTypes()
                 .Where(type => type.IsInterface == false
-                    && type.IsAbstract == false
-                    && typeof(IEntityComponent).IsAssignableFrom(type));
+                               && type.IsAbstract == false
+                               && typeof(IEntityComponent).IsAssignableFrom(type));
         }
 
         public static string GetValidTypeName(Type type)

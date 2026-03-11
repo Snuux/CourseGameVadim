@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace _Project.Develop.Runtime.Utilities.Reactive
 {

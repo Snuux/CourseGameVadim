@@ -11,24 +11,19 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
     {
         private ReactiveEvent _startAttackRequest;
         private ReactiveEvent _startAttackEvent;
-        private ICompositeCondition _canStartAttack;
         private ReactiveVariable<bool> _inAttackProcess;
+        private ICompositeCondition _canStartAttack;
 
         private IDisposable _attackRequestDispose;
-        
+
         public void OnInit(Entity entity)
         {
             _startAttackRequest = entity.StartAttackRequest;
             _startAttackEvent = entity.StartAttackEvent;
-            _canStartAttack = entity.CanStartAttack;
             _inAttackProcess = entity.InAttackProcess;
+            _canStartAttack = entity.CanStartAttack;
 
             _attackRequestDispose = _startAttackRequest.Subscribe(OnAttackRequest);
-        }
-
-        public void OnDispose()
-        {
-            _attackRequestDispose?.Dispose();
         }
 
         private void OnAttackRequest()
@@ -41,8 +36,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             }
             else
             {
-                Debug.Log("не могу атаковать");
+                Debug.Log("Не могу атаковать!");
             }
+        }
+
+        public void OnDispose()
+        {
+            _attackRequestDispose.Dispose();
         }
     }
 }

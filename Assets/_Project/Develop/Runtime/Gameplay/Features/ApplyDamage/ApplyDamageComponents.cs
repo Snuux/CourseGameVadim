@@ -13,7 +13,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ApplyDamage
     {
         public ReactiveEvent<float> Value;
     }
-    
+
     public class CanApplyDamage : IEntityComponent
     {
         public ICompositeCondition Value;

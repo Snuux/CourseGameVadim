@@ -27,10 +27,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 
         private void OnTimerChanged(float arg1, float currentTime)
         {
-            if (TimerIsDone(currentTime))
+            if (TimeIsDone(currentTime))
             {
                 Debug.Log("Конец атаки");
-
                 _inAttackProcess.Value = false;
                 _endAttackEvent.Invoke();
             }
@@ -41,6 +40,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             _timerDisposable.Dispose();
         }
 
-        private bool TimerIsDone(float currentTime) => currentTime >= _attackProcessInitialTime.Value;
+        private bool TimeIsDone(float currentTime) => currentTime >= _attackProcessInitialTime.Value;
     }
 }

@@ -17,7 +17,7 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
 
         public void Invoke() => _action?.Invoke();
     }
-    
+
     public class Subscriber<T> : IDisposable
     {
         private Action<T> _action;
@@ -33,7 +33,7 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
 
         public void Invoke(T arg1) => _action?.Invoke(arg1);
     }
-    
+
     public class Subscriber<T, K> : IDisposable
     {
         private Action<T, K> _action;

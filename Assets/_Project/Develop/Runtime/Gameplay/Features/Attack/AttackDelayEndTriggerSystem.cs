@@ -11,7 +11,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
         private ReactiveEvent _attackDelayEndEvent;
         private ReactiveVariable<float> _delay;
         private ReactiveVariable<float> _attackProcessCurrentTime;
-        
+
         private ReactiveEvent _startAttackEvent;
 
         private bool _alreadyAttacked;
@@ -30,18 +30,17 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             _startAttackDisposable = _startAttackEvent.Subscribe(OnStartAttack);
         }
 
-        public void OnDispose()
+        private void OnStartAttack()
         {
-            _timerDisposable.Dispose();
-            _startAttackDisposable.Dispose();
+            _alreadyAttacked = false;
         }
 
         private void OnTimerChanged(float arg1, float currentTime)
         {
             if (_alreadyAttacked)
                 return;
-            
-            if (currentTime >= _delay.Value)
+
+            if(currentTime >= _delay.Value)
             {
                 Debug.Log("Задержка перед атакой закончилась");
                 _attackDelayEndEvent.Invoke();
@@ -49,9 +48,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             }
         }
 
-        private void OnStartAttack()
+        public void OnDispose()
         {
-            _alreadyAttacked = false;
+            _timerDisposable.Dispose();
+            _startAttackDisposable.Dispose();
         }
     }
 }
