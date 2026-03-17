@@ -1,11 +1,14 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Attack;
+using _Project.Develop.Runtime.Gameplay.Features.Attack.Area;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot;
 using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
+using _Project.Develop.Runtime.Gameplay.Features.Energy;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Gameplay.Features.Sensors;
+using _Project.Develop.Runtime.Gameplay.Features.Teleport;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities;
 using _Project.Develop.Runtime.Utilities.Conditions;
@@ -178,6 +181,80 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+        
+        public Entity CreateMage(Vector3 position)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesFactory.Create(entity, position, "Entities/Mage");
+
+            entity
+                .AddMaxHealth(new ReactiveVariable<float>(30))
+                .AddCurrentHealth(new ReactiveVariable<float>(30))
+                .AddIsDead()
+                .AddInDeathProcess()
+                .AddDeathProcessInitialTime(new ReactiveVariable<float>(2))
+                .AddDeathProcessCurrentTime()
+                .AddTakeDamageEvent()
+                .AddTakeDamageRequest()
+                .AddMaxEnergy(new ReactiveVariable<float>(15))
+                .AddCurrentEnergy(new ReactiveVariable<float>(0))
+                .AddEnergyRecoverAmount(new ReactiveVariable<float>(3))
+                .AddEnergyRecoverInterval(new ReactiveVariable<float>(3))
+                .AddEnergySpendRequest()
+                .AddEnergySpendEvent()
+                .AddTeleportationCostEnergy(new ReactiveVariable<float>(5))
+                .AddTeleportRadius(new ReactiveVariable<float>(3))
+                .AddTeleportEvent()
+                .AddTeleportRequest()
+                .AddCalculateTeleportTargetRequest()
+                .AddDoTeleportInTargetPositionRequest()
+                .AddTeleportTargetPosition()
+                .AddInstantAttackDamage(new ReactiveVariable<float>(50))
+                .AddAreaAttackRadius(new ReactiveVariable<float>(30))
+                ;
+
+            ICompositeCondition canStartTeleport = new CompositeCondition()
+                    .Add(new FuncCondition(() => entity.CurrentEnergy.Value >= entity.TeleportationCostEnergy.Value))
+                    .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                ;
+
+            ICompositeCondition mustDIe = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
+
+            ICompositeCondition mustSelfRelease = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.InDeathProcess.Value == false));
+
+            ICompositeCondition canApplyDamage = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            entity
+                .AddCanStartTeleport(canStartTeleport)
+                .AddMustDie(mustDIe)
+                .AddMustSelfRelease(mustSelfRelease)
+                .AddCanApplyDamage(canApplyDamage)
+                ;
+
+            entity
+                .AddSystem(new EnergyRecoverySystem())
+                .AddSystem(new EnergySpendSystem())
+                .AddSystem(new InstantAreaAttackSystem(this))
+                .AddSystem(new TeleportInitiationSystem())
+                .AddSystem(new CalculateTeleportTargetSystem())
+                .AddSystem(new InstantRigidbodyTeleportSystem())
+                .AddSystem(new AutoAttackSystem(canStartTeleport, entity.TeleportRequest))
+                .AddSystem(new ApplyDamageSystem())
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
+                .AddSystem(new SelfReleaseSystem(_container.Resolve<EntitiesLifeContext>()));
+            ;
 
             _entitiesLifeContext.Add(entity);
 
