@@ -29,11 +29,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Teleport
     {
         public ReactiveEvent Value;
     }
-
-    public class CalculateTeleportTargetRequest : IEntityComponent
-    {
-        public ReactiveEvent Value;
-    }
     
     public class DoTeleportInTargetPositionRequest : IEntityComponent
     {

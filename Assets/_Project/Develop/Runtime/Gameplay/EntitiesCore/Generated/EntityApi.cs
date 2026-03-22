@@ -117,30 +117,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportEvent() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.Teleport.CalculateTeleportTargetRequest CalculateTeleportTargetRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.CalculateTeleportTargetRequest>();
-
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent CalculateTeleportTargetRequest => CalculateTeleportTargetRequestC.Value;
-
-		public bool TryGetCalculateTeleportTargetRequest(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
-		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Teleport.CalculateTeleportTargetRequest component);
-			if(result)
-				value = component.Value;
-			else
-				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
-			return result;
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCalculateTeleportTargetRequest()
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.CalculateTeleportTargetRequest() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCalculateTeleportTargetRequest(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.CalculateTeleportTargetRequest() {Value = value}); 
-		}
-
 		public _Project.Develop.Runtime.Gameplay.Features.Teleport.DoTeleportInTargetPositionRequest DoTeleportInTargetPositionRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.DoTeleportInTargetPositionRequest>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent DoTeleportInTargetPositionRequest => DoTeleportInTargetPositionRequestC.Value;

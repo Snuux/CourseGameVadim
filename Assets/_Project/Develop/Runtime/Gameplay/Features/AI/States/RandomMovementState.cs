@@ -7,10 +7,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
     public class RandomMovementState : State, IUpdatableState
     {
-        private ReactiveVariable<Vector3> _movementDirection;
-        private ReactiveVariable<Vector3> _rotationDirection;
+        private readonly ReactiveVariable<Vector3> _movementDirection;
+        private readonly ReactiveVariable<Vector3> _rotationDirection;
 
-        private float _cooldownBetweenDirectionGeneration;
+        private readonly float _cooldownBetweenDirectionGeneration;
 
         private float _time;
 

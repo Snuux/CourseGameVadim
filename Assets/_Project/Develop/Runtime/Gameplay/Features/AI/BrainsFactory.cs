@@ -73,6 +73,46 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
             return brain;
         }
+        
+        public StateMachineBrain CreateMageBrain(Entity entity)
+        {
+            AIStateMachine stateMachine = CreateRandomTeleportStateMachine(entity);
+            StateMachineBrain brain = new StateMachineBrain(stateMachine);
+
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
+        }
+        
+        private AIStateMachine CreateRandomTeleportStateMachine(Entity entity)
+        {
+            List<IDisposable> disposables = new List<IDisposable>();
+            
+            RandomTeleportInRadiusState randomTeleportInRadiusState = new RandomTeleportInRadiusState(entity, 2f);
+
+            EmptyState emptyState = new EmptyState();
+
+            TimerService teleportTimer = _timerServiceFactory.Create(2f);
+            disposables.Add(teleportTimer);
+            disposables.Add(randomTeleportInRadiusState.Entered.Subscribe(teleportTimer.Restart));
+
+            TimerService idleTimer = _timerServiceFactory.Create(3f);
+            disposables.Add(idleTimer);
+            disposables.Add(emptyState.Entered.Subscribe(idleTimer.Restart));
+
+            FuncCondition movementTimerEndedCondition = new FuncCondition(() => teleportTimer.IsOver);
+            FuncCondition idleTimerEndedCondition = new FuncCondition(() => idleTimer.IsOver);
+
+            AIStateMachine stateMachine = new AIStateMachine(disposables);
+
+            stateMachine.AddState(randomTeleportInRadiusState);
+            stateMachine.AddState(emptyState);
+
+            stateMachine.AddTransition(randomTeleportInRadiusState, emptyState, movementTimerEndedCondition);
+            stateMachine.AddTransition(emptyState, randomTeleportInRadiusState, idleTimerEndedCondition);
+
+            return stateMachine;
+        }
 
         private AIStateMachine CreateRandomMovementStateMachine(Entity entity)
         {

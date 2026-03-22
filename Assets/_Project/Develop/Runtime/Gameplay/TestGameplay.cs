@@ -12,8 +12,9 @@ namespace _Project.Develop.Runtime.Gameplay
         private EntitiesFactory _entitiesFactory;
         private BrainsFactory _brainsFactory;
 
-        private Entity _entity;
+        private Entity _hero;
         private Entity _ghost;
+        private Entity _mage;
 
         private bool _isRunning;
 
@@ -26,11 +27,14 @@ namespace _Project.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            _entity = _entitiesFactory.CreateHero(Vector3.zero);
-            _entity.AddCurrentTarget();
-            _brainsFactory.CreateMainHeroBrain(_entity, new NearestDamageableTargetSelector(_entity));
+            //_hero = _entitiesFactory.CreateHero(Vector3.zero);
+            //_hero.AddCurrentTarget();
+            //_brainsFactory.CreateMainHeroBrain(_hero, new NearestDamageableTargetSelector(_hero));
 
-            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+            //_ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+
+            _mage = _entitiesFactory.CreateMage(Vector3.zero + Vector3.forward * 3);
+            _brainsFactory.CreateMageBrain(_mage);
 
             _isRunning = true;
         }
@@ -40,14 +44,14 @@ namespace _Project.Develop.Runtime.Gameplay
             if (_isRunning == false)
                 return;
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            /*if (Input.GetKeyDown(KeyCode.Space))
                 _entity.TakeDamageRequest.Invoke(50);
 
             if (Input.GetKeyDown(KeyCode.R))
                 _entity.StartAttackRequest.Invoke();
 
             if (Input.GetKeyDown(KeyCode.I))
-                _brainsFactory.CreateGhostBrain(_ghost);
+                _brainsFactory.CreateGhostBrain(_ghost);*/
         }
     }
 }

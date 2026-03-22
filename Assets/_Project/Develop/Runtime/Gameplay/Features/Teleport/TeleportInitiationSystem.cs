@@ -13,7 +13,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Teleport
         private ICompositeCondition _canStartTeleport;
 
         private ReactiveEvent _teleportEvent;
-        private ReactiveEvent _calculateTeleportTargetRequest;
         private ReactiveEvent _doTeleportInTargetPositionRequest;
 
         private ReactiveEvent<float> _energySpendRequest;
@@ -31,7 +30,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Teleport
             _teleportationCostEnergy = entity.TeleportationCostEnergy;
             
             _doTeleportInTargetPositionRequest = entity.DoTeleportInTargetPositionRequest;
-            _calculateTeleportTargetRequest = entity.CalculateTeleportTargetRequest;
                 
             _teleportRequestDisposable = entity.TeleportRequest.Subscribe(OnStartTeleport);
         }
@@ -50,7 +48,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Teleport
             }
             
             _energySpendRequest.Invoke(_teleportationCostEnergy.Value);
-            _calculateTeleportTargetRequest.Invoke();
             _doTeleportInTargetPositionRequest.Invoke();
             
             Debug.Log("Телепортация завершена");
