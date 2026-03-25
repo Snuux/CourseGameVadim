@@ -145,7 +145,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
                 .AddContactCollidersBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
-                .AddBodyContactDamage(new ReactiveVariable<float>(50));
+                .AddBodyContactDamage(new ReactiveVariable<float>(0));
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
@@ -194,7 +194,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _monoEntitiesFactory.Create(entity, position, "Entities/Mage");
 
             entity
-                .AddMaxHealth(new ReactiveVariable<float>(30))
+                .AddMaxHealth(new ReactiveVariable<float>(3000))
                 .AddCurrentHealth(new ReactiveVariable<float>(30))
                 .AddIsDead()
                 .AddInDeathProcess()
@@ -202,27 +202,28 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamageEvent()
                 .AddTakeDamageRequest()
+                //energy:
                 .AddMaxEnergy(new ReactiveVariable<float>(15))
                 .AddCurrentEnergy(new ReactiveVariable<float>(0))
                 .AddEnergyRecoverAmount(new ReactiveVariable<float>(3))
-                .AddEnergyRecoverInterval(new ReactiveVariable<float>(3))
-                .AddEnergySpendRequest()
+                .AddEnergyRecoverInterval(new ReactiveVariable<float>(1))
                 .AddEnergySpendEvent()
-                .AddTeleportationCostEnergy(new ReactiveVariable<float>(5))
-                .AddTeleportRadius(new ReactiveVariable<float>(3))
-                .AddTeleportEvent()
-                .AddTeleportRequest()
-                //.AddCalculateTeleportTargetRequest()
-                .AddDoTeleportInTargetPositionRequest()
+                .AddEnergySpendRequest()
+                //teleport:
+                .AddTeleportCostEnergy(new ReactiveVariable<float>(5))
                 .AddTeleportTargetPosition()
-                .AddInstantAttackDamage(new ReactiveVariable<float>(50))
-                .AddAreaAttackRadius(new ReactiveVariable<float>(30))
+                .AddTeleportRadius(new ReactiveVariable<float>(3))
+                .AddTeleportRequested()
+                .AddTeleportInProcess()
+                .AddTeleportCompleted()
+                
+                //.AddInstantAttackDamage(new ReactiveVariable<float>(1))
+                //.AddAreaAttackRadius(new ReactiveVariable<float>(30))
                 ;
 
             ICompositeCondition canStartTeleport = new CompositeCondition()
-                    .Add(new FuncCondition(() => entity.CurrentEnergy.Value >= entity.TeleportationCostEnergy.Value))
-                    .Add(new FuncCondition(() => entity.IsDead.Value == false))
-                ;
+                .Add(new FuncCondition(() => entity.CurrentEnergy.Value >= entity.TeleportCostEnergy.Value))
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
             ICompositeCondition mustDIe = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
@@ -244,11 +245,15 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddSystem(new EnergyRecoverySystem())
                 .AddSystem(new EnergySpendSystem())
-                .AddSystem(new InstantAreaAttackSystem(this))
-                .AddSystem(new TeleportInitiationSystem())
-                //.AddSystem(new CalculateTeleportTargetSystem())
+                
+                //teleport:
+                .AddSystem(new TeleportInitSystem())
+                .AddSystem(new TeleportEnergySpendSystem())
                 .AddSystem(new InstantRigidbodyTeleportSystem())
-                .AddSystem(new AutoAttackSystem(canStartTeleport, entity.TeleportRequest))
+                .AddSystem(new TeleportEndSystem())
+                
+                //.AddSystem(new InstantAreaAttackSystem(this))
+                
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())

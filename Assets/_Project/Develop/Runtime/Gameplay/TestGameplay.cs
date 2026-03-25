@@ -31,11 +31,13 @@ namespace _Project.Develop.Runtime.Gameplay
             //_hero.AddCurrentTarget();
             //_brainsFactory.CreateMainHeroBrain(_hero, new NearestDamageableTargetSelector(_hero));
 
-            //_ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
 
             _mage = _entitiesFactory.CreateMage(Vector3.zero + Vector3.forward * 3);
-            _brainsFactory.CreateMageBrain(_mage);
-
+            //_brainsFactory.CreateRandomTeleportMageBrain(_mage);
+            _mage.AddCurrentTarget();
+            _brainsFactory.CreateMageBrainLowHealthTarget(_mage, new LowestHealthTargetSelector(_mage));
+            
             _isRunning = true;
         }
 

@@ -50,6 +50,30 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRadius() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCostEnergy TeleportCostEnergyC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCostEnergy>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> TeleportCostEnergy => TeleportCostEnergyC.Value;
+
+		public bool TryGetTeleportCostEnergy(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCostEnergy component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportCostEnergy()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCostEnergy() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportCostEnergy(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCostEnergy() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.Teleport.CanStartTeleport CanStartTeleportC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.CanStartTeleport>();
 
 		public _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanStartTeleport => CanStartTeleportC.Value;
@@ -69,76 +93,76 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.CanStartTeleport() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequest TeleportRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequest>();
+		public _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequested TeleportRequestedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequested>();
 
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent TeleportRequest => TeleportRequestC.Value;
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> TeleportRequested => TeleportRequestedC.Value;
 
-		public bool TryGetTeleportRequest(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public bool TryGetTeleportRequested(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequest component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequested component);
 			if(result)
 				value = component.Value;
 			else
-				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
 			return result;
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRequest()
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRequested()
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequest() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequested() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRequest(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRequested(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequest() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportRequested() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportEvent TeleportEventC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportEvent>();
+		public _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportInProcess TeleportInProcessC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportInProcess>();
 
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent TeleportEvent => TeleportEventC.Value;
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> TeleportInProcess => TeleportInProcessC.Value;
 
-		public bool TryGetTeleportEvent(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public bool TryGetTeleportInProcess(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportEvent component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportInProcess component);
 			if(result)
 				value = component.Value;
 			else
-				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
 			return result;
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportEvent()
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportInProcess()
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportEvent() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportInProcess() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportEvent(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportInProcess(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportEvent() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportInProcess() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.Teleport.DoTeleportInTargetPositionRequest DoTeleportInTargetPositionRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.DoTeleportInTargetPositionRequest>();
+		public _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCompleted TeleportCompletedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCompleted>();
 
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent DoTeleportInTargetPositionRequest => DoTeleportInTargetPositionRequestC.Value;
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> TeleportCompleted => TeleportCompletedC.Value;
 
-		public bool TryGetDoTeleportInTargetPositionRequest(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public bool TryGetTeleportCompleted(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Teleport.DoTeleportInTargetPositionRequest component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCompleted component);
 			if(result)
 				value = component.Value;
 			else
-				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
 			return result;
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDoTeleportInTargetPositionRequest()
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportCompleted()
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.DoTeleportInTargetPositionRequest() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCompleted() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDoTeleportInTargetPositionRequest(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportCompleted(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.DoTeleportInTargetPositionRequest() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Teleport.TeleportCompleted() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider BodyColliderC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider>();
@@ -670,30 +694,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentEnergy(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.CurrentEnergy() {Value = value}); 
-		}
-
-		public _Project.Develop.Runtime.Gameplay.Features.Energy.TeleportationCostEnergy TeleportationCostEnergyC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Energy.TeleportationCostEnergy>();
-
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> TeleportationCostEnergy => TeleportationCostEnergyC.Value;
-
-		public bool TryGetTeleportationCostEnergy(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
-		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Energy.TeleportationCostEnergy component);
-			if(result)
-				value = component.Value;
-			else
-				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
-			return result;
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportationCostEnergy()
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.TeleportationCostEnergy() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportationCostEnergy(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.TeleportationCostEnergy() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.Energy.EnergyRecoverAmount EnergyRecoverAmountC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Energy.EnergyRecoverAmount>();

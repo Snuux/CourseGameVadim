@@ -31,7 +31,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Area
             _teleportTargetPosition = entity.TeleportTargetPosition;
             _entity = entity;
 
-            _teleportEventDisposable = entity.TeleportEvent.Subscribe(OnTeleportEnd);
+            //_teleportEventDisposable = entity.TeleportEvent.Subscribe(OnTeleportEnd); //todo
         }
 
         public void OnDispose()

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI.States;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.Teleport;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using _Project.Develop.Runtime.Utilities.Timer;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI
 {
@@ -26,6 +28,26 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             _brainsContext = _container.Resolve<AIBrainsContext>();
             _inputService = _container.Resolve<IInputService>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+        }
+
+        public StateMachineBrain CreateGhostBrain(Entity entity)
+        {
+            AIStateMachine stateMachine = CreateRandomMovementStateMachine(entity);
+            StateMachineBrain brain = new StateMachineBrain(stateMachine);
+
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
+        }
+
+        public StateMachineBrain CreateRandomTeleportMageBrain(Entity entity)
+        {
+            AIStateMachine stateMachine = CreateRandomTeleportStateMachine(entity);
+            StateMachineBrain brain = new StateMachineBrain(stateMachine);
+
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
         }
 
         public StateMachineBrain CreateMainHeroBrain(Entity entity, ITargetSelector targetSelector)
@@ -64,52 +86,93 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             return brain;
         }
 
-        public StateMachineBrain CreateGhostBrain(Entity entity)
+        public StateMachineBrain CreateMageBrainLowHealthTarget(Entity entity, ITargetSelector targetSelector)
         {
-            AIStateMachine stateMachine = CreateRandomMovementStateMachine(entity);
-            StateMachineBrain brain = new StateMachineBrain(stateMachine);
+            AIStateMachine teleportBehaviour = CreateTeleportToTargetLowestHealthStateMachine(entity);
+            FindTargetState findTargetState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
 
+            AIParallelState parallelState = new AIParallelState(findTargetState, teleportBehaviour);
+
+            AIStateMachine rootStateMachine = new AIStateMachine();
+            rootStateMachine.AddState(parallelState);
+
+            StateMachineBrain brain = new StateMachineBrain(rootStateMachine);
             _brainsContext.SetFor(entity, brain);
 
             return brain;
         }
-        
-        public StateMachineBrain CreateMageBrain(Entity entity)
-        {
-            AIStateMachine stateMachine = CreateRandomTeleportStateMachine(entity);
-            StateMachineBrain brain = new StateMachineBrain(stateMachine);
 
-            _brainsContext.SetFor(entity, brain);
-
-            return brain;
-        }
-        
-        private AIStateMachine CreateRandomTeleportStateMachine(Entity entity)
+        private AIStateMachine CreateTeleportToTargetLowestHealthStateMachine(Entity entity)
         {
-            List<IDisposable> disposables = new List<IDisposable>();
+            const float hpPercent = 0.4f;
             
-            RandomTeleportInRadiusState randomTeleportInRadiusState = new RandomTeleportInRadiusState(entity, 2f);
+            List<IDisposable> disposables = new List<IDisposable>();
 
+            TeleportState teleportState = new TeleportState(entity);
+            TeleportSetTargetPositionState teleportSetTargetPositionState =
+                new TeleportSetTargetPositionState(entity, TeleportPositionSelector.NearestTargetPositionInRadiusSelector);
             EmptyState emptyState = new EmptyState();
 
-            TimerService teleportTimer = _timerServiceFactory.Create(2f);
+            TimerService teleportTimer = _timerServiceFactory.Create(1f);
             disposables.Add(teleportTimer);
-            disposables.Add(randomTeleportInRadiusState.Entered.Subscribe(teleportTimer.Restart));
+            disposables.Add(teleportState.Entered.Subscribe(teleportTimer.Restart));
 
-            TimerService idleTimer = _timerServiceFactory.Create(3f);
+            TimerService idleTimer = _timerServiceFactory.Create(2f);
             disposables.Add(idleTimer);
             disposables.Add(emptyState.Entered.Subscribe(idleTimer.Restart));
 
-            FuncCondition movementTimerEndedCondition = new FuncCondition(() => teleportTimer.IsOver);
+            FuncCondition teleportTimerEndedCondition = new FuncCondition(() => teleportTimer.IsOver);
+            FuncCondition idleTimerEndedCondition = new FuncCondition(() => idleTimer.IsOver);
+            
+            FuncCondition teleportStartCondition =
+                new FuncCondition(() => entity.CurrentTarget.Value != null &&
+                                        entity.CurrentEnergy.Value >= entity.MaxEnergy.Value * hpPercent);
+            
+            FuncCondition noTargetCondition = new FuncCondition(() => entity.CurrentTarget.Value == null);
+
+            AIStateMachine stateMachine = new AIStateMachine(disposables);
+
+            stateMachine.AddState(teleportState);
+            stateMachine.AddState(teleportSetTargetPositionState);
+            stateMachine.AddState(emptyState);
+
+            stateMachine.AddTransition(emptyState, teleportSetTargetPositionState, idleTimerEndedCondition);
+            stateMachine.AddTransition(teleportSetTargetPositionState, teleportState, teleportStartCondition);
+            stateMachine.AddTransition(teleportSetTargetPositionState, emptyState, noTargetCondition);
+            stateMachine.AddTransition(teleportState, emptyState, teleportTimerEndedCondition);
+
+            return stateMachine;
+        }
+
+        private AIStateMachine CreateRandomTeleportStateMachine(Entity entity)
+        {
+            List<IDisposable> disposables = new List<IDisposable>();
+
+            TeleportState teleportState = new TeleportState(entity);
+            TeleportSetTargetPositionState teleportSetTargetPositionState =
+                new TeleportSetTargetPositionState(entity, TeleportPositionSelector.RandomPositionInRadiusSelector);
+            EmptyState emptyState = new EmptyState();
+
+            TimerService teleportTimer = _timerServiceFactory.Create(1f);
+            disposables.Add(teleportTimer);
+            disposables.Add(teleportState.Entered.Subscribe(teleportTimer.Restart));
+
+            TimerService idleTimer = _timerServiceFactory.Create(2f);
+            disposables.Add(idleTimer);
+            disposables.Add(emptyState.Entered.Subscribe(idleTimer.Restart));
+
+            FuncCondition teleportTimerEndedCondition = new FuncCondition(() => teleportTimer.IsOver);
             FuncCondition idleTimerEndedCondition = new FuncCondition(() => idleTimer.IsOver);
 
             AIStateMachine stateMachine = new AIStateMachine(disposables);
 
-            stateMachine.AddState(randomTeleportInRadiusState);
+            stateMachine.AddState(teleportState);
+            stateMachine.AddState(teleportSetTargetPositionState);
             stateMachine.AddState(emptyState);
 
-            stateMachine.AddTransition(randomTeleportInRadiusState, emptyState, movementTimerEndedCondition);
-            stateMachine.AddTransition(emptyState, randomTeleportInRadiusState, idleTimerEndedCondition);
+            stateMachine.AddTransition(emptyState, teleportSetTargetPositionState, idleTimerEndedCondition);
+            stateMachine.AddTransition(teleportSetTargetPositionState, teleportState, new FuncCondition(() => true));
+            stateMachine.AddTransition(teleportState, emptyState, teleportTimerEndedCondition);
 
             return stateMachine;
         }
@@ -163,7 +226,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
                     if (target == null)
                         return false;
 
-                    float angleToTarget = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(target.Transform.position - transform.position));
+                    float angleToTarget = Quaternion.Angle(transform.rotation,
+                        Quaternion.LookRotation(target.Transform.position - transform.position));
                     return angleToTarget < 1f;
                 }));
 

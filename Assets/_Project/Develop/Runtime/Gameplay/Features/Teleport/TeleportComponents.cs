@@ -15,23 +15,28 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Teleport
         public ReactiveVariable<float> Value;
     }
 
+    public class TeleportCostEnergy : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
     public class CanStartTeleport : IEntityComponent
     {
         public ICompositeCondition Value;
     }
 
-    public class TeleportRequest : IEntityComponent
+    public class TeleportRequested : IEntityComponent
     {
-        public ReactiveEvent Value;
-    }
-
-    public class TeleportEvent : IEntityComponent
-    {
-        public ReactiveEvent Value;
+        public ReactiveVariable<bool> Value;
     }
     
-    public class DoTeleportInTargetPositionRequest : IEntityComponent
+    public class TeleportInProcess : IEntityComponent
     {
-        public ReactiveEvent Value;
+        public ReactiveVariable<bool> Value;
+    }
+
+    public class TeleportCompleted : IEntityComponent
+    {
+        public ReactiveVariable<bool> Value;
     }
 }

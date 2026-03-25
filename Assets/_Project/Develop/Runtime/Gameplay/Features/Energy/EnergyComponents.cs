@@ -13,11 +13,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Energy
         public ReactiveVariable<float> Value;
     }
     
-    public class TeleportationCostEnergy : IEntityComponent
-    {
-        public ReactiveVariable<float> Value;
-    }
-    
     public class EnergyRecoverAmount : IEntityComponent
     {
         public ReactiveVariable<float> Value;

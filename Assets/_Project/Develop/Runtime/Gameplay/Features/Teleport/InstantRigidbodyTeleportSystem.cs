@@ -7,31 +7,24 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Teleport
 {
-    public class InstantRigidbodyTeleportSystem : IInitializableSystem, IDisposableSystem
+    public class InstantRigidbodyTeleportSystem : IInitializableSystem, IUpdatableSystem
     {
-        private ReactiveEvent<Vector3> _teleportRequest;
-
         private Rigidbody _rigidbody;
-        
         private ReactiveVariable<Vector3> _teleportTargetPosition;
-
-        private IDisposable _doTeleportInTargetPositionRequestDisposable;
+        private ReactiveVariable<bool> _teleportInProcess;
 
         public void OnInit(Entity entity)
         {
             _teleportTargetPosition = entity.TeleportTargetPosition;
+            _teleportInProcess = entity.TeleportInProcess;
             _rigidbody = entity.Rigidbody;
-
-            _doTeleportInTargetPositionRequestDisposable = entity.DoTeleportInTargetPositionRequest.Subscribe(OnTeleportInTargetPositionRequest);
         }
 
-        public void OnDispose()
+        public void OnUpdate(float deltaTime)
         {
-            _doTeleportInTargetPositionRequestDisposable.Dispose();
-        }
+            if (_teleportInProcess.Value == false)
+                return;
 
-        private void OnTeleportInTargetPositionRequest()
-        {
             Debug.Log($"Телепорт в позицию: {_teleportTargetPosition.Value}");
 
             TeleportRigidbody(_teleportTargetPosition.Value);

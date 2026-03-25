@@ -29,19 +29,19 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Energy
             _energySpendRequestDisposable.Dispose();
         }
 
-        private void OnEnergySpend(float spentEnergy)
+        private void OnEnergySpend(float energyToSpent)
         {
-            if (_currentEnergy.Value >= spentEnergy)
+            if (_currentEnergy.Value >= energyToSpent)
             {
-                _currentEnergy.Value = Math.Max(0, _currentEnergy.Value - spentEnergy);
+                _currentEnergy.Value = Math.Max(0, _currentEnergy.Value - energyToSpent);
 
-                Debug.Log($"Энергии потратилось: {spentEnergy}");
+                Debug.Log($"Энергии потратилось: {energyToSpent}");
 
                 _energySpendEvent.Invoke();
             }
             else
             {
-                Debug.Log($"Недостаточно энергии, нужно больше: {spentEnergy}");
+                Debug.Log($"Недостаточно энергии, нужно больше: {energyToSpent}");
             }
         }
     }
