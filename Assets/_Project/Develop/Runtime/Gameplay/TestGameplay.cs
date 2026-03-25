@@ -27,16 +27,19 @@ namespace _Project.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            //_hero = _entitiesFactory.CreateHero(Vector3.zero);
-            //_hero.AddCurrentTarget();
-            //_brainsFactory.CreateMainHeroBrain(_hero, new NearestDamageableTargetSelector(_hero));
-
+            _hero = _entitiesFactory.CreateHero(Vector3.zero);
+            _hero.AddCurrentTarget();
+            
+            _brainsFactory.CreateMainHeroBrain(_hero, new NearestDamageableTargetSelector(_hero));
+            
             _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
 
-            _mage = _entitiesFactory.CreateMage(Vector3.zero + Vector3.forward * 3);
+            //_mage = _entitiesFactory.CreateMage(Vector3.zero + Vector3.forward * 3);
+            // test random teleport
             //_brainsFactory.CreateRandomTeleportMageBrain(_mage);
-            _mage.AddCurrentTarget();
-            _brainsFactory.CreateMageBrainLowHealthTarget(_mage, new LowestHealthTargetSelector(_mage));
+            // test teleport to lowest health target
+            //_mage.AddCurrentTarget();
+            //_brainsFactory.CreateMageBrainLowHealthTarget(_mage, new LowestHealthTargetSelector(_mage));
             
             _isRunning = true;
         }
