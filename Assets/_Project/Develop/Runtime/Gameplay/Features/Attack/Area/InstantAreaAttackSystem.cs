@@ -30,8 +30,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Area
             _areaAttackRadius = entity.AreaAttackRadius;
             _teleportTargetPosition = entity.TeleportTargetPosition;
             _entity = entity;
-
-            //_teleportEventDisposable = entity.TeleportEvent.Subscribe(OnTeleportEnd); //todo
         }
 
         public void OnDispose()
