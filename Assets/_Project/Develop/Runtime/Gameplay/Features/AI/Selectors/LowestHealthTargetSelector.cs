@@ -4,7 +4,7 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Utilities.Conditions;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
+namespace _Project.Develop.Runtime.Gameplay.Features.AI.Selectors
 {
     public class LowestHealthTargetSelector : ITargetSelector
     {

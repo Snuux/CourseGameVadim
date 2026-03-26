@@ -1,7 +1,7 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
+namespace _Project.Develop.Runtime.Gameplay.Features.AI.Selectors
 {
     public class TeleportPositionSelector
     {
