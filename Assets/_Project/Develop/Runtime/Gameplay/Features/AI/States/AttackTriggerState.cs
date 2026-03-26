@@ -6,7 +6,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
     public class AttackTriggerState : State, IUpdatableState
     {
-        private ReactiveEvent _attackRequest;
+        private readonly ReactiveEvent _attackRequest;
 
         public AttackTriggerState(Entity entity)
         {

@@ -7,9 +7,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
     public class RotateToTargetState : State, IUpdatableState
     {
-        private ReactiveVariable<Vector3> _rotationDirection;
-        private ReactiveVariable<Entity> _currentTarget;
-        private Transform _transform;
+        private readonly ReactiveVariable<Vector3> _rotationDirection;
+        private readonly ReactiveVariable<Entity> _currentTarget;
+        private readonly Transform _transform;
 
         public RotateToTargetState(Entity entity)
         {

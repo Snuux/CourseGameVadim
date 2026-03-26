@@ -6,32 +6,22 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
-    public class PlayerInputMovementState : State, IUpdatableState
+    public class RotateToMouseWorldPositionState : State, IUpdatableState
     {
         private readonly IInputService _inputService;
-        private readonly ReactiveVariable<Vector3> _movementDirection;
         private readonly ReactiveVariable<Vector3> _rotationDirection;
+        private readonly Transform _transform;
 
-        public PlayerInputMovementState(
-            Entity entity,
-            IInputService inputService)
+        public RotateToMouseWorldPositionState(Entity entity, IInputService inputService)
         {
             _inputService = inputService;
-            _movementDirection = entity.MoveDirection;
             _rotationDirection = entity.RotationDirection;
+            _transform = entity.Transform;
         }
 
         public void Update(float deltaTime)
         {
-            _movementDirection.Value = _inputService.Direction;
-            _rotationDirection.Value = _inputService.Direction;
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-
-            _movementDirection.Value = Vector3.zero;
+            _rotationDirection.Value = (_inputService.MouseWorldPosition - _transform.position).normalized;
         }
     }
 }

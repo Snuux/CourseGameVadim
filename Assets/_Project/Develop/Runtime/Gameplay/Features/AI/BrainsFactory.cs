@@ -85,6 +85,32 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
             return brain;
         }
+        
+        public StateMachineBrain CreateMainHeroManualInputBrain(Entity entity)
+        {
+            AIStateMachine combatState = CreateManualAttackStateMachine(entity);
+
+            PlayerInputMovementState movementState = new PlayerInputMovementState(entity, _inputService);
+
+            ICompositeCondition fromMovementToCombatStateCondition = new CompositeCondition()
+                .Add(new FuncCondition(() => _inputService.Direction == Vector3.zero));
+
+            ICompositeCondition fromCombatToMovementStateCondition = new CompositeCondition()
+                .Add(new FuncCondition(() => _inputService.Direction != Vector3.zero));
+
+            AIStateMachine behaviour = new AIStateMachine();
+
+            behaviour.AddState(movementState);
+            behaviour.AddState(combatState);
+
+            behaviour.AddTransition(movementState, combatState, fromMovementToCombatStateCondition);
+            behaviour.AddTransition(combatState, movementState, fromCombatToMovementStateCondition);
+
+            StateMachineBrain brain = new StateMachineBrain(behaviour);
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
+        }
 
         public StateMachineBrain CreateMageBrainLowHealthTarget(Entity entity, ITargetSelector targetSelector)
         {
@@ -203,6 +229,33 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
             stateMachine.AddTransition(randomMovementState, emptyState, movementTimerEndedCondition);
             stateMachine.AddTransition(emptyState, randomMovementState, idleTimerEndedCondition);
+
+            return stateMachine;
+        }
+
+        private AIStateMachine CreateManualAttackStateMachine(Entity entity)
+        {
+            RotateToMouseWorldPositionState rotateToMouseState = new RotateToMouseWorldPositionState(entity, _inputService);
+            
+            AttackTriggerState attackTriggerState = new AttackTriggerState(entity);
+
+            ICondition canAttack = entity.CanStartAttack;
+
+            ICompositeCondition fromRotateToAttackCondition = new CompositeCondition()
+                .Add(canAttack)
+                .Add(new FuncCondition(() => _inputService.LeftMouseButton));
+
+            ReactiveVariable<bool> inAttackProcess = entity.InAttackProcess;
+
+            ICondition fromAttackToRotateStateCondition = new FuncCondition(() => inAttackProcess.Value == false);
+
+            AIStateMachine stateMachine = new AIStateMachine();
+
+            stateMachine.AddState(rotateToMouseState);
+            stateMachine.AddState(attackTriggerState);
+
+            stateMachine.AddTransition(rotateToMouseState, attackTriggerState, fromRotateToAttackCondition);
+            stateMachine.AddTransition(attackTriggerState, rotateToMouseState, fromAttackToRotateStateCondition);
 
             return stateMachine;
         }

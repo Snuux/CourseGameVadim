@@ -20,20 +20,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.InputFeature
             }
         }
 
-        public bool MouseButtonDown => Input.GetMouseButtonDown(0);
-
-        public Vector2 MousePosition
-        {
-            get
-            {
-                if (IsEnabled == false)
-                    return Vector2.zero;
-
-                return new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            }
-        }
-
-        public Vector3 MousePositionOnZeroPlane
+        public Vector3 MouseWorldPosition
         {
             get
             {
@@ -44,6 +31,19 @@ namespace _Project.Develop.Runtime.Gameplay.Features.InputFeature
                     return ray.GetPoint(dist);
                 
                 return Vector3.zero;
+            }
+        }
+
+        public bool LeftMouseButton => Input.GetMouseButton(0);
+
+        private Vector2 MousePosition
+        {
+            get
+            {
+                if (IsEnabled == false)
+                    return Vector2.zero;
+
+                return new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             }
         }
     }
