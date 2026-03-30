@@ -69,7 +69,7 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
+                _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
                 Debug.Log("Сохранение было вызвано");
             }
         }

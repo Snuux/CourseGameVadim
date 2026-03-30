@@ -2,7 +2,9 @@
 using System.Linq;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using _Project.Develop.Runtime.Utilities.Conditions;
+using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI.Selectors
@@ -24,9 +26,15 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.Selectors
             {
                 bool result = target.HasComponent<TakeDamageRequest>();
 
-                if(target.TryGetCanApplyDamage(out ICompositeCondition canApplyDamage))
+                if (target.TryGetCanApplyDamage(out ICompositeCondition canApplyDamage))
                 {
                     result = result && canApplyDamage.Evaluate();
+                }
+
+                if (_source.TryGetTeam(out ReactiveVariable<Teams> sourceTeam) &&
+                    target.TryGetTeam(out ReactiveVariable<Teams> targetTeam))
+                {
+                    result = result && (sourceTeam.Value != targetTeam.Value);
                 }
 
                 result = result && (target != _source);
@@ -44,7 +52,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.Selectors
             {
                 float distance = GetDistanceTo(target);
 
-                if(distance < minDistance)
+                if (distance < minDistance)
                 {
                     minDistance = distance;
                     closestTarget = target;

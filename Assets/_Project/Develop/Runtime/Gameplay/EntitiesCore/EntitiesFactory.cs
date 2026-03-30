@@ -1,4 +1,5 @@
-﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+﻿using _Project.Develop.Runtime.Configs.Gameplay.Entities;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Attack;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.Area;
@@ -8,6 +9,7 @@ using _Project.Develop.Runtime.Gameplay.Features.Energy;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Gameplay.Features.Sensors;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using _Project.Develop.Runtime.Gameplay.Features.Teleport;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities;
@@ -32,37 +34,37 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _collidersRegistryService = _container.Resolve<CollidersRegistryService>();
         }
 
-        public Entity CreateHero(Vector3 position)
+        public Entity CreateHero(Vector3 position, HeroConfig config)
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, "Entities/Hero");
+            _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
             entity
                 .AddMoveDirection()
-                .AddMoveSpeed(new ReactiveVariable<float>(10))
+                .AddMoveSpeed(new ReactiveVariable<float>(config.MoveSpeed))
                 .AddIsMoving()
                 .AddRotationDirection()
-                .AddRotationSpeed(new ReactiveVariable<float>(900))
-                .AddMaxHealth(new ReactiveVariable<float>(100))
-                .AddCurrentHealth(new ReactiveVariable<float>(100))
+                .AddRotationSpeed(new ReactiveVariable<float>(config.RotationSpeed))
+                .AddMaxHealth(new ReactiveVariable<float>(config.MaxHealth))
+                .AddCurrentHealth(new ReactiveVariable<float>(config.MaxHealth))
                 .AddIsDead()
                 .AddInDeathProcess()
-                .AddDeathProcessInitialTime(new ReactiveVariable<float>(2))
+                .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
-                .AddAttackProcessInitialTime(new ReactiveVariable<float>(1))
+                .AddAttackProcessInitialTime(new ReactiveVariable<float>(config.AttackProcessTime))
                 .AddAttackProcessCurrentTime()
                 .AddInAttackProcess()
                 .AddStartAttackRequest()
                 .AddStartAttackEvent()
                 .AddEndAttackEvent()
-                .AddAttackDelayTime(new ReactiveVariable<float>(0.5f))
+                .AddAttackDelayTime(new ReactiveVariable<float>(config.AttackDelayTime))
                 .AddAttackDelayEndEvent()
-                .AddInstantAttackDamage(new ReactiveVariable<float>(1))
+                .AddInstantAttackDamage(new ReactiveVariable<float>(config.InstantAttackDamage))
                 .AddAttackCanceledEvent()
-                .AddAttackCooldownInitialTime(new ReactiveVariable<float>(1))
+                .AddAttackCooldownInitialTime(new ReactiveVariable<float>(config.AttackCooldown))
                 .AddAttackCooldownCurrentTime()
                 .AddInAttackCooldown();
 
@@ -117,35 +119,33 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
-            _entitiesLifeContext.Add(entity);
-
             return entity;
         }
 
-        public Entity CreateGhost(Vector3 position)
+        public Entity CreateGhost(Vector3 position, GhostConfig config)
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, "Entities/Ghost");
+            _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
             entity
                 .AddMoveDirection()
-                .AddMoveSpeed(new ReactiveVariable<float>(10))
+                .AddMoveSpeed(new ReactiveVariable<float>(config.MoveSpeed))
                 .AddIsMoving()
                 .AddRotationDirection()
-                .AddRotationSpeed(new ReactiveVariable<float>(900))
-                .AddMaxHealth(new ReactiveVariable<float>(100))
-                .AddCurrentHealth(new ReactiveVariable<float>(100))
+                .AddRotationSpeed(new ReactiveVariable<float>(config.RotationSpeed))
+                .AddMaxHealth(new ReactiveVariable<float>(config.MaxHealth))
+                .AddCurrentHealth(new ReactiveVariable<float>(config.MaxHealth))
                 .AddIsDead()
                 .AddInDeathProcess()
-                .AddDeathProcessInitialTime(new ReactiveVariable<float>(2))
+                .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
-                .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
+                .AddContactsDetectingMask(Layers.CharactersMask)
                 .AddContactCollidersBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
-                .AddBodyContactDamage(new ReactiveVariable<float>(0));
+                .AddBodyContactDamage(new ReactiveVariable<float>(config.BodyContactDamage));
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
@@ -182,11 +182,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
-            _entitiesLifeContext.Add(entity);
-
             return entity;
         }
-        
+
         public Entity CreateMage(Vector3 position)
         {
             Entity entity = CreateEmpty();
@@ -216,7 +214,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTeleportRequested()
                 .AddTeleportInProcess()
                 .AddTeleportCompleted()
-                
+
                 //.AddInstantAttackDamage(new ReactiveVariable<float>(1))
                 //.AddAreaAttackRadius(new ReactiveVariable<float>(30))
                 ;
@@ -245,15 +243,14 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddSystem(new EnergyRecoverySystem())
                 .AddSystem(new EnergySpendSystem())
-                
+
                 //teleport:
                 .AddSystem(new TeleportInitSystem())
                 .AddSystem(new TeleportEnergySpendSystem())
                 .AddSystem(new InstantRigidbodyTeleportSystem())
                 .AddSystem(new TeleportEndSystem())
-                
+
                 //.AddSystem(new InstantAreaAttackSystem(this))
-                
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
@@ -266,7 +263,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public Entity CreateProjectile(Vector3 position, Vector3 direction, float damage)
+        public Entity CreateProjectile(Vector3 position, Vector3 direction, float damage, Entity owner)
         {
             Entity entity = CreateEmpty();
 
@@ -279,12 +276,17 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddRotationDirection(new ReactiveVariable<Vector3>(direction))
                 .AddRotationSpeed(new ReactiveVariable<float>(9999))
                 .AddIsDead()
-                .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
+                .AddContactsDetectingMask(Layers.EnvironmentMask |
+                                          Layers.CharactersMask) // чтоб в целом отслеживать коллизии со слоем
                 .AddContactCollidersBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddBodyContactDamage(new ReactiveVariable<float>(damage))
-                .AddDeathMask(1 << LayerMask.NameToLayer("Characters"))
-                .AddIsTouchDeathMask();
+                .AddDeathMask(Layers.EnvironmentMask)
+                .AddIsTouchDeathMask()
+                .AddIsTouchAnotherTeam()
+                //.AddTeam(owner.Team) //todo чуть чуть не понятно почему мы не делаем именно так
+                .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value))
+                ;
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
@@ -292,8 +294,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             ICompositeCondition canRotate = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
-            ICompositeCondition mustDie = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value));
+            ICompositeCondition mustDie = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value))
+                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value));
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value));
@@ -311,9 +314,30 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
                 .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new DeathMaskTouchDetectorSystem())
+                .AddSystem(new AnotherTeamTouchDetectorSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+        
+        public Entity CreateContactTrigger(Vector3 position)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesFactory.Create(entity, position, "Entities/ContactTrigger");
+
+            entity
+                .AddContactsDetectingMask(Layers.CharactersMask)
+                .AddContactCollidersBuffer(new Buffer<Collider>(64))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(64));
+
+            entity
+                .AddSystem(new BodyContactsDetectingSystem())
+                .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService));
 
             _entitiesLifeContext.Add(entity);
 

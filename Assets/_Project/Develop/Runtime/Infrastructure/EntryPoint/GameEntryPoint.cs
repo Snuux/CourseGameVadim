@@ -49,20 +49,21 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             bool isPlayerDataSaveExists = false;
 
-            yield return playerDataProvider.Exists(result => isPlayerDataSaveExists = result);
+            yield return playerDataProvider.ExistsAsync(result => isPlayerDataSaveExists = result);
 
             if (isPlayerDataSaveExists)
-                yield return playerDataProvider.Load();
+                yield return playerDataProvider.LoadAsync();
             else
                 playerDataProvider.Reset();
 
-            yield return new WaitForSeconds(1f);
+            //yield return new WaitForSeconds(1f);
 
             Debug.Log("Завершается инициализация сервисов");
 
             loadingScreen.Hide();
 
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
+            //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
+            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
         }
     }
 }

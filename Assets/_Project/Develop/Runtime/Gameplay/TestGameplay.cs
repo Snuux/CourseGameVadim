@@ -1,18 +1,32 @@
-﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using _Project.Develop.Runtime.Configs.Gameplay.Entities;
+using _Project.Develop.Runtime.Configs.Gameplay.Stages;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.AI.Selectors;
 using _Project.Develop.Runtime.Gameplay.Features.AI.States;
+using _Project.Develop.Runtime.Gameplay.Features.Enemies;
+using _Project.Develop.Runtime.Gameplay.Features.MainHero;
+using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay
 {
-    public class TestGameplay : MonoBehaviour
+    /*public class TestGameplay : MonoBehaviour
     {
         private DIContainer _container;
         private EntitiesFactory _entitiesFactory;
         private BrainsFactory _brainsFactory;
 
+        [SerializeField] private HeroConfig _heroConfig;
+        [SerializeField] private StageConfig _stageConfig;
+
+        private StagesFactory _stagesFactory;
+        private IStage _stage;
+        
+        private MainHeroFactory _mainHeroFactory;
+        private EnemiesFactory _enemiesFactory;
+        
         private Entity _hero;
         private Entity _ghost;
         private Entity _mage;
@@ -24,19 +38,31 @@ namespace _Project.Develop.Runtime.Gameplay
             _container = container;
             _entitiesFactory = _container.Resolve<EntitiesFactory>();
             _brainsFactory = _container.Resolve<BrainsFactory>();
+
+            _mainHeroFactory = _container.Resolve<MainHeroFactory>();
+            _enemiesFactory = _container.Resolve<EnemiesFactory>();
+
+            _stagesFactory = _container.Resolve<StagesFactory>();
         }
 
         public void Run()
         {
-            _hero = _entitiesFactory.CreateHero(Vector3.zero);
-            _hero.AddCurrentTarget();
-            
-            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+            _hero = _mainHeroFactory.Create(Vector3.zero);
 
-            _mage = _entitiesFactory.CreateMage(Vector3.zero + Vector3.forward * 3);
-            _mage.AddCurrentTarget();
+            _stage = _stagesFactory.Create(_stageConfig);
+            _stage.Completed.Subscribe(OnCompleted);
+            _stage.Start();
+            
+            //_mage = _entitiesFactory.CreateMage(Vector3.zero + Vector3.forward * 3);
+            //_mage.AddCurrentTarget();
             
             _isRunning = true;
+        }
+
+        private void OnCompleted()
+        {
+            Debug.Log("Победа");
+            _stage.Cleanup();
         }
 
         private StateMachineBrain _heroBrain;
@@ -46,6 +72,8 @@ namespace _Project.Develop.Runtime.Gameplay
         {
             if (_isRunning == false)
                 return;
+            
+            _stage.Update(Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.Alpha1)) // auto attack player behaviour
                 _heroBrain = _brainsFactory.CreateMainHeroBrain(_hero, new NearestDamageableTargetSelector(_hero));
@@ -65,14 +93,14 @@ namespace _Project.Develop.Runtime.Gameplay
             if (Input.GetKeyDown(KeyCode.Alpha6))
                 _mageBrain.Disable();
             
-            /*if (Input.GetKeyDown(KeyCode.Space))
-                _entity.TakeDamageRequest.Invoke(50);
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //    _entity.TakeDamageRequest.Invoke(50);
 
-            if (Input.GetKeyDown(KeyCode.R))
-                _entity.StartAttackRequest.Invoke();
+            //if (Input.GetKeyDown(KeyCode.R))
+            //    _entity.StartAttackRequest.Invoke();
 
-            if (Input.GetKeyDown(KeyCode.I))
-                _brainsFactory.CreateGhostBrain(_ghost);*/
+            //if (Input.GetKeyDown(KeyCode.I))
+            //    _brainsFactory.CreateGhostBrain(_ghost);
         }
-    }
+    }*/
 }
