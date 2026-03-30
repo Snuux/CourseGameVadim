@@ -13,7 +13,7 @@ namespace _Project.Develop.Editor
 
         private static string OutputPath
             => Path.Combine(Application.dataPath,
-                "_Project/Develop/Runtime/Utilities/Generated/LayersAPI.cs");
+                "_Project/Develop/Runtime/Utilities/Generated/Layers.cs");
 
         [InitializeOnLoadMethod]
         [MenuItem("Tools/GenerateLayersAPI")]
@@ -28,25 +28,27 @@ namespace _Project.Develop.Editor
             
             sb.AppendLine();
             
-            sb.AppendLine($"\tpublic static class UnityLayers");
+            sb.AppendLine($"\tpublic static class Layers");
             sb.AppendLine("\t{");
 
             List<string> layerNames = GetAllLayerNames();
 
             foreach (string layerName in layerNames)
             {
-                string prefix = "Layer";
+                string prefix = "";
+                string postfix = "";
                 sb.AppendLine(
-                    $"\t\tpublic static readonly int {prefix}{layerName.Replace(" ", string.Empty)} = LayerMask.NameToLayer(\"{layerName}\");");
+                    $"\t\tpublic static readonly int {prefix}{layerName.Replace(" ", string.Empty)}{postfix} = LayerMask.NameToLayer(\"{layerName}\");");
             }
 
             sb.AppendLine();
             
             foreach (string layerName in layerNames)
             {
-                string prefix = "LayerMask";
+                string prefix = "";
+                string postfix = "Mask";
                 sb.AppendLine(
-                    $"\t\tpublic static readonly int {prefix}{layerName.Replace(" ", string.Empty)} = 1 << Layer{layerName.Replace(" ", string.Empty)};");
+                    $"\t\tpublic static readonly int {prefix}{layerName.Replace(" ", string.Empty)}{postfix} = 1 << {layerName.Replace(" ", string.Empty)};");
             }
 
             sb.AppendLine("\t}");
