@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay
 {
-    /*public class TestGameplay : MonoBehaviour
+    public class TestGameplay : MonoBehaviour
     {
         private DIContainer _container;
         private EntitiesFactory _entitiesFactory;
@@ -42,16 +42,16 @@ namespace _Project.Develop.Runtime.Gameplay
             _mainHeroFactory = _container.Resolve<MainHeroFactory>();
             _enemiesFactory = _container.Resolve<EnemiesFactory>();
 
-            _stagesFactory = _container.Resolve<StagesFactory>();
+            //_stagesFactory = _container.Resolve<StagesFactory>();
         }
 
         public void Run()
         {
             _hero = _mainHeroFactory.Create(Vector3.zero);
 
-            _stage = _stagesFactory.Create(_stageConfig);
-            _stage.Completed.Subscribe(OnCompleted);
-            _stage.Start();
+            //_stage = _stagesFactory.Create(_stageConfig);
+            //_stage.Completed.Subscribe(OnCompleted);
+            //_stage.Start();
             
             //_mage = _entitiesFactory.CreateMage(Vector3.zero + Vector3.forward * 3);
             //_mage.AddCurrentTarget();
@@ -59,39 +59,41 @@ namespace _Project.Develop.Runtime.Gameplay
             _isRunning = true;
         }
 
-        private void OnCompleted()
-        {
-            Debug.Log("Победа");
-            _stage.Cleanup();
-        }
+        //private void OnCompleted()
+        //{
+        //    Debug.Log("Победа");
+        //    _stage.Cleanup();
+        //}
 
-        private StateMachineBrain _heroBrain;
-        private StateMachineBrain _mageBrain;
+        //private StateMachineBrain _heroBrain;
+        //private StateMachineBrain _mageBrain;
         
         private void Update()
         {
             if (_isRunning == false)
                 return;
             
+            /*
             _stage.Update(Time.deltaTime);
 
-            if (Input.GetKeyDown(KeyCode.Alpha1)) // auto attack player behaviour
+             if (Input.GetKeyDown(KeyCode.Alpha1)) // auto attack player behaviour
                 _heroBrain = _brainsFactory.CreateMainHeroBrain(_hero, new NearestDamageableTargetSelector(_hero));
-            
+
             if (Input.GetKeyDown(KeyCode.Alpha2)) // manual attack player behaviour
                 _heroBrain = _brainsFactory.CreateMainHeroManualInputBrain(_hero);
-            
+
             if (Input.GetKeyDown(KeyCode.Alpha3))
                 _heroBrain.Disable();
-            
+
             if (Input.GetKeyDown(KeyCode.Alpha4)) // test mage random teleport
-                _mageBrain = _brainsFactory.CreateRandomTeleportMageBrain(_mage); 
+                _mageBrain = _brainsFactory.CreateRandomTeleportMageBrain(_mage);
 
             if (Input.GetKeyDown(KeyCode.Alpha5)) // test mage teleport to lowest health target
                 _mageBrain = _brainsFactory.CreateMageBrainLowHealthTarget(_mage, new LowestHealthTargetSelector(_mage));
-            
+
             if (Input.GetKeyDown(KeyCode.Alpha6))
                 _mageBrain.Disable();
+            */
             
             //if (Input.GetKeyDown(KeyCode.Space))
             //    _entity.TakeDamageRequest.Invoke(50);
@@ -102,5 +104,5 @@ namespace _Project.Develop.Runtime.Gameplay
             //if (Input.GetKeyDown(KeyCode.I))
             //    _brainsFactory.CreateGhostBrain(_ghost);
         }
-    }*/
+    }
 }

@@ -21,6 +21,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private WalletService _walletService;
 
         private GameplayStateContext _gameplayStateContext;
+        [SerializeField] private TestGameplay _testGameplay;
 
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainsContext _brainsContext;
@@ -47,9 +48,11 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainsContext = _container.Resolve<AIBrainsContext>();
-            _gameplayStateContext = _container.Resolve<GameplayStateContext>();
+            //_gameplayStateContext = _container.Resolve<GameplayStateContext>();
 
-            _container.Resolve<MainHeroFactory>().Create(Vector3.zero);
+            //_container.Resolve<MainHeroFactory>().Create(Vector3.zero);
+            
+            _testGameplay.Initialize(_container);
 
             yield break;
         }
@@ -58,21 +61,22 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         {
             Debug.Log("Старт геймплейной сцены");
 
-            _gameplayStateContext.Run();
+            _testGameplay.Run();
+            //_gameplayStateContext.Run();
         }
 
         private void Update()
         {
             _brainsContext?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
-            _gameplayStateContext?.Update(Time.deltaTime);
+            //_gameplayStateContext?.Update(Time.deltaTime);
 
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
-            }
+            //if (Input.GetKeyDown(KeyCode.F))
+            //{
+            //    SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
+            //    ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+            //    coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
+            //}
         }
     }
 }
