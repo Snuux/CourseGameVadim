@@ -8,13 +8,10 @@ namespace _Project.Develop.Runtime.Utilities.Timer
 {
     public class TimerService : IDisposable
     {
-        private float _cooldown;
-
-        private ReactiveEvent _cooldownEnded;
-
-        private ReactiveVariable<float> _currentTime;
-
-        private ICoroutinesPerformer _coroutinePerformer;
+        private readonly float _cooldown;
+        private readonly ReactiveEvent _cooldownEnded;
+        private readonly ReactiveVariable<float> _currentTime;
+        private readonly ICoroutinesPerformer _coroutinePerformer;
         private Coroutine _cooldownProcess;
 
         public TimerService(

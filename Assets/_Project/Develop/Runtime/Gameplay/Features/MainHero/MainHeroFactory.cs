@@ -28,21 +28,5 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
             _configsProviderService = container.Resolve<ConfigsProviderService>();
             _entitiesLifeContext = container.Resolve<EntitiesLifeContext>();
         }
-
-        public Entity Create(Vector3 position)
-        {
-            HeroConfig config = _configsProviderService.GetConfig<HeroConfig>();
-
-            Entity entity = _entitiesFactory.CreateHero(position, config);
-            entity.AddCurrentTarget();
-            entity.AddIsMainHero();
-            entity.AddTeam(new ReactiveVariable<Teams>(Teams.MainHero));
-            
-            _brainsFactory.CreateMainHeroBrain(entity, new NearestDamageableTargetSelector(entity));
-
-            _entitiesLifeContext.Add(entity);
-
-            return entity;
-        }
     }
 }

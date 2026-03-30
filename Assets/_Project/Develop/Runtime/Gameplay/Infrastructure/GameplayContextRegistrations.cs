@@ -42,21 +42,11 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStageFactory);
 
             container.RegisterAsSingle(CreateStagesProviderService);
-
-            container.RegisterAsSingle(CreatePreparationTriggerService);
             
             container.RegisterAsSingle(CreateMainHeroHolderService).NonLazy();
 
             container.RegisterAsSingle(CreateGameplayStateFactory);
-            
-            container.RegisterAsSingle(CreateGameplayStateContext);
         }
-
-        public static GameplayStateContext CreateGameplayStateContext(DIContainer c)
-        {
-            return new GameplayStateContext(c.Resolve<GameplayStateFactory>().CreateGameplayStateMachine(_inputArgs));
-        }
-
         public static GameplayStateFactory CreateGameplayStateFactory(DIContainer c)
         {
             return new GameplayStateFactory(c);
@@ -65,14 +55,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private static MainHeroHolderService CreateMainHeroHolderService(DIContainer c)
         {
             return new MainHeroHolderService(c.Resolve<EntitiesLifeContext>());
-        }
-
-        private static PreparationTriggerService CreatePreparationTriggerService(DIContainer c)
-        {
-            return new PreparationTriggerService(
-                c.Resolve<EntitiesFactory>(),
-                c.Resolve<EntitiesLifeContext>()
-            );
         }
 
         private static StageProviderService CreateStagesProviderService(DIContainer c)

@@ -47,7 +47,7 @@ namespace _Project.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            _hero = _mainHeroFactory.Create(Vector3.zero);
+            //_hero = _mainHeroFactory.Create(Vector3.zero);
 
             //_stage = _stagesFactory.Create(_stageConfig);
             //_stage.Completed.Subscribe(OnCompleted);

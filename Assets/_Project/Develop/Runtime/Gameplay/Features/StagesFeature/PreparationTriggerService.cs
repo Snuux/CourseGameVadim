@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 {
-    public class PreparationTriggerService
+    /*public class PreparationTriggerService
     {
         private ReactiveVariable<bool> _hasMainHeroContact = new();
 
@@ -29,7 +29,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
         {
             if (_nextStageTrigger != null)
                 throw new InvalidOperationException("Trigger Already Created");
-            
+
             _nextStageTrigger = _entitiesFactory.CreateContactTrigger(position);
             _nextStateTriggerContacts = _nextStageTrigger.ContactEntitiesBuffer;
         }
@@ -38,7 +38,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
         {
             if (_nextStageTrigger == null)
                 return;
-            
+
             for (int i = 0; i < _nextStateTriggerContacts.Count; i++)
             {
                 Entity contact = _nextStateTriggerContacts.Items[i];
@@ -60,5 +60,5 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
             _nextStageTrigger = null;
             _nextStateTriggerContacts = null;
         }
-    }
+    }*/
 }

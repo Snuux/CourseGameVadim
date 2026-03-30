@@ -34,7 +34,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 
             _inProcess = true;
 
-            SpawnEnemies();
+            //SpawnEnemies();
         }
 
         public void Update(float deltaTime)
@@ -69,7 +69,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
             _inProcess = false;
         }
 
-        private void SpawnEnemies()
+        /*private void SpawnEnemies()
         {
             foreach (EnemyItemConfig enemyItemConfig in _config.EnemyItems)
                 SpawnEnemy(enemyItemConfig);
@@ -90,7 +90,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
             });
 
             _spawnEnemiesToRemoveReason.Add(spawnedEnemy, removeReason);
-        }
+        }*/
 
         private void ProcessEnd()
         {
