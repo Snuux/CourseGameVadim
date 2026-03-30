@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Configs.Gameplay.Entities;
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
@@ -15,38 +16,30 @@ namespace _Project.Develop.Runtime.Gameplay
     public class TestGameplay : MonoBehaviour
     {
         private DIContainer _container;
-        private EntitiesFactory _entitiesFactory;
-        private BrainsFactory _brainsFactory;
-
-        [SerializeField] private HeroConfig _heroConfig;
-        [SerializeField] private StageConfig _stageConfig;
-
-        private StagesFactory _stagesFactory;
-        private IStage _stage;
-        
-        private MainHeroFactory _mainHeroFactory;
+        private AllyFactory _allyFactory;
         private EnemiesFactory _enemiesFactory;
         
-        private Entity _hero;
+        [SerializeField] GhostConfig _ghostConfig;
+        [SerializeField] LevelConfig _levelConfig;
+        
+        private Entity _tower;
         private Entity _ghost;
-        private Entity _mage;
 
         private bool _isRunning;
 
         public void Initialize(DIContainer container)
         {
             _container = container;
-            _entitiesFactory = _container.Resolve<EntitiesFactory>();
-            _brainsFactory = _container.Resolve<BrainsFactory>();
-
-            _mainHeroFactory = _container.Resolve<MainHeroFactory>();
+            
+            _allyFactory = _container.Resolve<AllyFactory>();
             _enemiesFactory = _container.Resolve<EnemiesFactory>();
-
-            //_stagesFactory = _container.Resolve<StagesFactory>();
         }
 
         public void Run()
         {
+            _tower = _allyFactory.CreateTower(Vector3.zero, _levelConfig);
+            _ghost = _enemiesFactory.Create(Vector3.zero + Vector3.forward * 3, _ghostConfig);
+            
             //_hero = _mainHeroFactory.Create(Vector3.zero);
 
             //_stage = _stagesFactory.Create(_stageConfig);

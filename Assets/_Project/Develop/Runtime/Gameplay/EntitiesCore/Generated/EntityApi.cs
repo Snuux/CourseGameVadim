@@ -26,6 +26,13 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.MainHero.IsTower IsTowerC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MainHero.IsTower>();
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTower()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MainHero.IsTower() ); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider BodyColliderC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider>();
 
 		public UnityEngine.CapsuleCollider BodyCollider => BodyColliderC.Value;
@@ -325,13 +332,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanRotate(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanRotate() {Value = value}); 
-		}
-
-		public _Project.Develop.Runtime.Gameplay.Features.MainHero.IsMainHero IsMainHeroC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MainHero.IsMainHero>();
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsMainHero()
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MainHero.IsMainHero() ); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth CurrentHealthC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth>();
@@ -691,6 +691,30 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTransform(UnityEngine.Transform value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Common.TransformComponent() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Common.IDComponent IDC => GetComponent<_Project.Develop.Runtime.Gameplay.Common.IDComponent>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> ID => IDC.Value;
+
+		public bool TryGetID(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Common.IDComponent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddID()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Common.IDComponent() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddID(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Common.IDComponent() {Value = value}); 
 		}
 
 	}

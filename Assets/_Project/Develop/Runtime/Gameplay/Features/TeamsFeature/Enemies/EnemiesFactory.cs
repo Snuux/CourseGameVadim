@@ -27,5 +27,25 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Enemies
             _brainsFactory = container.Resolve<BrainsFactory>();
             _entitiesLifeContext = container.Resolve<EntitiesLifeContext>();
         }
+        
+        public Entity Create(Vector3 position, EntityConfig config)
+        {
+            Entity entity;
+
+            switch (config)
+            {
+                case GhostConfig ghostConfig:
+                    entity = _entitiesFactory.CreateGhost(position, ghostConfig);
+                    //_brainsFactory.CreateGhostBrain(entity);
+                    break;
+                default:
+                    throw new ArgumentException($"Not support {config.GetType()} type config");
+            }
+
+            entity.AddTeam(new ReactiveVariable<Teams>(Teams.Enemies));
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
     }
 }

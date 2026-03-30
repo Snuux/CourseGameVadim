@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using _Project.Develop.Runtime.Utilities;
 using _Project.Develop.Runtime.Utilities.Reactive;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage
 {
@@ -31,9 +32,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage
             {
                 Entity contactEntity = _contacts.Items[i];
 
-                if(_processedEntities.Contains(contactEntity) == false)
+                if (_processedEntities.Contains(contactEntity) == false)
                 {
                     _processedEntities.Add(contactEntity);
+
+                    Debug.Log($"Урон:  {_damage.Value} От: {_entity.ID.Value} К: {contactEntity.ID.Value}");
 
                     EntitiesHelper.TryTakeDamageFrom(_entity, contactEntity, _damage.Value);
                 }

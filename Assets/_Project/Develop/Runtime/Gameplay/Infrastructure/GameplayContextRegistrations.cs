@@ -35,7 +35,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
 
-            container.RegisterAsSingle(CreateMainHeroFactory);
+            container.RegisterAsSingle(CreateAllyFactory);
 
             container.RegisterAsSingle(CreateEnemiesFactory);
 
@@ -52,9 +52,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             return new GameplayStateFactory(c);
         }
 
-        private static MainHeroHolderService CreateMainHeroHolderService(DIContainer c)
+        private static TowerHolderService CreateMainHeroHolderService(DIContainer c)
         {
-            return new MainHeroHolderService(c.Resolve<EntitiesLifeContext>());
+            return new TowerHolderService(c.Resolve<EntitiesLifeContext>());
         }
 
         private static StageProviderService CreateStagesProviderService(DIContainer c)
@@ -75,9 +75,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             return new EnemiesFactory(c);
         }
 
-        private static MainHeroFactory CreateMainHeroFactory(DIContainer c)
+        private static AllyFactory CreateAllyFactory(DIContainer c)
         {
-            return new MainHeroFactory(c);
+            return new AllyFactory(c);
         }
 
         private static DesktopInput CreateDesktopInput(DIContainer c)

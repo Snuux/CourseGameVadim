@@ -5,21 +5,21 @@ using _Project.Develop.Runtime.Utilities.Reactive;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
 {
-    public class MainHeroHolderService : IInitializable, IDisposable
+    public class TowerHolderService : IInitializable, IDisposable
     {
         private EntitiesLifeContext _entitiesLifeContext;
-        private ReactiveEvent<Entity> _heroRegistered = new();
+        private ReactiveEvent<Entity> _towerRegistered = new();
 
-        private Entity _mainHero;
+        private Entity _tower;
 
-        public MainHeroHolderService(EntitiesLifeContext entitiesLifeContext)
+        public TowerHolderService(EntitiesLifeContext entitiesLifeContext)
         {
             _entitiesLifeContext = entitiesLifeContext;
         }
 
-        public ReactiveEvent<Entity> HeroRegistered => _heroRegistered;
+        public ReactiveEvent<Entity> TowerRegistered => _towerRegistered;
 
-        public Entity MainHero => _mainHero;
+        public Entity Tower => _tower;
 
 
         public void Initialize()
@@ -29,11 +29,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
 
         private void OnEntityAdded(Entity entity)
         {
-            if (entity.HasComponent<IsMainHero>())
+            if (entity.HasComponent<IsTower>())
             {
                 _entitiesLifeContext.Added -= OnEntityAdded;
-                _mainHero = entity;
-                _heroRegistered?.Invoke(_mainHero);
+                _tower = entity;
+                _towerRegistered?.Invoke(_tower);
             }
         }
 

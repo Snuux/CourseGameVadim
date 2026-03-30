@@ -2,7 +2,7 @@
 
 namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
 {
-    public class IsMainHero : IEntityComponent
+    public class IsTower : IEntityComponent
     {
         
     }
