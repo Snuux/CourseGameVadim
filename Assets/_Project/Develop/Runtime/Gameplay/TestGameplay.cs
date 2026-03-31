@@ -9,6 +9,7 @@ using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay
@@ -18,6 +19,7 @@ namespace _Project.Develop.Runtime.Gameplay
         private DIContainer _container;
         private AllyFactory _allyFactory;
         private EnemiesFactory _enemiesFactory;
+        private BrainsFactory _brainsFactory;
         
         [SerializeField] GhostConfig _ghostConfig;
         [SerializeField] LevelConfig _levelConfig;
@@ -33,12 +35,15 @@ namespace _Project.Develop.Runtime.Gameplay
             
             _allyFactory = _container.Resolve<AllyFactory>();
             _enemiesFactory = _container.Resolve<EnemiesFactory>();
+            _brainsFactory = _container.Resolve<BrainsFactory>();
         }
 
         public void Run()
         {
             _tower = _allyFactory.CreateTower(Vector3.zero, _levelConfig);
-            _ghost = _enemiesFactory.Create(Vector3.zero + Vector3.forward * 3, _ghostConfig);
+            _ghost = _enemiesFactory.Create(Vector3.zero + Vector3.forward * 5, _ghostConfig);
+            
+            _brainsFactory.CreateGhostBrain(_ghost);
             
             //_hero = _mainHeroFactory.Create(Vector3.zero);
 

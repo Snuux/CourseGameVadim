@@ -43,7 +43,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateStagesProviderService);
             
-            container.RegisterAsSingle(CreateMainHeroHolderService).NonLazy();
+            container.RegisterAsSingle(CreateTowerHolderService).NonLazy();
 
             container.RegisterAsSingle(CreateGameplayStateFactory);
         }
@@ -52,7 +52,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             return new GameplayStateFactory(c);
         }
 
-        private static TowerHolderService CreateMainHeroHolderService(DIContainer c)
+        private static TowerHolderService CreateTowerHolderService(DIContainer c)
         {
             return new TowerHolderService(c.Resolve<EntitiesLifeContext>());
         }

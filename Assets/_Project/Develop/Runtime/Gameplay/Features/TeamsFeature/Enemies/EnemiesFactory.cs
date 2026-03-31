@@ -3,6 +3,7 @@ using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.AI.Selectors;
+using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -18,6 +19,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Enemies
         private readonly EntitiesFactory _entitiesFactory;
         private readonly BrainsFactory _brainsFactory;
         private readonly EntitiesLifeContext _entitiesLifeContext;
+        private readonly TowerHolderService _towerHolderService;
 
         public EnemiesFactory(DIContainer container)
         {
@@ -26,6 +28,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Enemies
             _entitiesFactory = container.Resolve<EntitiesFactory>();
             _brainsFactory = container.Resolve<BrainsFactory>();
             _entitiesLifeContext = container.Resolve<EntitiesLifeContext>();
+            _towerHolderService = container.Resolve<TowerHolderService>();
         }
         
         public Entity Create(Vector3 position, EntityConfig config)
@@ -43,6 +46,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Enemies
             }
 
             entity.AddTeam(new ReactiveVariable<Teams>(Teams.Enemies));
+            entity.AddCurrentTarget(new ReactiveVariable<Entity>(_towerHolderService.Tower));
+            
             _entitiesLifeContext.Add(entity);
 
             return entity;
