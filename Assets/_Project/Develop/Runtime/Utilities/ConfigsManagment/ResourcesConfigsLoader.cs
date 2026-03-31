@@ -20,6 +20,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
             
             {typeof(TowerConfig), "Configs/Gameplay/Entities/Characters/TowerConfig" },
+            {typeof(AreaProjectileConfig), "Configs/Gameplay/Entities/Characters/AreaProjectileConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

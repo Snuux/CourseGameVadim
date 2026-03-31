@@ -43,7 +43,7 @@ namespace _Project.Develop.Runtime.Gameplay
             _tower = _allyFactory.CreateTower(Vector3.zero, _levelConfig);
             _ghost = _enemiesFactory.Create(Vector3.zero + Vector3.forward * 5, _ghostConfig);
             
-            _brainsFactory.CreateGhostBrain(_ghost);
+            //_brainsFactory.CreateGhostBrain(_ghost);
             
             //_hero = _mainHeroFactory.Create(Vector3.zero);
 
@@ -70,6 +70,9 @@ namespace _Project.Develop.Runtime.Gameplay
         {
             if (_isRunning == false)
                 return;
+            
+            if (Input.GetKeyDown(KeyCode.Alpha1)) // auto attack player behaviour
+                _ghost.AttackRequested.Value = true;
             
             /*
             _stage.Update(Time.deltaTime);

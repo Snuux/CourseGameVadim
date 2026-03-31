@@ -1,0 +1,36 @@
+﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Utilities.Conditions;
+using _Project.Develop.Runtime.Utilities.Reactive;
+
+namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
+{
+    public class CanStartAttack : IEntityComponent
+    {
+        public ICompositeCondition Value;
+    }
+
+    public class AreaAttackDamage : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
+    public class AreaAttackRadius : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
+    public class AttackRequested : IEntityComponent
+    {
+        public ReactiveVariable<bool> Value;
+    }
+    
+    public class AttackStarted : IEntityComponent
+    {
+        public ReactiveVariable<bool> Value;
+    }
+
+    public class AttackCompleted : IEntityComponent
+    {
+        public ReactiveVariable<bool> Value;
+    }
+}

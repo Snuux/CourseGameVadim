@@ -35,9 +35,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage
                 if (_processedEntities.Contains(contactEntity) == false)
                 {
                     _processedEntities.Add(contactEntity);
-
-                    Debug.Log($"Урон:  {_damage.Value} От: {_entity.ID.Value} К: {contactEntity.ID.Value}");
-
                     EntitiesHelper.TryTakeDamageFrom(_entity, contactEntity, _damage.Value);
                 }
             }

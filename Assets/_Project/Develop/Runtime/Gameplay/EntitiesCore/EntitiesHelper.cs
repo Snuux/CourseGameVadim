@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using _Project.Develop.Runtime.Utilities.Reactive;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 {
@@ -14,6 +15,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 return false;
 
             takeDamageRequest.Invoke(damage);
+
+            Debug.Log($"Урон:  {damage} От: {source} К: {damageable}");
 
             return true;
         }
