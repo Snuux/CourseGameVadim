@@ -112,8 +112,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
                 
-                .AddAreaAttackDamage(new ReactiveVariable<float>(config.ExplosionDamage))
+                .AddAttackDamage(new ReactiveVariable<float>(config.ExplosionDamage))
                 .AddAreaAttackRadius(new ReactiveVariable<float>(config.ExplosionRadius))
+                .AddDistanceForAttack(new ReactiveVariable<float>(config.DistanceForAreaAttack))
                 .AddAttackRequested()
                 .AddAttackStarted()
                 .AddAttackCompleted()
@@ -133,8 +134,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             ICompositeCondition canRotate = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
-            ICompositeCondition mustDie = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
+            ICompositeCondition mustDie = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0))
+                .Add(new FuncCondition(() => entity.AttackCompleted.Value));
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value))
@@ -158,20 +160,21 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidbodyRotationSystem())
-                
+
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AreaAttackSystem(this))
-                .AddSystem(new EndAttackSystem())
-                
+
                 //.AddSystem(new BodyContactsDetectingSystem())
                 //.AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
                 //.AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new ApplyDamageSystem())
-                
+
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
-                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
+                .AddSystem(new EndAttackSystem())
+                ;
 
             return entity;
         }

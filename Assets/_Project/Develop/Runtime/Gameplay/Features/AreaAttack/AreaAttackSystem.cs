@@ -30,7 +30,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
             _sourceTransform = entity.Transform;
             _attackStarted = entity.AttackStarted;
             _attackCompleted = entity.AttackCompleted;
-            _damage = entity.AreaAttackDamage;
+            _damage = entity.AttackDamage;
             _radius = entity.AreaAttackRadius;
         }
 

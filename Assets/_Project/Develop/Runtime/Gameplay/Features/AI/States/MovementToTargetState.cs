@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
-    public class MoveToTargetState : State, IUpdatableState
+    public class MovementToTargetState : State, IUpdatableState
     {
         private readonly ReactiveVariable<Vector3> _rotationDirection;
         private readonly ReactiveVariable<Vector3> _movementDirection;
         private readonly ReactiveVariable<Entity> _currentTarget;
         private readonly Transform _transform;
 
-        public MoveToTargetState(Entity entity)
+        public MovementToTargetState(Entity entity)
         {
             _rotationDirection = entity.RotationDirection;
             _movementDirection = entity.MoveDirection;

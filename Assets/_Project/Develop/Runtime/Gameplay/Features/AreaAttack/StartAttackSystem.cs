@@ -25,8 +25,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
             if (_attackRequested.Value == false)
                 return;
 
-            
-            Debug.Log("StartAttackSystem");
             _attackRequested.Value = false;
 
             if (_canStartAttack.Evaluate())

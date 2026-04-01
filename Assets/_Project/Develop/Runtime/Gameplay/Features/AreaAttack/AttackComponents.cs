@@ -9,7 +9,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
         public ICompositeCondition Value;
     }
 
-    public class AreaAttackDamage : IEntityComponent
+    public class AttackDamage : IEntityComponent
     {
         public ReactiveVariable<float> Value;
     }
@@ -32,5 +32,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
     public class AttackCompleted : IEntityComponent
     {
         public ReactiveVariable<bool> Value;
+    }
+
+    public class DistanceForAttack : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
     }
 }

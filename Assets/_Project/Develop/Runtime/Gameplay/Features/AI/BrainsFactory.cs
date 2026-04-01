@@ -5,7 +5,9 @@ using _Project.Develop.Runtime.Gameplay.Features.AI.States;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Conditions;
+using _Project.Develop.Runtime.Utilities.Reactive;
 using _Project.Develop.Runtime.Utilities.Timer;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI
 {
@@ -25,37 +27,69 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             _inputService = _container.Resolve<IInputService>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
-        
+
         public StateMachineBrain CreateGhostBrain(Entity entity)
         {
-            AIStateMachine stateMachine = CreateMoveToTargetStateMachine(entity);
+            List<IDisposable> disposables = new List<IDisposable>();
+
+            AIStateMachine movementAttackStateMachine = CreateMovementAttackStateMachine(entity);
+            EmptyState emptyState = new EmptyState();
+
+            ICompositeCondition movementCondition = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.CurrentTarget != null))
+                .Add(new FuncCondition(() => entity.CurrentTarget.Value.IsDead.Value == false));
+            
+            ICompositeCondition idleCondition = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => entity.CurrentTarget == null))
+                .Add(new FuncCondition(() => entity.CurrentTarget.Value.IsDead.Value));
+
+            AIStateMachine stateMachine = new AIStateMachine(disposables);
+
+            stateMachine.AddState(movementAttackStateMachine);
+            stateMachine.AddState(emptyState);
+
+            stateMachine.AddTransition(movementAttackStateMachine, emptyState, idleCondition);
+            stateMachine.AddTransition(emptyState, movementAttackStateMachine, movementCondition);
+
             StateMachineBrain brain = new StateMachineBrain(stateMachine);
 
             _brainsContext.SetFor(entity, brain);
 
             return brain;
         }
-        
-        private AIStateMachine CreateMoveToTargetStateMachine(Entity entity)
+
+        private AIStateMachine CreateMovementAttackStateMachine(Entity entity)
         {
             List<IDisposable> disposables = new List<IDisposable>();
 
-            MoveToTargetState moveToTargetState = new MoveToTargetState(entity);
+            MovementToTargetState movementToTargetState = new MovementToTargetState(entity);
+            AttackState attackState = new AttackState(entity);
 
-            EmptyState emptyState = new EmptyState();
+            ICompositeCondition movementCondition = new CompositeCondition()
+                .Add(new FuncCondition(() => TargetInRange(entity) == false));
 
-            FuncCondition movementCondition = new FuncCondition(() => entity.CurrentTarget != null);
-            FuncCondition idleCondition = new FuncCondition(() => entity.CurrentTarget == null);
+            ICompositeCondition attackCondition = new CompositeCondition()
+                .Add(new FuncCondition(() => TargetInRange(entity)));
 
             AIStateMachine stateMachine = new AIStateMachine(disposables);
 
-            stateMachine.AddState(emptyState);
-            stateMachine.AddState(moveToTargetState);
+            stateMachine.AddState(attackState);
+            stateMachine.AddState(movementToTargetState);
 
-            stateMachine.AddTransition(moveToTargetState, emptyState, idleCondition);
-            stateMachine.AddTransition(emptyState, moveToTargetState, movementCondition);
+            stateMachine.AddTransition(movementToTargetState, attackState, attackCondition);
+            stateMachine.AddTransition(attackState, movementToTargetState, movementCondition);
 
             return stateMachine;
+        }
+
+        private bool TargetInRange(Entity entity)
+        {
+            return CalcDistanceToTarget(entity) < entity.DistanceForAttack.Value;
+        }
+
+        private float CalcDistanceToTarget(Entity source)
+        {
+            return (source.CurrentTarget.Value.Transform.position - source.Transform.position).magnitude;
         }
     }
 }

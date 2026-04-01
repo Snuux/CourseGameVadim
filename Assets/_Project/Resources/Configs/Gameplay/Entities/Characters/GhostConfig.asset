@@ -17,5 +17,7 @@ MonoBehaviour:
   <MoveSpeed>k__BackingField: 5
   <RotationSpeed>k__BackingField: 900
   <MaxHealth>k__BackingField: 3
-  <BodyContactDamage>k__BackingField: 1
   <DeathProcessTime>k__BackingField: 0.1
+  <ExplosionDamage>k__BackingField: 1
+  <ExplosionRadius>k__BackingField: 1
+  <DistanceForAreaAttack>k__BackingField: 2
