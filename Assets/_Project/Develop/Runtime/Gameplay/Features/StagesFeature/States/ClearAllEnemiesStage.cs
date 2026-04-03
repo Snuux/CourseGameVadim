@@ -3,26 +3,34 @@ using System.Collections.Generic;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.Enemies;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 {
     public class ClearAllEnemiesStage : IStage
     {
+        private EntitiesLifeContext _entitiesLifeContext;
+        private EnemiesFactory _enemiesFactory;
+        private EnemiesSpawnerService _enemiesSpawnerService;
+        
         private ClearAllEnemiesStageConfig _config;
         private ReactiveEvent _completed = new();
-        private EnemiesFactory _enemiesFactory;
         private bool _inProcess;
-        private EntitiesLifeContext _entitiesLifeContext;
 
         private Dictionary<Entity, IDisposable> _spawnEnemiesToRemoveReason = new();
 
-        public ClearAllEnemiesStage(ClearAllEnemiesStageConfig config, EnemiesFactory enemiesFactory, EntitiesLifeContext entitiesLifeContext)
+        public ClearAllEnemiesStage(ClearAllEnemiesStageConfig config,
+            EnemiesFactory enemiesFactory,
+            EntitiesLifeContext entitiesLifeContext,
+            EnemiesSpawnerService enemiesSpawnerService)
         {
             _config = config;
             _enemiesFactory = enemiesFactory;
             _entitiesLifeContext = entitiesLifeContext;
+            _enemiesSpawnerService = enemiesSpawnerService;
         }
 
         public IReadOnlyEvent Completed => _completed;
@@ -34,7 +42,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 
             _inProcess = true;
 
-            //SpawnEnemies();
+            Debug.Log("Spawning Enemies");
+            
+            SpawnEnemies();
         }
 
         public void Update(float deltaTime)
@@ -69,7 +79,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
             _inProcess = false;
         }
 
-        /*private void SpawnEnemies()
+        private void SpawnEnemies()
         {
             foreach (EnemyItemConfig enemyItemConfig in _config.EnemyItems)
                 SpawnEnemy(enemyItemConfig);
@@ -77,8 +87,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 
         private void SpawnEnemy(EnemyItemConfig enemyItemConfig)
         {
-            Entity spawnedEnemy = _enemiesFactory.Create(enemyItemConfig.SpawnPosition, enemyItemConfig.EnemyConfig);
-
+            Entity spawnedEnemy = _enemiesSpawnerService.Spawn(enemyItemConfig);
+            
             IDisposable removeReason = spawnedEnemy.IsDead.Subscribe((oldValue, isDead) =>
             {
                 if (isDead)
@@ -90,7 +100,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
             });
 
             _spawnEnemiesToRemoveReason.Add(spawnedEnemy, removeReason);
-        }*/
+        }
 
         private void ProcessEnd()
         {

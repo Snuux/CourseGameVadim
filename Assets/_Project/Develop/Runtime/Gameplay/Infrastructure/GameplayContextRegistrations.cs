@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
@@ -6,6 +7,7 @@ using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
@@ -42,11 +44,27 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStageFactory);
 
             container.RegisterAsSingle(CreateStagesProviderService);
-            
+
             container.RegisterAsSingle(CreateTowerHolderService).NonLazy();
 
             container.RegisterAsSingle(CreateGameplayStateFactory);
+
+            container.RegisterAsSingle(CreateGameplayStateContext);
+            
+            container.RegisterAsSingle(CreateEnemiesSpawnerService);
         }
+
+        public static EnemiesSpawnerService CreateEnemiesSpawnerService(DIContainer c)
+        {
+            return new EnemiesSpawnerService(c.Resolve<EnemiesFactory>(), 
+                c.Resolve<ConfigsProviderService>().GetConfig<SpawnerEnemiesConfig>());
+        }
+
+        public static GameplayStateContext CreateGameplayStateContext(DIContainer c)
+        {
+            return new GameplayStateContext(c.Resolve<GameplayStateFactory>().CreateGameplayStateMachine(_inputArgs));
+        }
+
         public static GameplayStateFactory CreateGameplayStateFactory(DIContainer c)
         {
             return new GameplayStateFactory(c);

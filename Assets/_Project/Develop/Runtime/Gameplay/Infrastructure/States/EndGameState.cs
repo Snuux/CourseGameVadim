@@ -3,7 +3,7 @@ using _Project.Develop.Runtime.Utilities.StateMachineCore;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 {
-    public abstract class EndGameState : State
+    /*public abstract class EndGameState : State
     {
         private readonly IInputService _inputService;
 
@@ -25,5 +25,5 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 
             _inputService.IsEnabled = true;
         }
-    }
+    }*/
 }

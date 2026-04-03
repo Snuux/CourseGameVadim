@@ -33,8 +33,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
                 Debug.Log("Атака начата");
                 return;
             }
-
-            Debug.Log("Нельзя начать атаку");
         }
     }
 }

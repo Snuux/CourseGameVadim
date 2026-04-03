@@ -2,6 +2,7 @@
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Reactive;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
 {
@@ -21,7 +22,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
 
         public Entity Tower => _tower;
 
-
         public void Initialize()
         {
             _entitiesLifeContext.Added += OnEntityAdded;
@@ -29,8 +29,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
 
         private void OnEntityAdded(Entity entity)
         {
+            Debug.Log("asdadkasldkaso");
             if (entity.HasComponent<IsTower>())
             {
+                Debug.Log("ISTOWER!!");
                 _entitiesLifeContext.Added -= OnEntityAdded;
                 _tower = entity;
                 _towerRegistered?.Invoke(_tower);

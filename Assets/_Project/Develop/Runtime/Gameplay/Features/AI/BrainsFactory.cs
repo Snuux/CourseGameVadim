@@ -5,9 +5,7 @@ using _Project.Develop.Runtime.Gameplay.Features.AI.States;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Conditions;
-using _Project.Develop.Runtime.Utilities.Reactive;
 using _Project.Develop.Runtime.Utilities.Timer;
-using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI
 {
@@ -27,7 +25,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             _inputService = _container.Resolve<IInputService>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
-
+        
         public StateMachineBrain CreateGhostBrain(Entity entity)
         {
             List<IDisposable> disposables = new List<IDisposable>();

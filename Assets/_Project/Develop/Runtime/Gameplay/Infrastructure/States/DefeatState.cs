@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 {
-    public class DefeatState : EndGameState, IUpdatableState
+    /*public class DefeatState : EndGameState, IUpdatableState
     {
         private readonly SceneSwitcherService _sceneSwitcherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
@@ -35,5 +35,5 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
                     _sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
             }
         }
-    }
+    }*/
 }

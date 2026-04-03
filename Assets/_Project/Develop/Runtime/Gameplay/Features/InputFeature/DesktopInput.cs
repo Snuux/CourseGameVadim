@@ -26,15 +26,16 @@ namespace _Project.Develop.Runtime.Gameplay.Features.InputFeature
             {
                 Plane plane = new Plane(Vector3.up, Vector3.zero);
                 Ray ray = Camera.main.ScreenPointToRay(MousePosition);
-                
+
                 if (plane.Raycast(ray, out float dist))
                     return ray.GetPoint(dist);
-                
+
                 return Vector3.zero;
             }
         }
 
         public bool LeftMouseButton => Input.GetMouseButton(0);
+        public bool RightMouseButton => Input.GetMouseButton(1);
 
         private Vector2 MousePosition
         {

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 {
-    public class WinState : EndGameState, IUpdatableState
+    /*public class WinState : EndGameState, IUpdatableState
     {
         private readonly LevelsProgressionService _levelsProgressionService;
         private readonly GameplayInputArgs _gameplayInputArgs;
@@ -50,5 +50,5 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
                     _sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
             }
         }
-    }
+    }*/
 }
