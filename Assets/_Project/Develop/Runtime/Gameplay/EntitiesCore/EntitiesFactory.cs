@@ -46,12 +46,12 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddID(new ReactiveVariable<string>(towerConfig.ID))
                 .AddMaxHealth(new ReactiveVariable<float>(levelConfig.TowerMaxHealth))
                 .AddCurrentHealth(new ReactiveVariable<float>(levelConfig.TowerMaxHealth))
-                
+
                 .AddIsDead()
                 .AddInDeathProcess()
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(towerConfig.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
-                
+
                 .AddContactsDetectingMask(Layers.CharactersMask)
                 .AddContactCollidersBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
@@ -59,6 +59,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
+
+                .AddAreaAttackRadius(new ReactiveVariable<float>(towerConfig.AttackRadius))
+                .AddAttackDamage(new ReactiveVariable<float>(towerConfig.AttackDamage));
                 ;
 
             ICompositeCondition mustDie = new CompositeCondition()
@@ -114,6 +117,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 
                 .AddAttackDamage(new ReactiveVariable<float>(config.ExplosionDamage))
                 .AddAreaAttackRadius(new ReactiveVariable<float>(config.ExplosionRadius))
+                
                 .AddDistanceForAttack(new ReactiveVariable<float>(config.DistanceForAreaAttack))
                 .AddAttackRequested()
                 .AddAttackStarted()
@@ -181,12 +185,14 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         
         public Entity CreateAreaProjectile(Vector3 position, float radius, float damage, Entity owner)
         {
-            //radius left for todo. Now in prefab there is big radius that overlap tower!
             AreaProjectileConfig config = _configsProviderService.GetConfig<AreaProjectileConfig>();
             
             Entity entity = CreateEmpty();
                 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
+
+            entity.BodyCollider.radius = radius;
+            entity.ViewContainer.localScale = new Vector3(radius, .03f, radius);
 
             entity
                 .AddID(new ReactiveVariable<string>(config.ID))
@@ -237,6 +243,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             Entity entity = CreateEmpty();
                 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
+            
+            entity.BodyCollider.radius = radius;
+            entity.ViewContainer.localScale = new Vector3(radius, .03f, radius);
 
             entity
                 .AddID(new ReactiveVariable<string>(config.ID))

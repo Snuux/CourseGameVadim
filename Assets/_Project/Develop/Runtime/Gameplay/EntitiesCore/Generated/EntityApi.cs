@@ -856,6 +856,25 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Common.TransformComponent() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Common.ViewContainer ViewContainerC => GetComponent<_Project.Develop.Runtime.Gameplay.Common.ViewContainer>();
+
+		public UnityEngine.Transform ViewContainer => ViewContainerC.Value;
+
+		public bool TryGetViewContainer(out UnityEngine.Transform value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Common.ViewContainer component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(UnityEngine.Transform);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddViewContainer(UnityEngine.Transform value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Common.ViewContainer() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Common.IDComponent IDC => GetComponent<_Project.Develop.Runtime.Gameplay.Common.IDComponent>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> ID => IDC.Value;

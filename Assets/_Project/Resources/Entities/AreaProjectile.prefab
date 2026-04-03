@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 0.03, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5631313219296342524}
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 1412552668340395652}
   - component: {fileID: 1467369528267951159}
   - component: {fileID: 2249962775954064593}
+  - component: {fileID: 1956588667850577503}
   - component: {fileID: 5652032739786323052}
   - component: {fileID: 7553456055726109266}
   m_Layer: 7
@@ -185,6 +186,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colliders:
   - {fileID: 7553456055726109266}
+--- !u!114 &1956588667850577503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380056371662529947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da936a4aa344c2faf53d9be876ab776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _viewContainer: {fileID: 5631313219296342524}
 --- !u!54 &5652032739786323052
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -231,7 +245,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
