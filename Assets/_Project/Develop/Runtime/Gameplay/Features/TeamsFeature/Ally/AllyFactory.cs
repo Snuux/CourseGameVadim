@@ -34,16 +34,27 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
         {
             TowerConfig towerConfig = _configsProviderService.GetConfig<TowerConfig>();
 
-            Entity entity = _entitiesFactory.CreateTower(position, towerConfig, levelConfig);
-            entity.AddCurrentTarget();
-            entity.AddIsTower();
-            entity.AddTeam(new ReactiveVariable<Teams>(Teams.Ally));
+            Entity tower = _entitiesFactory.CreateTower(position, towerConfig, levelConfig);
+            tower.AddCurrentTarget();
+            tower.AddIsTower();
+            tower.AddTeam(new ReactiveVariable<Teams>(Teams.Ally));
             
             //_brainsFactory.CreateMainHeroBrain(entity, new NearestDamageableTargetSelector(entity));
 
-            _entitiesLifeContext.Add(entity);
+            _entitiesLifeContext.Add(tower);
 
-            return entity;
+            return tower;
+        }
+
+        public Entity CreateMine(Vector3 position, Entity owner)
+        {
+            Entity mine = _entitiesFactory.CreateMine(position, owner);
+            mine.AddTeam(new ReactiveVariable<Teams>(owner.Team.Value));
+            
+            _brainsFactory.CreateMineBrain(mine, new NearestDamageableTargetSelector(mine));
+            _entitiesLifeContext.Add(mine);
+
+            return mine;
         }
     }
 }

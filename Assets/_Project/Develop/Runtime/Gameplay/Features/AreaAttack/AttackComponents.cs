@@ -14,7 +14,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
         public ReactiveVariable<float> Value;
     }
 
-    public class AreaAttackRadius : IEntityComponent
+    public class AttackRadius : IEntityComponent
     {
         public ReactiveVariable<float> Value;
     }

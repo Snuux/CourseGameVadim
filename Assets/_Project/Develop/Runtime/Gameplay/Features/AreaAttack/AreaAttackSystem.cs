@@ -31,14 +31,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
             _attackStarted = entity.AttackStarted;
             _attackCompleted = entity.AttackCompleted;
             _damage = entity.AttackDamage;
-            _radius = entity.AreaAttackRadius;
+            _radius = entity.AttackRadius;
         }
 
         public void OnUpdate(float deltaTime)
         {
             if (_attackStarted.Value == false)
                 return;
-
+            
             _attackStarted.Value = false;
             _entitiesFactory.CreateAreaProjectile(_sourceTransform.position, _radius.Value, _damage.Value, _entity);
             

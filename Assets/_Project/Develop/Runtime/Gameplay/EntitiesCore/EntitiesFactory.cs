@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Gameplay.Features.AreaAttack;
 using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
+using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Gameplay.Features.Sensors;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
@@ -59,9 +60,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
-
-                .AddAreaAttackRadius(new ReactiveVariable<float>(towerConfig.AttackRadius))
-                .AddAttackDamage(new ReactiveVariable<float>(towerConfig.AttackDamage));
                 ;
 
             ICompositeCondition mustDie = new CompositeCondition()
@@ -116,7 +114,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddDeathProcessCurrentTime()
                 
                 .AddAttackDamage(new ReactiveVariable<float>(config.ExplosionDamage))
-                .AddAreaAttackRadius(new ReactiveVariable<float>(config.ExplosionRadius))
+                .AddAttackRadius(new ReactiveVariable<float>(config.ExplosionRadius))
                 
                 .AddDistanceForAttack(new ReactiveVariable<float>(config.DistanceForAreaAttack))
                 .AddAttackRequested()
@@ -168,9 +166,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AreaAttackSystem(this))
 
-                //.AddSystem(new BodyContactsDetectingSystem())
-                //.AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
-                //.AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new ApplyDamageSystem())
 
                 .AddSystem(new DeathSystem())
@@ -235,34 +230,38 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
         
-        public Entity CreateMine(Vector3 position, float radius, float damage, Entity owner)
+        public Entity CreateMine(Vector3 position, Entity owner)
         {
-            //radius left for todo. Now in prefab there is big radius that overlap tower!
-            AreaProjectileConfig config = _configsProviderService.GetConfig<AreaProjectileConfig>();
+            MineConfig config = _configsProviderService.GetConfig<MineConfig>();
+            AllyFactory allyFactory = _container.Resolve<AllyFactory>();
             
             Entity entity = CreateEmpty();
                 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
             
-            entity.BodyCollider.radius = radius;
-            entity.ViewContainer.localScale = new Vector3(radius, .03f, radius);
-
             entity
                 .AddID(new ReactiveVariable<string>(config.ID))
-                .AddContactsDetectingMask(Layers.CharactersMask)
-                .AddContactCollidersBuffer(new Buffer<Collider>(64))
-                .AddContactEntitiesBuffer(new Buffer<Entity>(64))
-                .AddBodyContactDamage(new ReactiveVariable<float>(damage))
+                .AddAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
+                .AddAttackRadius(new ReactiveVariable<float>(config.AttackRadius))
+                
+                .AddDistanceForAttack(new ReactiveVariable<float>(config.TriggerRadius))
+                .AddAttackRequested()
+                .AddAttackStarted()
+                .AddAttackCompleted()
+                
+                .AddCurrentTarget()
+                
                 .AddIsDead()
                 .AddInDeathProcess()
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
-                .AddIsTouchAnotherTeam()
-                .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value))
                 ;
-
+            
+            ICompositeCondition canStartAttack = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+            
             ICompositeCondition mustDie = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value));
+                .Add(new FuncCondition(() => entity.AttackCompleted.Value));
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value))
@@ -270,20 +269,19 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             
             entity
                 .AddMustDie(mustDie)
-                .AddMustSelfRelease(mustSelfRelease);
+                .AddMustSelfRelease(mustSelfRelease)
+                .AddCanStartAttack(canStartAttack)
+                ;
 
             entity
-                .AddSystem(new BodyContactsDetectingSystem())
-                .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
-                .AddSystem(new DealDamageOnContactSystem())
-                .AddSystem(new AnotherTeamTouchDetectorSystem())
+                .AddSystem(new StartAttackSystem())
+                .AddSystem(new AreaAttackSystem(this))
                 
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
-                .AddSystem(new DisableCollidersOnDeathSystem())
-                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
-
-            _entitiesLifeContext.Add(entity);
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
+                .AddSystem(new EndAttackSystem())
+                ;
 
             return entity;
         }

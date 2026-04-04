@@ -19,7 +19,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
         
         public void Update(float deltaTime)
         {
-            if (_currentTarget == null)
+            if (_currentTarget.Value == null)
                 return;
 
             _attackRequested.Value = true;

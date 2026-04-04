@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 using UnityEngine;
@@ -36,12 +37,14 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             TowerHolderService towerHolderService = _container.Resolve<TowerHolderService>();
             IInputService inputService = _container.Resolve<IInputService>();
             EntitiesFactory entitiesFactory = _container.Resolve<EntitiesFactory>();
+            AllyFactory allyFactory = _container.Resolve<AllyFactory>();
+            WalletService walletService = _container.Resolve<WalletService>();
 
             StageProcessState stageProcessState = CreateStageProcessState();
             CursorAttackState cursorAttackState = new CursorAttackState(towerHolderService, inputService, entitiesFactory);
 
             GameplayParallelState battleState = new GameplayParallelState(stageProcessState, cursorAttackState);
-            CursorPurchaseState purchaseState = new CursorPurchaseState(towerHolderService, entitiesFactory, inputService);
+            CursorPurchaseState purchaseState = new CursorPurchaseState(towerHolderService, allyFactory, inputService, walletService);
             
             GameplayStateMachine coreLoopState = new GameplayStateMachine();
             

@@ -19,10 +19,14 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(StartWalletConfig), "Configs/Meta/Wallet/StartWalletConfig" },
             {typeof(CurrencyIconsConfig), "Configs/Meta/Wallet/CurrencyIconsConfig" },
             {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
-            {typeof(SpawnerEnemiesConfig), "Configs/Gameplay/Entities/SpawnerEnemiesConfig" },
             
             {typeof(TowerConfig), "Configs/Gameplay/Entities/Characters/TowerConfig" },
             {typeof(AreaProjectileConfig), "Configs/Gameplay/Entities/Characters/AreaProjectileConfig" },
+            {typeof(CursorAttackerConfig), "Configs/Gameplay/Entities/Characters/CursorAttackerConfig" },
+            {typeof(MineConfig), "Configs/Gameplay/Entities/Characters/MineConfig" },
+            
+            {typeof(SpawnerEnemiesConfig), "Configs/Gameplay/Entities/SpawnerEnemiesConfig" },
+            
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)
