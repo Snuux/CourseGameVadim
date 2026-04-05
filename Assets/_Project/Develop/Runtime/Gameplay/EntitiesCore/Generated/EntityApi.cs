@@ -1,6 +1,3 @@
-using _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack;
-using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
-
 namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 {
 	public partial class Entity
@@ -29,11 +26,11 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team() {Value = value}); 
 		}
 
-		public IsTower IsTowerC => GetComponent<IsTower>();
+		public _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally.IsTower IsTowerC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally.IsTower>();
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTower()
 		{
-			return AddComponent(new IsTower() ); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally.IsTower() ); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider BodyColliderC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider>();
@@ -567,13 +564,13 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage.BodyContactDamage() {Value = value}); 
 		}
 
-		public CanStartAttack CanStartAttackC => GetComponent<CanStartAttack>();
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.CanStartAttack CanStartAttackC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.CanStartAttack>();
 
 		public _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanStartAttack => CanStartAttackC.Value;
 
 		public bool TryGetCanStartAttack(out _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
 		{
-			bool result = TryGetComponent(out CanStartAttack component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.CanStartAttack component);
 			if(result)
 				value = component.Value;
 			else
@@ -583,16 +580,16 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanStartAttack(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
 		{
-			return AddComponent(new CanStartAttack() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.CanStartAttack() {Value = value}); 
 		}
 
-		public AttackDamage AttackDamageC => GetComponent<AttackDamage>();
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackDamage AttackDamageC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackDamage>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> AttackDamage => AttackDamageC.Value;
 
 		public bool TryGetAttackDamage(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
-			bool result = TryGetComponent(out AttackDamage component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackDamage component);
 			if(result)
 				value = component.Value;
 			else
@@ -602,21 +599,21 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDamage()
 		{
-			return AddComponent(new AttackDamage() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackDamage() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDamage(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
-			return AddComponent(new AttackDamage() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackDamage() {Value = value}); 
 		}
 
-		public AttackRadius AttackRadiusC => GetComponent<AttackRadius>();
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRadius AttackRadiusC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRadius>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> AttackRadius => AttackRadiusC.Value;
 
 		public bool TryGetAttackRadius(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
-			bool result = TryGetComponent(out AttackRadius component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRadius component);
 			if(result)
 				value = component.Value;
 			else
@@ -626,21 +623,21 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackRadius()
 		{
-			return AddComponent(new AttackRadius() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRadius() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackRadius(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
-			return AddComponent(new AttackRadius() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRadius() {Value = value}); 
 		}
 
-		public AttackRequested AttackRequestedC => GetComponent<AttackRequested>();
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRequested AttackRequestedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRequested>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> AttackRequested => AttackRequestedC.Value;
 
 		public bool TryGetAttackRequested(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			bool result = TryGetComponent(out AttackRequested component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRequested component);
 			if(result)
 				value = component.Value;
 			else
@@ -650,21 +647,21 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackRequested()
 		{
-			return AddComponent(new AttackRequested() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRequested() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackRequested(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			return AddComponent(new AttackRequested() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackRequested() {Value = value}); 
 		}
 
-		public AttackStarted AttackStartedC => GetComponent<AttackStarted>();
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackStarted AttackStartedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackStarted>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> AttackStarted => AttackStartedC.Value;
 
 		public bool TryGetAttackStarted(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			bool result = TryGetComponent(out AttackStarted component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackStarted component);
 			if(result)
 				value = component.Value;
 			else
@@ -674,21 +671,21 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackStarted()
 		{
-			return AddComponent(new AttackStarted() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackStarted() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackStarted(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			return AddComponent(new AttackStarted() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackStarted() {Value = value}); 
 		}
 
-		public AttackCompleted AttackCompletedC => GetComponent<AttackCompleted>();
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackCompleted AttackCompletedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackCompleted>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> AttackCompleted => AttackCompletedC.Value;
 
 		public bool TryGetAttackCompleted(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			bool result = TryGetComponent(out AttackCompleted component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackCompleted component);
 			if(result)
 				value = component.Value;
 			else
@@ -698,21 +695,21 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCompleted()
 		{
-			return AddComponent(new AttackCompleted() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackCompleted() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCompleted(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
-			return AddComponent(new AttackCompleted() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackCompleted() {Value = value}); 
 		}
 
-		public DistanceForAttack DistanceForAttackC => GetComponent<DistanceForAttack>();
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack DistanceForAttackC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> DistanceForAttack => DistanceForAttackC.Value;
 
 		public bool TryGetDistanceForAttack(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
-			bool result = TryGetComponent(out DistanceForAttack component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack component);
 			if(result)
 				value = component.Value;
 			else
@@ -722,12 +719,12 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDistanceForAttack()
 		{
-			return AddComponent(new DistanceForAttack() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDistanceForAttack(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
-			return AddComponent(new DistanceForAttack() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.ApplyDamage.TakeDamageRequest TakeDamageRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.ApplyDamage.TakeDamageRequest>();
