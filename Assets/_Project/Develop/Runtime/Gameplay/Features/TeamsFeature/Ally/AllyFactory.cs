@@ -39,8 +39,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
             tower.AddIsTower();
             tower.AddTeam(new ReactiveVariable<Teams>(Teams.Ally));
             
-            //_brainsFactory.CreateMainHeroBrain(entity, new NearestDamageableTargetSelector(entity));
-
             _entitiesLifeContext.Add(tower);
 
             return tower;

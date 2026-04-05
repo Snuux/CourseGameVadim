@@ -114,11 +114,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddAttackCompleted()
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
-
-                //.AddContactsDetectingMask(Layers.CharactersMask)
-                //.AddContactCollidersBuffer(new Buffer<Collider>(64))
-                //.AddContactEntitiesBuffer(new Buffer<Entity>(64))
-                //.AddBodyContactDamage(new ReactiveVariable<float>(config.BodyContactDamage))
                 ;
 
             ICompositeCondition canMove = new CompositeCondition()
