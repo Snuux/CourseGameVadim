@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Configs.Gameplay.Shop;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
@@ -26,6 +27,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(MineConfig), "Configs/Gameplay/Entities/Characters/MineConfig" },
             
             {typeof(SpawnerEnemiesConfig), "Configs/Gameplay/Entities/SpawnerEnemiesConfig" },
+            {typeof(ShopConfig), "Configs/Gameplay/Shop/ShopConfig" },
             
         };
 

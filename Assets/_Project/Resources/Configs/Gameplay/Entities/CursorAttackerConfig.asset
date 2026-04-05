@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1cf974b63eb45d5ac8ee8d3feb78116, type: 3}
-  m_Name: MineConfig
+  m_Script: {fileID: 11500000, guid: d9a2cb992b6e4d48bec8cd700dbdaf79, type: 3}
+  m_Name: CursorAttackerConfig
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: Mine
-  <PrefabPath>k__BackingField: Entities/Mine
-  <TriggerRadius>k__BackingField: 1.5
+  <ID>k__BackingField: CursorAttacker
+  <PrefabPath>k__BackingField: Entities/CursorAttacker
   <AttackRadius>k__BackingField: 2
-  <AttackDamage>k__BackingField: 1
-  <DeathProcessTime>k__BackingField: 0.1
+  <AttackDamage>k__BackingField: 99

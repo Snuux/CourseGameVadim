@@ -19,3 +19,9 @@ MonoBehaviour:
   - <SpawnPosition>k__BackingField: {x: 3, y: 0, z: 5}
     <EnemyConfig>k__BackingField: {fileID: 11400000, guid: ac4da768c466e3140878caacc8ea277b,
       type: 2}
+  - <SpawnPosition>k__BackingField: {x: 3, y: 0, z: 5}
+    <EnemyConfig>k__BackingField: {fileID: 11400000, guid: ac4da768c466e3140878caacc8ea277b,
+      type: 2}
+  - <SpawnPosition>k__BackingField: {x: 3, y: 0, z: 5}
+    <EnemyConfig>k__BackingField: {fileID: 11400000, guid: ac4da768c466e3140878caacc8ea277b,
+      type: 2}

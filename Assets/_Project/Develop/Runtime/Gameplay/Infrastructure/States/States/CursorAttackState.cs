@@ -1,4 +1,5 @@
-﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using System;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Utilities.Reactive;
@@ -9,42 +10,54 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
     public class CursorAttackState : State, IUpdatableState
     {
-        private readonly TowerHolderService _towerHolderService;
-        
         private readonly IInputService _inputService;
         private readonly EntitiesFactory _entitiesFactory;
-        private Entity _entityParent;
+        private readonly AllyFactory _allyFactory;
+        private readonly EntitiesLifeContext _entitiesLifeContext;
+        
+        private Entity _cursorAttacker;
 
         private ReactiveVariable<float> _cursorAttackRadius;
         private ReactiveVariable<float> _cursorAttackDamage;
 
-        public CursorAttackState(TowerHolderService towerHolderService, IInputService inputService, EntitiesFactory entitiesFactory)
+        public CursorAttackState(
+            IInputService inputService,
+            EntitiesFactory entitiesFactory,
+            AllyFactory allyFactory,
+            EntitiesLifeContext entitiesLifeContext)
         {
             _inputService = inputService;
             _entitiesFactory = entitiesFactory;
-            _cursorAttackRadius = new ReactiveVariable<float>(5);
-            _cursorAttackDamage = new ReactiveVariable<float>(99);
-            //todo add _cursorAttackRadius;
+            _allyFactory = allyFactory;
+            _entitiesLifeContext = entitiesLifeContext;
+        }
+        
+        public override void Enter()
+        {
+            base.Enter();
 
-            _towerHolderService = towerHolderService;
-            _towerHolderService.TowerRegistered.Subscribe(OnTowerRegistered);
+            _cursorAttacker = _allyFactory.CreateCursorAttacker();
+            
+            _cursorAttackRadius = _cursorAttacker.AttackRadius;
+            _cursorAttackDamage = _cursorAttacker.AttackDamage;
+
+            Debug.Log("Attacking!!!");
         }
 
         public void Update(float deltaTime)
         {
-            if (_entityParent == null)
-                return;
-            
-            if (_inputService.LeftMouseButton)
+            if (_inputService.LeftMouseButtonDown)
             {
                 _entitiesFactory.CreateAreaProjectile(_inputService.MouseWorldPosition, _cursorAttackRadius.Value,
-                    _cursorAttackDamage.Value, _entityParent);
+                    _cursorAttackDamage.Value, _cursorAttacker);
             }
         }
 
-        private void OnTowerRegistered(Entity tower)
+        public override void Exit()
         {
-            _entityParent = tower;
+            base.Exit();
+            
+            _entitiesLifeContext.Release(_cursorAttacker);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.InputFeature
 
         Vector3 Direction { get; }
         Vector3 MouseWorldPosition { get; }
-        bool LeftMouseButton { get; }
-        bool RightMouseButton { get; }
+        bool LeftMouseButtonDown { get; }
+        bool RightMouseButtonDown { get; }
     }
 }

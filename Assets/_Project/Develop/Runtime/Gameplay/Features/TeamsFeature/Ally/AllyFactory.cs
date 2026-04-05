@@ -56,5 +56,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
 
             return mine;
         }
+
+        public Entity CreateCursorAttacker()
+        {
+            Entity entity = _entitiesFactory.CreateCursorAttacker();
+            entity.AddTeam(new ReactiveVariable<Teams>(Teams.Ally));
+            
+            _entitiesLifeContext.Add(entity);
+            return entity;
+        }
     }
 }

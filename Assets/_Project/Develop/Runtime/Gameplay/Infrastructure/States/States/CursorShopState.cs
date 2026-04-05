@@ -1,35 +1,45 @@
 ﻿using System;
+using _Project.Develop.Runtime.Configs.Gameplay.Shop;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
+using _Project.Develop.Runtime.Gameplay.Features.ShopFeature;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
 {
-    public class CursorPurchaseState : State, IUpdatableState
+    public class CursorShopState : State, IUpdatableState
     {
         private readonly TowerHolderService _towerHolderService;
         private readonly WalletService _walletService;
         private readonly AllyFactory _allyFactory;
         private readonly IInputService _inputService;
+        private readonly ShopConfig _shopConfig;
         private Entity _entityParent;
 
         private ReactiveVariable<float> _cursorAttackRadius;
         private ReactiveVariable<float> _cursorAttackDamage;
         
-        private IDisposable _towerRegistered;
+        private IDisposable _towerRegisteredDisposable;
 
-        public CursorPurchaseState(TowerHolderService towerHolderService, AllyFactory entitiesFactory, IInputService inputService, WalletService walletService)
+        public CursorShopState(
+            TowerHolderService towerHolderService, 
+            AllyFactory entitiesFactory, 
+            IInputService inputService, 
+            WalletService walletService, 
+            ShopConfig shopConfig)
         {
             _towerHolderService = towerHolderService;
             _allyFactory = entitiesFactory;
             _inputService = inputService;
             _walletService = walletService;
+            _shopConfig = shopConfig;
 
-            _towerRegistered = _towerHolderService.TowerRegistered.Subscribe(OnTowerRegistered);
+            _towerRegisteredDisposable = _towerHolderService.TowerRegistered.Subscribe(OnTowerRegistered);
         }
 
         public override void Enter()
@@ -44,10 +54,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States
             if (_entityParent == null)
                 return;
             
-            if (_inputService.LeftMouseButton)
+            if (_inputService.LeftMouseButtonDown)
             {
-                if (_walletService.Enough(CurrencyTypes.Gold, 100))
+                var mineItemPrice = _shopConfig.GetPriceFor(ShopItemTypes.Mine);
+                
+                if (_walletService.Enough(mineItemPrice.currencyType, mineItemPrice.price))
                 {
+                    _walletService.Spend(mineItemPrice.currencyType, mineItemPrice.price);
                     _allyFactory.CreateMine(_inputService.MouseWorldPosition, _entityParent);
                 }
             }
@@ -56,8 +69,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States
         private void OnTowerRegistered(Entity tower)
         {
             _entityParent = tower;
-            _towerRegistered.Dispose();
-            _towerRegistered = null;
+            _towerRegisteredDisposable.Dispose();
+            _towerRegisteredDisposable = null;
         }
     }
 }

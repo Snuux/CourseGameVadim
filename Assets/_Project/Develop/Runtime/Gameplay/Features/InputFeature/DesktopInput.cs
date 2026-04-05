@@ -34,8 +34,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.InputFeature
             }
         }
 
-        public bool LeftMouseButton => Input.GetMouseButton(0);
-        public bool RightMouseButton => Input.GetMouseButton(1);
+        public bool LeftMouseButtonDown => Input.GetMouseButtonDown(0);
+        public bool RightMouseButtonDown => Input.GetMouseButtonDown(1);
 
         private Vector2 MousePosition
         {
