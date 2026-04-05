@@ -1,8 +1,11 @@
 ﻿using System.Collections;
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
+using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
@@ -49,10 +52,17 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             {
                 SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2)));
+                
+                ILevelProviderService levelProviderService = _container.Resolve<ILevelProviderService>();
+                
+                coroutinesPerformer.StartPerform(
+                    sceneSwitcherService.ProcessSwitchTo(
+                        Scenes.Gameplay, 
+                        new GameplayInputArgs(levelProviderService.Get()))
+                    );
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            /*if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 _walletService.Add(CurrencyTypes.Gold, 10);
                 Debug.Log("Золота осталось: " + _walletService.GetCurrency(CurrencyTypes.Gold).Value);
@@ -71,7 +81,7 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             {
                 _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
                 Debug.Log("Сохранение было вызвано");
-            }
+            }*/
         }
     }
 }

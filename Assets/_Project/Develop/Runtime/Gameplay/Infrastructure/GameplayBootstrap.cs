@@ -7,6 +7,7 @@ using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -28,6 +29,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainsContext _brainsContext;
         private ConfigsProviderService _configsProviderService;
+        private ILevelProviderService _randomLevelProviderService;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -43,8 +45,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         public override IEnumerator Initialize()
         {
-            Debug.Log($"Вы попали на уровень {_inputArgs.LevelNumber}");
-
             Debug.Log("Инициализация геймплейной сцены");
 
             _walletService = _container.Resolve<WalletService>();
@@ -54,10 +54,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _gameplayStateContext = _container.Resolve<GameplayStateContext>();
             _configsProviderService = _container.Resolve<ConfigsProviderService>();
 
-            _container.Resolve<AllyFactory>().CreateTower(
-                Vector3.zero, 
-                _configsProviderService.GetConfig<LevelsListConfig>().GetBy(_inputArgs.LevelNumber)
-                );
+            _container.Resolve<AllyFactory>().CreateTower(Vector3.zero, _inputArgs.Level);
             
             //_testGameplay.Initialize(_container);
 

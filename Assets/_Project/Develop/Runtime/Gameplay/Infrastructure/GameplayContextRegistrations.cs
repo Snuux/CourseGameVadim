@@ -10,6 +10,7 @@ using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 
@@ -78,8 +79,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private static StageProviderService CreateStagesProviderService(DIContainer c)
         {
             return new StageProviderService(
-                c.Resolve<ConfigsProviderService>()
-                    .GetConfig<LevelsListConfig>().GetBy(_inputArgs.LevelNumber),
+                _inputArgs.Level,
                 c.Resolve<StagesFactory>());
         }
 

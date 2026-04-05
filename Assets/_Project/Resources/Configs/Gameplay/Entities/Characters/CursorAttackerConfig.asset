@@ -15,4 +15,4 @@ MonoBehaviour:
   <ID>k__BackingField: CursorAttacker
   <PrefabPath>k__BackingField: Entities/CursorAttacker
   <AttackRadius>k__BackingField: 1.5
-  <AttackDamage>k__BackingField: 1
+  <AttackDamage>k__BackingField: 3

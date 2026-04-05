@@ -1,8 +1,10 @@
 ﻿using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.MainMenu;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
+using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Infrastructure
@@ -15,6 +17,12 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateMainMenuPresentersFactory);
             container.RegisterAsSingle(CreateMainMenuScreenPresenter).NonLazy();
             container.RegisterAsSingle(CreateMainMenuPopupService);
+            container.RegisterAsSingle<ILevelProviderService>(CreateRandomLevelProviderService).NonLazy();
+        }
+        
+        private static RandomLevelProviderService CreateRandomLevelProviderService(DIContainer c)
+        {
+            return new RandomLevelProviderService(c.Resolve<ConfigsProviderService>());
         }
 
         private static MainMenuPopupService CreateMainMenuPopupService(DIContainer c)

@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using _Project.Develop.Runtime.Gameplay.Infrastructure;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Wallet;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using _Project.Develop.Runtime.Utilities.SceneManagment;
 
 namespace _Project.Develop.Runtime.UI.MainMenu
 {
@@ -9,24 +13,29 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         private readonly MainMenuScreenView _screen;
 
         private readonly ProjectPresentersFactory _projectPresentersFactory;
-
-        private readonly MainMenuPopupService _popupService;
+        private readonly SceneSwitcherService _sceneSwitcherService;
+        private readonly ICoroutinesPerformer _coroutinesPerformer;
+        private readonly ILevelProviderService _levelProviderService;
 
         private readonly List<IPresenter> _childPresenters = new();
 
         public MainMenuScreenPresenter(
             MainMenuScreenView screen,
-            ProjectPresentersFactory projectPresentersFactory,
-            MainMenuPopupService popupService)
+            ProjectPresentersFactory projectPresentersFactory, 
+            SceneSwitcherService sceneSwitcherService, 
+            ICoroutinesPerformer coroutinesPerformer, 
+            ILevelProviderService levelProviderService)
         {
             _screen = screen;
             _projectPresentersFactory = projectPresentersFactory;
-            _popupService = popupService;
+            _sceneSwitcherService = sceneSwitcherService;
+            _coroutinesPerformer = coroutinesPerformer;
+            _levelProviderService = levelProviderService;
         }
 
         public void Initialize()
         {
-            _screen.OpenLevelsMenuButtonClicked += OnOpenLevelsMenuButtonClicked;
+            _screen.StartMenuButtonClicked += OnStartMenuButtonClicked;
 
             CreateWallet();
 
@@ -36,7 +45,7 @@ namespace _Project.Develop.Runtime.UI.MainMenu
 
         public void Dispose()
         {
-            _screen.OpenLevelsMenuButtonClicked -= OnOpenLevelsMenuButtonClicked;
+            _screen.StartMenuButtonClicked -= OnStartMenuButtonClicked;
 
             foreach (IPresenter presenter in _childPresenters)
                 presenter.Dispose();
@@ -51,9 +60,14 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _childPresenters.Add(walletPresenter);
         }
 
-        private void OnOpenLevelsMenuButtonClicked()
+        
+        private void OnStartMenuButtonClicked()
         {
-            _popupService.OpenLevelsMenuPopup();
+            _coroutinesPerformer.StartPerform(
+                _sceneSwitcherService.ProcessSwitchTo(
+                    Scenes.Gameplay, 
+                    new GameplayInputArgs(_levelProviderService.Get()))
+            );
         }
     }
 }

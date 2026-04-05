@@ -1,4 +1,7 @@
 ﻿using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using _Project.Develop.Runtime.Utilities.SceneManagment;
 
 namespace _Project.Develop.Runtime.UI.MainMenu
 {
@@ -16,7 +19,10 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             return new MainMenuScreenPresenter(
                 view,
                 _container.Resolve<ProjectPresentersFactory>(),
-                _container.Resolve<MainMenuPopupService>());
+                _container.Resolve<SceneSwitcherService>(),
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<ILevelProviderService>()
+            );
         }
     }
 }

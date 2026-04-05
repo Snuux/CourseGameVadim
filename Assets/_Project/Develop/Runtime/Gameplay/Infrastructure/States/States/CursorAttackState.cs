@@ -40,6 +40,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
             
             _cursorAttackRadius = _cursorAttacker.AttackRadius;
             _cursorAttackDamage = _cursorAttacker.AttackDamage;
+            
 
             Debug.Log("Attacking!!!");
         }

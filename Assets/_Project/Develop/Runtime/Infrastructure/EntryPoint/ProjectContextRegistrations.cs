@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.Core;
@@ -49,15 +48,10 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateTimerService);
 
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
-
-            container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
         }
 
         private static TimerServiceFactory CreateTimerService(DIContainer c)
             => new TimerServiceFactory(c);
-
-        private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
-            => new LevelsProgressionService(c.Resolve<PlayerDataProvider>());
 
         private static ViewsFactory CreateViewsFactory(DIContainer c)
             => new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());

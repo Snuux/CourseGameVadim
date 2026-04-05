@@ -8,7 +8,7 @@ namespace _Project.Develop.Runtime.UI.MainMenu
 {
     public class MainMenuScreenView : MonoBehaviour, IView
     {
-        public event Action OpenLevelsMenuButtonClicked;
+        public event Action StartMenuButtonClicked;
 
         [field: SerializeField] public IconTextListView WalletView { get; private set; }
 
@@ -24,6 +24,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _openLevelsMenuButton.onClick.RemoveListener(OnOpenLevelsMenuButtonClicked);
         }
 
-        private void OnOpenLevelsMenuButtonClicked() => OpenLevelsMenuButtonClicked?.Invoke();
+        private void OnOpenLevelsMenuButtonClicked() => StartMenuButtonClicked?.Invoke();
     }
 }

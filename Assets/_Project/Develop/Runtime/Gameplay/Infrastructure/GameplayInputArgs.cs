@@ -1,14 +1,16 @@
-﻿using _Project.Develop.Runtime.Utilities.SceneManagment;
+﻿using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Utilities.SceneManagment;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
     public class GameplayInputArgs : IInputSceneArgs
     {
-        public GameplayInputArgs(int levelNumber)
+        public GameplayInputArgs(LevelConfig level)
         {
-            LevelNumber = levelNumber;
+            Level = level;
         }
-
-        public int LevelNumber { get; }
+        
+        public LevelConfig Level { get; }
     }
 }
