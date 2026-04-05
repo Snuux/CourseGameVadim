@@ -31,5 +31,25 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             return false;
         }
+        
+        public static bool TryGetAliveTargetTransform(Entity source, out Transform targetTransform)
+        {
+            targetTransform = null;
+
+            Entity target = source.CurrentTarget.Value;
+            if (target == null || target.IsInit == false)
+            {
+                source.CurrentTarget.Value = null;
+                return false;
+            }
+
+            if (target.TryGetTransform(out targetTransform) == false || targetTransform == null)
+            {
+                source.CurrentTarget.Value = null;
+                return false;
+            }
+
+            return true;
+        }
     }
 }

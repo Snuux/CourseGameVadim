@@ -16,5 +16,5 @@ MonoBehaviour:
   <PrefabPath>k__BackingField: Entities/Mine
   <TriggerRadius>k__BackingField: 1.5
   <AttackRadius>k__BackingField: 2
-  <AttackDamage>k__BackingField: 1
+  <AttackDamage>k__BackingField: 99
   <DeathProcessTime>k__BackingField: 0.1

@@ -33,7 +33,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         public GameplayStateFactory(DIContainer container)
         {
             _container = container;
-            
+
             _stageProviderService = _container.Resolve<StageProviderService>();
             _towerHolderService = _container.Resolve<TowerHolderService>();
             _inputService = _container.Resolve<IInputService>();
@@ -52,10 +52,18 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             GameplayStateMachine coreLoopState = CreateCoreLoopState();
             DefeatState defeatState = CreateDefeatState();
             WinState winState = CreateWinState(inputArgs);
-            
+
             ICompositeCondition coreLoopToWinCondition = new CompositeCondition()
+                .Add(new FuncCondition(() =>
+                {
+                    if (_towerHolderService.Tower != null)
+                        return _towerHolderService.Tower.IsDead.Value == false;
+
+                    return true;
+                }))
                 .Add(new FuncCondition(() => _stageProviderService.CurrentStageResult.Value == StageResults.Completed))
-                .Add(new FuncCondition(() => _stageProviderService.HasNextStage() == false));
+                .Add(new FuncCondition(() => _stageProviderService.HasNextStage() == false))
+                ;
 
             ICompositeCondition coreLoopToDefeatCondition = new CompositeCondition()
                 .Add(new FuncCondition(() =>
@@ -65,13 +73,13 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 
                     return false;
                 }));
-            
+
             GameplayStateMachine gameplayCycle = new GameplayStateMachine();
-            
+
             gameplayCycle.AddState(coreLoopState);
             gameplayCycle.AddState(winState);
             gameplayCycle.AddState(defeatState);
-            
+
             gameplayCycle.AddTransition(coreLoopState, winState, coreLoopToWinCondition);
             gameplayCycle.AddTransition(coreLoopState, defeatState, coreLoopToDefeatCondition);
 
@@ -95,15 +103,15 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
                 .Add(new FuncCondition(() => _stageProviderService.CurrentStageResult.Value == StageResults.Completed));
 
             ICompositeCondition purchaseToBattleCondition = new CompositeCondition()
-                    .Add(new FuncCondition(() => _stageProviderService.HasNextStage()))
-                    .Add(new FuncCondition(() => _inputService.RightMouseButtonDown));
+                .Add(new FuncCondition(() => _stageProviderService.HasNextStage()))
+                .Add(new FuncCondition(() => _inputService.RightMouseButtonDown));
 
             coreLoopState.AddTransition(battleState, shopState, battleToPurchaseCondition);
             coreLoopState.AddTransition(shopState, battleState, purchaseToBattleCondition);
 
             return coreLoopState;
         }
-        
+
         public CursorAttackState CreateCursorAttackState()
         {
             return new CursorAttackState(_inputService, _entitiesFactory, _allyFactory, _entitiesLifeContext);

@@ -23,7 +23,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             
             {typeof(TowerConfig), "Configs/Gameplay/Entities/Characters/TowerConfig" },
             {typeof(AreaProjectileConfig), "Configs/Gameplay/Entities/Characters/AreaProjectileConfig" },
-            {typeof(CursorAttackerConfig), "Configs/Gameplay/Entities/Characters/CursorAttackerConfig" },
+            {typeof(CursorAttackerConfig), "Configs/Gameplay/Entities/CursorAttackerConfig" },
             {typeof(MineConfig), "Configs/Gameplay/Entities/Characters/MineConfig" },
             
             {typeof(SpawnerEnemiesConfig), "Configs/Gameplay/Entities/SpawnerEnemiesConfig" },

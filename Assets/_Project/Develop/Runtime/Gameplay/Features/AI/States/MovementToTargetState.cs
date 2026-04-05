@@ -11,24 +11,25 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
         private readonly ReactiveVariable<Vector3> _movementDirection;
         private readonly ReactiveVariable<Entity> _currentTarget;
         private readonly Transform _transform;
+        private readonly Entity _entity;
 
         public MovementToTargetState(Entity entity)
         {
             _rotationDirection = entity.RotationDirection;
             _movementDirection = entity.MoveDirection;
-            _currentTarget = entity.CurrentTarget;
             _transform = entity.Transform;
+            _entity = entity;
         }
 
         public void Update(float deltaTime)
         {
-            if (_currentTarget.Value != null)
-            {
-                Vector3 targetDirection = (_currentTarget.Value.Transform.position - _transform.position).normalized;
+            if (EntitiesHelper.TryGetAliveTargetTransform(_entity, out Transform targetTransform) == false)
+                return;
+            
+            Vector3 targetDirection = (targetTransform.position - _transform.position).normalized;
                 
-                _rotationDirection.Value = targetDirection;
-                _movementDirection.Value = targetDirection;
-            }
+            _rotationDirection.Value = targetDirection;
+            _movementDirection.Value = targetDirection;
         }
         
         public override void Exit()

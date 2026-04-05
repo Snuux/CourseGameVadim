@@ -62,6 +62,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.Selectors
             return closestTarget;
         }
 
-        private float GetDistanceTo(Entity target) => (_sourceTransform.position - target.Transform.position).magnitude;
+        private float GetDistanceTo(Entity target)
+        {
+            return (_sourceTransform.position - target.Transform.position).magnitude;
+        }
     }
 }

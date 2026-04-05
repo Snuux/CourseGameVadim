@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelConfig2
   m_EditorClassIdentifier: 
   _stageConfigs:
-  - {fileID: 11400000, guid: e893610ee1218424980a430bc6a53b50, type: 2}
+  - {fileID: 11400000, guid: ad4c17ef047c2344c85bc92272450d68, type: 2}
   - {fileID: 11400000, guid: e893610ee1218424980a430bc6a53b50, type: 2}
   <TowerMaxHealth>k__BackingField: 1
   <Reward>k__BackingField:

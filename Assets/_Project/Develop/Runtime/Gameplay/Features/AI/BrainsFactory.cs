@@ -7,6 +7,7 @@ using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Timer;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI
 {
@@ -111,15 +112,16 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
         private bool TargetInRange(Entity entity)
         {
-            if (entity.CurrentTarget == null || entity.CurrentTarget.Value == null)
+            if (EntitiesHelper.TryGetAliveTargetTransform(entity, out Transform targetTransform) == false)
                 return false;
-
-            return CalcDistanceToTarget(entity) < entity.DistanceForAttack.Value;
+            
+            return CalcDistanceToTarget(targetTransform.position, entity.Transform.position ) < 
+                   entity.DistanceForAttack.Value;
         }
 
-        private float CalcDistanceToTarget(Entity source)
+        private float CalcDistanceToTarget(Vector3 source, Vector3 target)
         {
-            return (source.CurrentTarget.Value.Transform.position - source.Transform.position).magnitude;
+            return (target - source).magnitude;
         }
     }
 }
