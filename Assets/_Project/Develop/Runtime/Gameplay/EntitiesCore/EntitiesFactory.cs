@@ -2,10 +2,9 @@
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
-using _Project.Develop.Runtime.Gameplay.Features.AreaAttack;
+using _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack;
 using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
-using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Gameplay.Features.Sensors;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
@@ -15,7 +14,6 @@ using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.Generated;
 using _Project.Develop.Runtime.Utilities.Reactive;
-using _Project.Develop.Runtime.Utilities.Timer;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.EntitiesCore

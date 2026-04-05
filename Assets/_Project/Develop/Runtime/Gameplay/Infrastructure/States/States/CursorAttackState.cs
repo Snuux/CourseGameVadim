@@ -1,12 +1,11 @@
-﻿using System;
-using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
-using _Project.Develop.Runtime.Gameplay.Features.MainHero;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
 {
     public class CursorAttackState : State, IUpdatableState
     {

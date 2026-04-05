@@ -1,6 +1,5 @@
 ﻿using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies

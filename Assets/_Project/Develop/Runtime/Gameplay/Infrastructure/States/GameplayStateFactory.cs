@@ -1,9 +1,8 @@
 ﻿using _Project.Develop.Runtime.Configs.Gameplay.Shop;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using _Project.Develop.Runtime.Gameplay.Features.AI.States;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
-using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
@@ -12,8 +11,6 @@ using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
-using _Project.Develop.Runtime.Utilities.StateMachineCore;
-using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 {

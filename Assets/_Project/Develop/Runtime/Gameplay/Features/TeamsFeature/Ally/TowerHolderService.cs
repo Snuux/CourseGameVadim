@@ -4,7 +4,7 @@ using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
+namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally
 {
     public class TowerHolderService : IInitializable, IDisposable
     {

@@ -2,7 +2,7 @@
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.AreaAttack
+namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack
 {
     public class CanStartAttack : IEntityComponent
     {

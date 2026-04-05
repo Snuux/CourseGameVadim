@@ -1,11 +1,4 @@
-﻿using System;
-using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using _Project.Develop.Runtime.Gameplay.Features.MainHero;
-using _Project.Develop.Runtime.Utilities;
-using _Project.Develop.Runtime.Utilities.Reactive;
-using UnityEngine;
-
-namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
+﻿namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 {
     /*public class PreparationTriggerService
     {

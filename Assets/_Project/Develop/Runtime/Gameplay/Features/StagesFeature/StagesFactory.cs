@@ -1,7 +1,7 @@
 ﻿using System;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using _Project.Develop.Runtime.Gameplay.Features.Enemies;
+using _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
 using _Project.Develop.Runtime.Infrastructure.DI;
 

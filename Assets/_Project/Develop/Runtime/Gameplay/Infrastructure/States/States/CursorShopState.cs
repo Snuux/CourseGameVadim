@@ -1,10 +1,9 @@
 ﻿using System;
 using _Project.Develop.Runtime.Configs.Gameplay.Shop;
-using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
-using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.ShopFeature;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;

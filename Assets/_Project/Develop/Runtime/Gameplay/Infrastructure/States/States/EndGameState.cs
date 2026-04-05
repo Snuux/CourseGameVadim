@@ -1,7 +1,7 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 
-namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
 {
     public abstract class EndGameState : State
     {

@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
-using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
+namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States
 {
     public class ClearAllEnemiesStage : IStage
     {
