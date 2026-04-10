@@ -28,7 +28,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
                         _container.Resolve<EnemiesSpawnerService>());
                 
                 default:
-                    throw new ArgumentException($"Not supported {stageConfig.GetType()} type config.");
+                    throw new ArgumentException($"Not supported {stageConfig.GetType()} types config.");
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -15,6 +16,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
         private readonly SceneSwitcherService _sceneSwitcherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly WalletService _walletService;
+        private readonly StatisticsService _statisticsService;
 
         public WinState(
             IInputService inputService,
@@ -22,24 +24,26 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
             PlayerDataProvider playerDataProvider,
             SceneSwitcherService sceneSwitcherService,
             ICoroutinesPerformer coroutinesPerformer, 
-            WalletService walletService) : base(inputService)
+            WalletService walletService, 
+            StatisticsService statisticsService) : base(inputService)
         {
             _gameplayInputArgs = gameplayInputArgs;
             _playerDataProvider = playerDataProvider;
             _sceneSwitcherService = sceneSwitcherService;
             _coroutinesPerformer = coroutinesPerformer;
             _walletService = walletService;
+            _statisticsService = statisticsService;
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            Debug.Log($"ПОБЕДА. Начисление: {_gameplayInputArgs.Level.Reward.Type}: {_gameplayInputArgs.Level.Reward.Value}");
+            Debug.Log($"ПОБЕДА. Начисление: {_gameplayInputArgs.Level.Reward.Types}: {_gameplayInputArgs.Level.Reward.Value}");
             Debug.Log($"Нажмите Q для перехода в меню");
             
-            _walletService.Add(_gameplayInputArgs.Level.Reward.Type, _gameplayInputArgs.Level.Reward.Value);
-            _walletService.Add(CurrencyTypes.Wins, 1);
+            _walletService.Add(_gameplayInputArgs.Level.Reward.Types, _gameplayInputArgs.Level.Reward.Value);
+            _statisticsService.Add(StatisticType.Wins);
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.Core;
@@ -38,6 +39,8 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
             container.RegisterAsSingle(CreateWalletService).NonLazy();
+            
+            container.RegisterAsSingle(CreateStatisticsService).NonLazy();
 
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
@@ -82,6 +85,16 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
                 currencies[currencyType] = new ReactiveVariable<int>();
 
             return new WalletService(currencies, c.Resolve<PlayerDataProvider>());
+        }
+        
+        private static StatisticsService CreateStatisticsService(DIContainer c)
+        {
+            Dictionary<StatisticType, ReactiveVariable<int>> records = new();
+
+            foreach (StatisticType recordType in Enum.GetValues(typeof(StatisticType)))
+                records[recordType] = new ReactiveVariable<int>();
+
+            return new StatisticsService(records, c.Resolve<PlayerDataProvider>());
         }
 
         private static SceneSwitcherService CreateSceneSwitcherService(DIContainer c)

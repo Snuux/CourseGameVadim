@@ -22,33 +22,33 @@ namespace _Project.Develop.Runtime.Meta.Features.Wallet
 
         public List<CurrencyTypes> AvailableCurrencies => _currencies.Keys.ToList();
 
-        public IReadOnlyVariable<int> GetCurrency(CurrencyTypes type) => _currencies[type];
+        public IReadOnlyVariable<int> GetCurrency(CurrencyTypes types) => _currencies[types];
 
-        public bool Enough(CurrencyTypes type, int amount)
+        public bool Enough(CurrencyTypes types, int amount)
         {
             if (amount < 0)
                 throw new ArgumentOutOfRangeException(nameof(amount));
 
-            return _currencies[type].Value >= amount;
+            return _currencies[types].Value >= amount;
         }
 
-        public void Add(CurrencyTypes type, int amount)
+        public void Add(CurrencyTypes types, int amount)
         {
             if (amount < 0)
                 throw new ArgumentOutOfRangeException(nameof(amount));
 
-            _currencies[type].Value += amount;
+            _currencies[types].Value += amount;
         }
 
-        public void Spend(CurrencyTypes type, int amount)
+        public void Spend(CurrencyTypes types, int amount)
         {
-            if (Enough(type, amount) == false)
-                throw new InvalidOperationException("Not enough: " + type.ToString());
+            if (Enough(types, amount) == false)
+                throw new InvalidOperationException("Not enough: " + types.ToString());
 
             if (amount < 0)
                 throw new ArgumentOutOfRangeException(nameof(amount));
 
-            _currencies[type].Value -= amount;
+            _currencies[types].Value -= amount;
         }
 
         public void ReadFrom(PlayerData data)

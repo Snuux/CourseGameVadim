@@ -350,23 +350,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.BinaryConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.BinaryConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.BinaryConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.BinaryConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.BsonObjectIdConverter">
@@ -382,30 +382,30 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.BsonObjectIdConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.BsonObjectIdConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.BsonObjectIdConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.BsonObjectIdConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.CustomCreationConverter`1">
             <summary>
             Creates a custom object.
             </summary>
-            <typeparam name="T">The object type to convert.</typeparam>
+            <typeparam name="T">The object types to convert.</typeparam>
         </member>
         <member name="M:Newtonsoft.Json.Converters.CustomCreationConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
@@ -415,30 +415,30 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.CustomCreationConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.CustomCreationConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.CustomCreationConverter`1.Create(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.CustomCreationConverter`1.Create(System.Types)">
             <summary>
             Creates an object which will then be populated by the serializer.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>The created object.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.CustomCreationConverter`1.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.CustomCreationConverter`1.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="P:Newtonsoft.Json.Converters.CustomCreationConverter`1.CanWrite">
@@ -462,23 +462,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.DataSetConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.DataSetConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.DataSetConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.DataSetConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified value type.
+            Determines whether this instance can convert the specified value types.
             </summary>
-            <param name="valueType">Type of the value.</param>
+            <param name="valueType">Types of the value.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified value type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified value types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.DataTableConverter">
@@ -494,23 +494,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.DataTableConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.DataTableConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.DataTableConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.DataTableConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified value type.
+            Determines whether this instance can convert the specified value types.
             </summary>
-            <param name="valueType">Type of the value.</param>
+            <param name="valueType">Types of the value.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified value type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified value types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.DateTimeConverterBase">
@@ -518,18 +518,18 @@
             Provides a base class for converting a <see cref="T:System.DateTime"/> to and from JSON.
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.DateTimeConverterBase.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.DateTimeConverterBase.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.DiscriminatedUnionConverter">
             <summary>
-            Converts a F# discriminated union type to and from JSON.
+            Converts a F# discriminated union types to and from JSON.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.Converters.DiscriminatedUnionConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
@@ -540,23 +540,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.DiscriminatedUnionConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.DiscriminatedUnionConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.DiscriminatedUnionConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.DiscriminatedUnionConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.EntityKeyMemberConverter">
@@ -572,23 +572,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.EntityKeyMemberConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.EntityKeyMemberConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.EntityKeyMemberConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.EntityKeyMemberConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.ExpandoObjectConverter">
@@ -604,23 +604,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.ExpandoObjectConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.ExpandoObjectConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.ExpandoObjectConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.ExpandoObjectConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="P:Newtonsoft.Json.Converters.ExpandoObjectConverter.CanWrite">
@@ -662,12 +662,12 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.IsoDateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.IsoDateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
@@ -685,12 +685,12 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.JavaScriptDateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.JavaScriptDateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing property value of the JSON that is being converted.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
@@ -708,23 +708,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.KeyValuePairConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.KeyValuePairConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.KeyValuePairConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.KeyValuePairConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.RegexConverter">
@@ -740,23 +740,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.RegexConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.RegexConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.RegexConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.RegexConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.StringEnumConverter">
@@ -802,34 +802,34 @@
             <param name="namingStrategy">The naming strategy used to resolve how enum text is written.</param>
             <param name="allowIntegerValues"><c>true</c> if integers are allowed when serializing and deserializing; otherwise, <c>false</c>.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Converters.StringEnumConverter"/> class.
             </summary>
-            <param name="namingStrategyType">The <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> used to write enum text.</param>
+            <param name="namingStrategyType">The <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> used to write enum text.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.#ctor(System.Type,System.Object[])">
+        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.#ctor(System.Types,System.Object[])">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Converters.StringEnumConverter"/> class.
             </summary>
-            <param name="namingStrategyType">The <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> used to write enum text.</param>
+            <param name="namingStrategyType">The <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> used to write enum text.</param>
             <param name="namingStrategyParameters">
             The parameter list to use when constructing the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> described by <paramref name="namingStrategyType"/>.
             If <c>null</c>, the default constructor is used.
             When non-<c>null</c>, there must be a constructor defined in the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> that exactly matches the number,
-            order, and type of these parameters.
+            order, and types of these parameters.
             </param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.#ctor(System.Type,System.Object[],System.Boolean)">
+        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.#ctor(System.Types,System.Object[],System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Converters.StringEnumConverter"/> class.
             </summary>
-            <param name="namingStrategyType">The <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> used to write enum text.</param>
+            <param name="namingStrategyType">The <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> used to write enum text.</param>
             <param name="namingStrategyParameters">
             The parameter list to use when constructing the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> described by <paramref name="namingStrategyType"/>.
             If <c>null</c>, the default constructor is used.
             When non-<c>null</c>, there must be a constructor defined in the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> that exactly matches the number,
-            order, and type of these parameters.
+            order, and types of these parameters.
             </param>
             <param name="allowIntegerValues"><c>true</c> if integers are allowed when serializing and deserializing; otherwise, <c>false</c>.</param>
         </member>
@@ -841,23 +841,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.StringEnumConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            <c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            <c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.UnixDateTimeConverter">
@@ -899,12 +899,12 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.UnixDateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.UnixDateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing property value of the JSON that is being converted.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
@@ -922,23 +922,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.VersionConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.VersionConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing property value of the JSON that is being converted.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.VersionConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.VersionConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.Converters.XmlNodeConverter">
@@ -982,12 +982,12 @@
             <param name="serializer">The calling serializer.</param>
             <param name="value">The value.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.XmlNodeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Converters.XmlNodeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
@@ -1000,13 +1000,13 @@
             <param name="prefix">The attribute name prefix if it has one, otherwise an empty string.</param>
             <returns><c>true</c> if attribute name is for a namespace attribute, otherwise <c>false</c>.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Converters.XmlNodeConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.Converters.XmlNodeConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified value type.
+            Determines whether this instance can convert the specified value types.
             </summary>
-            <param name="valueType">Type of the value.</param>
+            <param name="valueType">Types of the value.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified value type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified value types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.DateFormatHandling">
@@ -1031,7 +1031,7 @@
         </member>
         <member name="F:Newtonsoft.Json.DateParseHandling.None">
             <summary>
-            Date formatted strings are not parsed to a date type and are read as strings.
+            Date formatted strings are not parsed to a date types and are read as strings.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.DateParseHandling.DateTime">
@@ -1188,7 +1188,7 @@
             <summary>
             Provides an interface for using pooled arrays.
             </summary>
-            <typeparam name="T">The array type content.</typeparam>
+            <typeparam name="T">The array types content.</typeparam>
         </member>
         <member name="M:Newtonsoft.Json.IArrayPool`1.Rent(System.Int32)">
             <summary>
@@ -1295,7 +1295,7 @@
             The parameter list to use when constructing the <see cref="T:Newtonsoft.Json.JsonConverter"/> described by <see cref="P:Newtonsoft.Json.JsonContainerAttribute.ItemConverterType"/>.
             If <c>null</c>, the default constructor is used.
             When non-<c>null</c>, there must be a constructor defined in the <see cref="T:Newtonsoft.Json.JsonConverter"/> that exactly matches the number,
-            order, and type of these parameters.
+            order, and types of these parameters.
             </summary>
             <example>
             <code>
@@ -1305,16 +1305,16 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonContainerAttribute.NamingStrategyType">
             <summary>
-            Gets or sets the <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.
+            Gets or sets the <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.
             </summary>
-            <value>The <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.</value>
+            <value>The <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonContainerAttribute.NamingStrategyParameters">
             <summary>
             The parameter list to use when constructing the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> described by <see cref="P:Newtonsoft.Json.JsonContainerAttribute.NamingStrategyType"/>.
             If <c>null</c>, the default constructor is used.
             When non-<c>null</c>, there must be a constructor defined in the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> that exactly matches the number,
-            order, and type of these parameters.
+            order, and types of these parameters.
             </summary>
             <example>
             <code>
@@ -1346,9 +1346,9 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonContainerAttribute.ItemTypeNameHandling">
             <summary>
-            Gets or sets the type name handling used when serializing the collection's items.
+            Gets or sets the types name handling used when serializing the collection's items.
             </summary>
-            <value>The type name handling.</value>
+            <value>The types name handling.</value>
         </member>
         <member name="M:Newtonsoft.Json.JsonContainerAttribute.#ctor">
             <summary>
@@ -1639,17 +1639,17 @@
             A JSON string representation of the object.
             </returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.SerializeObject(System.Object,System.Type,Newtonsoft.Json.JsonSerializerSettings)">
+        <member name="M:Newtonsoft.Json.JsonConvert.SerializeObject(System.Object,System.Types,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
-            Serializes the specified object to a JSON string using a type, formatting and <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
+            Serializes the specified object to a JSON string using a types, formatting and <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
             </summary>
             <param name="value">The object to serialize.</param>
             <param name="settings">The <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> used to serialize the object.
             If this is <c>null</c>, default serialization settings will be used.</param>
-            <param name="type">
-            The type of the value being serialized.
-            This parameter is used when <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> is <see cref="F:Newtonsoft.Json.TypeNameHandling.Auto"/> to write out the type name if the type of the value does not match.
-            Specifying the type is optional.
+            <param name="types">
+            The types of the value being serialized.
+            This parameter is used when <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> is <see cref="F:Newtonsoft.Json.TypeNameHandling.Auto"/> to write out the types name if the types of the value does not match.
+            Specifying the types is optional.
             </param>
             <returns>
             A JSON string representation of the object.
@@ -1667,18 +1667,18 @@
             A JSON string representation of the object.
             </returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.SerializeObject(System.Object,System.Type,Newtonsoft.Json.Formatting,Newtonsoft.Json.JsonSerializerSettings)">
+        <member name="M:Newtonsoft.Json.JsonConvert.SerializeObject(System.Object,System.Types,Newtonsoft.Json.Formatting,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
-            Serializes the specified object to a JSON string using a type, formatting and <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
+            Serializes the specified object to a JSON string using a types, formatting and <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
             </summary>
             <param name="value">The object to serialize.</param>
             <param name="formatting">Indicates how the output should be formatted.</param>
             <param name="settings">The <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> used to serialize the object.
             If this is <c>null</c>, default serialization settings will be used.</param>
-            <param name="type">
-            The type of the value being serialized.
-            This parameter is used when <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> is <see cref="F:Newtonsoft.Json.TypeNameHandling.Auto"/> to write out the type name if the type of the value does not match.
-            Specifying the type is optional.
+            <param name="types">
+            The types of the value being serialized.
+            This parameter is used when <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> is <see cref="F:Newtonsoft.Json.TypeNameHandling.Auto"/> to write out the types name if the types of the value does not match.
+            Specifying the types is optional.
             </param>
             <returns>
             A JSON string representation of the object.
@@ -1702,66 +1702,66 @@
             </param>
             <returns>The deserialized object from the JSON string.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject(System.String,System.Type)">
+        <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject(System.String,System.Types)">
             <summary>
-            Deserializes the JSON to the specified .NET type.
+            Deserializes the JSON to the specified .NET types.
             </summary>
             <param name="value">The JSON to deserialize.</param>
-            <param name="type">The <see cref="T:System.Type"/> of object being deserialized.</param>
+            <param name="types">The <see cref="T:System.Types"/> of object being deserialized.</param>
             <returns>The deserialized object from the JSON string.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject``1(System.String)">
             <summary>
-            Deserializes the JSON to the specified .NET type.
+            Deserializes the JSON to the specified .NET types.
             </summary>
-            <typeparam name="T">The type of the object to deserialize to.</typeparam>
+            <typeparam name="T">The types of the object to deserialize to.</typeparam>
             <param name="value">The JSON to deserialize.</param>
             <returns>The deserialized object from the JSON string.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonConvert.DeserializeAnonymousType``1(System.String,``0)">
             <summary>
-            Deserializes the JSON to the given anonymous type.
+            Deserializes the JSON to the given anonymous types.
             </summary>
             <typeparam name="T">
-            The anonymous type to deserialize to. This can't be specified
-            traditionally and must be inferred from the anonymous type passed
+            The anonymous types to deserialize to. This can't be specified
+            traditionally and must be inferred from the anonymous types passed
             as a parameter.
             </typeparam>
             <param name="value">The JSON to deserialize.</param>
-            <param name="anonymousTypeObject">The anonymous type object.</param>
-            <returns>The deserialized anonymous type from the JSON string.</returns>
+            <param name="anonymousTypeObject">The anonymous types object.</param>
+            <returns>The deserialized anonymous types from the JSON string.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonConvert.DeserializeAnonymousType``1(System.String,``0,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
-            Deserializes the JSON to the given anonymous type using <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
+            Deserializes the JSON to the given anonymous types using <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
             </summary>
             <typeparam name="T">
-            The anonymous type to deserialize to. This can't be specified
-            traditionally and must be inferred from the anonymous type passed
+            The anonymous types to deserialize to. This can't be specified
+            traditionally and must be inferred from the anonymous types passed
             as a parameter.
             </typeparam>
             <param name="value">The JSON to deserialize.</param>
-            <param name="anonymousTypeObject">The anonymous type object.</param>
+            <param name="anonymousTypeObject">The anonymous types object.</param>
             <param name="settings">
             The <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> used to deserialize the object.
             If this is <c>null</c>, default serialization settings will be used.
             </param>
-            <returns>The deserialized anonymous type from the JSON string.</returns>
+            <returns>The deserialized anonymous types from the JSON string.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject``1(System.String,Newtonsoft.Json.JsonConverter[])">
             <summary>
-            Deserializes the JSON to the specified .NET type using a collection of <see cref="T:Newtonsoft.Json.JsonConverter"/>.
+            Deserializes the JSON to the specified .NET types using a collection of <see cref="T:Newtonsoft.Json.JsonConverter"/>.
             </summary>
-            <typeparam name="T">The type of the object to deserialize to.</typeparam>
+            <typeparam name="T">The types of the object to deserialize to.</typeparam>
             <param name="value">The JSON to deserialize.</param>
             <param name="converters">Converters to use while deserializing.</param>
             <returns>The deserialized object from the JSON string.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject``1(System.String,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
-            Deserializes the JSON to the specified .NET type using <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
+            Deserializes the JSON to the specified .NET types using <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
             </summary>
-            <typeparam name="T">The type of the object to deserialize to.</typeparam>
+            <typeparam name="T">The types of the object to deserialize to.</typeparam>
             <param name="value">The object to deserialize.</param>
             <param name="settings">
             The <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> used to deserialize the object.
@@ -1769,21 +1769,21 @@
             </param>
             <returns>The deserialized object from the JSON string.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject(System.String,System.Type,Newtonsoft.Json.JsonConverter[])">
+        <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject(System.String,System.Types,Newtonsoft.Json.JsonConverter[])">
             <summary>
-            Deserializes the JSON to the specified .NET type using a collection of <see cref="T:Newtonsoft.Json.JsonConverter"/>.
+            Deserializes the JSON to the specified .NET types using a collection of <see cref="T:Newtonsoft.Json.JsonConverter"/>.
             </summary>
             <param name="value">The JSON to deserialize.</param>
-            <param name="type">The type of the object to deserialize.</param>
+            <param name="types">The types of the object to deserialize.</param>
             <param name="converters">Converters to use while deserializing.</param>
             <returns>The deserialized object from the JSON string.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject(System.String,System.Type,Newtonsoft.Json.JsonSerializerSettings)">
+        <member name="M:Newtonsoft.Json.JsonConvert.DeserializeObject(System.String,System.Types,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
-            Deserializes the JSON to the specified .NET type using <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
+            Deserializes the JSON to the specified .NET types using <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/>.
             </summary>
             <param name="value">The JSON to deserialize.</param>
-            <param name="type">The type of the object to deserialize to.</param>
+            <param name="types">The types of the object to deserialize to.</param>
             <param name="settings">
             The <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> used to deserialize the object.
             If this is <c>null</c>, default serialization settings will be used.
@@ -1963,23 +1963,23 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.JsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConverter.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.JsonConverter.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="P:Newtonsoft.Json.JsonConverter.CanRead">
@@ -1998,7 +1998,7 @@
             <summary>
             Converts an object to and from JSON.
             </summary>
-            <typeparam name="T">The object type to convert.</typeparam>
+            <typeparam name="T">The object types to convert.</typeparam>
         </member>
         <member name="M:Newtonsoft.Json.JsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
@@ -2016,34 +2016,34 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.JsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Types,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,`0,System.Boolean,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.JsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Types,`0,System.Boolean,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <param name="existingValue">The existing value of object being read. If there is no existing value then <c>null</c> will be used.</param>
             <param name="hasExistingValue">The existing value has a value.</param>
             <param name="serializer">The calling serializer.</param>
             <returns>The object value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConverter`1.CanConvert(System.Type)">
+        <member name="M:Newtonsoft.Json.JsonConverter`1.CanConvert(System.Types)">
             <summary>
-            Determines whether this instance can convert the specified object type.
+            Determines whether this instance can convert the specified object types.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            	<c>true</c> if this instance can convert the specified object types; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:Newtonsoft.Json.JsonConverterAttribute">
@@ -2053,9 +2053,9 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonConverterAttribute.ConverterType">
             <summary>
-            Gets the <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.JsonConverter"/>.
+            Gets the <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.JsonConverter"/>.
             </summary>
-            <value>The <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.JsonConverter"/>.</value>
+            <value>The <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.JsonConverter"/>.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonConverterAttribute.ConverterParameters">
             <summary>
@@ -2063,17 +2063,17 @@
             If <c>null</c>, the default constructor is used.
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonConverterAttribute"/> class.
             </summary>
-            <param name="converterType">Type of the <see cref="T:Newtonsoft.Json.JsonConverter"/>.</param>
+            <param name="converterType">Types of the <see cref="T:Newtonsoft.Json.JsonConverter"/>.</param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Type,System.Object[])">
+        <member name="M:Newtonsoft.Json.JsonConverterAttribute.#ctor(System.Types,System.Object[])">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonConverterAttribute"/> class.
             </summary>
-            <param name="converterType">Type of the <see cref="T:Newtonsoft.Json.JsonConverter"/>.</param>
+            <param name="converterType">Types of the <see cref="T:Newtonsoft.Json.JsonConverter"/>.</param>
             <param name="converterParameters">Parameter list to use when constructing the <see cref="T:Newtonsoft.Json.JsonConverter"/>. Can be <c>null</c>.</param>
         </member>
         <member name="T:Newtonsoft.Json.JsonConverterCollection">
@@ -2232,16 +2232,16 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonPropertyAttribute.ItemConverterType">
             <summary>
-            Gets or sets the <see cref="T:Newtonsoft.Json.JsonConverter"/> type used when serializing the property's collection items.
+            Gets or sets the <see cref="T:Newtonsoft.Json.JsonConverter"/> types used when serializing the property's collection items.
             </summary>
-            <value>The collection's items <see cref="T:Newtonsoft.Json.JsonConverter"/> type.</value>
+            <value>The collection's items <see cref="T:Newtonsoft.Json.JsonConverter"/> types.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonPropertyAttribute.ItemConverterParameters">
             <summary>
             The parameter list to use when constructing the <see cref="T:Newtonsoft.Json.JsonConverter"/> described by <see cref="P:Newtonsoft.Json.JsonPropertyAttribute.ItemConverterType"/>.
             If <c>null</c>, the default constructor is used.
             When non-<c>null</c>, there must be a constructor defined in the <see cref="T:Newtonsoft.Json.JsonConverter"/> that exactly matches the number,
-            order, and type of these parameters.
+            order, and types of these parameters.
             </summary>
             <example>
             <code>
@@ -2251,16 +2251,16 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonPropertyAttribute.NamingStrategyType">
             <summary>
-            Gets or sets the <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.
+            Gets or sets the <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.
             </summary>
-            <value>The <see cref="T:System.Type"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.</value>
+            <value>The <see cref="T:System.Types"/> of the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonPropertyAttribute.NamingStrategyParameters">
             <summary>
             The parameter list to use when constructing the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> described by <see cref="P:Newtonsoft.Json.JsonPropertyAttribute.NamingStrategyType"/>.
             If <c>null</c>, the default constructor is used.
             When non-<c>null</c>, there must be a constructor defined in the <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> that exactly matches the number,
-            order, and type of these parameters.
+            order, and types of these parameters.
             </summary>
             <example>
             <code>
@@ -2294,9 +2294,9 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonPropertyAttribute.TypeNameHandling">
             <summary>
-            Gets or sets the type name handling used when serializing this property.
+            Gets or sets the types name handling used when serializing this property.
             </summary>
-            <value>The type name handling.</value>
+            <value>The types name handling.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonPropertyAttribute.IsReference">
             <summary>
@@ -2332,9 +2332,9 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonPropertyAttribute.ItemTypeNameHandling">
             <summary>
-            Gets or sets the type name handling used when serializing the property's collection items.
+            Gets or sets the types name handling used when serializing the property's collection items.
             </summary>
-            <value>The collection's items type name handling.</value>
+            <value>The collection's items types name handling.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonPropertyAttribute.ItemIsReference">
             <summary>
@@ -2585,7 +2585,7 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonReader.TokenType">
             <summary>
-            Gets the type of the current JSON token. 
+            Gets the types of the current JSON token. 
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.JsonReader.Value">
@@ -2595,7 +2595,7 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonReader.ValueType">
             <summary>
-            Gets the .NET type for the current JSON token.
+            Gets the .NET types for the current JSON token.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.JsonReader.Depth">
@@ -2701,7 +2701,7 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonReader.SetStateBasedOnCurrent">
             <summary>
-            Sets the state based on current token type.
+            Sets the state based on current token types.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.JsonReader.Dispose(System.Boolean)">
@@ -2865,12 +2865,12 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializer.Binder">
             <summary>
-            Gets or sets the <see cref="P:Newtonsoft.Json.JsonSerializer.SerializationBinder"/> used by the serializer when resolving type names.
+            Gets or sets the <see cref="P:Newtonsoft.Json.JsonSerializer.SerializationBinder"/> used by the serializer when resolving types names.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializer.SerializationBinder">
             <summary>
-            Gets or sets the <see cref="T:Newtonsoft.Json.Serialization.ISerializationBinder"/> used by the serializer when resolving type names.
+            Gets or sets the <see cref="T:Newtonsoft.Json.Serialization.ISerializationBinder"/> used by the serializer when resolving types names.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializer.TraceWriter">
@@ -2887,7 +2887,7 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling">
             <summary>
-            Gets or sets how type name writing and reading is handled by the serializer.
+            Gets or sets how types name writing and reading is handled by the serializer.
             The default value is <see cref="F:Newtonsoft.Json.TypeNameHandling.None" />.
             </summary>
             <remarks>
@@ -2898,17 +2898,17 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializer.TypeNameAssemblyFormat">
             <summary>
-            Gets or sets how a type name assembly is written and resolved by the serializer.
+            Gets or sets how a types name assembly is written and resolved by the serializer.
             The default value is <see cref="F:System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple" />.
             </summary>
-            <value>The type name assembly format.</value>
+            <value>The types name assembly format.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializer.TypeNameAssemblyFormatHandling">
             <summary>
-            Gets or sets how a type name assembly is written and resolved by the serializer.
+            Gets or sets how a types name assembly is written and resolved by the serializer.
             The default value is <see cref="F:Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple" />.
             </summary>
-            <value>The type name assembly format.</value>
+            <value>The types name assembly format.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializer.PreserveReferencesHandling">
             <summary>
@@ -3128,31 +3128,31 @@
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> that contains the JSON structure to deserialize.</param>
             <returns>The <see cref="T:System.Object"/> being deserialized.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonSerializer.Deserialize(System.IO.TextReader,System.Type)">
+        <member name="M:Newtonsoft.Json.JsonSerializer.Deserialize(System.IO.TextReader,System.Types)">
             <summary>
             Deserializes the JSON structure contained by the specified <see cref="T:System.IO.TextReader"/>
-            into an instance of the specified type.
+            into an instance of the specified types.
             </summary>
             <param name="reader">The <see cref="T:System.IO.TextReader"/> containing the object.</param>
-            <param name="objectType">The <see cref="T:System.Type"/> of object being deserialized.</param>
+            <param name="objectType">The <see cref="T:System.Types"/> of object being deserialized.</param>
             <returns>The instance of <paramref name="objectType"/> being deserialized.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonSerializer.Deserialize``1(Newtonsoft.Json.JsonReader)">
             <summary>
             Deserializes the JSON structure contained by the specified <see cref="T:Newtonsoft.Json.JsonReader"/>
-            into an instance of the specified type.
+            into an instance of the specified types.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> containing the object.</param>
-            <typeparam name="T">The type of the object to deserialize.</typeparam>
+            <typeparam name="T">The types of the object to deserialize.</typeparam>
             <returns>The instance of <typeparamref name="T"/> being deserialized.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonSerializer.Deserialize(Newtonsoft.Json.JsonReader,System.Type)">
+        <member name="M:Newtonsoft.Json.JsonSerializer.Deserialize(Newtonsoft.Json.JsonReader,System.Types)">
             <summary>
             Deserializes the JSON structure contained by the specified <see cref="T:Newtonsoft.Json.JsonReader"/>
-            into an instance of the specified type.
+            into an instance of the specified types.
             </summary>
             <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> containing the object.</param>
-            <param name="objectType">The <see cref="T:System.Type"/> of object being deserialized.</param>
+            <param name="objectType">The <see cref="T:System.Types"/> of object being deserialized.</param>
             <returns>The instance of <paramref name="objectType"/> being deserialized.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonSerializer.Serialize(System.IO.TextWriter,System.Object)">
@@ -3163,7 +3163,7 @@
             <param name="textWriter">The <see cref="T:System.IO.TextWriter"/> used to write the JSON structure.</param>
             <param name="value">The <see cref="T:System.Object"/> to serialize.</param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonSerializer.Serialize(Newtonsoft.Json.JsonWriter,System.Object,System.Type)">
+        <member name="M:Newtonsoft.Json.JsonSerializer.Serialize(Newtonsoft.Json.JsonWriter,System.Object,System.Types)">
             <summary>
             Serializes the specified <see cref="T:System.Object"/> and writes the JSON structure
             using the specified <see cref="T:Newtonsoft.Json.JsonWriter"/>.
@@ -3171,12 +3171,12 @@
             <param name="jsonWriter">The <see cref="T:Newtonsoft.Json.JsonWriter"/> used to write the JSON structure.</param>
             <param name="value">The <see cref="T:System.Object"/> to serialize.</param>
             <param name="objectType">
-            The type of the value being serialized.
-            This parameter is used when <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> is <see cref="F:Newtonsoft.Json.TypeNameHandling.Auto"/> to write out the type name if the type of the value does not match.
-            Specifying the type is optional.
+            The types of the value being serialized.
+            This parameter is used when <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> is <see cref="F:Newtonsoft.Json.TypeNameHandling.Auto"/> to write out the types name if the types of the value does not match.
+            Specifying the types is optional.
             </param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonSerializer.Serialize(System.IO.TextWriter,System.Object,System.Type)">
+        <member name="M:Newtonsoft.Json.JsonSerializer.Serialize(System.IO.TextWriter,System.Object,System.Types)">
             <summary>
             Serializes the specified <see cref="T:System.Object"/> and writes the JSON structure
             using the specified <see cref="T:System.IO.TextWriter"/>.
@@ -3184,9 +3184,9 @@
             <param name="textWriter">The <see cref="T:System.IO.TextWriter"/> used to write the JSON structure.</param>
             <param name="value">The <see cref="T:System.Object"/> to serialize.</param>
             <param name="objectType">
-            The type of the value being serialized.
-            This parameter is used when <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> is Auto to write out the type name if the type of the value does not match.
-            Specifying the type is optional.
+            The types of the value being serialized.
+            This parameter is used when <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> is Auto to write out the types name if the types of the value does not match.
+            Specifying the types is optional.
             </param>
         </member>
         <member name="M:Newtonsoft.Json.JsonSerializer.Serialize(Newtonsoft.Json.JsonWriter,System.Object)">
@@ -3252,7 +3252,7 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializerSettings.TypeNameHandling">
             <summary>
-            Gets or sets how type name writing and reading is handled by the serializer.
+            Gets or sets how types name writing and reading is handled by the serializer.
             The default value is <see cref="F:Newtonsoft.Json.TypeNameHandling.None" />.
             </summary>
             <remarks>
@@ -3260,7 +3260,7 @@
             Incoming types should be validated with a custom <see cref="P:Newtonsoft.Json.JsonSerializerSettings.SerializationBinder"/>
             when deserializing with a value other than <see cref="F:Newtonsoft.Json.TypeNameHandling.None"/>.
             </remarks>
-            <value>The type name handling.</value>
+            <value>The types name handling.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializerSettings.MetadataPropertyHandling">
             <summary>
@@ -3271,17 +3271,17 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializerSettings.TypeNameAssemblyFormat">
             <summary>
-            Gets or sets how a type name assembly is written and resolved by the serializer.
+            Gets or sets how a types name assembly is written and resolved by the serializer.
             The default value is <see cref="F:System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple" />.
             </summary>
-            <value>The type name assembly format.</value>
+            <value>The types name assembly format.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializerSettings.TypeNameAssemblyFormatHandling">
             <summary>
-            Gets or sets how a type name assembly is written and resolved by the serializer.
+            Gets or sets how a types name assembly is written and resolved by the serializer.
             The default value is <see cref="F:Newtonsoft.Json.TypeNameAssemblyFormatHandling.Simple" />.
             </summary>
-            <value>The type name assembly format.</value>
+            <value>The types name assembly format.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializerSettings.ConstructorHandling">
             <summary>
@@ -3323,13 +3323,13 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializerSettings.Binder">
             <summary>
-            Gets or sets the <see cref="P:Newtonsoft.Json.JsonSerializerSettings.SerializationBinder"/> used by the serializer when resolving type names.
+            Gets or sets the <see cref="P:Newtonsoft.Json.JsonSerializerSettings.SerializationBinder"/> used by the serializer when resolving types names.
             </summary>
             <value>The binder.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonSerializerSettings.SerializationBinder">
             <summary>
-            Gets or sets the <see cref="T:Newtonsoft.Json.Serialization.ISerializationBinder"/> used by the serializer when resolving type names.
+            Gets or sets the <see cref="T:Newtonsoft.Json.Serialization.ISerializationBinder"/> used by the serializer when resolving types names.
             </summary>
             <value>The binder.</value>
         </member>
@@ -4472,7 +4472,7 @@
         </member>
         <member name="T:Newtonsoft.Json.JsonToken">
             <summary>
-            Specifies the type of JSON token.
+            Specifies the types of JSON token.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.JsonToken.None">
@@ -4570,7 +4570,7 @@
             <para>
             Represents a reader that provides <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> validation.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -4605,13 +4605,13 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonValidatingReader.TokenType">
             <summary>
-            Gets the type of the current JSON token.
+            Gets the types of the current JSON token.
             </summary>
             <value></value>
         </member>
         <member name="P:Newtonsoft.Json.JsonValidatingReader.ValueType">
             <summary>
-            Gets the .NET type for the current JSON token.
+            Gets the .NET types for the current JSON token.
             </summary>
             <value></value>
         </member>
@@ -5862,7 +5862,7 @@
         </member>
         <member name="F:Newtonsoft.Json.Linq.CommentHandling.Load">
             <summary>
-            Load comments as a <see cref="T:Newtonsoft.Json.Linq.JValue"/> with type <see cref="F:Newtonsoft.Json.Linq.JTokenType.Comment"/>.
+            Load comments as a <see cref="T:Newtonsoft.Json.Linq.JValue"/> with types <see cref="F:Newtonsoft.Json.Linq.JTokenType.Comment"/>.
             </summary>
         </member>
         <member name="T:Newtonsoft.Json.Linq.DuplicatePropertyNameHandling">
@@ -5894,7 +5894,7 @@
             <summary>
             Returns a collection of tokens that contains the ancestors of every token in the source collection.
             </summary>
-            <typeparam name="T">The type of the objects in source, constrained to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</typeparam>
+            <typeparam name="T">The types of the objects in source, constrained to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the ancestors of every token in the source collection.</returns>
         </member>
@@ -5902,7 +5902,7 @@
             <summary>
             Returns a collection of tokens that contains every token in the source collection, and the ancestors of every token in the source collection.
             </summary>
-            <typeparam name="T">The type of the objects in source, constrained to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</typeparam>
+            <typeparam name="T">The types of the objects in source, constrained to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains every token in the source collection, the ancestors of every token in the source collection.</returns>
         </member>
@@ -5910,7 +5910,7 @@
             <summary>
             Returns a collection of tokens that contains the descendants of every token in the source collection.
             </summary>
-            <typeparam name="T">The type of the objects in source, constrained to <see cref="T:Newtonsoft.Json.Linq.JContainer"/>.</typeparam>
+            <typeparam name="T">The types of the objects in source, constrained to <see cref="T:Newtonsoft.Json.Linq.JContainer"/>.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the descendants of every token in the source collection.</returns>
         </member>
@@ -5918,7 +5918,7 @@
             <summary>
             Returns a collection of tokens that contains every token in the source collection, and the descendants of every token in the source collection.
             </summary>
-            <typeparam name="T">The type of the objects in source, constrained to <see cref="T:Newtonsoft.Json.Linq.JContainer"/>.</typeparam>
+            <typeparam name="T">The types of the objects in source, constrained to <see cref="T:Newtonsoft.Json.Linq.JContainer"/>.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains every token in the source collection, and the descendants of every token in the source collection.</returns>
         </member>
@@ -5948,7 +5948,7 @@
             <summary>
             Returns a collection of converted child values of every object in the source collection with the given key.
             </summary>
-            <typeparam name="U">The type to convert the values to.</typeparam>
+            <typeparam name="U">The types to convert the values to.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
             <param name="key">The token key.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the converted values of every token in the source collection with the given key.</returns>
@@ -5957,7 +5957,7 @@
             <summary>
             Returns a collection of converted child values of every object in the source collection.
             </summary>
-            <typeparam name="U">The type to convert the values to.</typeparam>
+            <typeparam name="U">The types to convert the values to.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the converted values of every token in the source collection.</returns>
         </member>
@@ -5965,7 +5965,7 @@
             <summary>
             Converts the value.
             </summary>
-            <typeparam name="U">The type to convert the value to.</typeparam>
+            <typeparam name="U">The types to convert the value to.</typeparam>
             <param name="value">A <see cref="T:Newtonsoft.Json.Linq.JToken"/> cast as a <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</param>
             <returns>A converted value.</returns>
         </member>
@@ -5973,8 +5973,8 @@
             <summary>
             Converts the value.
             </summary>
-            <typeparam name="T">The source collection type.</typeparam>
-            <typeparam name="U">The type to convert the value to.</typeparam>
+            <typeparam name="T">The source collection types.</typeparam>
+            <typeparam name="U">The types to convert the value to.</typeparam>
             <param name="value">A <see cref="T:Newtonsoft.Json.Linq.JToken"/> cast as a <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</param>
             <returns>A converted value.</returns>
         </member>
@@ -5982,7 +5982,7 @@
             <summary>
             Returns a collection of child tokens of every array in the source collection.
             </summary>
-            <typeparam name="T">The source collection type.</typeparam>
+            <typeparam name="T">The source collection types.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the values of every token in the source collection.</returns>
         </member>
@@ -5991,8 +5991,8 @@
             Returns a collection of converted child tokens of every array in the source collection.
             </summary>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
-            <typeparam name="U">The type to convert the values to.</typeparam>
-            <typeparam name="T">The source collection type.</typeparam>
+            <typeparam name="U">The types to convert the values to.</typeparam>
+            <typeparam name="T">The source collection types.</typeparam>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the converted values of every token in the source collection.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.Extensions.AsJEnumerable(System.Collections.Generic.IEnumerable{Newtonsoft.Json.Linq.JToken})">
@@ -6006,7 +6006,7 @@
             <summary>
             Returns the input typed as <see cref="T:Newtonsoft.Json.Linq.IJEnumerable`1"/>.
             </summary>
-            <typeparam name="T">The source collection type.</typeparam>
+            <typeparam name="T">The source collection types.</typeparam>
             <param name="source">An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the source collection.</param>
             <returns>The input typed as <see cref="T:Newtonsoft.Json.Linq.IJEnumerable`1"/>.</returns>
         </member>
@@ -6014,7 +6014,7 @@
             <summary>
             Represents a collection of <see cref="T:Newtonsoft.Json.Linq.JToken"/> objects.
             </summary>
-            <typeparam name="T">The type of token.</typeparam>
+            <typeparam name="T">The types of token.</typeparam>
         </member>
         <member name="P:Newtonsoft.Json.Linq.IJEnumerable`1.Item(System.Object)">
             <summary>
@@ -6064,11 +6064,11 @@
             </summary>
             <value>The container's children tokens.</value>
         </member>
-        <member name="P:Newtonsoft.Json.Linq.JArray.Type">
+        <member name="P:Newtonsoft.Json.Linq.JArray.Types">
             <summary>
-            Gets the node type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets the node types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <value>The type.</value>
+            <value>The types.</value>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JArray.#ctor">
             <summary>
@@ -6291,11 +6291,11 @@
             </summary>
             <value>The constructor name.</value>
         </member>
-        <member name="P:Newtonsoft.Json.Linq.JConstructor.Type">
+        <member name="P:Newtonsoft.Json.Linq.JConstructor.Types">
             <summary>
-            Gets the node type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets the node types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <value>The type.</value>
+            <value>The types.</value>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JConstructor.#ctor">
             <summary>
@@ -6437,7 +6437,7 @@
             <summary>
             Returns a collection of the child values of this token, in document order.
             </summary>
-            <typeparam name="T">The type to convert the values to.</typeparam>
+            <typeparam name="T">The types to convert the values to.</typeparam>
             <returns>
             A <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing the child values of this <see cref="T:Newtonsoft.Json.Linq.JToken"/>, in document order.
             </returns>
@@ -6506,7 +6506,7 @@
             <summary>
             Represents a collection of <see cref="T:Newtonsoft.Json.Linq.JToken"/> objects.
             </summary>
-            <typeparam name="T">The type of token.</typeparam>
+            <typeparam name="T">The types of token.</typeparam>
         </member>
         <member name="F:Newtonsoft.Json.Linq.JEnumerable`1.Empty">
             <summary>
@@ -6637,11 +6637,11 @@
             </summary>
             <param name="content">The contents of the object.</param>
         </member>
-        <member name="P:Newtonsoft.Json.Linq.JObject.Type">
+        <member name="P:Newtonsoft.Json.Linq.JObject.Types">
             <summary>
-            Gets the node type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets the node types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <value>The type.</value>
+            <value>The types.</value>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JObject.Properties">
             <summary>
@@ -6900,11 +6900,11 @@
             </summary>
             <param name="other">A <see cref="T:Newtonsoft.Json.Linq.JProperty"/> object to copy from.</param>
         </member>
-        <member name="P:Newtonsoft.Json.Linq.JProperty.Type">
+        <member name="P:Newtonsoft.Json.Linq.JProperty.Types">
             <summary>
-            Gets the node type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets the node types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <value>The type.</value>
+            <value>The types.</value>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JProperty.#ctor(System.String,System.Object[])">
             <summary>
@@ -6996,13 +6996,13 @@
         </member>
         <member name="P:Newtonsoft.Json.Linq.JPropertyDescriptor.ComponentType">
             <summary>
-            When overridden in a derived class, gets the type of the component this property is bound to.
+            When overridden in a derived class, gets the types of the component this property is bound to.
             </summary>
             <returns>
-            A <see cref="T:System.Type"/> that represents the type of component this property is bound to.
+            A <see cref="T:System.Types"/> that represents the types of component this property is bound to.
             When the <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)"/> or
             <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)"/>
-            methods are invoked, the object specified might be an instance of this type.
+            methods are invoked, the object specified might be an instance of this types.
             </returns>
         </member>
         <member name="P:Newtonsoft.Json.Linq.JPropertyDescriptor.IsReadOnly">
@@ -7015,10 +7015,10 @@
         </member>
         <member name="P:Newtonsoft.Json.Linq.JPropertyDescriptor.PropertyType">
             <summary>
-            When overridden in a derived class, gets the type of the property.
+            When overridden in a derived class, gets the types of the property.
             </summary>
             <returns>
-            A <see cref="T:System.Type"/> that represents the type of the property.
+            A <see cref="T:System.Types"/> that represents the types of the property.
             </returns>
         </member>
         <member name="P:Newtonsoft.Json.Linq.JPropertyDescriptor.NameHashCode">
@@ -7196,8 +7196,8 @@
             A <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous creation. The
             <see cref="P:System.Threading.Tasks.Task`1.Result"/> property returns a <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains 
             the token and its descendant tokens
-            that were read from the reader. The runtime type of the token is determined
-            by the token type of the first token encountered in the reader.
+            that were read from the reader. The runtime types of the token is determined
+            by the token types of the first token encountered in the reader.
             </returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.ReadFromAsync(Newtonsoft.Json.JsonReader,Newtonsoft.Json.Linq.JsonLoadSettings,System.Threading.CancellationToken)">
@@ -7212,8 +7212,8 @@
             A <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous creation. The
             <see cref="P:System.Threading.Tasks.Task`1.Result"/> property returns a <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains 
             the token and its descendant tokens
-            that were read from the reader. The runtime type of the token is determined
-            by the token type of the first token encountered in the reader.
+            that were read from the reader. The runtime types of the token is determined
+            by the token types of the first token encountered in the reader.
             </returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.LoadAsync(Newtonsoft.Json.JsonReader,System.Threading.CancellationToken)">
@@ -7225,8 +7225,8 @@
             <returns>
             A <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous creation. The <see cref="P:System.Threading.Tasks.Task`1.Result"/>
             property returns a <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the token and its descendant tokens
-            that were read from the reader. The runtime type of the token is determined
-            by the token type of the first token encountered in the reader.
+            that were read from the reader. The runtime types of the token is determined
+            by the token types of the first token encountered in the reader.
             </returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.LoadAsync(Newtonsoft.Json.JsonReader,Newtonsoft.Json.Linq.JsonLoadSettings,System.Threading.CancellationToken)">
@@ -7240,8 +7240,8 @@
             <returns>
             A <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous creation. The <see cref="P:System.Threading.Tasks.Task`1.Result"/>
             property returns a <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the token and its descendant tokens
-            that were read from the reader. The runtime type of the token is determined
-            by the token type of the first token encountered in the reader.
+            that were read from the reader. The runtime types of the token is determined
+            by the token types of the first token encountered in the reader.
             </returns>
         </member>
         <member name="P:Newtonsoft.Json.Linq.JToken.EqualityComparer">
@@ -7262,11 +7262,11 @@
             </summary>
             <value>The root <see cref="T:Newtonsoft.Json.Linq.JToken"/> of this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</value>
         </member>
-        <member name="P:Newtonsoft.Json.Linq.JToken.Type">
+        <member name="P:Newtonsoft.Json.Linq.JToken.Types">
             <summary>
-            Gets the node type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets the node types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <value>The type.</value>
+            <value>The types.</value>
         </member>
         <member name="P:Newtonsoft.Json.Linq.JToken.HasValues">
             <summary>
@@ -7345,9 +7345,9 @@
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.Value``1(System.Object)">
             <summary>
-            Gets the <see cref="T:Newtonsoft.Json.Linq.JToken"/> with the specified key converted to the specified type.
+            Gets the <see cref="T:Newtonsoft.Json.Linq.JToken"/> with the specified key converted to the specified types.
             </summary>
-            <typeparam name="T">The type to convert the token to.</typeparam>
+            <typeparam name="T">The types to convert the token to.</typeparam>
             <param name="key">The token key.</param>
             <returns>The converted token value.</returns>
         </member>
@@ -7371,16 +7371,16 @@
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.Children``1">
             <summary>
-            Returns a collection of the child tokens of this token, in document order, filtered by the specified type.
+            Returns a collection of the child tokens of this token, in document order, filtered by the specified types.
             </summary>
-            <typeparam name="T">The type to filter the child tokens on.</typeparam>
+            <typeparam name="T">The types to filter the child tokens on.</typeparam>
             <returns>A <see cref="T:Newtonsoft.Json.Linq.JEnumerable`1"/> containing the child tokens of this <see cref="T:Newtonsoft.Json.Linq.JToken"/>, in document order.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.Values``1">
             <summary>
             Returns a collection of the child values of this token, in document order.
             </summary>
-            <typeparam name="T">The type to convert the values to.</typeparam>
+            <typeparam name="T">The types to convert the values to.</typeparam>
             <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing the child values of this <see cref="T:Newtonsoft.Json.Linq.JToken"/>, in document order.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.Remove">
@@ -7406,7 +7406,7 @@
             Returns the indented JSON for this token.
             </summary>
             <remarks>
-            <c>ToString()</c> returns a non-JSON string value for tokens with a type of <see cref="F:Newtonsoft.Json.Linq.JTokenType.String"/>.
+            <c>ToString()</c> returns a non-JSON string value for tokens with a types of <see cref="F:Newtonsoft.Json.Linq.JTokenType.String"/>.
             If you want the JSON for all token types then you should use <see cref="M:Newtonsoft.Json.Linq.JToken.WriteTo(Newtonsoft.Json.JsonWriter,Newtonsoft.Json.JsonConverter[])"/>.
             </remarks>
             <returns>
@@ -7948,31 +7948,31 @@
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.ToObject``1">
             <summary>
-            Creates an instance of the specified .NET type from the <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Creates an instance of the specified .NET types from the <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <typeparam name="T">The object type that the token will be deserialized to.</typeparam>
+            <typeparam name="T">The object types that the token will be deserialized to.</typeparam>
             <returns>The new object created from the JSON value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.ToObject(System.Type)">
+        <member name="M:Newtonsoft.Json.Linq.JToken.ToObject(System.Types)">
             <summary>
-            Creates an instance of the specified .NET type from the <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Creates an instance of the specified .NET types from the <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <param name="objectType">The object type that the token will be deserialized to.</param>
+            <param name="objectType">The object types that the token will be deserialized to.</param>
             <returns>The new object created from the JSON value.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.ToObject``1(Newtonsoft.Json.JsonSerializer)">
             <summary>
-            Creates an instance of the specified .NET type from the <see cref="T:Newtonsoft.Json.Linq.JToken"/> using the specified <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Creates an instance of the specified .NET types from the <see cref="T:Newtonsoft.Json.Linq.JToken"/> using the specified <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
-            <typeparam name="T">The object type that the token will be deserialized to.</typeparam>
+            <typeparam name="T">The object types that the token will be deserialized to.</typeparam>
             <param name="jsonSerializer">The <see cref="T:Newtonsoft.Json.JsonSerializer"/> that will be used when creating the object.</param>
             <returns>The new object created from the JSON value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.ToObject(System.Type,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Newtonsoft.Json.Linq.JToken.ToObject(System.Types,Newtonsoft.Json.JsonSerializer)">
             <summary>
-            Creates an instance of the specified .NET type from the <see cref="T:Newtonsoft.Json.Linq.JToken"/> using the specified <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Creates an instance of the specified .NET types from the <see cref="T:Newtonsoft.Json.Linq.JToken"/> using the specified <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
-            <param name="objectType">The object type that the token will be deserialized to.</param>
+            <param name="objectType">The object types that the token will be deserialized to.</param>
             <param name="jsonSerializer">The <see cref="T:Newtonsoft.Json.JsonSerializer"/> that will be used when creating the object.</param>
             <returns>The new object created from the JSON value.</returns>
         </member>
@@ -7983,8 +7983,8 @@
             <param name="reader">A <see cref="T:Newtonsoft.Json.JsonReader"/> positioned at the token to read into this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</param>
             <returns>
             A <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the token and its descendant tokens
-            that were read from the reader. The runtime type of the token is determined
-            by the token type of the first token encountered in the reader.
+            that were read from the reader. The runtime types of the token is determined
+            by the token types of the first token encountered in the reader.
             </returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.ReadFrom(Newtonsoft.Json.JsonReader,Newtonsoft.Json.Linq.JsonLoadSettings)">
@@ -7996,8 +7996,8 @@
             If this is <c>null</c>, default load settings will be used.</param>
             <returns>
             A <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the token and its descendant tokens
-            that were read from the reader. The runtime type of the token is determined
-            by the token type of the first token encountered in the reader.
+            that were read from the reader. The runtime types of the token is determined
+            by the token types of the first token encountered in the reader.
             </returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.Parse(System.String)">
@@ -8025,8 +8025,8 @@
             If this is <c>null</c>, default load settings will be used.</param>
             <returns>
             A <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the token and its descendant tokens
-            that were read from the reader. The runtime type of the token is determined
-            by the token type of the first token encountered in the reader.
+            that were read from the reader. The runtime types of the token is determined
+            by the token types of the first token encountered in the reader.
             </returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.Load(Newtonsoft.Json.JsonReader)">
@@ -8036,8 +8036,8 @@
             <param name="reader">A <see cref="T:Newtonsoft.Json.JsonReader"/> positioned at the token to read into this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</param>
             <returns>
             A <see cref="T:Newtonsoft.Json.Linq.JToken"/> that contains the token and its descendant tokens
-            that were read from the reader. The runtime type of the token is determined
-            by the token type of the first token encountered in the reader.
+            that were read from the reader. The runtime types of the token is determined
+            by the token types of the first token encountered in the reader.
             </returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.SelectToken(System.String)">
@@ -8137,43 +8137,43 @@
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.Annotation``1">
             <summary>
-            Get the first annotation object of the specified type from this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Get the first annotation object of the specified types from this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <typeparam name="T">The type of the annotation to retrieve.</typeparam>
-            <returns>The first annotation object that matches the specified type, or <c>null</c> if no annotation is of the specified type.</returns>
+            <typeparam name="T">The types of the annotation to retrieve.</typeparam>
+            <returns>The first annotation object that matches the specified types, or <c>null</c> if no annotation is of the specified types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.Annotation(System.Type)">
+        <member name="M:Newtonsoft.Json.Linq.JToken.Annotation(System.Types)">
             <summary>
-            Gets the first annotation object of the specified type from this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets the first annotation object of the specified types from this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <param name="type">The <see cref="P:Newtonsoft.Json.Linq.JToken.Type"/> of the annotation to retrieve.</param>
-            <returns>The first annotation object that matches the specified type, or <c>null</c> if no annotation is of the specified type.</returns>
+            <param name="types">The <see cref="P:Newtonsoft.Json.Linq.JToken.Types"/> of the annotation to retrieve.</param>
+            <returns>The first annotation object that matches the specified types, or <c>null</c> if no annotation is of the specified types.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.Annotations``1">
             <summary>
-            Gets a collection of annotations of the specified type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets a collection of annotations of the specified types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <typeparam name="T">The type of the annotations to retrieve.</typeparam>
+            <typeparam name="T">The types of the annotations to retrieve.</typeparam>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that contains the annotations for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.Annotations(System.Type)">
+        <member name="M:Newtonsoft.Json.Linq.JToken.Annotations(System.Types)">
             <summary>
-            Gets a collection of annotations of the specified type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets a collection of annotations of the specified types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <param name="type">The <see cref="P:Newtonsoft.Json.Linq.JToken.Type"/> of the annotations to retrieve.</param>
-            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:System.Object"/> that contains the annotations that match the specified type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</returns>
+            <param name="types">The <see cref="P:Newtonsoft.Json.Linq.JToken.Types"/> of the annotations to retrieve.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:System.Object"/> that contains the annotations that match the specified types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.RemoveAnnotations``1">
             <summary>
-            Removes the annotations of the specified type from this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Removes the annotations of the specified types from this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <typeparam name="T">The type of annotations to remove.</typeparam>
+            <typeparam name="T">The types of annotations to remove.</typeparam>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.RemoveAnnotations(System.Type)">
+        <member name="M:Newtonsoft.Json.Linq.JToken.RemoveAnnotations(System.Types)">
             <summary>
-            Removes the annotations of the specified type from this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Removes the annotations of the specified types from this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <param name="type">The <see cref="P:Newtonsoft.Json.Linq.JToken.Type"/> of annotations to remove.</param>
+            <param name="types">The <see cref="P:Newtonsoft.Json.Linq.JToken.Types"/> of annotations to remove.</param>
         </member>
         <member name="T:Newtonsoft.Json.Linq.JTokenEqualityComparer">
             <summary>
@@ -8184,8 +8184,8 @@
             <summary>
             Determines whether the specified objects are equal.
             </summary>
-            <param name="x">The first object of type <see cref="T:Newtonsoft.Json.Linq.JToken"/> to compare.</param>
-            <param name="y">The second object of type <see cref="T:Newtonsoft.Json.Linq.JToken"/> to compare.</param>
+            <param name="x">The first object of types <see cref="T:Newtonsoft.Json.Linq.JToken"/> to compare.</param>
+            <param name="y">The second object of types <see cref="T:Newtonsoft.Json.Linq.JToken"/> to compare.</param>
             <returns>
             <c>true</c> if the specified objects are equal; otherwise, <c>false</c>.
             </returns>
@@ -8196,7 +8196,7 @@
             </summary>
             <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be returned.</param>
             <returns>A hash code for the specified object.</returns>
-            <exception cref="T:System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">The types of <paramref name="obj"/> is a reference types and <paramref name="obj"/> is <c>null</c>.</exception>
         </member>
         <member name="T:Newtonsoft.Json.Linq.JTokenReader">
             <summary>
@@ -8236,12 +8236,12 @@
         </member>
         <member name="T:Newtonsoft.Json.Linq.JTokenType">
             <summary>
-            Specifies the type of token.
+            Specifies the types of token.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Linq.JTokenType.None">
             <summary>
-            No token type has been set.
+            No token types has been set.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Linq.JTokenType.Object">
@@ -8367,7 +8367,7 @@
             If <see cref="P:Newtonsoft.Json.JsonWriter.AutoCompleteOnClose"/> is set to <c>true</c>, the JSON is auto-completed.
             </summary>
             <remarks>
-            Setting <see cref="P:Newtonsoft.Json.JsonWriter.CloseOutput"/> to <c>true</c> has no additional effect, since the underlying <see cref="T:Newtonsoft.Json.Linq.JContainer"/> is a type that cannot be closed.
+            Setting <see cref="P:Newtonsoft.Json.JsonWriter.CloseOutput"/> to <c>true</c> has no additional effect, since the underlying <see cref="T:Newtonsoft.Json.Linq.JContainer"/> is a types that cannot be closed.
             </remarks>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JTokenWriter.WriteStartObject">
@@ -8685,11 +8685,11 @@
             </summary>
             <returns>A <see cref="T:Newtonsoft.Json.Linq.JValue"/> undefined value.</returns>
         </member>
-        <member name="P:Newtonsoft.Json.Linq.JValue.Type">
+        <member name="P:Newtonsoft.Json.Linq.JValue.Types">
             <summary>
-            Gets the node type for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            Gets the node types for this <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
-            <value>The type.</value>
+            <value>The types.</value>
         </member>
         <member name="P:Newtonsoft.Json.Linq.JValue.Value">
             <summary>
@@ -8706,7 +8706,7 @@
         </member>
         <member name="M:Newtonsoft.Json.Linq.JValue.Equals(Newtonsoft.Json.Linq.JValue)">
             <summary>
-            Indicates whether the current object is equal to another object of the same type.
+            Indicates whether the current object is equal to another object of the same types.
             </summary>
             <returns>
             <c>true</c> if the current object is equal to the <paramref name="other"/> parameter; otherwise, <c>false</c>.
@@ -8724,7 +8724,7 @@
         </member>
         <member name="M:Newtonsoft.Json.Linq.JValue.GetHashCode">
             <summary>
-            Serves as a hash function for a particular type.
+            Serves as a hash function for a particular types.
             </summary>
             <returns>
             A hash code for the current <see cref="T:System.Object"/>.
@@ -8735,7 +8735,7 @@
             Returns a <see cref="T:System.String"/> that represents this instance.
             </summary>
             <remarks>
-            <c>ToString()</c> returns a non-JSON string value for tokens with a type of <see cref="F:Newtonsoft.Json.Linq.JTokenType.String"/>.
+            <c>ToString()</c> returns a non-JSON string value for tokens with a types of <see cref="F:Newtonsoft.Json.Linq.JTokenType.String"/>.
             If you want the JSON for all token types then you should use <see cref="M:Newtonsoft.Json.Linq.JValue.WriteTo(Newtonsoft.Json.JsonWriter,Newtonsoft.Json.JsonConverter[])"/>.
             </remarks>
             <returns>
@@ -8781,7 +8781,7 @@
         </member>
         <member name="M:Newtonsoft.Json.Linq.JValue.CompareTo(Newtonsoft.Json.Linq.JValue)">
             <summary>
-            Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+            Compares the current instance with another object of the same types and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
             </summary>
             <param name="obj">An object to compare with this instance.</param>
             <returns>
@@ -8796,7 +8796,7 @@
             This instance is greater than <paramref name="obj"/>.
             </returns>
             <exception cref="T:System.ArgumentException">
-            	<paramref name="obj"/> is not of the same type as this instance.
+            	<paramref name="obj"/> is not of the same types as this instance.
             </exception>
         </member>
         <member name="T:Newtonsoft.Json.Linq.LineInfoHandling">
@@ -9023,7 +9023,7 @@
             <para>
             Contains the JSON schema extension methods.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9033,7 +9033,7 @@
             <para>
             Determines whether the <see cref="T:Newtonsoft.Json.Linq.JToken"/> is valid.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9048,7 +9048,7 @@
             <para>
             Determines whether the <see cref="T:Newtonsoft.Json.Linq.JToken"/> is valid.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9064,7 +9064,7 @@
             <para>
             Validates the specified <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9076,7 +9076,7 @@
             <para>
             Validates the specified <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9089,7 +9089,7 @@
             <para>
             An in-memory representation of a JSON Schema.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9129,11 +9129,11 @@
             Gets or sets the description of the object.
             </summary>
         </member>
-        <member name="P:Newtonsoft.Json.Schema.JsonSchema.Type">
+        <member name="P:Newtonsoft.Json.Schema.JsonSchema.Types">
             <summary>
             Gets or sets the types of values allowed by the object.
             </summary>
-            <value>The type.</value>
+            <value>The types.</value>
         </member>
         <member name="P:Newtonsoft.Json.Schema.JsonSchema.Pattern">
             <summary>
@@ -9351,7 +9351,7 @@
             <para>
             Returns detailed information about the schema exception.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9406,9 +9406,9 @@
         <member name="T:Newtonsoft.Json.Schema.JsonSchemaGenerator">
             <summary>
             <para>
-            Generates a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from a specified <see cref="T:System.Type"/>.
+            Generates a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from a specified <see cref="T:System.Types"/>.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9424,44 +9424,44 @@
             </summary>
             <value>The contract resolver.</value>
         </member>
-        <member name="M:Newtonsoft.Json.Schema.JsonSchemaGenerator.Generate(System.Type)">
+        <member name="M:Newtonsoft.Json.Schema.JsonSchemaGenerator.Generate(System.Types)">
             <summary>
-            Generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from the specified type.
+            Generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from the specified types.
             </summary>
-            <param name="type">The type to generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> generated from the specified type.</returns>
+            <param name="types">The types to generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> generated from the specified types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Schema.JsonSchemaGenerator.Generate(System.Type,Newtonsoft.Json.Schema.JsonSchemaResolver)">
+        <member name="M:Newtonsoft.Json.Schema.JsonSchemaGenerator.Generate(System.Types,Newtonsoft.Json.Schema.JsonSchemaResolver)">
             <summary>
-            Generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from the specified type.
+            Generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from the specified types.
             </summary>
-            <param name="type">The type to generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from.</param>
+            <param name="types">The types to generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from.</param>
             <param name="resolver">The <see cref="T:Newtonsoft.Json.Schema.JsonSchemaResolver"/> used to resolve schema references.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> generated from the specified type.</returns>
+            <returns>A <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> generated from the specified types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Schema.JsonSchemaGenerator.Generate(System.Type,System.Boolean)">
+        <member name="M:Newtonsoft.Json.Schema.JsonSchemaGenerator.Generate(System.Types,System.Boolean)">
             <summary>
-            Generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from the specified type.
+            Generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from the specified types.
             </summary>
-            <param name="type">The type to generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from.</param>
+            <param name="types">The types to generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from.</param>
             <param name="rootSchemaNullable">Specify whether the generated root <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> will be nullable.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> generated from the specified type.</returns>
+            <returns>A <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> generated from the specified types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Schema.JsonSchemaGenerator.Generate(System.Type,Newtonsoft.Json.Schema.JsonSchemaResolver,System.Boolean)">
+        <member name="M:Newtonsoft.Json.Schema.JsonSchemaGenerator.Generate(System.Types,Newtonsoft.Json.Schema.JsonSchemaResolver,System.Boolean)">
             <summary>
-            Generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from the specified type.
+            Generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from the specified types.
             </summary>
-            <param name="type">The type to generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from.</param>
+            <param name="types">The types to generate a <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from.</param>
             <param name="resolver">The <see cref="T:Newtonsoft.Json.Schema.JsonSchemaResolver"/> used to resolve schema references.</param>
             <param name="rootSchemaNullable">Specify whether the generated root <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> will be nullable.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> generated from the specified type.</returns>
+            <returns>A <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> generated from the specified types.</returns>
         </member>
         <member name="T:Newtonsoft.Json.Schema.JsonSchemaResolver">
             <summary>
             <para>
             Resolves <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/> from an id.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9489,54 +9489,54 @@
             <para>
             The value types allowed by the <see cref="T:Newtonsoft.Json.Schema.JsonSchema"/>.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.None">
             <summary>
-            No type specified.
+            No types specified.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.String">
             <summary>
-            String type.
+            String types.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.Float">
             <summary>
-            Float type.
+            Float types.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.Integer">
             <summary>
-            Integer type.
+            Integer types.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.Boolean">
             <summary>
-            Boolean type.
+            Boolean types.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.Object">
             <summary>
-            Object type.
+            Object types.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.Array">
             <summary>
-            Array type.
+            Array types.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.Null">
             <summary>
-            Null type.
+            Null types.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.JsonSchemaType.Any">
             <summary>
-            Any type.
+            Any types.
             </summary>
         </member>
         <member name="T:Newtonsoft.Json.Schema.UndefinedSchemaIdHandling">
@@ -9544,7 +9544,7 @@
             <para>
             Specifies undefined schema Id handling options for the <see cref="T:Newtonsoft.Json.Schema.JsonSchemaGenerator"/>.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9556,12 +9556,12 @@
         </member>
         <member name="F:Newtonsoft.Json.Schema.UndefinedSchemaIdHandling.UseTypeName">
             <summary>
-            Use the .NET type name as the schema Id.
+            Use the .NET types name as the schema Id.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.UndefinedSchemaIdHandling.UseAssemblyQualifiedName">
             <summary>
-            Use the assembly qualified .NET type name as the schema Id.
+            Use the assembly qualified .NET types name as the schema Id.
             </summary>
         </member>
         <member name="T:Newtonsoft.Json.Schema.ValidationEventArgs">
@@ -9569,7 +9569,7 @@
             <para>
             Returns detailed information related to the <see cref="T:Newtonsoft.Json.Schema.ValidationEventHandler"/>.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9597,7 +9597,7 @@
             <para>
             Represents the callback method that will handle JSON schema validation events and the <see cref="T:Newtonsoft.Json.Schema.ValidationEventArgs"/>.
             </para>
-            <note type="caution">
+            <note types="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
             </note>
             </summary>
@@ -9648,7 +9648,7 @@
         </member>
         <member name="T:Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver">
             <summary>
-            Resolves member mappings for a type, camel casing property names.
+            Resolves member mappings for a types, camel casing property names.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver.#ctor">
@@ -9656,16 +9656,16 @@
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver"/> class.
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver.ResolveContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver.ResolveContract(System.Types)">
             <summary>
-            Resolves the contract for a given type.
+            Resolves the contract for a given types.
             </summary>
-            <param name="type">The type to resolve a contract for.</param>
-            <returns>The contract for a given type.</returns>
+            <param name="types">The types to resolve a contract for.</param>
+            <returns>The contract for a given types.</returns>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.DefaultContractResolver">
             <summary>
-            Used by <see cref="T:Newtonsoft.Json.JsonSerializer"/> to resolve a <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/> for a given <see cref="T:System.Type"/>.
+            Used by <see cref="T:Newtonsoft.Json.JsonSerializer"/> to resolve a <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/> for a given <see cref="T:System.Types"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.DefaultContractResolver.DynamicCodeGeneration">
@@ -9734,33 +9734,33 @@
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.DefaultContractResolver"/> class.
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.ResolveContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.ResolveContract(System.Types)">
             <summary>
-            Resolves the contract for a given type.
+            Resolves the contract for a given types.
             </summary>
-            <param name="type">The type to resolve a contract for.</param>
-            <returns>The contract for a given type.</returns>
+            <param name="types">The types to resolve a contract for.</param>
+            <returns>The contract for a given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.GetSerializableMembers(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.GetSerializableMembers(System.Types)">
             <summary>
-            Gets the serializable members for the type.
+            Gets the serializable members for the types.
             </summary>
-            <param name="objectType">The type to get serializable members for.</param>
-            <returns>The serializable members for the type.</returns>
+            <param name="objectType">The types to get serializable members for.</param>
+            <returns>The serializable members for the types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateObjectContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateObjectContract(System.Types)">
             <summary>
-            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonObjectContract"/> for the given type.
+            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonObjectContract"/> for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonObjectContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonObjectContract"/> for the given types.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateConstructorParameters(System.Reflection.ConstructorInfo,Newtonsoft.Json.Serialization.JsonPropertyCollection)">
             <summary>
             Creates the constructor parameters.
             </summary>
             <param name="constructor">The constructor to create properties for.</param>
-            <param name="memberProperties">The type's member properties.</param>
+            <param name="memberProperties">The types's member properties.</param>
             <returns>Properties for the given <see cref="T:System.Reflection.ConstructorInfo"/>.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreatePropertyFromConstructorParameter(Newtonsoft.Json.Serialization.JsonProperty,System.Reflection.ParameterInfo)">
@@ -9771,75 +9771,75 @@
             <param name="parameterInfo">The constructor parameter.</param>
             <returns>A created <see cref="T:Newtonsoft.Json.Serialization.JsonProperty"/> for the given <see cref="T:System.Reflection.ParameterInfo"/>.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.ResolveContractConverter(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.ResolveContractConverter(System.Types)">
             <summary>
             Resolves the default <see cref="T:Newtonsoft.Json.JsonConverter" /> for the contract.
             </summary>
-            <param name="objectType">Type of the object.</param>
+            <param name="objectType">Types of the object.</param>
             <returns>The contract's default <see cref="T:Newtonsoft.Json.JsonConverter" />.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateDictionaryContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateDictionaryContract(System.Types)">
             <summary>
-            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonDictionaryContract"/> for the given type.
+            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonDictionaryContract"/> for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonDictionaryContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonDictionaryContract"/> for the given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateArrayContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateArrayContract(System.Types)">
             <summary>
-            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonArrayContract"/> for the given type.
+            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonArrayContract"/> for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonArrayContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonArrayContract"/> for the given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreatePrimitiveContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreatePrimitiveContract(System.Types)">
             <summary>
-            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonPrimitiveContract"/> for the given type.
+            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonPrimitiveContract"/> for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonPrimitiveContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonPrimitiveContract"/> for the given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateLinqContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateLinqContract(System.Types)">
             <summary>
-            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonLinqContract"/> for the given type.
+            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonLinqContract"/> for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonLinqContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonLinqContract"/> for the given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateISerializableContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateISerializableContract(System.Types)">
             <summary>
-            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonISerializableContract"/> for the given type.
+            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonISerializableContract"/> for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonISerializableContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonISerializableContract"/> for the given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateDynamicContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateDynamicContract(System.Types)">
             <summary>
-            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonDynamicContract"/> for the given type.
+            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonDynamicContract"/> for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonDynamicContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonDynamicContract"/> for the given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateStringContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateStringContract(System.Types)">
             <summary>
-            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonStringContract"/> for the given type.
+            Creates a <see cref="T:Newtonsoft.Json.Serialization.JsonStringContract"/> for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonStringContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonStringContract"/> for the given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateContract(System.Types)">
             <summary>
-            Determines which contract type is created for the given type.
+            Determines which contract types is created for the given types.
             </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/> for the given type.</returns>
+            <param name="objectType">Types of the object.</param>
+            <returns>A <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/> for the given types.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateProperties(System.Types,Newtonsoft.Json.MemberSerialization)">
             <summary>
             Creates properties for the given <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/>.
             </summary>
-            <param name="type">The type to create properties for.</param>
-            /// <param name="memberSerialization">The member serialization mode for the type.</param>
+            <param name="types">The types to create properties for.</param>
+            /// <param name="memberSerialization">The member serialization mode for the types.</param>
             <returns>Properties for the given <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/>.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.DefaultContractResolver.CreateMemberValueProvider(System.Reflection.MemberInfo)">
@@ -9899,7 +9899,7 @@
         </member>
         <member name="T:Newtonsoft.Json.Serialization.DefaultSerializationBinder">
             <summary>
-            The default serialization binder used when resolving and loading classes from type names.
+            The default serialization binder used when resolving and loading classes from types names.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.DefaultSerializationBinder.#ctor">
@@ -9909,21 +9909,21 @@
         </member>
         <member name="M:Newtonsoft.Json.Serialization.DefaultSerializationBinder.BindToType(System.String,System.String)">
             <summary>
-            When overridden in a derived class, controls the binding of a serialized object to a type.
+            When overridden in a derived class, controls the binding of a serialized object to a types.
             </summary>
             <param name="assemblyName">Specifies the <see cref="T:System.Reflection.Assembly"/> name of the serialized object.</param>
-            <param name="typeName">Specifies the <see cref="T:System.Type"/> name of the serialized object.</param>
+            <param name="typeName">Specifies the <see cref="T:System.Types"/> name of the serialized object.</param>
             <returns>
-            The type of the object the formatter creates a new instance of.
+            The types of the object the formatter creates a new instance of.
             </returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.DefaultSerializationBinder.BindToName(System.Type,System.String@,System.String@)">
+        <member name="M:Newtonsoft.Json.Serialization.DefaultSerializationBinder.BindToName(System.Types,System.String@,System.String@)">
             <summary>
-            When overridden in a derived class, controls the binding of a serialized object to a type.
+            When overridden in a derived class, controls the binding of a serialized object to a types.
             </summary>
-            <param name="serializedType">The type of the object the formatter creates a new instance of.</param>
+            <param name="serializedType">The types of the object the formatter creates a new instance of.</param>
             <param name="assemblyName">Specifies the <see cref="T:System.Reflection.Assembly"/> name of the serialized object.</param>
-            <param name="typeName">Specifies the <see cref="T:System.Type"/> name of the serialized object.</param>
+            <param name="typeName">Specifies the <see cref="T:System.Types"/> name of the serialized object.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.DiagnosticsTraceWriter">
             <summary>
@@ -10044,29 +10044,29 @@
             <param name="inherit">When <c>true</c>, look up the hierarchy chain for the inherited custom attribute.</param>
             <returns>A collection of <see cref="T:System.Attribute"/>s, or an empty collection.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.IAttributeProvider.GetAttributes(System.Type,System.Boolean)">
+        <member name="M:Newtonsoft.Json.Serialization.IAttributeProvider.GetAttributes(System.Types,System.Boolean)">
             <summary>
-            Returns a collection of attributes, identified by type, or an empty collection if there are no attributes.
+            Returns a collection of attributes, identified by types, or an empty collection if there are no attributes.
             </summary>
-            <param name="attributeType">The type of the attributes.</param>
+            <param name="attributeType">The types of the attributes.</param>
             <param name="inherit">When <c>true</c>, look up the hierarchy chain for the inherited custom attribute.</param>
             <returns>A collection of <see cref="T:System.Attribute"/>s, or an empty collection.</returns>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.IContractResolver">
             <summary>
-            Used by <see cref="T:Newtonsoft.Json.JsonSerializer"/> to resolve a <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/> for a given <see cref="T:System.Type"/>.
+            Used by <see cref="T:Newtonsoft.Json.JsonSerializer"/> to resolve a <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/> for a given <see cref="T:System.Types"/>.
             </summary>
             <example>
               <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeContractResolverObject" title="IContractResolver Class" />
               <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeContractResolverExample" title="IContractResolver Example" />
             </example>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.IContractResolver.ResolveContract(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.IContractResolver.ResolveContract(System.Types)">
             <summary>
-            Resolves the contract for a given type.
+            Resolves the contract for a given types.
             </summary>
-            <param name="type">The type to resolve a contract for.</param>
-            <returns>The contract for a given type.</returns>
+            <param name="types">The types to resolve a contract for.</param>
+            <returns>The contract for a given types.</returns>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.IReferenceResolver">
             <summary>
@@ -10114,19 +10114,19 @@
         </member>
         <member name="M:Newtonsoft.Json.Serialization.ISerializationBinder.BindToType(System.String,System.String)">
             <summary>
-            When implemented, controls the binding of a serialized object to a type.
+            When implemented, controls the binding of a serialized object to a types.
             </summary>
             <param name="assemblyName">Specifies the <see cref="T:System.Reflection.Assembly"/> name of the serialized object.</param>
-            <param name="typeName">Specifies the <see cref="T:System.Type"/> name of the serialized object</param>
-            <returns>The type of the object the formatter creates a new instance of.</returns>
+            <param name="typeName">Specifies the <see cref="T:System.Types"/> name of the serialized object</param>
+            <returns>The types of the object the formatter creates a new instance of.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.ISerializationBinder.BindToName(System.Type,System.String@,System.String@)">
+        <member name="M:Newtonsoft.Json.Serialization.ISerializationBinder.BindToName(System.Types,System.String@,System.String@)">
             <summary>
-            When implemented, controls the binding of a serialized object to a type.
+            When implemented, controls the binding of a serialized object to a types.
             </summary>
-            <param name="serializedType">The type of the object the formatter creates a new instance of.</param>
+            <param name="serializedType">The types of the object the formatter creates a new instance of.</param>
             <param name="assemblyName">Specifies the <see cref="T:System.Reflection.Assembly"/> name of the serialized object.</param>
-            <param name="typeName">Specifies the <see cref="T:System.Type"/> name of the serialized object.</param>
+            <param name="typeName">Specifies the <see cref="T:System.Types"/> name of the serialized object.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.ITraceWriter">
             <summary>
@@ -10170,20 +10170,20 @@
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonArrayContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonArrayContract.CollectionItemType">
             <summary>
-            Gets the <see cref="T:System.Type"/> of the collection items.
+            Gets the <see cref="T:System.Types"/> of the collection items.
             </summary>
-            <value>The <see cref="T:System.Type"/> of the collection items.</value>
+            <value>The <see cref="T:System.Types"/> of the collection items.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonArrayContract.IsMultidimensionalArray">
             <summary>
-            Gets a value indicating whether the collection type is a multidimensional array.
+            Gets a value indicating whether the collection types is a multidimensional array.
             </summary>
-            <value><c>true</c> if the collection type is a multidimensional array; otherwise, <c>false</c>.</value>
+            <value><c>true</c> if the collection types is a multidimensional array; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonArrayContract.OverrideCreator">
             <summary>
@@ -10197,15 +10197,15 @@
             </summary>
             <value><c>true</c> if the creator has a parameter with the collection values; otherwise, <c>false</c>.</value>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonArrayContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonArrayContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonArrayContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonContainerContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonContainerContract.ItemConverter">
@@ -10228,15 +10228,15 @@
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonContainerContract.ItemTypeNameHandling">
             <summary>
-            Gets or sets the collection item type name handling.
+            Gets or sets the collection item types name handling.
             </summary>
-            <value>The type name handling.</value>
+            <value>The types name handling.</value>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonContainerContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonContainerContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonContainerContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.SerializationCallback">
             <summary>
@@ -10269,26 +10269,26 @@
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonContract.UnderlyingType">
             <summary>
-            Gets the underlying type for the contract.
+            Gets the underlying types for the contract.
             </summary>
-            <value>The underlying type for the contract.</value>
+            <value>The underlying types for the contract.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonContract.CreatedType">
             <summary>
-            Gets or sets the type created during deserialization.
+            Gets or sets the types created during deserialization.
             </summary>
-            <value>The type created during deserialization.</value>
+            <value>The types created during deserialization.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonContract.IsReference">
             <summary>
-            Gets or sets whether this type contract is serialized as a reference.
+            Gets or sets whether this types contract is serialized as a reference.
             </summary>
-            <value>Whether this type contract is serialized as a reference.</value>
+            <value>Whether this types contract is serialized as a reference.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonContract.Converter">
             <summary>
@@ -10298,7 +10298,7 @@
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonContract.InternalConverter">
             <summary>
-            Gets the internally resolved <see cref="T:Newtonsoft.Json.JsonConverter"/> for the contract's type.
+            Gets the internally resolved <see cref="T:Newtonsoft.Json.JsonConverter"/> for the contract's types.
             This converter is used as a fallback converter when no other converter is resolved.
             Setting <see cref="P:Newtonsoft.Json.Serialization.JsonContract.Converter"/> will always override this converter.
             </summary>
@@ -10347,7 +10347,7 @@
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonDictionaryContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonDictionaryContract.DictionaryKeyResolver">
@@ -10358,15 +10358,15 @@
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonDictionaryContract.DictionaryKeyType">
             <summary>
-            Gets the <see cref="T:System.Type"/> of the dictionary keys.
+            Gets the <see cref="T:System.Types"/> of the dictionary keys.
             </summary>
-            <value>The <see cref="T:System.Type"/> of the dictionary keys.</value>
+            <value>The <see cref="T:System.Types"/> of the dictionary keys.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonDictionaryContract.DictionaryValueType">
             <summary>
-            Gets the <see cref="T:System.Type"/> of the dictionary values.
+            Gets the <see cref="T:System.Types"/> of the dictionary values.
             </summary>
-            <value>The <see cref="T:System.Type"/> of the dictionary values.</value>
+            <value>The <see cref="T:System.Types"/> of the dictionary values.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonDictionaryContract.OverrideCreator">
             <summary>
@@ -10380,15 +10380,15 @@
             </summary>
             <value><c>true</c> if the creator has a parameter with the dictionary values; otherwise, <c>false</c>.</value>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonDictionaryContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonDictionaryContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonDictionaryContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonDynamicContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonDynamicContract.Properties">
@@ -10403,15 +10403,15 @@
             </summary>
             <value>The property name resolver.</value>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonDynamicContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonDynamicContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonDynamicContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonISerializableContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonISerializableContract.ISerializableCreator">
@@ -10420,26 +10420,26 @@
             </summary>
             <value>The <see cref="T:System.Runtime.Serialization.ISerializable"/> object constructor.</value>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonISerializableContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonISerializableContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonISerializableContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonLinqContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonLinqContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonLinqContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonLinqContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonObjectContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonObjectContract.MemberSerialization">
@@ -10498,7 +10498,7 @@
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonObjectContract.ExtensionDataValueType">
             <summary>
-            Gets or sets the extension data value type.
+            Gets or sets the extension data value types.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonObjectContract.ExtensionDataNameResolver">
@@ -10507,22 +10507,22 @@
             </summary>
             <value>The extension data name resolver.</value>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonObjectContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonObjectContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonObjectContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonPrimitiveContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonPrimitiveContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonPrimitiveContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonPrimitiveContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonProperty">
             <summary>
@@ -10537,9 +10537,9 @@
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonProperty.DeclaringType">
             <summary>
-            Gets or sets the type that declared this property.
+            Gets or sets the types that declared this property.
             </summary>
-            <value>The type that declared this property.</value>
+            <value>The types that declared this property.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonProperty.Order">
             <summary>
@@ -10567,14 +10567,14 @@
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonProperty.PropertyType">
             <summary>
-            Gets or sets the type of the property.
+            Gets or sets the types of the property.
             </summary>
-            <value>The type of the property.</value>
+            <value>The types of the property.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonProperty.Converter">
             <summary>
             Gets or sets the <see cref="T:Newtonsoft.Json.JsonConverter" /> for the property.
-            If set this converter takes precedence over the contract converter for the property type.
+            If set this converter takes precedence over the contract converter for the property types.
             </summary>
             <value>The converter.</value>
         </member>
@@ -10659,9 +10659,9 @@
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonProperty.TypeNameHandling">
             <summary>
-            Gets or sets or sets the type name handling.
+            Gets or sets or sets the types name handling.
             </summary>
-            <value>The type name handling.</value>
+            <value>The types name handling.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonProperty.ShouldSerialize">
             <summary>
@@ -10709,9 +10709,9 @@
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonProperty.ItemTypeNameHandling">
             <summary>
-            Gets or sets the type name handling used when serializing the property's collection items.
+            Gets or sets the types name handling used when serializing the property's collection items.
             </summary>
-            <value>The collection's items type name handling.</value>
+            <value>The collection's items types name handling.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.JsonProperty.ItemReferenceLoopHandling">
             <summary>
@@ -10724,11 +10724,11 @@
             A collection of <see cref="T:Newtonsoft.Json.Serialization.JsonProperty"/> objects.
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonPropertyCollection.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonPropertyCollection.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonPropertyCollection"/> class.
             </summary>
-            <param name="type">The type.</param>
+            <param name="types">The types.</param>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.JsonPropertyCollection.GetKeyForItem(Newtonsoft.Json.Serialization.JsonProperty)">
             <summary>
@@ -10757,25 +10757,25 @@
             Gets a property by property name.
             </summary>
             <param name="propertyName">The name of the property to get.</param>
-            <param name="comparisonType">Type property name string comparison.</param>
+            <param name="comparisonType">Types property name string comparison.</param>
             <returns>A matching property if found.</returns>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonStringContract">
             <summary>
-            Contract details for a <see cref="T:System.Type"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Contract details for a <see cref="T:System.Types"/> used by the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonStringContract.#ctor(System.Type)">
+        <member name="M:Newtonsoft.Json.Serialization.JsonStringContract.#ctor(System.Types)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.JsonStringContract"/> class.
             </summary>
-            <param name="underlyingType">The underlying type for the contract.</param>
+            <param name="underlyingType">The underlying types for the contract.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.JsonTypeReflector.CreateJsonConverterInstance(System.Type,System.Object[])">
+        <member name="M:Newtonsoft.Json.Serialization.JsonTypeReflector.CreateJsonConverterInstance(System.Types,System.Object[])">
             <summary>
-            Lookup and create an instance of the <see cref="T:Newtonsoft.Json.JsonConverter"/> type described by the argument.
+            Lookup and create an instance of the <see cref="T:Newtonsoft.Json.JsonConverter"/> types described by the argument.
             </summary>
-            <param name="converterType">The <see cref="T:Newtonsoft.Json.JsonConverter"/> type to create.</param>
+            <param name="converterType">The <see cref="T:Newtonsoft.Json.JsonConverter"/> types to create.</param>
             <param name="args">Optional arguments to pass to an initializing constructor of the JsonConverter.
             If <c>null</c>, the default constructor is used.</param>
         </member>
@@ -10943,7 +10943,7 @@
             <summary>
             Represents a method that constructs an object.
             </summary>
-            <typeparam name="T">The object type to create.</typeparam>
+            <typeparam name="T">The object types to create.</typeparam>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.OnErrorAttribute">
             <summary>
@@ -10952,14 +10952,14 @@
         </member>
         <member name="T:Newtonsoft.Json.Serialization.ReflectionAttributeProvider">
             <summary>
-            Provides methods to get attributes from a <see cref="T:System.Type"/>, <see cref="T:System.Reflection.MemberInfo"/>, <see cref="T:System.Reflection.ParameterInfo"/> or <see cref="T:System.Reflection.Assembly"/>.
+            Provides methods to get attributes from a <see cref="T:System.Types"/>, <see cref="T:System.Reflection.MemberInfo"/>, <see cref="T:System.Reflection.ParameterInfo"/> or <see cref="T:System.Reflection.Assembly"/>.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.ReflectionAttributeProvider.#ctor(System.Object)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.ReflectionAttributeProvider"/> class.
             </summary>
-            <param name="attributeProvider">The instance to get attributes for. This parameter should be a <see cref="T:System.Type"/>, <see cref="T:System.Reflection.MemberInfo"/>, <see cref="T:System.Reflection.ParameterInfo"/> or <see cref="T:System.Reflection.Assembly"/>.</param>
+            <param name="attributeProvider">The instance to get attributes for. This parameter should be a <see cref="T:System.Types"/>, <see cref="T:System.Reflection.MemberInfo"/>, <see cref="T:System.Reflection.ParameterInfo"/> or <see cref="T:System.Reflection.Assembly"/>.</param>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.ReflectionAttributeProvider.GetAttributes(System.Boolean)">
             <summary>
@@ -10968,11 +10968,11 @@
             <param name="inherit">When <c>true</c>, look up the hierarchy chain for the inherited custom attribute.</param>
             <returns>A collection of <see cref="T:System.Attribute"/>s, or an empty collection.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Serialization.ReflectionAttributeProvider.GetAttributes(System.Type,System.Boolean)">
+        <member name="M:Newtonsoft.Json.Serialization.ReflectionAttributeProvider.GetAttributes(System.Types,System.Boolean)">
             <summary>
-            Returns a collection of attributes, identified by type, or an empty collection if there are no attributes.
+            Returns a collection of attributes, identified by types, or an empty collection if there are no attributes.
             </summary>
-            <param name="attributeType">The type of the attributes.</param>
+            <param name="attributeType">The types of the attributes.</param>
             <param name="inherit">When <c>true</c>, look up the hierarchy chain for the inherited custom attribute.</param>
             <returns>A collection of <see cref="T:System.Attribute"/>s, or an empty collection.</returns>
         </member>
@@ -11082,7 +11082,7 @@
         </member>
         <member name="T:Newtonsoft.Json.TypeNameHandling">
             <summary>
-            Specifies type name handling options for the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            Specifies types name handling options for the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
             <remarks>
             <see cref="P:Newtonsoft.Json.JsonSerializer.TypeNameHandling"/> should be used with caution when your application deserializes JSON from an external source.
@@ -11092,30 +11092,30 @@
         </member>
         <member name="F:Newtonsoft.Json.TypeNameHandling.None">
             <summary>
-            Do not include the .NET type name when serializing types.
+            Do not include the .NET types name when serializing types.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.TypeNameHandling.Objects">
             <summary>
-            Include the .NET type name when serializing into a JSON object structure.
+            Include the .NET types name when serializing into a JSON object structure.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.TypeNameHandling.Arrays">
             <summary>
-            Include the .NET type name when serializing into a JSON array structure.
+            Include the .NET types name when serializing into a JSON array structure.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.TypeNameHandling.All">
             <summary>
-            Always include the .NET type name when serializing.
+            Always include the .NET types name when serializing.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.TypeNameHandling.Auto">
             <summary>
-            Include the .NET type name when the type of the object being serialized is not the same as its declared type.
-            Note that this doesn't include the root serialized object by default. To include the root object's type name in JSON
-            you must specify a root type object with <see cref="M:Newtonsoft.Json.JsonConvert.SerializeObject(System.Object,System.Type,Newtonsoft.Json.JsonSerializerSettings)"/>
-            or <see cref="M:Newtonsoft.Json.JsonSerializer.Serialize(Newtonsoft.Json.JsonWriter,System.Object,System.Type)"/>.
+            Include the .NET types name when the types of the object being serialized is not the same as its declared types.
+            Note that this doesn't include the root serialized object by default. To include the root object's types name in JSON
+            you must specify a root types object with <see cref="M:Newtonsoft.Json.JsonConvert.SerializeObject(System.Object,System.Types,Newtonsoft.Json.JsonSerializerSettings)"/>
+            or <see cref="M:Newtonsoft.Json.JsonSerializer.Serialize(Newtonsoft.Json.JsonWriter,System.Object,System.Types)"/>.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.Utilities.CollectionUtils.IsNullOrEmpty``1(System.Collections.Generic.ICollection{``0})">
@@ -11134,17 +11134,17 @@
             <param name="initial">The list to add to.</param>
             <param name="collection">The collection of elements to add.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(System.Object,System.Globalization.CultureInfo,System.Type)">
+        <member name="M:Newtonsoft.Json.Utilities.ConvertUtils.ConvertOrCast(System.Object,System.Globalization.CultureInfo,System.Types)">
             <summary>
-            Converts the value to the specified type. If the value is unable to be converted, the
-            value is checked whether it assignable to the specified type.
+            Converts the value to the specified types. If the value is unable to be converted, the
+            value is checked whether it assignable to the specified types.
             </summary>
             <param name="initialValue">The value to convert.</param>
             <param name="culture">The culture to use when converting.</param>
-            <param name="targetType">The type to convert or cast the value to.</param>
+            <param name="targetType">The types to convert or cast the value to.</param>
             <returns>
-            The converted type. If conversion was unsuccessful, the initial value
-            is returned if assignable to the target type.
+            The converted types. If conversion was unsuccessful, the initial value
+            is returned if assignable to the target types.
             </returns>
         </member>
         <member name="M:Newtonsoft.Json.Utilities.DynamicProxyMetaObject`1.CallMethodWithResult(System.String,System.Dynamic.DynamicMetaObjectBinder,System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression},Newtonsoft.Json.Utilities.DynamicProxyMetaObject{`0}.Fallback,Newtonsoft.Json.Utilities.DynamicProxyMetaObject{`0}.Fallback)">
@@ -11170,7 +11170,7 @@
         <member name="M:Newtonsoft.Json.Utilities.DynamicProxyMetaObject`1.GetRestrictions">
             <summary>
             Returns a Restrictions object which includes our current restrictions merged
-            with a restriction limiting our type
+            with a restriction limiting our types
             </summary>
         </member>
         <member name="T:Newtonsoft.Json.Utilities.ImmutableCollectionsUtils">
@@ -11180,19 +11180,19 @@
             https://github.com/JamesNK/Newtonsoft.Json/issues/652
             </summary>
         </member>
-        <member name="M:Newtonsoft.Json.Utilities.ReflectionUtils.GetCollectionItemType(System.Type)">
+        <member name="M:Newtonsoft.Json.Utilities.ReflectionUtils.GetCollectionItemType(System.Types)">
             <summary>
-            Gets the type of the typed collection's items.
+            Gets the types of the typed collection's items.
             </summary>
-            <param name="type">The type.</param>
-            <returns>The type of the typed collection's items.</returns>
+            <param name="types">The types.</param>
+            <returns>The types of the typed collection's items.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Utilities.ReflectionUtils.GetMemberUnderlyingType(System.Reflection.MemberInfo)">
             <summary>
-            Gets the member's underlying type.
+            Gets the member's underlying types.
             </summary>
             <param name="member">The member.</param>
-            <returns>The underlying type of the member.</returns>
+            <returns>The underlying types of the member.</returns>
         </member>
         <member name="M:Newtonsoft.Json.Utilities.ReflectionUtils.IsIndexedProperty(System.Reflection.PropertyInfo)">
             <summary>
@@ -11297,10 +11297,10 @@
             </summary>
         </member>
         <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
-            <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
+            <summary>Specifies that an output will not be null even if the corresponding types allows it.</summary>
         </member>
         <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
-            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding types allows it.</summary>
         </member>
         <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
             <summary>Initializes the attribute with the specified return value condition.</summary>
@@ -11312,10 +11312,10 @@
             <summary>Gets the return value condition.</summary>
         </member>
         <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
-            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
+            <summary>Specifies that an output may be null even if the corresponding types disallows it.</summary>
         </member>
         <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
-            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
+            <summary>Specifies that null is allowed as an input even if the corresponding types disallows it.</summary>
         </member>
         <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
             <summary>

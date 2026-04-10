@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -24,6 +25,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         private readonly EntitiesFactory _entitiesFactory;
         private readonly AllyFactory _allyFactory;
         private readonly WalletService _walletService;
+        private readonly StatisticsService _statisticsService;
         private readonly EntitiesLifeContext _entitiesLifeContext;
         private readonly ShopConfig _shopConfig;
         private readonly PlayerDataProvider _playerDataProvider;
@@ -40,6 +42,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             _entitiesFactory = _container.Resolve<EntitiesFactory>();
             _allyFactory = _container.Resolve<AllyFactory>();
             _walletService = _container.Resolve<WalletService>();
+            _statisticsService = _container.Resolve<StatisticsService>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _shopConfig = _container.Resolve<ConfigsProviderService>().GetConfig<ShopConfig>();
             _playerDataProvider = _container.Resolve<PlayerDataProvider>();
@@ -120,12 +123,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         private WinState CreateWinState(GameplayInputArgs inputArgs)
         {
             return new WinState(_inputService, inputArgs, _playerDataProvider, _sceneSwitcherService,
-                _coroutinesPerformer, _walletService);
+                _coroutinesPerformer, _walletService, _statisticsService);
         }
 
         private DefeatState CreateDefeatState()
         {
-            return new DefeatState(_inputService, _sceneSwitcherService, _coroutinesPerformer, _walletService);
+            return new DefeatState(_inputService, _sceneSwitcherService, _coroutinesPerformer, _statisticsService);
         }
 
         private StageProcessState CreateStageProcessState()

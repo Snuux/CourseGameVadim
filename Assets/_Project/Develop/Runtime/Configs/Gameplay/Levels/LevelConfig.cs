@@ -14,6 +14,6 @@ namespace _Project.Develop.Runtime.Configs.Gameplay.Levels
         
         [field: SerializeField] public float TowerMaxHealth { get; private set; } = 3;
         
-        [field: SerializeField] public Currency Reward { get; private set; }
+        [field: SerializeField] public StartWalletConfig.Currency Reward { get; private set; }
     }
 }

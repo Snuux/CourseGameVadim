@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Configs.Gameplay.Shop;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
+using _Project.Develop.Runtime.Configs.Meta.Statistics;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using UnityEngine;
@@ -19,6 +20,10 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
         {
             {typeof(StartWalletConfig), "Configs/Meta/Wallet/StartWalletConfig" },
             {typeof(CurrencyIconsConfig), "Configs/Meta/Wallet/CurrencyIconsConfig" },
+            
+            {typeof(StartStatisticsConfig), "Configs/Meta/Statistics/StartStatisticsConfig" },
+            {typeof(RecordIconsConfig), "Configs/Meta/Statistics/RecordIconsConfig" },
+            
             {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
             
             {typeof(TowerConfig), "Configs/Gameplay/Entities/Characters/TowerConfig" },

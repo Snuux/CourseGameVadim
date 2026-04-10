@@ -2,6 +2,7 @@
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.Statistics;
 using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
@@ -56,8 +57,10 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         private void CreateWallet()
         {
             WalletPresenter walletPresenter = _projectPresentersFactory.CreateWalletPresenter(_screen.WalletView);
+            StatisticsPresenter statisticsPresenter = _projectPresentersFactory.CreateStatisticsPresenter(_screen.StatisticsView);
 
             _childPresenters.Add(walletPresenter);
+            _childPresenters.Add(statisticsPresenter);
         }
 
         

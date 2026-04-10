@@ -16,14 +16,14 @@ namespace _Project.Develop.Runtime.Configs.Gameplay.Shop
         {
             ShopItemConfig shopItemCost = _configs.First(config => config.ItemType == itemType);
             
-            return (shopItemCost.CurrencyType, shopItemCost.Price);
+            return (shopItemCost.CurrencyTypes, shopItemCost.Price);
         }
         
         [Serializable]
         private class ShopItemConfig
         {
             [field: SerializeField] public ShopItemTypes ItemType { get; private set; } = ShopItemTypes.Mine;
-            [field: SerializeField] public CurrencyTypes CurrencyType { get; private set; } = CurrencyTypes.Gold;
+            [field: SerializeField] public CurrencyTypes CurrencyTypes { get; private set; } = CurrencyTypes.Gold;
             [field: SerializeField] public int Price { get; private set; } = 50;
         }
     }
