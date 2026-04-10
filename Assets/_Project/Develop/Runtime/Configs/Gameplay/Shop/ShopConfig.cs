@@ -12,18 +12,18 @@ namespace _Project.Develop.Runtime.Configs.Gameplay.Shop
     {
         [SerializeField] private List<ShopItemConfig> _configs;
 
-        public (CurrencyTypes currencyType, int price) GetPriceFor(ShopItemTypes itemType)
+        public (CurrencyType currencyType, int price) GetPriceFor(ShopItemTypes itemType)
         {
             ShopItemConfig shopItemCost = _configs.First(config => config.ItemType == itemType);
             
-            return (shopItemCost.CurrencyTypes, shopItemCost.Price);
+            return (shopItemCost.CurrencyType, shopItemCost.Price);
         }
         
         [Serializable]
         private class ShopItemConfig
         {
             [field: SerializeField] public ShopItemTypes ItemType { get; private set; } = ShopItemTypes.Mine;
-            [field: SerializeField] public CurrencyTypes CurrencyTypes { get; private set; } = CurrencyTypes.Gold;
+            [field: SerializeField] public CurrencyType CurrencyType { get; private set; } = CurrencyType.Gold;
             [field: SerializeField] public int Price { get; private set; } = 50;
         }
     }

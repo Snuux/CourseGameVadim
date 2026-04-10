@@ -11,7 +11,7 @@ namespace _Project.Develop.Runtime.UI.Wallet
     {
         //Бизнес логика
         private readonly IReadOnlyVariable<int> _currency;
-        private readonly CurrencyTypes _currencyType;
+        private readonly CurrencyType _currencyType;
         private readonly CurrencyIconsConfig _currencyIconsConfig;
 
         //Визуал
@@ -21,7 +21,7 @@ namespace _Project.Develop.Runtime.UI.Wallet
 
         public CurrencyPresenter(
             IReadOnlyVariable<int> currency, 
-            CurrencyTypes currencyType, 
+            CurrencyType currencyType, 
             CurrencyIconsConfig currencyIconsConfig, 
             IconTextView view)
         {

@@ -29,7 +29,7 @@ namespace _Project.Develop.Runtime.UI.Wallet
 
         public void Initialize()
         {
-            foreach (CurrencyTypes currencyType in _walletService.AvailableCurrencies)
+            foreach (CurrencyType currencyType in _walletService.AvailableCurrencies)
             {
                 IconTextView currencyView = _viewsFactory.Create<IconTextView>(ViewIDs.CurrencyView);
 

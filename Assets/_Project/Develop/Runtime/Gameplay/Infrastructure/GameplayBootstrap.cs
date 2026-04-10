@@ -34,7 +34,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _container = container;
 
             if (sceneArgs is not GameplayInputArgs gameplayInputArgs)
-                throw new ArgumentException($"{nameof(sceneArgs)} is not match with {typeof(GameplayInputArgs)} types");
+                throw new ArgumentException($"{nameof(sceneArgs)} is not match with {typeof(GameplayInputArgs)} type");
 
             _inputArgs = gameplayInputArgs;
 

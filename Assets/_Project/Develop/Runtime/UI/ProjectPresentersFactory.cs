@@ -26,11 +26,11 @@ namespace _Project.Develop.Runtime.UI
         public CurrencyPresenter CreateCurrencyPresenter(
             IconTextView view,
             IReadOnlyVariable<int> currency,
-            CurrencyTypes currencyTypes)
+            CurrencyType currencyType)
         {
             return new CurrencyPresenter(
                 currency,
-                currencyTypes,
+                currencyType,
                 _container.Resolve<ConfigsProviderService>().GetConfig<CurrencyIconsConfig>(),
                 view);
         }

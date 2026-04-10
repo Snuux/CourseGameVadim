@@ -62,16 +62,16 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
             /*if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                _walletService.Add(CurrencyTypes.Gold, 10);
-                Debug.Log("Золота осталось: " + _walletService.GetCurrency(CurrencyTypes.Gold).Value);
+                _walletService.Add(CurrencyType.Gold, 10);
+                Debug.Log("Золота осталось: " + _walletService.GetCurrency(CurrencyType.Gold).Value);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                if(_walletService.Enough(CurrencyTypes.Gold, 10))
+                if(_walletService.Enough(CurrencyType.Gold, 10))
                 {
-                    _walletService.Spend(CurrencyTypes.Gold, 10);
-                    Debug.Log("Золота осталось: " + _walletService.GetCurrency(CurrencyTypes.Gold).Value);
+                    _walletService.Spend(CurrencyType.Gold, 10);
+                    Debug.Log("Золота осталось: " + _walletService.GetCurrency(CurrencyType.Gold).Value);
                 }
             }
 
