@@ -38,7 +38,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies
                     entity = _entitiesFactory.CreateGhost(position, ghostConfig);
                     break;
                 default:
-                    throw new ArgumentException($"Not support {config.GetType()} types config");
+                    throw new ArgumentException($"Not support {config.GetType()} type config");
             }
 
             entity.AddTeam(new ReactiveVariable<Teams>(Teams.Enemies));

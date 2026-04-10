@@ -79,9 +79,9 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
         private static WalletService CreateWalletService(DIContainer c)
         {
-            Dictionary<CurrencyTypes, ReactiveVariable<int>> currencies = new();
+            Dictionary<CurrencyType, ReactiveVariable<int>> currencies = new();
 
-            foreach (CurrencyTypes currencyType in Enum.GetValues(typeof(CurrencyTypes)))
+            foreach (CurrencyType currencyType in Enum.GetValues(typeof(CurrencyType)))
                 currencies[currencyType] = new ReactiveVariable<int>();
 
             return new WalletService(currencies, c.Resolve<PlayerDataProvider>());

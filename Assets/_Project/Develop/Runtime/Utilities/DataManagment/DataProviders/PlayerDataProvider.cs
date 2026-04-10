@@ -30,13 +30,13 @@ namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
             };
         }
 
-        private Dictionary<CurrencyTypes, int> InitWalletData()
+        private Dictionary<CurrencyType, int> InitWalletData()
         {
-            Dictionary<CurrencyTypes, int> walletData = new();
+            Dictionary<CurrencyType, int> walletData = new();
 
             StartWalletConfig walletConfig = _configsProviderService.GetConfig<StartWalletConfig>();
 
-            foreach (CurrencyTypes currencyType in Enum.GetValues(typeof(CurrencyTypes)))
+            foreach (CurrencyType currencyType in Enum.GetValues(typeof(CurrencyType)))
                 walletData[currencyType] = walletConfig.GetValueFor(currencyType);
 
             return walletData;

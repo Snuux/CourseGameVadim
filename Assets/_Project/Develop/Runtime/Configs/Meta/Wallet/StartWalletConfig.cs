@@ -11,13 +11,13 @@ namespace _Project.Develop.Runtime.Configs.Meta.Wallet
     {
         [SerializeField] private List<Currency> _values;
 
-        public int GetValueFor(CurrencyTypes currencyTypes)
-            => _values.First(currency => currency.Types == currencyTypes).Value;
+        public int GetValueFor(CurrencyType currencyType)
+            => _values.First(currency => currency.Type == currencyType).Value;
         
         [Serializable]
         public class Currency
         {
-            [field: SerializeField] public CurrencyTypes Types { get; private set; }
+            [field: SerializeField] public CurrencyType Type { get; private set; }
             [field: SerializeField] public int Value { get; private set; }
         }
     }

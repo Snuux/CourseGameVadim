@@ -39,10 +39,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
         {
             base.Enter();
 
-            Debug.Log($"ПОБЕДА. Начисление: {_gameplayInputArgs.Level.Reward.Types}: {_gameplayInputArgs.Level.Reward.Value}");
+            Debug.Log($"ПОБЕДА. Начисление: {_gameplayInputArgs.Level.Reward.Type}: {_gameplayInputArgs.Level.Reward.Value}");
             Debug.Log($"Нажмите Q для перехода в меню");
             
-            _walletService.Add(_gameplayInputArgs.Level.Reward.Types, _gameplayInputArgs.Level.Reward.Value);
+            _walletService.Add(_gameplayInputArgs.Level.Reward.Type, _gameplayInputArgs.Level.Reward.Value);
             _statisticsService.Add(StatisticType.Wins);
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
         }
