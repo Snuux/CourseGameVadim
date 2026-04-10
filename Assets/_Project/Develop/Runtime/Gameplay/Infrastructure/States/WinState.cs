@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
@@ -13,22 +14,23 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         private readonly LevelsProgressionService _levelsProgressionService;
         private readonly GameplayInputArgs _gameplayInputArgs;
         private readonly PlayerDataProvider _playerDataProvider;
-        private readonly SceneSwitcherService _sceneSwitcherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
+        
+        private readonly GameplayPopupService _popupService;
 
         public WinState(
             IInputService inputService,
             LevelsProgressionService levelsProgressionService,
             GameplayInputArgs gameplayInputArgs,
             PlayerDataProvider playerDataProvider,
-            SceneSwitcherService sceneSwitcherService,
-            ICoroutinesPerformer coroutinesPerformer) : base(inputService)
+            ICoroutinesPerformer coroutinesPerformer, 
+            GameplayPopupService popupService) : base(inputService)
         {
             _levelsProgressionService = levelsProgressionService;
             _gameplayInputArgs = gameplayInputArgs;
             _playerDataProvider = playerDataProvider;
-            _sceneSwitcherService = sceneSwitcherService;
             _coroutinesPerformer = coroutinesPerformer;
+            _popupService = popupService;
         }
 
         public override void Enter()
@@ -40,15 +42,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             _levelsProgressionService.AddLevelToCompleted(_gameplayInputArgs.LevelNumber);
 
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
+
+            _popupService.OpenWinPopup();
         }
 
         public void Update(float deltaTime)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                _coroutinesPerformer.StartPerform(
-                    _sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
-            }
         }
     }
 }

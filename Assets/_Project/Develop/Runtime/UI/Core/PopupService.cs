@@ -15,7 +15,7 @@ namespace _Project.Develop.Runtime.UI.Core
         private readonly Dictionary<PopupPresenterBase, PopupInfo> _presenterToInfo = new();
 
         protected PopupService(
-            ViewsFactory viewsFactory, 
+            ViewsFactory viewsFactory,
             ProjectPresentersFactory presentersFactory)
         {
             ViewsFactory = viewsFactory;

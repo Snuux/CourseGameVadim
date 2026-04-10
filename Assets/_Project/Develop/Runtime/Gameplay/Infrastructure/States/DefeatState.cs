@@ -1,4 +1,6 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.UI.Gameplay;
+using _Project.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
@@ -8,32 +10,24 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 {
     public class DefeatState : EndGameState, IUpdatableState
     {
-        private readonly SceneSwitcherService _sceneSwitcherService;
-        private readonly ICoroutinesPerformer _coroutinesPerformer;
+        private readonly GameplayPopupService _popupService;
 
         public DefeatState(
-            IInputService inputService,
-            SceneSwitcherService sceneSwitcherService,
-            ICoroutinesPerformer coroutinesPerformer) : base(inputService)
+            IInputService inputService, 
+            GameplayPopupService popupService) : base(inputService)
         {
-            _sceneSwitcherService = sceneSwitcherService;
-            _coroutinesPerformer = coroutinesPerformer;
+            _popupService = popupService;
         }
 
         public override void Enter()
         {
             base.Enter();
-
-            Debug.Log("ПОРАЖЕНИЕ!");
+            
+            _popupService.OpenDefeatPopup();
         }
 
         public void Update(float deltaTime)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                _coroutinesPerformer.StartPerform(
-                    _sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
-            }
         }
     }
 }
