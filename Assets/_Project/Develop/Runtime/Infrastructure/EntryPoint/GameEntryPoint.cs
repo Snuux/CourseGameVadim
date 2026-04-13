@@ -1,5 +1,8 @@
 ﻿using System.Collections;
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -39,6 +42,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             ILoadingScreen loadingScreen = container.Resolve<ILoadingScreen>();
             SceneSwitcherService sceneSwitcherService = container.Resolve<SceneSwitcherService>();
             PlayerDataProvider playerDataProvider = container.Resolve<PlayerDataProvider>();
+            ConfigsProviderService configsProviderService = container.Resolve<ConfigsProviderService>();
 
             loadingScreen.Show();
 
@@ -62,9 +66,16 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             loadingScreen.Hide();
 
             //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
+            //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
             //LevelConfig levelConfig = container.Resolve<ConfigsProviderService>().GetConfig<LevelConfig>();
-            //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1, levelConfig.Reward));
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
+
+
+            //todo поправить что не конфиг в параметры идёт!!
+
+            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay,
+                new GameplayInputArgs(configsProviderService.GetConfig<LevelsListConfig>().Levels[0]));
+
+            //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
         }
     }
 }
