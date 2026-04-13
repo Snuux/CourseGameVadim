@@ -15,4 +15,4 @@ MonoBehaviour:
   <ID>k__BackingField: Tower
   <PrefabPath>k__BackingField: Entities/Tower
   <BodyContactDamage>k__BackingField: 999
-  <DeathProcessTime>k__BackingField: 0.1
+  <DeathProcessTime>k__BackingField: 2
