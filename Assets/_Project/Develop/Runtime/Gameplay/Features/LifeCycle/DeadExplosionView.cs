@@ -10,15 +10,26 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
 {
     public class DeadExplosionView : EntityView
     {
+        private const float ExplosionMaxScale = 1.3f;
+
+        [SerializeField] ParticleSystem _applyDamageEffectPrefab;
+
         private IReadOnlyVariable<bool> _isDead;
+        private IReadOnlyVariable<float> _deathProcessInitialTime;
         private Transform _entityTransform;
+
+        private Sequence _deathAnimation;
 
         private IDisposable _isDeadChangedDisposable;
 
         protected override void OnEntityStartedWork(Entity entity)
         {
             _isDead = entity.IsDead;
-            _entityTransform =  entity.Transform;
+            _deathProcessInitialTime = entity.DeathProcessInitialTime;
+
+            _entityTransform = entity.TryGetViewContainer(out Transform viewContainer) && viewContainer != null
+                ? viewContainer
+                : entity.Transform;
 
             _isDeadChangedDisposable = _isDead.Subscribe(OnIsDeadChanged);
         }
@@ -26,20 +37,36 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
         public override void Cleanup(Entity entity)
         {
             base.Cleanup(entity);
-            
+
+            _deathAnimation?.Kill();
+            _deathAnimation = null;
             _isDeadChangedDisposable?.Dispose();
+            
+            InstantiateFinalExplosion();
         }
 
         private void OnIsDeadChanged(bool oldIsDead, bool isDead)
         {
             if (isDead)
-                UpdateIsDead(isDead);
+                PlayDeathAnimation();
         }
 
-        private void UpdateIsDead(bool isDeadValue)
+        private void PlayDeathAnimation()
         {
-            Sequence s = CommonAnimationsCreator.CreateBeforeExplosionAnimation(_entityTransform, 2, 2);
-            s.Play();
+            if (_entityTransform == null)
+                return;
+
+            _deathAnimation = CommonAnimationsCreator.CreateBeforeExplosionAnimation(
+                _entityTransform,
+                ExplosionMaxScale,
+                _deathProcessInitialTime.Value);
+
+            _deathAnimation.Play();
+        }
+
+        private void InstantiateFinalExplosion()
+        {
+            Instantiate(_applyDamageEffectPrefab, _entityTransform.position, Quaternion.identity, null);
         }
     }
 }

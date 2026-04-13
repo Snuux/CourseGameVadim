@@ -30,7 +30,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ApplyDamage
 
         private void OnDamaged(float obj)
         {
-            Instantiate(_applyDamageEffectPrefab, _effectSpawnPoint.position, Quaternion.identity);
+            Instantiate(_applyDamageEffectPrefab, _effectSpawnPoint.position, Quaternion.identity, null);
         }
     }
 }
