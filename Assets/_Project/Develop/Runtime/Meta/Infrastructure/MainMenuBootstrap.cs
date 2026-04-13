@@ -46,40 +46,6 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                
-                ILevelProviderService levelProviderService = _container.Resolve<ILevelProviderService>();
-                
-                coroutinesPerformer.StartPerform(
-                    sceneSwitcherService.ProcessSwitchTo(
-                        Scenes.Gameplay, 
-                        new GameplayInputArgs(levelProviderService.Get()))
-                    );
-            }
-
-            /*if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                _walletService.Add(CurrencyType.Gold, 10);
-                Debug.Log("Золота осталось: " + _walletService.GetCurrency(CurrencyType.Gold).Value);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                if(_walletService.Enough(CurrencyType.Gold, 10))
-                {
-                    _walletService.Spend(CurrencyType.Gold, 10);
-                    Debug.Log("Золота осталось: " + _walletService.GetCurrency(CurrencyType.Gold).Value);
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
-                Debug.Log("Сохранение было вызвано");
-            }*/
         }
     }
 }

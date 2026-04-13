@@ -7,6 +7,7 @@ using _Project.Develop.Runtime.Gameplay.Infrastructure.States.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -31,6 +32,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         private readonly PlayerDataProvider _playerDataProvider;
         private readonly SceneSwitcherService _sceneSwitcherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
+        private readonly GameplayPopupService _popupService;
 
         public GameplayStateFactory(DIContainer container)
         {
@@ -48,6 +50,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             _playerDataProvider = _container.Resolve<PlayerDataProvider>();
             _sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
             _coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+            _popupService = _container.Resolve<GameplayPopupService>();
         }
 
         public GameplayStateMachine CreateGameplayStateMachine(GameplayInputArgs inputArgs)
@@ -95,7 +98,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             CursorAttackState cursorAttackState = CreateCursorAttackState();
 
             GameplayParallelState battleState = new GameplayParallelState(stageProcessState, cursorAttackState);
-            CursorShopState shopState = CreateCursorShopState();
+            ShopState shopState = CreateCursorShopState();
 
             GameplayStateMachine coreLoopState = new GameplayStateMachine();
 
@@ -107,7 +110,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 
             ICompositeCondition purchaseToBattleCondition = new CompositeCondition()
                 .Add(new FuncCondition(() => _stageProviderService.HasNextStage()))
-                .Add(new FuncCondition(() => _inputService.RightMouseButtonDown));
+                .Add(new FuncCondition(() => _stageProviderService.CurrentStageResult.Value == StageResults.ShopCompleted));
 
             coreLoopState.AddTransition(battleState, shopState, battleToPurchaseCondition);
             coreLoopState.AddTransition(shopState, battleState, purchaseToBattleCondition);
@@ -123,12 +126,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         private WinState CreateWinState(GameplayInputArgs inputArgs)
         {
             return new WinState(_inputService, inputArgs, _playerDataProvider, _sceneSwitcherService,
-                _coroutinesPerformer, _walletService, _statisticsService);
+                _coroutinesPerformer, _walletService, _statisticsService, _popupService);
         }
 
         private DefeatState CreateDefeatState()
         {
-            return new DefeatState(_inputService, _sceneSwitcherService, _coroutinesPerformer, _statisticsService);
+            return new DefeatState(_inputService, _sceneSwitcherService, _coroutinesPerformer, _statisticsService, _popupService);
         }
 
         private StageProcessState CreateStageProcessState()
@@ -136,9 +139,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             return new StageProcessState(_stageProviderService);
         }
 
-        private CursorShopState CreateCursorShopState()
+        private ShopState CreateCursorShopState()
         {
-            return new CursorShopState(_towerHolderService, _allyFactory, _inputService, _walletService, _shopConfig);
+            return new ShopState(_towerHolderService, _allyFactory, _inputService, _walletService, _shopConfig, _popupService);
         }
     }
 }

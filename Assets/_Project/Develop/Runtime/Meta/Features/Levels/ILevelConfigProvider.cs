@@ -2,7 +2,7 @@
 
 namespace _Project.Develop.Runtime.Meta.Features.Levels
 {
-    public interface ILevelProviderService
+    public interface ILevelConfigProviderService
     {
         LevelConfig Get();
     }

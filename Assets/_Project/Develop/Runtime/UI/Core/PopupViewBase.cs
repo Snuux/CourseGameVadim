@@ -21,7 +21,9 @@ namespace _Project.Develop.Runtime.UI.Core
 
         private void Awake()
         {
-            _anticlickerDefaultAlpha = _anticlicker.color.a;
+            if (_anticlicker != null)
+                _anticlickerDefaultAlpha = _anticlicker.color.a;
+            
             _mainGroup.alpha = 0;
         }
 
@@ -33,7 +35,6 @@ namespace _Project.Develop.Runtime.UI.Core
 
             OnPreShow();
 
-            //тут потом появятся анимации
             _mainGroup.alpha = 1;
 
             Sequence animation = PopupAnimationsCreator

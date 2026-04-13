@@ -1,6 +1,7 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
@@ -17,6 +18,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly WalletService _walletService;
         private readonly StatisticsService _statisticsService;
+        private readonly GameplayPopupService _popupService;
 
         public WinState(
             IInputService inputService,
@@ -25,7 +27,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
             SceneSwitcherService sceneSwitcherService,
             ICoroutinesPerformer coroutinesPerformer, 
             WalletService walletService, 
-            StatisticsService statisticsService) : base(inputService)
+            StatisticsService statisticsService, 
+            GameplayPopupService popupService) : base(inputService)
         {
             _gameplayInputArgs = gameplayInputArgs;
             _playerDataProvider = playerDataProvider;
@@ -33,18 +36,21 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
             _coroutinesPerformer = coroutinesPerformer;
             _walletService = walletService;
             _statisticsService = statisticsService;
+            _popupService = popupService;
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            Debug.Log($"ПОБЕДА. Начисление: {_gameplayInputArgs.Level.Reward.Type}: {_gameplayInputArgs.Level.Reward.Value}");
+            Debug.Log($"ПОБЕДА. Начисление: {_gameplayInputArgs.RewardCurrencyType}: {_gameplayInputArgs.RewardPrice}");
             Debug.Log($"Нажмите Q для перехода в меню");
             
-            _walletService.Add(_gameplayInputArgs.Level.Reward.Type, _gameplayInputArgs.Level.Reward.Value);
+            _walletService.Add(_gameplayInputArgs.RewardCurrencyType, _gameplayInputArgs.RewardPrice);
             _statisticsService.Add(StatisticType.Wins);
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
+            
+            _popupService.OpenWinPopup();
         }
 
         public void Update(float deltaTime)

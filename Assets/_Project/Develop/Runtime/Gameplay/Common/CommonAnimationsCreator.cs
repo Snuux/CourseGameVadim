@@ -38,5 +38,23 @@ namespace _Project.Develop.Runtime.Gameplay.Common
                     .DOScale(Vector3.zero, finalExplosionDuration)
                     .SetEase(Ease.InExpo));
         }
+        
+        public static Sequence CreateBreathAnimation(
+            Transform transform,
+            float maxScale,
+            float duration)
+        {
+            if (transform == null)
+                throw new ArgumentNullException(nameof(transform));
+
+            if (maxScale <= 0)
+                throw new ArgumentOutOfRangeException(nameof(maxScale));
+            
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(transform.DOScale(maxScale, duration).SetEase(Ease.InOutSine));
+            sequence.SetLoops(-1, LoopType.Yoyo);
+
+            return sequence;
+        }
     }
 }

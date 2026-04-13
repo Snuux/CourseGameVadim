@@ -1,4 +1,5 @@
-﻿using _Project.Develop.Runtime.Infrastructure.DI;
+﻿using _Project.Develop.Runtime.Gameplay.Infrastructure;
+using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
@@ -21,7 +22,7 @@ namespace _Project.Develop.Runtime.UI.MainMenu
                 _container.Resolve<ProjectPresentersFactory>(),
                 _container.Resolve<SceneSwitcherService>(),
                 _container.Resolve<ICoroutinesPerformer>(),
-                _container.Resolve<ILevelProviderService>()
+                _container.Resolve<ILevelConfigProviderService>()
             );
         }
     }

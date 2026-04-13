@@ -27,7 +27,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainsContext _brainsContext;
         private ConfigsProviderService _configsProviderService;
-        private ILevelProviderService _randomLevelProviderService;
+        private ILevelConfigProviderService _randomLevelConfigProviderService;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -52,7 +52,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _gameplayStateContext = _container.Resolve<GameplayStateContext>();
             _configsProviderService = _container.Resolve<ConfigsProviderService>();
 
-            _container.Resolve<AllyFactory>().CreateTower(Vector3.zero, _inputArgs.Level);
+            _container.Resolve<AllyFactory>().CreateTower(Vector3.zero, _inputArgs.TowerMaxHealth);
             
             //_testGameplay.Initialize(_container);
 

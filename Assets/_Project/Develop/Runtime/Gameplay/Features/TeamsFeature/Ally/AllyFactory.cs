@@ -29,11 +29,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally
             _entitiesLifeContext = container.Resolve<EntitiesLifeContext>();
         }
         
-        public Entity CreateTower(Vector3 position, LevelConfig levelConfig)
+        public Entity CreateTower(Vector3 position, float health)
         {
             TowerConfig towerConfig = _configsProviderService.GetConfig<TowerConfig>();
 
-            Entity tower = _entitiesFactory.CreateTower(position, towerConfig, levelConfig);
+            Entity tower = _entitiesFactory.CreateTower(position, towerConfig, health);
             tower.AddCurrentTarget();
             tower.AddIsTower();
             tower.AddTeam(new ReactiveVariable<Teams>(Teams.Ally));

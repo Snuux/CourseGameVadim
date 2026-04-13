@@ -37,7 +37,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _configsProviderService = _container.Resolve<ConfigsProviderService>();
         }
 
-        public Entity CreateTower(Vector3 position, TowerConfig towerConfig, LevelConfig levelConfig)
+        public Entity CreateTower(Vector3 position, TowerConfig towerConfig, float maxHealth)
         {
             Entity entity = CreateEmpty();
 
@@ -45,8 +45,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddID(new ReactiveVariable<string>(towerConfig.ID))
-                .AddMaxHealth(new ReactiveVariable<float>(levelConfig.TowerMaxHealth))
-                .AddCurrentHealth(new ReactiveVariable<float>(levelConfig.TowerMaxHealth))
+                .AddMaxHealth(new ReactiveVariable<float>(maxHealth))
+                .AddCurrentHealth(new ReactiveVariable<float>(maxHealth))
                 .AddIsDead()
                 .AddInDeathProcess()
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(towerConfig.DeathProcessTime))
@@ -107,7 +107,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddDeathProcessCurrentTime()
                 .AddAttackDamage(new ReactiveVariable<float>(config.ExplosionDamage))
                 .AddAttackRadius(new ReactiveVariable<float>(config.ExplosionRadius))
-                .AddDistanceForAttack(new ReactiveVariable<float>(config.DistanceForAreaAttack))
+                .AddTriggerRadius(new ReactiveVariable<float>(config.AttackTriggerRadius))
                 .AddAttackRequested()
                 .AddAttackStarted()
                 .AddAttackCompleted()
@@ -214,7 +214,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddID(new ReactiveVariable<string>(config.ID))
                 .AddAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
                 .AddAttackRadius(new ReactiveVariable<float>(config.AttackRadius))
-                .AddDistanceForAttack(new ReactiveVariable<float>(config.TriggerRadius))
+                .AddTriggerRadius(new ReactiveVariable<float>(config.TriggerRadius))
                 .AddAttackRequested()
                 .AddAttackStarted()
                 .AddAttackCompleted()
@@ -237,8 +237,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddMustDie(mustDie)
                 .AddMustSelfRelease(mustSelfRelease)
-                .AddCanStartAttack(canStartAttack)
-                ;
+                .AddCanStartAttack(canStartAttack);
 
             entity
                 .AddSystem(new StartAttackSystem())
@@ -246,8 +245,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
-                .AddSystem(new EndAttackSystem())
-                ;
+                .AddSystem(new EndAttackSystem());
 
             return entity;
         }

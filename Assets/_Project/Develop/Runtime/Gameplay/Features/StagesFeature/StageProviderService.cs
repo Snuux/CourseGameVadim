@@ -1,6 +1,8 @@
 ﻿using System;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Utilities.Reactive;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 {
@@ -9,15 +11,16 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
         private ReactiveVariable<int> _currentStageNumber = new();
         private ReactiveVariable<StageResults> _currentStageResult = new();
 
-        private LevelConfig _levelConfig;
+        private GameplayInputArgs _inputArgs;
         private StagesFactory _stagesFactory;
         private IStage _currentStage;
 
         private IDisposable _stageEndedDisposable;
 
-        public StageProviderService(LevelConfig levelConfig, StagesFactory stagesFactory)
+        public StageProviderService(GameplayInputArgs inputArgs, StagesFactory stagesFactory)
         {
-            _levelConfig = levelConfig;
+            _inputArgs = inputArgs;
+            Debug.Log(inputArgs.ToString());
             _stagesFactory = stagesFactory;
         }
 
@@ -25,9 +28,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 
         public ReactiveVariable<StageResults> CurrentStageResult => _currentStageResult;
 
-        public int StagesCount => _levelConfig.StageConfigs.Count;
+        public int StagesCount => _inputArgs.StageConfigs.Count;
 
         public bool HasNextStage() => CurrentStageNumber.Value < StagesCount;
+        
+        public void SetShopStateCompleted() => _currentStageResult.Value = StageResults.ShopCompleted;
 
         public void SwitchToNext()
         {
@@ -40,7 +45,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
             _currentStageNumber.Value++;
             _currentStageResult.Value = StageResults.Uncompleted;
 
-            _currentStage = _stagesFactory.Create(_levelConfig.StageConfigs[_currentStageNumber.Value - 1]);
+            _currentStage = _stagesFactory.Create(_inputArgs.StageConfigs[_currentStageNumber.Value - 1]);
         }
 
         public void StartCurrent()

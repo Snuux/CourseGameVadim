@@ -2,7 +2,8 @@
 {
     public enum StageResults
     {
+        Uncompleted,
         Completed,
-        Uncompleted
+        ShopCompleted,
     }
 }

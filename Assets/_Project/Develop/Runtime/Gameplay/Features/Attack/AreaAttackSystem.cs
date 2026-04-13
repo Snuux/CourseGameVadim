@@ -14,9 +14,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack
         private ReactiveVariable<bool> _attackStarted;
         private ReactiveVariable<bool> _attackCompleted;
         
-        private ReactiveVariable<float> _damage;
-        private ReactiveVariable<float> _radius;
-        
         private Entity _entity;
 
         public AreaAttackSystem(EntitiesFactory entitiesFactory)
@@ -30,8 +27,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack
             _sourceTransform = entity.Transform;
             _attackStarted = entity.AttackStarted;
             _attackCompleted = entity.AttackCompleted;
-            _damage = entity.AttackDamage;
-            _radius = entity.AttackRadius;
         }
 
         public void OnUpdate(float deltaTime)

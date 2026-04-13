@@ -20,5 +20,5 @@ MonoBehaviour:
   <DeathProcessTime>k__BackingField: 2
   <ExplosionDamage>k__BackingField: 1
   <ExplosionRadius>k__BackingField: 3
-  <DistanceForAreaAttack>k__BackingField: 2
+  <AttackTriggerRadius>k__BackingField: 2
   <SpawnProcessTime>k__BackingField: 2

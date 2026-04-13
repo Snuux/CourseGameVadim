@@ -775,13 +775,13 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.AttackCompleted() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack DistanceForAttackC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack>();
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.TriggerRadius TriggerRadiusC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.TriggerRadius>();
 
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> DistanceForAttack => DistanceForAttackC.Value;
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> TriggerRadius => TriggerRadiusC.Value;
 
-		public bool TryGetDistanceForAttack(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		public bool TryGetTriggerRadius(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.TriggerRadius component);
 			if(result)
 				value = component.Value;
 			else
@@ -789,14 +789,14 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDistanceForAttack()
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTriggerRadius()
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.TriggerRadius() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDistanceForAttack(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTriggerRadius(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.DistanceForAttack() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack.TriggerRadius() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.ApplyDamage.TakeDamageRequest TakeDamageRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.ApplyDamage.TakeDamageRequest>();

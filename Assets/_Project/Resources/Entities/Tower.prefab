@@ -143,6 +143,37 @@ Transform:
   - {fileID: 7613477275093494885}
   m_Father: {fileID: 266444240801978367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8204606672815248650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8066178282864653350}
+  m_Layer: 0
+  m_Name: ApplyDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8066178282864653350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204606672815248650}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7613477275093494885}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8589248697822818113
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7613477275093494885}
   - component: {fileID: 6207449813041986904}
+  - component: {fileID: 7205966427915925430}
   m_Layer: 0
   m_Name: Tower_01
   m_TagString: Untagged
@@ -175,6 +207,7 @@ Transform:
   m_Children:
   - {fileID: 5999167647956064546}
   - {fileID: 2401212471358846785}
+  - {fileID: 8066178282864653350}
   m_Father: {fileID: 4595113288729785282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6207449813041986904
@@ -191,6 +224,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _applyDamageEffectPrefab: {fileID: 19816416, guid: 96a96c08c36361544affb3c783e0056e,
     type: 3}
+--- !u!114 &7205966427915925430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589248697822818113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313aeb05218b491ead1bdd07c16dfb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _applyDamageEffectPrefab: {fileID: 19894390, guid: 13e43982d1a0a9d40909a898f9762727,
+    type: 3}
+  _effectSpawnPoint: {fileID: 8066178282864653350}
 --- !u!1001 &2799105332610699434
 PrefabInstance:
   m_ObjectHideFlags: 0

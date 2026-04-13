@@ -154,6 +154,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.11294508, y: -0.036382973, z: 0}
     m_Extent: {x: 0.53654194, y: 0.40283787, z: 0.36515978}
   m_DirtyAABB: 0
+--- !u!1 &3261751765858797628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1673627866892906364}
+  m_Layer: 0
+  m_Name: ApplyDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1673627866892906364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261751765858797628}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.76, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8208488523239557642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3635659518092902529
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +474,8 @@ GameObject:
   - component: {fileID: 2813135713295224944}
   - component: {fileID: 2959875313950218330}
   - component: {fileID: 2115357314801205090}
+  - component: {fileID: 5839592839644548330}
+  - component: {fileID: 1563558567812388770}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -466,6 +499,7 @@ Transform:
   - {fileID: 5655317413769757729}
   - {fileID: 3644997413941257965}
   - {fileID: 9214796419428234856}
+  - {fileID: 1673627866892906364}
   m_Father: {fileID: 6184043881470378523}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2813135713295224944
@@ -515,6 +549,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 2813135713295224944}
+--- !u!114 &5839592839644548330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8836546798674825392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313aeb05218b491ead1bdd07c16dfb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _applyDamageEffectPrefab: {fileID: 19801142, guid: c83fb3ef04bb383408bb2064b89690b2,
+    type: 3}
+  _effectSpawnPoint: {fileID: 1673627866892906364}
+--- !u!114 &1563558567812388770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8836546798674825392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85948fb479dd41a9b8435e3e65bcfe63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radiusEffectPrefab: {fileID: 19867586, guid: c82022460ac6d274cb9e2aefc6da9dc9,
+    type: 3}
+  _effectSpawnPoint: {fileID: 8208488523239557642}
 --- !u!1 &8996592756355788384
 GameObject:
   m_ObjectHideFlags: 0

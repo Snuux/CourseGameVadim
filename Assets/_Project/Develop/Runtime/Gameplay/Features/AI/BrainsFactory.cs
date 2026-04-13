@@ -96,7 +96,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             
             ICompositeCondition ifNoTargetCondition = new CompositeCondition(LogicOperations.Or)
                 .Add(new FuncCondition(() => TargetInRange(entity) == false));
-                ;
             
             stateMachine.AddState(findTargetState);
             stateMachine.AddState(attackState);
@@ -116,7 +115,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
                 return false;
             
             return CalcDistanceToTarget(targetTransform.position, entity.Transform.position ) < 
-                   entity.DistanceForAttack.Value;
+                   entity.TriggerRadius.Value / 2.0f;
         }
 
         private float CalcDistanceToTarget(Vector3 source, Vector3 target)

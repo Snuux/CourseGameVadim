@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Features.Levels
 {
-    public class RandomLevelProviderService : ILevelProviderService
+    public class RandomLevelConfigConfigProviderService : ILevelConfigProviderService
     {
         private readonly ConfigsProviderService _configsProviderService;
         private List<LevelConfig> _levelConfigs;
 
-        public RandomLevelProviderService(ConfigsProviderService configsProviderService)
+        public RandomLevelConfigConfigProviderService(ConfigsProviderService configsProviderService)
         {
             _configsProviderService = configsProviderService;
 

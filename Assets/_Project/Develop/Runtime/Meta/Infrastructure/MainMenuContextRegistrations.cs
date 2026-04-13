@@ -17,12 +17,12 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateMainMenuPresentersFactory);
             container.RegisterAsSingle(CreateMainMenuScreenPresenter).NonLazy();
             container.RegisterAsSingle(CreateMainMenuPopupService);
-            container.RegisterAsSingle<ILevelProviderService>(CreateRandomLevelProviderService).NonLazy();
+            container.RegisterAsSingle<ILevelConfigProviderService>(CreateRandomLevelProviderService).NonLazy();
         }
         
-        private static RandomLevelProviderService CreateRandomLevelProviderService(DIContainer c)
+        private static RandomLevelConfigConfigProviderService CreateRandomLevelProviderService(DIContainer c)
         {
-            return new RandomLevelProviderService(c.Resolve<ConfigsProviderService>());
+            return new RandomLevelConfigConfigProviderService(c.Resolve<ConfigsProviderService>());
         }
 
         private static MainMenuPopupService CreateMainMenuPopupService(DIContainer c)

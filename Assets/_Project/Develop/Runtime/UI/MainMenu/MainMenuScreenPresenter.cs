@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.UI.Core;
@@ -16,7 +17,7 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         private readonly ProjectPresentersFactory _projectPresentersFactory;
         private readonly SceneSwitcherService _sceneSwitcherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
-        private readonly ILevelProviderService _levelProviderService;
+        private readonly ILevelConfigProviderService _levelConfigProviderService;
 
         private readonly List<IPresenter> _childPresenters = new();
 
@@ -25,13 +26,13 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             ProjectPresentersFactory projectPresentersFactory, 
             SceneSwitcherService sceneSwitcherService, 
             ICoroutinesPerformer coroutinesPerformer, 
-            ILevelProviderService levelProviderService)
+            ILevelConfigProviderService levelConfigProviderService)
         {
             _screen = screen;
             _projectPresentersFactory = projectPresentersFactory;
             _sceneSwitcherService = sceneSwitcherService;
             _coroutinesPerformer = coroutinesPerformer;
-            _levelProviderService = levelProviderService;
+            _levelConfigProviderService = levelConfigProviderService;
         }
 
         public void Initialize()
@@ -66,11 +67,16 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         
         private void OnStartMenuButtonClicked()
         {
+            LevelConfig levelConfig = _levelConfigProviderService.Get();
+            
             _coroutinesPerformer.StartPerform(
                 _sceneSwitcherService.ProcessSwitchTo(
                     Scenes.Gameplay, 
-                    new GameplayInputArgs(_levelProviderService.Get()))
-            );
+                    new GameplayInputArgs(
+                        levelConfig.Reward.Type,
+                        levelConfig.Reward.Value,
+                        levelConfig.TowerMaxHealth,
+                        levelConfig.StageConfigs)));
         }
     }
 }

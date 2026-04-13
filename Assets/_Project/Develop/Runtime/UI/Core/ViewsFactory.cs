@@ -12,11 +12,16 @@ namespace _Project.Develop.Runtime.UI.Core
 
         private readonly Dictionary<string, string> _viewIDToResourcesPath = new Dictionary<string, string>()
         {
-            {ViewIDs.CurrencyView, "UI/Wallet/CurrencyView" },
-            {ViewIDs.MainMenuScreen, "UI/MainMenu/MainMenuScreenView" },
-            {ViewIDs.TestPopup, "UI/TestPopup" },
-            {ViewIDs.LevelTile, "UI/LevelsMenuPopup/LevelTile" },
-            {ViewIDs.LevelsMenuPopup, "UI/LevelsMenuPopup/LevelsMenuPopup" }
+            { ViewIDs.CurrencyView, "UI/Wallet/CurrencyView" },
+            { ViewIDs.MainMenuScreen, "UI/MainMenu/MainMenuScreenView" },
+            { ViewIDs.TestPopup, "UI/TestPopup" },
+            { ViewIDs.LevelTile, "UI/LevelsMenuPopup/LevelTile" },
+            { ViewIDs.GameplayScreen, "UI/Gameplay/GameplayScreenView" },
+            { ViewIDs.WinPopup, "UI/Gameplay/ResultsPopup/WinPopup" },
+            { ViewIDs.DefeatPopup, "UI/Gameplay/ResultsPopup/DefeatPopup" },
+            { ViewIDs.SimpleHealthBar, "UI/Gameplay/HealthBars/SimpleHealthBar" },
+            { ViewIDs.MainHeroHealthBar, "UI/Gameplay/HealthBars/HeroHealthBar" },
+            { ViewIDs.ShopPopup, "UI/Gameplay/ResultsPopup/ShopPopup" }
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

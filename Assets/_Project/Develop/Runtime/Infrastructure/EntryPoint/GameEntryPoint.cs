@@ -72,10 +72,10 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             //todo поправить что не конфиг в параметры идёт!!
 
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay,
-                new GameplayInputArgs(configsProviderService.GetConfig<LevelsListConfig>().Levels[0]));
+            //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay,
+            //    new GameplayInputArgs(configsProviderService.GetConfig<LevelsListConfig>().Levels[1]));
 
-            //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
+            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
         }
     }
 }

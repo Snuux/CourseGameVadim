@@ -34,7 +34,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack
         public ReactiveVariable<bool> Value;
     }
 
-    public class DistanceForAttack : IEntityComponent
+    public class TriggerRadius : IEntityComponent
     {
         public ReactiveVariable<float> Value;
     }
