@@ -47,8 +47,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
         {
             if (_inputService.LeftMouseButtonDown)
             {
-                _entitiesFactory.CreateAreaProjectile(_inputService.MouseWorldPosition, _cursorAttackRadius.Value,
-                    _cursorAttackDamage.Value, _cursorAttacker);
+                _entitiesFactory.InstantDamageZone(_inputService.MouseWorldPosition, _cursorAttacker);
             }
         }
 

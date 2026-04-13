@@ -13,11 +13,6 @@ namespace _Project.Develop.Runtime.Gameplay.Common
     {
         public Transform Value;
     }
-    
-    public class ViewContainer : IEntityComponent
-    {
-        public Transform Value;
-    }
 
     public class IDComponent : IEntityComponent
     {

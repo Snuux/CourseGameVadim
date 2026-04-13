@@ -40,7 +40,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack
                 return;
             
             _attackStarted.Value = false;
-            _entitiesFactory.CreateAreaProjectile(_sourceTransform.position, _radius.Value, _damage.Value, _entity);
+            _entitiesFactory.InstantDamageZone(_sourceTransform.position, _entity);
             
             _attackCompleted.Value = true;
         }

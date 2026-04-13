@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
 {
-    public class DeadExplosionView : EntityView
+    public class DeadTowerExplosionView : EntityView
     {
         private const float ExplosionMaxScale = 1.3f;
 
@@ -26,10 +26,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
         {
             _isDead = entity.IsDead;
             _deathProcessInitialTime = entity.DeathProcessInitialTime;
-
-            _entityTransform = entity.TryGetViewContainer(out Transform viewContainer) && viewContainer != null
-                ? viewContainer
-                : entity.Transform;
+            _entityTransform = entity.Transform;
 
             _isDeadChangedDisposable = _isDead.Subscribe(OnIsDeadChanged);
         }
@@ -56,7 +53,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
             if (_entityTransform == null)
                 return;
 
-            _deathAnimation = CommonAnimationsCreator.CreateBeforeExplosionAnimation(
+            _deathAnimation = CommonAnimationsCreator.CreatePreExplosionAnimation(
                 _entityTransform,
                 ExplosionMaxScale,
                 _deathProcessInitialTime.Value);

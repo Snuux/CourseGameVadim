@@ -26,6 +26,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         private readonly MonoEntitiesFactory _monoEntitiesFactory;
         private readonly ConfigsProviderService _configsProviderService;
 
+        private const int BufferDefaultSize = 64;
+
         public EntitiesFactory(DIContainer container)
         {
             _container = container;
@@ -50,12 +52,11 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(towerConfig.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
                 .AddContactsDetectingMask(Layers.CharactersMask)
-                .AddContactCollidersBuffer(new Buffer<Collider>(64))
-                .AddContactEntitiesBuffer(new Buffer<Entity>(64))
+                .AddContactCollidersBuffer(new Buffer<Collider>(BufferDefaultSize))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(BufferDefaultSize))
                 .AddBodyContactDamage(new ReactiveVariable<float>(towerConfig.BodyContactDamage))
                 .AddTakeDamageRequest()
-                .AddTakeDamageEvent()
-                ;
+                .AddTakeDamageEvent();
 
             ICompositeCondition mustDie = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
@@ -111,8 +112,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddAttackStarted()
                 .AddAttackCompleted()
                 .AddTakeDamageRequest()
-                .AddTakeDamageEvent()
-                ;
+                .AddTakeDamageEvent();
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
@@ -140,8 +140,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddMustDie(mustDie)
                 .AddMustSelfRelease(mustSelfRelease)
                 .AddCanApplyDamage(canApplyDamage)
-                .AddCanStartAttack(canStartAttack)
-                ;
+                .AddCanStartAttack(canStartAttack);
 
             entity
                 .AddSystem(new RigidbodyMovementSystem())
@@ -153,55 +152,48 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
-                .AddSystem(new EndAttackSystem())
-                ;
+                .AddSystem(new EndAttackSystem());
 
             return entity;
         }
 
-        public Entity CreateAreaProjectile(Vector3 position, float radius, float damage, Entity owner)
+        public Entity InstantDamageZone(Vector3 position, Entity owner)
         {
-            AreaProjectileConfig config = _configsProviderService.GetConfig<AreaProjectileConfig>();
+            InstantDamageZoneConfig config = _configsProviderService.GetConfig<InstantDamageZoneConfig>();
 
             Entity entity = CreateEmpty();
 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
-
-            entity.BodyCollider.radius = radius;
-            entity.ViewContainer.localScale = new Vector3(radius * 2, .03f, radius * 2);
+            
+            entity.BodyCollider.radius = owner.AttackRadius.Value / 2;
 
             entity
                 .AddID(new ReactiveVariable<string>(config.ID))
                 .AddContactsDetectingMask(Layers.CharactersMask)
-                .AddContactCollidersBuffer(new Buffer<Collider>(64))
-                .AddContactEntitiesBuffer(new Buffer<Entity>(64))
-                .AddBodyContactDamage(new ReactiveVariable<float>(damage))
+                .AddContactCollidersBuffer(new Buffer<Collider>(BufferDefaultSize))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(BufferDefaultSize))
+                .AddBodyContactDamage(new ReactiveVariable<float>(owner.AttackDamage.Value))
+                .AddAttackRadius(new ReactiveVariable<float>(owner.AttackRadius.Value))
                 .AddIsDead()
-                .AddInDeathProcess()
-                .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
-                .AddDeathProcessCurrentTime()
                 .AddIsTouchAnotherTeam()
-                .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value))
-                ;
+                .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value));
 
             ICompositeCondition mustDie = new CompositeCondition()
                 .Add(new FuncCondition(() => true));
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsDead.Value))
-                .Add(new FuncCondition(() => entity.InDeathProcess.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value));
 
             entity
                 .AddMustDie(mustDie)
                 .AddMustSelfRelease(mustSelfRelease);
-
+            
             entity
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
                 .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new AnotherTeamTouchDetectorSystem())
                 .AddSystem(new DeathSystem())
-                .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
@@ -230,8 +222,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddIsDead()
                 .AddInDeathProcess()
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
-                .AddDeathProcessCurrentTime()
-                ;
+                .AddDeathProcessCurrentTime();
 
             ICompositeCondition canStartAttack = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));

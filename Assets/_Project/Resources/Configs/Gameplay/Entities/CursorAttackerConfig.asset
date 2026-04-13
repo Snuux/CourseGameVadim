@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: CursorAttacker
   <PrefabPath>k__BackingField: Entities/CursorAttacker
-  <AttackRadius>k__BackingField: 2
+  <AttackRadius>k__BackingField: 4
   <AttackDamage>k__BackingField: 99

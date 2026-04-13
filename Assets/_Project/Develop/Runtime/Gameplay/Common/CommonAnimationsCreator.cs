@@ -6,7 +6,7 @@ namespace _Project.Develop.Runtime.Gameplay.Common
 {
     public class CommonAnimationsCreator
     {
-        public static Sequence CreateBeforeExplosionAnimation(
+        public static Sequence CreatePreExplosionAnimation(
             Transform transform,
             float maxScale,
             float duration)
