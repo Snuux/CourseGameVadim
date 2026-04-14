@@ -3,6 +3,7 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Gameplay.HealthDisplay;
@@ -30,7 +31,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<ICoroutinesPerformer>(),
                 view,
                 _container.Resolve<SceneSwitcherService>(),
-                _gameplayInputArgs);
+                _container.Resolve<ILevelConfigProviderService>());
         }
 
         public WinPopupPresenter CreateWinPopupPresenter(WinPopupView view)

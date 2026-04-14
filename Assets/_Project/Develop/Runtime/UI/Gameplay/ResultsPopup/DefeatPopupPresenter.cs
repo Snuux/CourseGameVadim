@@ -1,4 +1,6 @@
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
@@ -8,19 +10,20 @@ namespace _Project.Develop.Runtime.UI.Gameplay.ResultsPopup
     public class DefeatPopupPresenter : PopupPresenterBase
     {
         private const string TitleName = "YOU LOOSE";
-        
+
         private readonly DefeatPopupView _view;
-        
+
         private readonly SceneSwitcherService _sceneSwitcherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
-        private readonly GameplayInputArgs _gameplayInputArgs;
-        
-        public DefeatPopupPresenter(ICoroutinesPerformer coroutinesPerformer, DefeatPopupView view, 
-            SceneSwitcherService sceneSwitcherService, GameplayInputArgs gameplayInputArgs) : base(coroutinesPerformer)
+        private readonly ILevelConfigProviderService _levelConfigProviderService;
+
+        public DefeatPopupPresenter(ICoroutinesPerformer coroutinesPerformer, DefeatPopupView view,
+            SceneSwitcherService sceneSwitcherService,
+            ILevelConfigProviderService levelConfigProviderService) : base(coroutinesPerformer)
         {
             _coroutinesPerformer = coroutinesPerformer;
             _sceneSwitcherService = sceneSwitcherService;
-            _gameplayInputArgs = gameplayInputArgs;
+            _levelConfigProviderService = levelConfigProviderService;
             _view = view;
         }
 
@@ -29,7 +32,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay.ResultsPopup
         public override void Initialize()
         {
             base.Initialize();
-            
+
             _view.SetTitle(TitleName);
             _view.ContinueClicked += OnContinueClicked;
             _view.RestartClicked += OnRestartClicked;
@@ -38,7 +41,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay.ResultsPopup
         protected override void OnPreHide()
         {
             base.OnPreHide();
-            
+
             _view.ContinueClicked -= OnContinueClicked;
             _view.RestartClicked -= OnRestartClicked;
         }
@@ -46,7 +49,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay.ResultsPopup
         public override void Dispose()
         {
             base.Dispose();
-            
+
             _view.ContinueClicked -= OnContinueClicked;
             _view.RestartClicked -= OnRestartClicked;
         }
@@ -55,19 +58,23 @@ namespace _Project.Develop.Runtime.UI.Gameplay.ResultsPopup
         {
             _coroutinesPerformer.StartPerform(_sceneSwitcherService
                 .ProcessSwitchTo(Scenes.MainMenu));
-            
+
             OnCloseRequest();
         }
-        
+
         private void OnRestartClicked()
         {
-            // todo restart func
-            //_coroutinesPerformer.StartPerform(_sceneSwitcherService
-            //    .ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(_gameplayInputArgs.LevelNumber)));
+            LevelConfig levelConfig = _levelConfigProviderService.Get();
 
-            
-            
-            
+            _coroutinesPerformer.StartPerform(
+                _sceneSwitcherService.ProcessSwitchTo(
+                    Scenes.Gameplay,
+                    new GameplayInputArgs(
+                        levelConfig.Reward.Type,
+                        levelConfig.Reward.Value,
+                        levelConfig.TowerMaxHealth,
+                        levelConfig.StageConfigs)));
+
             OnCloseRequest();
         }
     }
