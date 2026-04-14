@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 using UnityEngine;
@@ -39,12 +40,11 @@ namespace _Project.Develop.Runtime.UI.Gameplay.HealthDisplay
 
         private void OnEntityAdded(Entity entity)
         {
-            //todo
-            /*if (entity.TryGetHealthBarPoint(out Transform healthBarPoint))
+            if (entity.TryGetHealthBarPoint(out Transform healthBarPoint))
             {
                 BarWithText healthBarView = null;
 
-                if (entity.HasComponent<IsMainHero>())
+                if (entity.HasComponent<IsTower>())
                     healthBarView = _viewsFactory.Create<BarWithText>(ViewIDs.MainHeroHealthBar);
                 else
                     healthBarView = _viewsFactory.Create<BarWithText>(ViewIDs.SimpleHealthBar);
@@ -64,7 +64,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay.HealthDisplay
 
                 _entityToHealthBarInfo.Add(entity,
                     new EntityHealthBarInfo(healthBarPoint, removeReason, entityHealthPresenter));
-            }*/
+            }
         }
 
         public void Dispose()

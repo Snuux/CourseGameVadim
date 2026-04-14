@@ -15,6 +15,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
     {
         public ReactiveVariable<float> Value;
     }
+    
+    public class HealthBarPoint : IEntityComponent
+    {
+        public Transform Value;
+    }
 
     public class IsDead : IEntityComponent
     {

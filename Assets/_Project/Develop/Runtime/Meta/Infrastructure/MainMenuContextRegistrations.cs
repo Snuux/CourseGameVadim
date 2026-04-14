@@ -17,12 +17,6 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateMainMenuPresentersFactory);
             container.RegisterAsSingle(CreateMainMenuScreenPresenter).NonLazy();
             container.RegisterAsSingle(CreateMainMenuPopupService);
-            container.RegisterAsSingle<ILevelConfigProviderService>(CreateRandomLevelProviderService).NonLazy();
-        }
-        
-        private static RandomLevelConfigConfigProviderService CreateRandomLevelProviderService(DIContainer c)
-        {
-            return new RandomLevelConfigConfigProviderService(c.Resolve<ConfigsProviderService>());
         }
 
         private static MainMenuPopupService CreateMainMenuPopupService(DIContainer c)

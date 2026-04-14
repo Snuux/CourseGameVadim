@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: -4190965971629817911}
   - component: {fileID: 8178926596849676920}
   - component: {fileID: 4678305475604569214}
+  - component: {fileID: 4605895145315925849}
   - component: {fileID: -477930910927327690}
   - component: {fileID: 2788539638560889829}
   m_Layer: 6
@@ -381,6 +382,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colliders:
   - {fileID: 2788539638560889829}
+--- !u!114 &4605895145315925849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694565146182115110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333776c3c1ce43938ad4a38fb9f807fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transform: {fileID: 2027033193112070545}
 --- !u!54 &-477930910927327690
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -462,6 +476,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7945373370311427835}
   m_LocalEulerAnglesHint: {x: -0.2667085, y: 1.5215015, z: 8.892753}
+--- !u!1 &7919183332767973830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2027033193112070545}
+  m_Layer: 0
+  m_Name: HealthBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2027033193112070545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7919183332767973830}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.468, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8208488523239557642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8836546798674825392
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +545,7 @@ Transform:
   - {fileID: 3644997413941257965}
   - {fileID: 9214796419428234856}
   - {fileID: 1673627866892906364}
+  - {fileID: 2027033193112070545}
   m_Father: {fileID: 6184043881470378523}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2813135713295224944

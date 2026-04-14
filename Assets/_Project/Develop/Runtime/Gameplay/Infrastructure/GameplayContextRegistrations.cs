@@ -1,13 +1,16 @@
-﻿using _Project.Develop.Runtime.Configs.Gameplay.Stages;
+using _Project.Develop.Runtime.Configs.Gameplay.Shop;
+using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.ShopFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Gameplay;
@@ -38,6 +41,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStageFactory);
             container.RegisterAsSingle(CreateStagesProviderService);
             container.RegisterAsSingle(CreateTowerHolderService).NonLazy();
+            container.RegisterAsSingle(CreateShopService);
             container.RegisterAsSingle(CreateGameplayStateFactory);
             container.RegisterAsSingle(CreateGameplayStateContext);
             container.RegisterAsSingle(CreateEnemiesSpawnerService);
@@ -89,7 +93,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         public static EnemiesSpawnerService CreateEnemiesSpawnerService(DIContainer c)
         {
-            return new EnemiesSpawnerService(c.Resolve<EnemiesFactory>(),
+            return new EnemiesSpawnerService(
+                c.Resolve<EnemiesFactory>(),
                 c.Resolve<ConfigsProviderService>().GetConfig<SpawnerEnemiesConfig>());
         }
 
@@ -103,6 +108,16 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             return new GameplayStateFactory(c);
         }
 
+        private static ShopService CreateShopService(DIContainer c)
+        {
+            return new ShopService(
+                c.Resolve<TowerHolderService>(),
+                c.Resolve<AllyFactory>(),
+                c.Resolve<WalletService>(),
+                c.Resolve<EntitiesLifeContext>(),
+                c.Resolve<ConfigsProviderService>().GetConfig<ShopConfig>());
+        }
+
         private static TowerHolderService CreateTowerHolderService(DIContainer c)
         {
             return new TowerHolderService(c.Resolve<EntitiesLifeContext>());
@@ -110,9 +125,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static StageProviderService CreateStagesProviderService(DIContainer c)
         {
-            return new StageProviderService(
-                _inputArgs,
-                c.Resolve<StagesFactory>());
+            return new StageProviderService(_inputArgs, c.Resolve<StagesFactory>());
         }
 
         private static StagesFactory CreateStageFactory(DIContainer c)

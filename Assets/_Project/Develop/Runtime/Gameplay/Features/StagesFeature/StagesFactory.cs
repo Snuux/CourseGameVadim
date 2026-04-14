@@ -22,8 +22,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
             {
                 case ClearAllEnemiesStageConfig clearAllEnemiesStageConfig:
                     return new ClearAllEnemiesStage(
-                        clearAllEnemiesStageConfig, 
-                        _container.Resolve<EnemiesFactory>(),
+                        clearAllEnemiesStageConfig,
                         _container.Resolve<EntitiesLifeContext>(),
                         _container.Resolve<EnemiesSpawnerService>());
                 

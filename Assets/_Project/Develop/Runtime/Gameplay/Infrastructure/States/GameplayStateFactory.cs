@@ -1,6 +1,6 @@
-﻿using _Project.Develop.Runtime.Configs.Gameplay.Shop;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.ShopFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States.States;
@@ -9,7 +9,6 @@ using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.Conditions;
-using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
@@ -28,9 +27,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         private readonly WalletService _walletService;
         private readonly StatisticsService _statisticsService;
         private readonly EntitiesLifeContext _entitiesLifeContext;
-        private readonly ShopConfig _shopConfig;
+        private readonly ShopService _shopService;
         private readonly PlayerDataProvider _playerDataProvider;
-        private readonly SceneSwitcherService _sceneSwitcherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly GameplayPopupService _popupService;
 
@@ -46,9 +44,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             _walletService = _container.Resolve<WalletService>();
             _statisticsService = _container.Resolve<StatisticsService>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
-            _shopConfig = _container.Resolve<ConfigsProviderService>().GetConfig<ShopConfig>();
+            _shopService = _container.Resolve<ShopService>();
             _playerDataProvider = _container.Resolve<PlayerDataProvider>();
-            _sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
+            _container.Resolve<SceneSwitcherService>();
             _coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
             _popupService = _container.Resolve<GameplayPopupService>();
         }
@@ -68,8 +66,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
                     return true;
                 }))
                 .Add(new FuncCondition(() => _stageProviderService.CurrentStageResult.Value == StageResults.Completed))
-                .Add(new FuncCondition(() => _stageProviderService.HasNextStage() == false))
-                ;
+                .Add(new FuncCondition(() => _stageProviderService.HasNextStage() == false));
 
             ICompositeCondition coreLoopToDefeatCondition = new CompositeCondition()
                 .Add(new FuncCondition(() =>
@@ -125,13 +122,20 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 
         private WinState CreateWinState(GameplayInputArgs inputArgs)
         {
-            return new WinState(_inputService, inputArgs, _playerDataProvider, _sceneSwitcherService,
-                _coroutinesPerformer, _walletService, _statisticsService, _popupService);
+            return new WinState(
+                _inputService,
+                inputArgs,
+                _playerDataProvider,
+                _coroutinesPerformer,
+                _walletService,
+                _statisticsService,
+                _popupService, 
+                _shopService);
         }
 
         private DefeatState CreateDefeatState()
         {
-            return new DefeatState(_inputService, _sceneSwitcherService, _coroutinesPerformer, _statisticsService, _popupService);
+            return new DefeatState(_inputService, _statisticsService, _popupService, _shopService);
         }
 
         private StageProcessState CreateStageProcessState()
@@ -141,7 +145,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 
         private ShopState CreateCursorShopState()
         {
-            return new ShopState(_towerHolderService, _allyFactory, _inputService, _walletService, _shopConfig, _popupService);
+            return new ShopState(_shopService, _inputService, _popupService);
         }
     }
 }

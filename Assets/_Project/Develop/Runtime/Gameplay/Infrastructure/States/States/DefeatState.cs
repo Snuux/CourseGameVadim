@@ -1,9 +1,9 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.ShopFeature;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI.Gameplay;
-using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using _Project.Develop.Runtime.Utilities.SceneManagment;
+using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 using UnityEngine;
 
@@ -11,22 +11,19 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
 {
     public class DefeatState : EndGameState, IUpdatableState
     {
-        private readonly SceneSwitcherService _sceneSwitcherService;
-        private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly StatisticsService _statisticsService;
         private readonly GameplayPopupService _popupService;
+        private readonly ShopService _shopService;
 
         public DefeatState(
-            IInputService inputService,
-            SceneSwitcherService sceneSwitcherService,
-            ICoroutinesPerformer coroutinesPerformer, 
+            IInputService inputService, 
             StatisticsService statisticsService, 
-            GameplayPopupService popupService) : base(inputService)
+            GameplayPopupService popupService, 
+            ShopService shopService) : base(inputService)
         {
-            _sceneSwitcherService = sceneSwitcherService;
-            _coroutinesPerformer = coroutinesPerformer;
             _statisticsService = statisticsService;
             _popupService = popupService;
+            _shopService = shopService;
         }
 
         public override void Enter()
@@ -39,6 +36,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
             _statisticsService.Add(StatisticType.Defeats);
             
             _popupService.OpenDefeatPopup();
+            _shopService.CleanupSpawnedItems();
         }
 
         public void Update(float deltaTime)

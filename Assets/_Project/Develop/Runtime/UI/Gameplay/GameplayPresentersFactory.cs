@@ -31,7 +31,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<ICoroutinesPerformer>(),
                 view,
                 _container.Resolve<SceneSwitcherService>(),
-                _container.Resolve<ILevelConfigProviderService>());
+                _gameplayInputArgs);
         }
 
         public WinPopupPresenter CreateWinPopupPresenter(WinPopupView view)

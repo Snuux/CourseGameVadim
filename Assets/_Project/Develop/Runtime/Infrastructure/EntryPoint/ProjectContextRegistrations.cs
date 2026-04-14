@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
@@ -27,30 +28,24 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         public static void Process(DIContainer container)
         {
             container.RegisterAsSingle<ICoroutinesPerformer>(CreateCoroutinesPerformer);
-
             container.RegisterAsSingle(CreateConfigsProviderService);
-
             container.RegisterAsSingle(CreateResourcesAssetsLoader);
-
             container.RegisterAsSingle(CreateSceneLoaderService);
-
             container.RegisterAsSingle(CreateSceneSwitcherService);
-
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
-
             container.RegisterAsSingle(CreateWalletService).NonLazy();
-            
             container.RegisterAsSingle(CreateStatisticsService).NonLazy();
-
             container.RegisterAsSingle(CreatePlayerDataProvider);
-
             container.RegisterAsSingle(CreateProjectPresentersFactory);
-
             container.RegisterAsSingle(CreateViewsFactory);
-
             container.RegisterAsSingle(CreateTimerService);
-
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
+            container.RegisterAsSingle<ILevelConfigProviderService>(CreateRandomLevelProviderService);
+        }
+
+        private static RandomLevelConfigConfigProviderService CreateRandomLevelProviderService(DIContainer c)
+        {
+            return new RandomLevelConfigConfigProviderService(c.Resolve<ConfigsProviderService>());
         }
 
         private static TimerServiceFactory CreateTimerService(DIContainer c)
@@ -86,7 +81,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             return new WalletService(currencies, c.Resolve<PlayerDataProvider>());
         }
-        
+
         private static StatisticsService CreateStatisticsService(DIContainer c)
         {
             Dictionary<StatisticType, ReactiveVariable<int>> records = new();

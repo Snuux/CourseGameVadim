@@ -46,7 +46,6 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         private void CreateStageNumber()
         {
             StagePresenter stagePresenter = _gameplayPresentersFactory.CreateStagePresenter(_screen.StageView);
-            
             _childPresenters.Add(stagePresenter);
         }
 

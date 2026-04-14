@@ -19,6 +19,6 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 3
   <DeathProcessTime>k__BackingField: 2
   <ExplosionDamage>k__BackingField: 1
-  <ExplosionRadius>k__BackingField: 3
-  <AttackTriggerRadius>k__BackingField: 2
+  <ExplosionRadius>k__BackingField: 4
+  <AttackTriggerRadius>k__BackingField: 3
   <SpawnProcessTime>k__BackingField: 2

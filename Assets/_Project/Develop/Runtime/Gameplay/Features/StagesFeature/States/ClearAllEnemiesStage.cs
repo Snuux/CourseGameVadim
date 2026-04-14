@@ -11,7 +11,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States
     public class ClearAllEnemiesStage : IStage
     {
         private EntitiesLifeContext _entitiesLifeContext;
-        private EnemiesFactory _enemiesFactory;
         private EnemiesSpawnerService _enemiesSpawnerService;
         
         private ClearAllEnemiesStageConfig _config;
@@ -21,12 +20,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States
         private Dictionary<Entity, IDisposable> _spawnEnemiesToRemoveReason = new();
 
         public ClearAllEnemiesStage(ClearAllEnemiesStageConfig config,
-            EnemiesFactory enemiesFactory,
             EntitiesLifeContext entitiesLifeContext,
             EnemiesSpawnerService enemiesSpawnerService)
         {
             _config = config;
-            _enemiesFactory = enemiesFactory;
             _entitiesLifeContext = entitiesLifeContext;
             _enemiesSpawnerService = enemiesSpawnerService;
         }
