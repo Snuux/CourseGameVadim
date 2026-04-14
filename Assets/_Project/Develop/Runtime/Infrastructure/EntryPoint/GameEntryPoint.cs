@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
@@ -23,11 +24,9 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             Debug.Log("Процесс регистрации сервисов всего проекта");
 
             DIContainer projectContainer = new DIContainer();
-
             ProjectContextRegistrations.Process(projectContainer);
-
+            
             projectContainer.Initialize();
-
             projectContainer.Resolve<ICoroutinesPerformer>().StartPerform(Initialize(projectContainer));
         }
 
@@ -59,22 +58,25 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             else
                 playerDataProvider.Reset();
 
-            //yield return new WaitForSeconds(1f);
-
             Debug.Log("Завершается инициализация сервисов");
 
             loadingScreen.Hide();
 
-            //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
-            //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
-            //LevelConfig levelConfig = container.Resolve<ConfigsProviderService>().GetConfig<LevelConfig>();
-
-
-            //todo поправить что не конфиг в параметры идёт!!
-
+            // For test from gameplay state level #levelToTest
+            
+            //const int levelToTest = 1;
+            //LevelsListConfig levelsListConfig = configsProviderService.GetConfig<LevelsListConfig>();
+            //List<LevelConfig> levelConfigs = new List<LevelConfig>(levelsListConfig.Levels);
+            //
+            //LevelConfig levelConfig = levelConfigs[levelToTest];
+            //    
             //yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay,
-            //    new GameplayInputArgs(configsProviderService.GetConfig<LevelsListConfig>().Levels[1]));
-
+            //    new GameplayInputArgs(
+            //        levelConfig.Reward.Type,
+            //        levelConfig.Reward.Value,
+            //        levelConfig.TowerMaxHealth,
+            //        levelConfig.StageConfigs));
+            
             yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
         }
     }
