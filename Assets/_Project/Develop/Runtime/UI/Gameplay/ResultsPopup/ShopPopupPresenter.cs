@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.UI.Core;
-using _Project.Develop.Runtime.UI.Statistics;
 using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 
-namespace _Project.Develop.Runtime.UI.Gameplay.Stages
+namespace _Project.Develop.Runtime.UI.Gameplay.ResultsPopup
 {
     public class ShopPopupPresenter : PopupPresenterBase
     {

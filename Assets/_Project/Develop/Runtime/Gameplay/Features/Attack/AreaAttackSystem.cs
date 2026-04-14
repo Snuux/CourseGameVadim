@@ -3,7 +3,7 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaAttack
+namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 {
     public class AreaAttackSystem : IInitializableSystem, IUpdatableSystem
     {

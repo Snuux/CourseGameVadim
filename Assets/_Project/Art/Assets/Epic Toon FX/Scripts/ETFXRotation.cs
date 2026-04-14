@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
- 
-namespace EpicToonFX
+
+namespace _Project.Art.Assets.Epic_Toon_FX.Scripts
 {
     public class ETFXRotation : MonoBehaviour
     {

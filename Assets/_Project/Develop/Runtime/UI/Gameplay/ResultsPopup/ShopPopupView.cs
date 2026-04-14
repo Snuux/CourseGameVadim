@@ -4,7 +4,7 @@ using _Project.Develop.Runtime.UI.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Develop.Runtime.UI.Gameplay.Stages
+namespace _Project.Develop.Runtime.UI.Gameplay.ResultsPopup
 {
     public class ShopPopupView : PopupViewBase
     {
