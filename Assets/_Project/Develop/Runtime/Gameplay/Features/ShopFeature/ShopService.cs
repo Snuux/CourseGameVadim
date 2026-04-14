@@ -16,9 +16,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ShopFeature
         private readonly EntitiesLifeContext _entitiesLifeContext;
         private readonly ShopConfig _shopConfig;
 
+        private readonly Dictionary<Entity, IDisposable> _spawnedItemsToRemoveReason = new();
+        
         private Entity _entityParent;
         private IDisposable _towerRegisteredDisposable;
-        private Dictionary<Entity, IDisposable> _spawnedItemsToRemoveReason = new();
 
         public ShopService(
             TowerHolderService towerHolderService,
@@ -98,7 +99,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ShopFeature
 
         private void RegisterSpawnedItem(Entity spawnedItem)
         {
-            IDisposable removeReason = spawnedItem.IsDead.Subscribe((oldValue, isDead) =>
+            IDisposable removeReason = spawnedItem.IsDead.Subscribe((_, isDead) =>
             {
                 if (isDead == false)
                     return;

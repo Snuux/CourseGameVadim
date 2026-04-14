@@ -329,7 +329,7 @@ MonoBehaviour:
   <HUDLayer>k__BackingField: {fileID: 9154119899673815642}
   <PopupsLayer>k__BackingField: {fileID: 7741053952696840135}
   <VFXUnderPopupsLayer>k__BackingField: {fileID: 1949277521191872018}
-  <VFXOVerPopupsLayer>k__BackingField: {fileID: 1284123176839021587}
+  <VFXOverPopupsLayer>k__BackingField: {fileID: 1284123176839021587}
 --- !u!223 &1136511714046130803
 Canvas:
   m_ObjectHideFlags: 0

@@ -62,7 +62,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay.HealthDisplay
 
         private void UpdateFillerColorBy(Teams team)
         {
-            if (team == Teams.Ally) //todo check
+            if (team == Teams.Ally)
                 _bar.SetFillerColor(Color.green);
             else if (team == Teams.Enemies)
                 _bar.SetFillerColor(Color.red);
