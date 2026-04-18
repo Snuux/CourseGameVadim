@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.Experience;
 using _Project.Develop.Runtime.UI.Gameplay.HealthDisplay;
 using _Project.Develop.Runtime.UI.Gameplay.Stages;
 
@@ -10,7 +11,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         private readonly GameplayScreenView _screen;
         private readonly GameplayPresentersFactory _gameplayPresentersFactory;
         private readonly List<IPresenter> _childPresenters = new();
-        
+
         private EntitiesHealthDisplayPresenter _entityToHealthDisplayPresenter;
 
         public GameplayScreenPresenter(GameplayScreenView screen, GameplayPresentersFactory gameplayPresentersFactory)
@@ -23,7 +24,8 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         {
             CreateStageNumer();
             CreateEntitiesHealthDisplay();
-            
+            CreateMainHeroExperienceView();
+
             foreach (IPresenter childPresenter in _childPresenters)
                 childPresenter.Initialize();
         }
@@ -32,7 +34,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         {
             foreach (IPresenter childPresenter in _childPresenters)
                 childPresenter.Dispose();
-            
+
             _childPresenters.Clear();
         }
 
@@ -44,14 +46,23 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         private void CreateStageNumer()
         {
             StagePresenter stagePresenter = _gameplayPresentersFactory.CreateStagePresenter(_screen.StageView);
-            
+
             _childPresenters.Add(stagePresenter);
         }
 
         private void CreateEntitiesHealthDisplay()
         {
-            _entityToHealthDisplayPresenter = _gameplayPresentersFactory.CreateEntitiesHealthDisplayPresenter(_screen.EntitiesHealthDisplay);
+            _entityToHealthDisplayPresenter =
+                _gameplayPresentersFactory.CreateEntitiesHealthDisplayPresenter(_screen.EntitiesHealthDisplay);
             _childPresenters.Add(_entityToHealthDisplayPresenter);
+        }
+
+        private void CreateMainHeroExperienceView()
+        {
+            MainHeroExperiencePresenter experiencePresenter =
+                _gameplayPresentersFactory.CreateMainHeroExperiencePresenter(_screen.ExperienceBarView);
+
+            _childPresenters.Add(experiencePresenter);
         }
     }
 }

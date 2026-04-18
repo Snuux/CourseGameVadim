@@ -11,7 +11,7 @@ namespace _Project.Develop.Runtime.UI.CommonViews
 
         public void UpdateText(string text) => _text.text = text;
         
-        public void UpdateValue(float value) => _bar.UpdateValue(value);
+        public void UpdateSlider(float value) => _bar.UpdateSlider(value);
 
         public void SetFillerColor(Color color) => _bar.SetFillerColor(color);
     }

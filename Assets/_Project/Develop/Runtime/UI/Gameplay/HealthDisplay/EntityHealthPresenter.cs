@@ -57,7 +57,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay.HealthDisplay
         private void UpdateHealth()
         {
             _bar.UpdateText(_health.Value.ToString("0"));
-            _bar.UpdateValue(_health.Value / _maxHealth.Value);
+            _bar.UpdateSlider(_health.Value / _maxHealth.Value);
         }
 
         private void UpdateFillerColorBy(Teams team)

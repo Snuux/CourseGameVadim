@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -14,7 +15,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 
         public DefeatState(
             IInputService inputService, 
-            GameplayPopupService popupService) : base(inputService)
+            GameplayPopupService popupService,
+            IPauseService pauseService) : base(inputService, pauseService)
         {
             _popupService = popupService;
         }

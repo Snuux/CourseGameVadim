@@ -1,4 +1,6 @@
 using System;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.UI.AbilitySelectPopup;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using UnityEngine;
@@ -39,6 +41,18 @@ namespace _Project.Develop.Runtime.UI.Gameplay
             
             OnPopupCreated(popup, view, closedCallback);
             
+            return popup;
+        }
+
+        public AbilitySelectPopupPresenter OpenAbilityPopupPresenter(Entity entity, int level, Action closedCallback = null)
+        {
+            AbilitySelectPopupView view 
+                = ViewsFactory.Create<AbilitySelectPopupView>(ViewIDs.AbilitySelectPopup, PopupLayer);
+            AbilitySelectPopupPresenter popup 
+                = _gameplayPresentersFactory.CreateAbilitySelectPopupPresenter(view, entity, level);
+            
+            OnPopupCreated(popup, view, closedCallback);
+
             return popup;
         }
     }

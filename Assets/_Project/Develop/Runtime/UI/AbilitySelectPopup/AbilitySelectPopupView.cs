@@ -1,0 +1,59 @@
+using System;
+using _Project.Develop.Runtime.UI.Core;
+using DG.Tweening;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+using Sequence = DG.Tweening.Sequence;
+
+namespace _Project.Develop.Runtime.UI.AbilitySelectPopup
+{
+    public class AbilitySelectPopupView : PopupViewBase
+    {
+        public event Action SelectButtonClicked;
+        
+        [SerializeField] private TMP_Text _title;
+        [SerializeField] private TMP_Text _selectAbilityText;
+        
+        [SerializeField] private Button _selectButton;
+        
+        [SerializeField] private SelectableAbilityListView _abilityListView;
+        
+        public SelectableAbilityListView AbilityListView => _abilityListView;
+
+        private void OnEnable()
+        {
+            _selectButton.onClick.AddListener(OnSelectButtonClicked);
+        }
+
+        private void OnDisable()
+        {
+            _selectButton.onClick.RemoveListener(OnSelectButtonClicked);
+        }
+
+        protected override void ModifyShowAnimation(Sequence animation)
+        {
+            base.ModifyShowAnimation(animation);
+
+            animation.Append(_abilityListView.Show());
+        }
+        
+        protected override void ModifyHideAnimation(Sequence animation)
+        {
+            base.ModifyHideAnimation(animation);
+
+            animation.Append(_abilityListView.Hide());
+        }
+
+        public void SetTitle(string title) => _title.text = title;
+
+        public void SelectButtonOn() => _selectButton.gameObject.SetActive(true);
+
+        public void SelectButtonOff() => _selectButton.gameObject.SetActive(false);
+
+        public void SetAdditionalText(string text) => _selectAbilityText.text = text;
+
+        private void OnSelectButtonClicked() => SelectButtonClicked?.Invoke();
+    }
+}

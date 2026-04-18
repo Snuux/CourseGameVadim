@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
 using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -24,7 +25,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             GameplayInputArgs gameplayInputArgs,
             PlayerDataProvider playerDataProvider,
             ICoroutinesPerformer coroutinesPerformer, 
-            GameplayPopupService popupService) : base(inputService)
+            GameplayPopupService popupService,
+            IPauseService pauseService) : base(inputService, pauseService)
         {
             _levelsProgressionService = levelsProgressionService;
             _gameplayInputArgs = gameplayInputArgs;

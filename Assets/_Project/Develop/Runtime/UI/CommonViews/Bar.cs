@@ -9,7 +9,7 @@ namespace _Project.Develop.Runtime.UI.CommonViews
         [SerializeField] private Slider _slider;
         [SerializeField] private Image _filler;
 
-        public void UpdateValue(float value) => _slider.value = value;
+        public void UpdateSlider(float value) => _slider.value = value;
 
         public void SetFillerColor(Color color) => _filler.color = color;
     }

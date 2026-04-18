@@ -77,6 +77,11 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
                 coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu));
             }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _container.Resolve<MainHeroHolderService>().MainHero.Experience.Value += 1000;
+            }
         }
 
         private void LateUpdate()

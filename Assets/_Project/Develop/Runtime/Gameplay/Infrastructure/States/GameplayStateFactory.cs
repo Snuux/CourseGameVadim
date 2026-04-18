@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
+using _Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
@@ -38,7 +39,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
                 inputArgs,
                 _container.Resolve<PlayerDataProvider>(),
                 _container.Resolve<ICoroutinesPerformer>(),
-                _container.Resolve<GameplayPopupService>()
+                _container.Resolve<GameplayPopupService>(),
+                _container.Resolve<IPauseService>()
             );
         }
 
@@ -46,7 +48,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         {
             return new DefeatState(
                 _container.Resolve<IInputService>(),
-                _container.Resolve<GameplayPopupService>()
+                _container.Resolve<GameplayPopupService>(),
+                _container.Resolve<IPauseService>()
             );
         }
 

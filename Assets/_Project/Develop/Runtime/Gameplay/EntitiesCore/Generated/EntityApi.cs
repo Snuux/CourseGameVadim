@@ -189,6 +189,78 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.StatFeature.BaseStats BaseStatsC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.StatFeature.BaseStats>();
+
+		public System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single> BaseStats => BaseStatsC.Value;
+
+		public bool TryGetBaseStats(out System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.StatFeature.BaseStats component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBaseStats()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.StatFeature.BaseStats() { Value = new System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBaseStats(System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.StatFeature.BaseStats() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.StatFeature.ModifiedStats ModifiedStatsC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.StatFeature.ModifiedStats>();
+
+		public System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single> ModifiedStats => ModifiedStatsC.Value;
+
+		public bool TryGetModifiedStats(out System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.StatFeature.ModifiedStats component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddModifiedStats()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.StatFeature.ModifiedStats() { Value = new System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddModifiedStats(System.Collections.Generic.Dictionary<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatTypes, System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.StatFeature.ModifiedStats() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffects StatsEffectsC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffects>();
+
+		public _Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffectsList StatsEffects => StatsEffectsC.Value;
+
+		public bool TryGetStatsEffects(out _Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffectsList value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffects component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffectsList);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStatsEffects()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffects() { Value = new _Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffectsList() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStatsEffects(_Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffectsList value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.StatFeature.StatsEffects() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.SpawnFeature.SpawnInitialTime SpawnInitialTimeC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.SpawnFeature.SpawnInitialTime>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SpawnInitialTime => SpawnInitialTimeC.Value;
@@ -792,6 +864,54 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDisableCollidersOnDeath(System.Collections.Generic.List<UnityEngine.Collider> value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LifeCycle.DisableCollidersOnDeath() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Experience ExperienceC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Experience>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> Experience => ExperienceC.Value;
+
+		public bool TryGetExperience(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Experience component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddExperience()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Experience() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddExperience(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Experience() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Level LevelC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Level>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> Level => LevelC.Value;
+
+		public bool TryGetLevel(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Level component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLevel()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Level() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLevel(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature.Level() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.Energy.MaxEnergy MaxEnergyC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Energy.MaxEnergy>();
@@ -1444,6 +1564,30 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentTarget(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<_Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent AbilitiesC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent>();
+
+		public _Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList Abilities => AbilitiesC.Value;
+
+		public bool TryGetAbilities(out _Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAbilities()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent() { Value = new _Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAbilities(_Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Common.RigidbodyComponent RigidbodyC => GetComponent<_Project.Develop.Runtime.Gameplay.Common.RigidbodyComponent>();

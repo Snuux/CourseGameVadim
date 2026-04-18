@@ -30,6 +30,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         public void Dispose()
         {
             _isRunning = false;
+            _gameplayStateMachine.Exit(); // не вызывали раньше
             _gameplayStateMachine.Dispose();
         }
     }
