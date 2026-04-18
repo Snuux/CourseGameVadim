@@ -1,5 +1,7 @@
-﻿using _Project.Develop.Runtime.Configs.Gameplay.Entities;
+﻿using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
+using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Gameplay.Features.AbilityFeature;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.AI.Selectors;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
@@ -34,9 +36,23 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
             HeroConfig config = _configsProviderService.GetConfig<HeroConfig>();
 
             Entity entity = _entitiesFactory.CreateHero(position, config);
-            entity.AddCurrentTarget();
-            entity.AddIsMainHero();
-            entity.AddTeam(new ReactiveVariable<Teams>(Teams.MainHero));
+            
+            entity
+                .AddIsMainHero()
+                .AddCurrentTarget()
+                .AddTeam(new ReactiveVariable<Teams>(Teams.MainHero));
+
+            //AbilityFactory abilityFactory = _container.Resolve<AbilityFactory>();
+            //AbilitiesList abilitiesList = new AbilitiesList();
+            //
+            //abilitiesList.Add(abilityFactory.CreateAbilityFor(entity, _configsProviderService.GetConfig<AbilitiesConfigsContainer>().AbilityConfigs[1]));
+            //abilitiesList.Add(abilityFactory.CreateAbilityFor(entity, _configsProviderService.GetConfig<AbilitiesConfigsContainer>().AbilityConfigs[3]));
+            //abilitiesList.Add(abilityFactory.CreateAbilityFor(entity, _configsProviderService.GetConfig<AbilitiesConfigsContainer>().AbilityConfigs[3]));
+            //abilitiesList.Add(abilityFactory.CreateAbilityFor(entity, _configsProviderService.GetConfig<AbilitiesConfigsContainer>().AbilityConfigs[3]));
+            
+            entity
+                .AddAbilities()//abilitiesList)
+                .AddSystem(new AbilityOnAddActivatorSystem());
             
             _brainsFactory.CreateMainHeroBrain(entity, new NearestDamageableTargetSelector(entity));
 

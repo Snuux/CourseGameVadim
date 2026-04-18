@@ -1,8 +1,12 @@
+using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using _Project.Develop.Runtime.Gameplay.Features.AbilitiesDroppingFeature;
+using _Project.Develop.Runtime.Gameplay.Features.AbilityFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.UI.AbilitySelectPopup;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Gameplay.HealthDisplay;
@@ -22,6 +26,31 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         {
             _container = container;
             _gameplayInputArgs = gameplayInputArgs;
+        }
+
+        public AbilitySelectPopupPresenter CreateAbilitySelectPopupPresenter(
+            AbilitySelectPopupView view,
+            Entity entity)
+        {
+            return new AbilitySelectPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                view,
+                entity,
+                _container.Resolve<AbilityDropService>(),
+                this,
+                _container.Resolve<ViewsFactory>());
+        }
+
+        public SelectableAbilityPresenter CreateSelectableAbilityPresenter(
+            AbilityConfig abilityConfig,
+            SelectableAbilityView view,
+            Entity entity)
+        {
+            return new SelectableAbilityPresenter(
+                abilityConfig,
+                view,
+                _container.Resolve<AbilityFactory>(),
+                entity);
         }
 
         public DefeatPopupPresenter CreateDefeatPopupPresenter(DefeatPopupView view)
@@ -49,7 +78,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         public GameplayScreenPresenter CreateGameplayScreenPresenter(GameplayScreenView view)
         {
             return new GameplayScreenPresenter(
-                view, 
+                view,
                 _container.Resolve<GameplayPresentersFactory>());
         }
 

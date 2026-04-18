@@ -1,6 +1,9 @@
-﻿using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+﻿using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using _Project.Develop.Runtime.Gameplay.Features.AbilitiesDroppingFeature;
+using _Project.Develop.Runtime.Gameplay.Features.AbilityFeature;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
@@ -26,39 +29,46 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _inputArgs = args;
 
             container.RegisterAsSingle(CreateEntitiesFactory);
-
             container.RegisterAsSingle(CreateEntitiesLifeContext);
-
             container.RegisterAsSingle(CreateCollidersRegistryService);
-
             container.RegisterAsSingle(CreateBrainsFactory);
-
             container.RegisterAsSingle(CreateAIBrainsContext);
-
             container.RegisterAsSingle<IInputService>(CreateDesktopInput);
-
             container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
-
             container.RegisterAsSingle(CreateMainHeroFactory);
-
             container.RegisterAsSingle(CreateEnemiesFactory);
-
             container.RegisterAsSingle(CreateStageFactory);
-
             container.RegisterAsSingle(CreateStagesProviderService);
-
             container.RegisterAsSingle(CreatePreparationTriggerService);
-            
             container.RegisterAsSingle(CreateMainHeroHolderService).NonLazy();
-
             container.RegisterAsSingle(CreateGameplayStateFactory);
-            
             container.RegisterAsSingle(CreateGameplayStateContext);
+            
+            container.RegisterAsSingle(CreateAbilityFactory);
+            container.RegisterAsSingle(CreateAbilityDroppingRuleService);
+            container.RegisterAsSingle(CreateAbilityDropService);
             
             container.RegisterAsSingle(CreateGameplayUIRoot).NonLazy();
             container.RegisterAsSingle(CreateGameplayPresentersFactory);
             container.RegisterAsSingle(CreateGameplayScreenPresenter).NonLazy();
             container.RegisterAsSingle(CreateGameplayPopupService);
+        }
+
+        private static AbilityDroppingRuleService CreateAbilityDroppingRuleService(DIContainer c)
+        {
+            return new AbilityDroppingRuleService();
+        }
+        
+        private static AbilityDropService CreateAbilityDropService(DIContainer c)
+        {
+            return new AbilityDropService(
+                c.Resolve<AbilitiesConfigsContainer>(),
+                c.Resolve<AbilityDroppingRuleService>());
+        }
+
+        private static AbilityFactory CreateAbilityFactory(DIContainer c)
+        {
+            return new AbilityFactory(c);
         }
         
         private static GameplayPopupService CreateGameplayPopupService(DIContainer c)

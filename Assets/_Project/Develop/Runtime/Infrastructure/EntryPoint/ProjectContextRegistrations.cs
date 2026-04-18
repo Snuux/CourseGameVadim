@@ -27,29 +27,17 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         public static void Process(DIContainer container)
         {
             container.RegisterAsSingle<ICoroutinesPerformer>(CreateCoroutinesPerformer);
-
             container.RegisterAsSingle(CreateConfigsProviderService);
-
             container.RegisterAsSingle(CreateResourcesAssetsLoader);
-
             container.RegisterAsSingle(CreateSceneLoaderService);
-
             container.RegisterAsSingle(CreateSceneSwitcherService);
-
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
-
             container.RegisterAsSingle(CreateWalletService).NonLazy();
-
             container.RegisterAsSingle(CreatePlayerDataProvider);
-
             container.RegisterAsSingle(CreateProjectPresentersFactory);
-
             container.RegisterAsSingle(CreateViewsFactory);
-
             container.RegisterAsSingle(CreateTimerService);
-
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
-
             container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
         }
 
