@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Configs.Gameplay.Loot;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.AbilitiesDroppingFeature;
@@ -8,6 +9,7 @@ using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature;
+using _Project.Develop.Runtime.Gameplay.Features.LootFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
@@ -55,14 +57,35 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayPopupService);
             container.RegisterAsSingle<IPauseService>(CreateTimeScalePauseService);
             container.RegisterAsSingle(CreateDropAbilityOnMainHeroLevelUpService).NonLazy();
+
+            container.RegisterAsSingle(CreateLootFactory);
+            container.RegisterAsSingle(CreateDropLootService);
             
+            container.RegisterAsSingle(CreateLootPullingService).NonLazy();
+        }
+
+        private static LootPullingService CreateLootPullingService(DIContainer c)
+        {
+            return new LootPullingService(c.Resolve<EntitiesLifeContext>());
+        }
+
+        private static DropLootService CreateDropLootService(DIContainer c)
+        {
+            return new DropLootService(
+                c.Resolve<ConfigsProviderService>().GetConfig<LootListConfig>(),
+                c.Resolve<LootFactory>());
+        }
+
+        private static LootFactory CreateLootFactory(DIContainer c)
+        {
+            return new LootFactory(c);
         }
 
         private static TimeScalePauseService CreateTimeScalePauseService(DIContainer c)
         {
             return new TimeScalePauseService();
         }
-        
+
         private static DropAbilityOnMainHeroLevelUpService CreateDropAbilityOnMainHeroLevelUpService(DIContainer c)
         {
             return new DropAbilityOnMainHeroLevelUpService(
@@ -71,12 +94,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<ICoroutinesPerformer>(),
                 c.Resolve<IPauseService>());
         }
-        
+
         private static AbilityDroppingRuleService CreateAbilityDroppingRuleService(DIContainer c)
         {
             return new AbilityDroppingRuleService();
         }
-        
+
         private static AbilityDropService CreateAbilityDropService(DIContainer c)
         {
             return new AbilityDropService(
@@ -88,7 +111,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         {
             return new AbilityFactory(c);
         }
-        
+
         private static GameplayPopupService CreateGameplayPopupService(DIContainer c)
         {
             return new GameplayPopupService(
@@ -130,12 +153,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         public static GameplayStateContext CreateGameplayStateContext(DIContainer c)
         {
-            return new GameplayStateContext(c.Resolve<GameplayStateFactory>().CreateGameplayStateMachine(_inputArgs));
+            return new GameplayStateContext(c.Resolve<GameplayStatesFactory>().CreateGameplayStateMachine(_inputArgs));
         }
 
-        public static GameplayStateFactory CreateGameplayStateFactory(DIContainer c)
+        public static GameplayStatesFactory CreateGameplayStateFactory(DIContainer c)
         {
-            return new GameplayStateFactory(c);
+            return new GameplayStatesFactory(c);
         }
 
         private static MainHeroHolderService CreateMainHeroHolderService(DIContainer c)

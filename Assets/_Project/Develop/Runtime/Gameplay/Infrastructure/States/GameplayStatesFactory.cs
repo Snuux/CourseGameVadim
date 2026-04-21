@@ -1,9 +1,11 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.LootFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
 using _Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -12,13 +14,20 @@ using _Project.Develop.Runtime.Utilities.SceneManagment;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
 {
-    public class GameplayStateFactory
+    public class GameplayStatesFactory
     {
         private readonly DIContainer _container;
 
-        public GameplayStateFactory(DIContainer container)
+        public GameplayStatesFactory(DIContainer container)
         {
             _container = container;
+        }
+
+        public CollectLootState CreateCollectLootState()
+        {
+            return new CollectLootState(
+                _container.Resolve<LootPullingService>(),
+                _container.Resolve<MainHeroHolderService>());
         }
 
         public PreparationState CreatePreparationState()
@@ -40,7 +49,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
                 _container.Resolve<PlayerDataProvider>(),
                 _container.Resolve<ICoroutinesPerformer>(),
                 _container.Resolve<GameplayPopupService>(),
-                _container.Resolve<IPauseService>()
+                _container.Resolve<IPauseService>(),
+                _container.Resolve<WalletService>(),
+                _container.Resolve<MainHeroHolderService>()
             );
         }
 
@@ -92,7 +103,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
         {
             PreparationTriggerService preparationTriggerService = _container.Resolve<PreparationTriggerService>();
             StageProviderService stageProviderService = _container.Resolve<StageProviderService>();
+            LootPullingService lootPullingService = _container.Resolve<LootPullingService>();
 
+            CollectLootState collectLootState = CreateCollectLootState();
             PreparationState preparationState = CreatePreparationState();
             StageProcessState stageProcessState = CreateStageProcessState();
 
@@ -100,16 +113,21 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
                 .Add(new FuncCondition(() => preparationTriggerService.HasMainHeroContact.Value))
                 .Add(new FuncCondition(() => stageProviderService.HasNextStage()));
 
-            FuncCondition stageProcessToPreparationCondition =
+            FuncCondition stageProcessToCollectStateCondition =
                 new FuncCondition(() => stageProviderService.CurrentStageResult.Value == StageResults.Completed);
+
+            FuncCondition collectStateToPreparationCondition =
+                new FuncCondition(() => lootPullingService.AllCollected.Value);
 
             GameplayStateMachine coreLoopState = new GameplayStateMachine();
 
             coreLoopState.AddState(preparationState);
             coreLoopState.AddState(stageProcessState);
+            coreLoopState.AddState(collectLootState);
 
             coreLoopState.AddTransition(preparationState, stageProcessState, preparationToStageProcessCondition);
-            coreLoopState.AddTransition(stageProcessState, preparationState, stageProcessToPreparationCondition);
+            coreLoopState.AddTransition(stageProcessState, collectLootState, stageProcessToCollectStateCondition);
+            coreLoopState.AddTransition(collectLootState, preparationState, collectStateToPreparationCondition);
 
             return coreLoopState;
         }

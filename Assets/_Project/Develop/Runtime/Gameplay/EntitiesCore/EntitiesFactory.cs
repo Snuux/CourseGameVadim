@@ -7,7 +7,9 @@ using _Project.Develop.Runtime.Gameplay.Features.Attack.Area;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot;
 using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Energy;
+using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
+using _Project.Develop.Runtime.Gameplay.Features.LootFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Gameplay.Features.Sensors;
 using _Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
@@ -374,6 +376,42 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             _entitiesLifeContext.Add(entity);
 
+            return entity;
+        }
+
+        public Entity CreatePullable(string prefabPath, Vector3 position)
+        {
+            Entity entity = CreateEmpty();
+            
+            _monoEntitiesFactory.Create(entity, position, prefabPath);
+
+            entity
+                .AddIsPullable()
+                .AddIsPullingProcess(new ReactiveVariable<bool>(true))
+                .AddCurrentTarget(new ReactiveVariable<Entity>(null))
+                .AddInSpawnProcess(new ReactiveVariable<bool>(true))
+                .AddMoveDirection()
+                .AddMoveSpeed(new ReactiveVariable<float>(12))
+                .AddIsMoving()
+                .AddIsCollected();
+            
+            ICompositeCondition moveCondition = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsPullingProcess.Value))
+                .Add(new FuncCondition(()=> entity.InSpawnProcess.Value == false));
+            
+            ICompositeCondition mustSelfRelease = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsCollected.Value));
+            
+            entity
+                .AddCanMove(moveCondition)
+                .AddMustSelfRelease(mustSelfRelease);
+            
+            entity
+                .AddSystem(new GenerateMoveDirectionToTargetSystem())
+                .AddSystem(new RigidbodyMovementSystem())
+                .AddSystem(new CollectedOnNearToTargetSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+            
             return entity;
         }
 

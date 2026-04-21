@@ -41,7 +41,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
 
             entity
                 .AddIsMainHero()
-                .AddCurrentTarget()
                 .AddTeam(new ReactiveVariable<Teams>(Teams.MainHero));
 
             //AbilityFactory abilityFactory = _container.Resolve<AbilityFactory>();
@@ -61,6 +60,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
                 .AddLevel(new ReactiveVariable<int>(1))
                 .AddSystem(new LevelUpSystem(_configsProviderService.GetConfig<ExperienceForUpgradeConfig>()));
 
+            entity
+                .AddCoins();
+
+            entity
+                .AddCurrentTarget();
+            
             _brainsFactory.CreateMainHeroBrain(entity, new NearestDamageableTargetSelector(entity));
 
             _entitiesLifeContext.Add(entity);

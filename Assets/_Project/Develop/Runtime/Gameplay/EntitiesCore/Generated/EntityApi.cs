@@ -641,6 +641,128 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MainHero.IsMainHero() ); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsPullable IsPullableC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LootFeature.IsPullable>();
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsPullable()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsPullable() ); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsPullingProcess IsPullingProcessC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LootFeature.IsPullingProcess>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> IsPullingProcess => IsPullingProcessC.Value;
+
+		public bool TryGetIsPullingProcess(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsPullingProcess component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsPullingProcess()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsPullingProcess() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsPullingProcess(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsPullingProcess() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsCollected IsCollectedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LootFeature.IsCollected>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> IsCollected => IsCollectedC.Value;
+
+		public bool TryGetIsCollected(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsCollected component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsCollected()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsCollected() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsCollected(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.IsCollected() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.LootFeature.Coins CoinsC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LootFeature.Coins>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> Coins => CoinsC.Value;
+
+		public bool TryGetCoins(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.LootFeature.Coins component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCoins()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.Coins() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCoins(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.Coins() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.LootFeature.LootIsDropped LootIsDroppedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LootFeature.LootIsDropped>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> LootIsDropped => LootIsDroppedC.Value;
+
+		public bool TryGetLootIsDropped(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.LootFeature.LootIsDropped component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLootIsDropped()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.LootIsDropped() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLootIsDropped(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.LootIsDropped() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.LootFeature.CanDropLoot CanDropLootC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LootFeature.CanDropLoot>();
+
+		public _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanDropLoot => CanDropLootC.Value;
+
+		public bool TryGetCanDropLoot(out _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.LootFeature.CanDropLoot component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanDropLoot(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LootFeature.CanDropLoot() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth CurrentHealthC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> CurrentHealth => CurrentHealthC.Value;
