@@ -1204,6 +1204,25 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage.BodyContactDamage() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.InstanShootingDirections InstanShootingDirectionsC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.InstanShootingDirections>();
+
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot.InstantShootingDirectionArgs InstanShootingDirections => InstanShootingDirectionsC.Value;
+
+		public bool TryGetInstanShootingDirections(out _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot.InstantShootingDirectionArgs value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.Attack.InstanShootingDirections component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Gameplay.Features.Attack.Shoot.InstantShootingDirectionArgs);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInstanShootingDirections(_Project.Develop.Runtime.Gameplay.Features.Attack.Shoot.InstantShootingDirectionArgs value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.InstanShootingDirections() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.Attack.StartAttackRequest StartAttackRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.StartAttackRequest>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent StartAttackRequest => StartAttackRequestC.Value;

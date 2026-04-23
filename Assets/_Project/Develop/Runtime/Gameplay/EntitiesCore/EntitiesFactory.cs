@@ -50,9 +50,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             //StatsEffectsList statsEffectsList = new StatsEffectsList();
             //statsEffectsList.Add(new StatsEffect(StatTypes.MoveSpeed, stat => stat * 4));
             //statsEffectsList.Add(new StatsEffect(StatTypes.MaxHealth, stat => stat * 15));
-            
+
             entity
-                .AddStatsEffects()//statsEffectsList)
+                .AddStatsEffects() //statsEffectsList)
                 .AddBaseStats(baseStats)
                 .AddModifiedStats(modifiedStats)
                 .AddMoveDirection()
@@ -66,6 +66,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddInDeathProcess()
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
+                .AddInstanShootingDirections(new InstantShootingDirectionArgs(
+                    new InstantShotDirectionArgs(0, 1)))
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
                 .AddAttackProcessInitialTime(new ReactiveVariable<float>(config.AttackProcessTime))
@@ -128,7 +130,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AttackProcessTimerSystem())
                 .AddSystem(new AttackDelayEndTriggerSystem())
-                .AddSystem(new InstantShootSystem(this))
+                .AddSystem(new DirectionsInstantShootSystem(this))
                 .AddSystem(new EndAttackSystem())
                 .AddSystem(new AttackCooldownTimerSystem())
                 .AddSystem(new ApplyDamageSystem())
@@ -170,13 +172,13 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 ;
 
             ICompositeCondition canMove = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsDead.Value == false))
-                .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false))
+                    .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                    .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false))
                 ;
 
             ICompositeCondition canRotate = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsDead.Value == false))
-                .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false))
+                    .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                    .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false))
                 ;
 
             ICompositeCondition mustDie = new CompositeCondition()
@@ -187,8 +189,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .Add(new FuncCondition(() => entity.InDeathProcess.Value == false));
 
             ICompositeCondition canApplyDamage = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsDead.Value == false))
-                .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false))
+                    .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                    .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false))
                 ;
 
             entity
@@ -219,7 +221,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             Entity entity = CreateEmpty();
 
             _monoEntitiesFactory.Create(entity, position, "Entities/Mage");
-            
+
             entity
                 .AddMaxHealth(new ReactiveVariable<float>(3000))
                 .AddCurrentHealth(new ReactiveVariable<float>(30))
@@ -351,7 +353,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             return entity;
         }
-        
+
         public Entity CreateContactTrigger(Vector3 position)
         {
             Entity entity = CreateEmpty();
@@ -375,7 +377,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         public Entity CreatePullable(string prefabPath, Vector3 position)
         {
             Entity entity = CreateEmpty();
-            
+
             _monoEntitiesFactory.Create(entity, position, prefabPath);
 
             entity
@@ -387,24 +389,24 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddMoveSpeed(new ReactiveVariable<float>(12))
                 .AddIsMoving()
                 .AddIsCollected();
-            
+
             ICompositeCondition moveCondition = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsPullingProcess.Value))
-                .Add(new FuncCondition(()=> entity.InSpawnProcess.Value == false));
-            
+                .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false));
+
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsCollected.Value));
-            
+
             entity
                 .AddCanMove(moveCondition)
                 .AddMustSelfRelease(mustSelfRelease);
-            
+
             entity
                 .AddSystem(new GenerateMoveDirectionToTargetSystem())
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new CollectedOnNearToTargetSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
-            
+
             return entity;
         }
 

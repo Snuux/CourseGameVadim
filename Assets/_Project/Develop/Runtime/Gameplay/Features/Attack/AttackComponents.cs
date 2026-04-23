@@ -1,10 +1,16 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 {
+    public class InstanShootingDirections : IEntityComponent
+    {
+        public InstantShootingDirectionArgs Value;
+    }
+
     public class StartAttackRequest : IEntityComponent
     {
         public ReactiveEvent Value;
