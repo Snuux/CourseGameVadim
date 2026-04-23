@@ -26,6 +26,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilityFeature
                 case AdditionalDirectionsShotAbilityConfig additionalDirectionsShotAbilityConfig:
                     return new AdditionalDirectionsShotAbility(additionalDirectionsShotAbilityConfig, entity, currentLevel);
 
+                case BounceProjectileAbilityConfig bounceProjectileAbilityConfig:
+                    return new BounceProjectileAbility(
+                        bounceProjectileAbilityConfig,
+                        entity,
+                        _container.Resolve<EntitiesLifeContext>(),
+                        currentLevel);
+
                 default:
                     throw new ArgumentException($"Unknown ability config {config}");
             }

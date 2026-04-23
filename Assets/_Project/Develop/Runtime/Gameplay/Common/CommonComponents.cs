@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Common
@@ -11,5 +12,10 @@ namespace _Project.Develop.Runtime.Gameplay.Common
     public class TransformComponent : IEntityComponent
     {
         public Transform Value;
+    }
+
+    public class Owner : IEntityComponent
+    {
+        public ReactiveVariable<Entity> Value;
     }
 }

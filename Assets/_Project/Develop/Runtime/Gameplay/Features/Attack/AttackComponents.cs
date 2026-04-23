@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 {
+    public class IsProjectile : IEntityComponent
+    {
+    }
+    
     public class InstanShootingDirections : IEntityComponent
     {
         public InstantShootingDirectionArgs Value;

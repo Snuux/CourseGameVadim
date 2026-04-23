@@ -302,6 +302,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _monoEntitiesFactory.Create(entity, position, "Entities/Projectile");
 
             entity
+                .AddIsProjectile()
+                .AddOwner(new ReactiveVariable<Entity>(owner))
+                    
                 .AddMoveDirection(new ReactiveVariable<Vector3>(direction))
                 .AddMoveSpeed(new ReactiveVariable<float>(25))
                 .AddIsMoving()
@@ -317,9 +320,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddIsTouchDeathMask()
                 .AddIsTouchAnotherTeam()
                 .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value))
-                .AddBounceEvent()
-                .AddLayerToBounceReaction(Layers.EnvironmentMask)
-                .AddBounceCount(new ReactiveVariable<int>(3))
+                //.AddBounceEvent()
+                //.AddLayerToBounceReaction(Layers.EnvironmentMask)
+                //.AddBounceCount(new ReactiveVariable<int>(3))
                 ;
 
             ICompositeCondition canMove = new CompositeCondition()
@@ -329,7 +332,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
             ICompositeCondition mustDie = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.BounceCount.Value + 1 == 0), 0)
+                //.Add(new FuncCondition(() => entity.BounceCount.Value + 1 == 0), 0)
                 .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value), 5)
                 .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value), 10, LogicOperations.Or);
 
@@ -348,10 +351,10 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
                 
-                .AddSystem(new BounceDetectorSystem())
-                .AddSystem(new ReflectMovementDirectionOnBounceSystem())
-                .AddSystem(new ReflectRotationDirectionOnBounceSystem())
-                .AddSystem(new BounceCountDecreaseSystem())
+                //.AddSystem(new BounceDetectorSystem())
+                //.AddSystem(new ReflectMovementDirectionOnBounceSystem())
+                //.AddSystem(new ReflectRotationDirectionOnBounceSystem())
+                //.AddSystem(new BounceCountDecreaseSystem())
                 
                 .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new DeathMaskTouchDetectorSystem())
