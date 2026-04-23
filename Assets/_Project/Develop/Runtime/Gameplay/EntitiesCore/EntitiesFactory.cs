@@ -72,18 +72,22 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
                 .AddAttackProcessInitialTime(new ReactiveVariable<float>(config.AttackProcessTime))
+                .AddAttackProcessModifiedTime(new ReactiveVariable<float>(config.AttackProcessTime))
                 .AddAttackProcessCurrentTime()
                 .AddInAttackProcess()
                 .AddStartAttackRequest()
                 .AddStartAttackEvent()
                 .AddEndAttackEvent()
                 .AddAttackDelayTime(new ReactiveVariable<float>(config.AttackDelayTime))
+                .AddAttackDelayModifiedTime(new ReactiveVariable<float>(config.AttackDelayTime))
                 .AddAttackDelayEndEvent()
                 .AddInstantAttackDamage(new ReactiveVariable<float>(baseStats[StatTypes.Damage]))
                 .AddAttackCanceledEvent()
                 .AddAttackCooldownInitialTime(new ReactiveVariable<float>(config.AttackCooldown))
+                .AddAttackCooldownModifiedTime(new ReactiveVariable<float>(config.AttackCooldown))
                 .AddAttackCooldownCurrentTime()
-                .AddInAttackCooldown();
+                .AddInAttackCooldown()
+                .AddAttackPerSecond(new ReactiveVariable<float>(baseStats[StatTypes.AttacksPerSecond]));
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
@@ -122,9 +126,11 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddSystem(new StatEffectApplierSystem())
+                .AddSystem(new AttackPerSecondStatSynchronizerSystem())
+                .AddSystem(new AttackTimeByAttackSpeedStatSyncronizerSystem())
+                .AddSystem(new MoveSpeedSynchronizerSystem())
                 .AddSystem(new DamageSynchronizerSystem())
                 .AddSystem(new MaxHealthSynchronizerSystem())
-                .AddSystem(new MoveSpeedSynchronizerSystem())
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidbodyRotationSystem())
                 .AddSystem(new AttackCancelSystem())

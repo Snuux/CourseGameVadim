@@ -6,14 +6,17 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 {
+    [RequireComponent(typeof(Animator))]
     public class InstantAttackAnimationSpeedView : EntityView
     {
         private readonly int _attackAnimationSpeedMultiplierKey = Animator.StringToHash("AttackAnimationSpeedMultiplier");
 
-        [SerializeField] private AnimationClip _animationClip;
         [SerializeField] private Animator _animator;
 
-        private ReactiveVariable<float> _attackProcessTime;
+        private ReactiveVariable<float> _attackProcessInitialTime;
+        private ReactiveVariable<float> _attackProcessModifiedTime;
+
+        private IDisposable _attackProcessTimeChangedDisposable;
 
         private void OnValidate()
         {
@@ -22,9 +25,23 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 
         protected override void OnEntityStartedWork(Entity entity)
         {
-            _attackProcessTime = entity.AttackProcessInitialTime;
-            
-            _animator.SetFloat(_attackAnimationSpeedMultiplierKey, _animationClip.length / _attackProcessTime.Value);
+            _attackProcessInitialTime = entity.AttackProcessInitialTime;
+            _attackProcessModifiedTime = entity.AttackProcessModifiedTime;
+
+            _attackProcessTimeChangedDisposable = _attackProcessModifiedTime.Subscribe(OnAttackProcessTimeChanged);
+            OnAttackProcessTimeChanged(0, _attackProcessModifiedTime.Value);
+        }
+
+        public override void Cleanup(Entity entity)
+        {
+            base.Cleanup(entity);
+
+            _attackProcessTimeChangedDisposable.Dispose();
+        }
+
+        private void OnAttackProcessTimeChanged(float arg1, float currentAttackProcessTime)
+        {
+            _animator.SetFloat(_attackAnimationSpeedMultiplierKey, _attackProcessInitialTime.Value / currentAttackProcessTime);
         }
     }
 }

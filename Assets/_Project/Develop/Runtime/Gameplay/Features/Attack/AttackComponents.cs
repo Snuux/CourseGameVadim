@@ -39,6 +39,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
     {
         public ReactiveVariable<float> Value;
     }
+    
+    public class AttackProcessModifiedTime : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
 
     public class AttackProcessCurrentTime : IEntityComponent
     {
@@ -51,6 +56,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
     }
 
     public class AttackDelayTime : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+    
+    public class AttackDelayModifiedTime : IEntityComponent
     {
         public ReactiveVariable<float> Value;
     }
@@ -81,6 +91,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
     }
 
     public class AttackCooldownInitialTime : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+    
+    public class AttackCooldownModifiedTime : IEntityComponent
     {
         public ReactiveVariable<float> Value;
     }

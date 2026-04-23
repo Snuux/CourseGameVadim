@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dedff47e12814c72b284eef3f2561fff, type: 3}
+  m_Name: IncreaseAttackSpeed 2
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: AttackPerSecond2
+  <Name>k__BackingField: Attack speed+
+  <Description>k__BackingField: Large increase attack speed
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8416f5c7c7d0544988eb5901fd168307,
+    type: 3}
+  <StatType>k__BackingField: 4
+  _operation: 0
+  _value: 1.4

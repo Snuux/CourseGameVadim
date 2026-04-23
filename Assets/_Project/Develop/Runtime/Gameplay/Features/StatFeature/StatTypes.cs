@@ -5,5 +5,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StatFeature
         MoveSpeed = 1,
         MaxHealth = 2,
         Damage = 3,
+        AttacksPerSecond = 4
     }
 }
