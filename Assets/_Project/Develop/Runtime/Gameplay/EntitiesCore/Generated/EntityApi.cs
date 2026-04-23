@@ -1204,6 +1204,73 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage.BodyContactDamage() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.BounceFeature.LayerToBounceReaction LayerToBounceReactionC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.BounceFeature.LayerToBounceReaction>();
+
+		public UnityEngine.LayerMask LayerToBounceReaction => LayerToBounceReactionC.Value;
+
+		public bool TryGetLayerToBounceReaction(out UnityEngine.LayerMask value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.BounceFeature.LayerToBounceReaction component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(UnityEngine.LayerMask);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLayerToBounceReaction(UnityEngine.LayerMask value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.BounceFeature.LayerToBounceReaction() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceEvent BounceEventC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceEvent>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent<UnityEngine.RaycastHit> BounceEvent => BounceEventC.Value;
+
+		public bool TryGetBounceEvent(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent<UnityEngine.RaycastHit> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent<UnityEngine.RaycastHit>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBounceEvent()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceEvent() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent<UnityEngine.RaycastHit>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBounceEvent(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent<UnityEngine.RaycastHit> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceEvent() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceCount BounceCountC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceCount>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> BounceCount => BounceCountC.Value;
+
+		public bool TryGetBounceCount(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceCount component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBounceCount()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceCount() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBounceCount(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.BounceFeature.BounceCount() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.Attack.InstanShootingDirections InstanShootingDirectionsC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.InstanShootingDirections>();
 
 		public _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot.InstantShootingDirectionArgs InstanShootingDirections => InstanShootingDirectionsC.Value;

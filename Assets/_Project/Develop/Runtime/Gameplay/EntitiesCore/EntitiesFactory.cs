@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Attack;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.Area;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot;
+using _Project.Develop.Runtime.Gameplay.Features.BounceFeature;
 using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Energy;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
@@ -316,6 +317,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddIsTouchDeathMask()
                 .AddIsTouchAnotherTeam()
                 .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value))
+                .AddBounceEvent()
+                .AddLayerToBounceReaction(Layers.EnvironmentMask)
+                .AddBounceCount(new ReactiveVariable<int>(3))
                 ;
 
             ICompositeCondition canMove = new CompositeCondition()
@@ -324,9 +328,10 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             ICompositeCondition canRotate = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
-            ICompositeCondition mustDie = new CompositeCondition(LogicOperations.Or)
-                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value))
-                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value));
+            ICompositeCondition mustDie = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.BounceCount.Value + 1 == 0), 0)
+                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value), 5)
+                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value), 10, LogicOperations.Or);
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value));
@@ -342,6 +347,12 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new RigidbodyRotationSystem())
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
+                
+                .AddSystem(new BounceDetectorSystem())
+                .AddSystem(new ReflectMovementDirectionOnBounceSystem())
+                .AddSystem(new ReflectRotationDirectionOnBounceSystem())
+                .AddSystem(new BounceCountDecreaseSystem())
+                
                 .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new DeathMaskTouchDetectorSystem())
                 .AddSystem(new AnotherTeamTouchDetectorSystem())
