@@ -1,37 +1,43 @@
 using System.Collections.Generic;
-using System.Linq;
 using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using _Project.Develop.Runtime.Gameplay.Features.AbilityFeature;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesDroppingFeature
 {
     public class AbilityDropService
     {
         private readonly AbilitiesConfigsContainer _abilitiesConfigsContainer;
-        private readonly AbilityDroppingRuleService _droppingRuleService;
+        private readonly AbilityDroppingRuleService _abilityDropingRules;
 
-        public AbilityDropService(AbilitiesConfigsContainer abilitiesConfigsContainer,
-            AbilityDroppingRuleService droppingRuleService)
+        public AbilityDropService(
+            AbilitiesConfigsContainer abilitiesConfigsContainer,
+            AbilityDroppingRuleService abilityDropingRules)
         {
             _abilitiesConfigsContainer = abilitiesConfigsContainer;
-            _droppingRuleService = droppingRuleService;
+            _abilityDropingRules = abilityDropingRules;
         }
 
-        public List<AbilityConfig> Drop(Entity entity, int count = 3)
+        public List<AbilityDropOption> Drop(int count, Entity entity)
         {
-            List<AbilityConfig> availableConfigs
-                = new List<AbilityConfig>(_abilitiesConfigsContainer
-                    .AbilityConfigs
-                    .Where(abilityOption => _droppingRuleService.IsAvailable(abilityOption, entity)));
+            List<AbilityDropOption> availablesAbilities = new List<AbilityDropOption>();
 
-            List<AbilityConfig> selectedAbilities = new();
+            foreach (AbilityConfig abilityConfig in _abilitiesConfigsContainer.AbilityConfigs)
+            {
+                for (int level = 1; level < abilityConfig.MaxLevel + 1; level++)
+                {
+                    if (_abilityDropingRules.IsAvailable(abilityConfig, entity, level))
+                        availablesAbilities.Add(new AbilityDropOption(abilityConfig, level));
+                }
+            }
+
+            List<AbilityDropOption> selectedAbilities = new();
 
             for (int i = 0; i < count; i++)
             {
-                AbilityConfig abilityConfig = availableConfigs[UnityEngine.Random.Range(0, availableConfigs.Count)];
-                selectedAbilities.Add(abilityConfig);
-                availableConfigs.RemoveAt(0);
+                AbilityDropOption selectedAbility =
+                    availablesAbilities[UnityEngine.Random.Range(0, availablesAbilities.Count)];
+                selectedAbilities.Add(selectedAbility);
+                availablesAbilities.Remove(selectedAbility);
             }
 
             return selectedAbilities;

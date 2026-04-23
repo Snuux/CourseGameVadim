@@ -58,13 +58,16 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         public SelectableAbilityPresenter CreateSelectableAbilityPresenter(
             AbilityConfig abilityConfig,
             SelectableAbilityView view,
-            Entity entity)
+            Entity entity,
+            int level)
         {
             return new SelectableAbilityPresenter(
                 abilityConfig,
                 view,
                 _container.Resolve<AbilityFactory>(),
-                entity);
+                entity,
+                level
+                );
         }
 
         public DefeatPopupPresenter CreateDefeatPopupPresenter(DefeatPopupView view)

@@ -15,12 +15,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilityFeature
             _container = container;
         }
 
-        public Ability CreateAbilityFor(Entity entity, AbilityConfig config)
+        public Ability CreateAbilityFor(Entity entity, AbilityConfig config, int currentLevel)
         {
             switch (config)
             {
                 case StatChangeAbilityConfig statChangeConfig:
-                    return new StatChangeAbility(entity, statChangeConfig);
+                    return new StatChangeAbility(entity, statChangeConfig, currentLevel);
 
                 default:
                     throw new ArgumentException($"Unknown ability config {config}");

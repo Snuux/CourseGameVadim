@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AbilityFeature;
@@ -10,21 +11,25 @@ namespace _Project.Develop.Runtime.UI.AbilitySelectPopup
     {
         public event Action<SelectableAbilityPresenter> Selected;
 
-        private AbilityFactory _abilityFactory;
-        private Entity _entity;
+        private readonly AbilityFactory _abilityFactory;
+        private readonly Entity _entity;
+
+        private readonly int _level;
 
         public SelectableAbilityPresenter(
             AbilityConfig abilityConfig,
             SelectableAbilityView view,
             AbilityFactory abilityFactory,
-            Entity entity)
+            Entity entity,
+            int level)
         {
-            AbilityConfig =  abilityConfig;
+            AbilityConfig = abilityConfig;
             View = view;
             _abilityFactory = abilityFactory;
             _entity = entity;
+            _level = level;
         }
-        
+
         public AbilityConfig AbilityConfig { get; }
         public SelectableAbilityView View { get; }
 
@@ -33,9 +38,8 @@ namespace _Project.Develop.Runtime.UI.AbilitySelectPopup
             View.SetName(AbilityConfig.Name);
             View.SetDescription(AbilityConfig.Description);
             View.Icon.SetIcon(AbilityConfig.Icon);
-            
-            View.Icon.HideLevel();
-            View.SetTabletText("NEW");
+
+            InitByLevelConfig();
 
             View.Clicked += OnViewClicked;
         }
@@ -47,8 +51,46 @@ namespace _Project.Develop.Runtime.UI.AbilitySelectPopup
 
         public void Provide()
         {
-            Ability ability = _abilityFactory.CreateAbilityFor(_entity, AbilityConfig);
+            Ability ability;
+
+            if (AbilityConfig.IsUpgradable())
+            {
+                ability = _entity.Abilities.Elements.FirstOrDefault(abil => abil.ID == AbilityConfig.ID);
+
+                if (ability != null)
+                {
+                    ability.AddLevel(_level);
+                    return;
+                }
+            }
+            
+            ability = _abilityFactory.CreateAbilityFor(_entity, AbilityConfig, _level);
             _entity.Abilities.Add(ability);
+        }
+
+        private void InitByLevelConfig()
+        {
+            if (AbilityConfig.IsUpgradable())
+            {
+                Ability ability = _entity.Abilities.Elements.FirstOrDefault(abil => abil.ID == AbilityConfig.ID);
+
+                if (ability != null)
+                {
+                    View.Icon.ShowLevel();
+                    View.Icon.SetLevel("LV."  + ability.CurrentLevel.Value);
+                    View.SetTabletText("LV."  + ability.CurrentLevel.Value + "->" + "LV."  + ability.CurrentLevel.Value + _level);
+                }
+                else
+                {
+                    View.Icon.HideLevel();
+                    View.SetTabletText("NEW LV."  + _level);
+                }
+            }
+            else
+            {
+                View.Icon.HideLevel();
+                View.SetTabletText("NEW");
+            }
         }
 
         private void OnViewClicked() => Selected?.Invoke(this);

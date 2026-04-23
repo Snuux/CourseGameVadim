@@ -8,8 +8,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.Abilities
     {
         private Entity _entity;
         private StatChangeAbilityConfig _config;
-        
-        public StatChangeAbility(Entity entity, StatChangeAbilityConfig config) : base(config.ID)
+
+        public StatChangeAbility(
+            Entity entity,
+            StatChangeAbilityConfig config,
+            int currentLevel) : base(config.ID, currentLevel, config.MaxLevel)
         {
             _entity = entity;
             _config = config;

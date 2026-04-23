@@ -56,7 +56,7 @@ namespace _Project.Develop.Runtime.UI.AbilitySelectPopup
 
             _view.SelectButtonClicked += OnSelectButtonClicked;
 
-            List<AbilityConfig> dropOptions = _abilityDropService.Drop(_entity, AbilitiesCount);
+            List<AbilityDropOption> dropOptions = _abilityDropService.Drop(AbilitiesCount, _entity);
 
             for (int i = 0; i < dropOptions.Count; i++)
             {
@@ -66,7 +66,7 @@ namespace _Project.Develop.Runtime.UI.AbilitySelectPopup
                 _view.AbilityListView.Add(selectableAbilityView);
 
                 SelectableAbilityPresenter selectableAbilityPresenter = _gameplayPresentersFactory
-                    .CreateSelectableAbilityPresenter(dropOptions[i], selectableAbilityView, _entity);
+                    .CreateSelectableAbilityPresenter(dropOptions[i].Config, selectableAbilityView, _entity, dropOptions[i].Level);
 
                 selectableAbilityPresenter.Selected += OnPresenterSelected;
                 selectableAbilityPresenter.Initialize();
