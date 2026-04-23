@@ -1,11 +1,15 @@
-﻿using _Project.Develop.Runtime.Configs.Meta.Wallet;
+﻿using _Project.Develop.Runtime.Configs.Meta.Stats;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Gameplay.Features.StatFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.LevelsProgression;
+using _Project.Develop.Runtime.Meta.Features.StatsUpgrade;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Core.TestPopup;
 using _Project.Develop.Runtime.UI.LevelsMenuPopup;
+using _Project.Develop.Runtime.UI.StatsUpgradePopup;
 using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -69,6 +73,34 @@ namespace _Project.Develop.Runtime.UI
                 this,
                 _container.Resolve<ViewsFactory>(),
                 view);
+        }
+
+        public UpgradableStatPresenter CreateUpgradableStatPresenter(UpgradableStatView view, StatTypes statType)
+        {
+            return new UpgradableStatPresenter(
+                view,
+                statType,
+                _container.Resolve<ConfigsProviderService>().GetConfig<StatsViewConfig>(),
+                _container.Resolve<StatsUpgradeService>(),
+                _container.Resolve<WalletService>(),
+                _container.Resolve<ConfigsProviderService>().GetConfig<CurrencyIconsConfig>());
+        }
+
+        public StatsUpgradePopupPresenter CreateStatsUpgradePopupPresenter(StatsUpgradePopupView view)
+        {
+            return new StatsUpgradePopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                view,
+                _container.Resolve<ProjectPresentersFactory>(),
+                _container.Resolve<StatsUpgradeService>(),
+                _container.Resolve<ViewsFactory>());
+        }
+
+        public CharacterPreviewPresenter CreateCharacterPreviewPresenter()
+        {
+            return new CharacterPreviewPresenter(
+                _container.Resolve<SceneLoaderService>(),
+                _container.Resolve<ICoroutinesPerformer>());
         }
     }
 }

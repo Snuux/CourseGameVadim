@@ -6,6 +6,7 @@ using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Configs.Gameplay.Loot;
+using _Project.Develop.Runtime.Configs.Meta.Stats;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(AbilitiesConfigsContainer), "Configs/Gameplay/Abilities/AbilitiesConfigsContainer" },
             {typeof(ExperienceForUpgradeConfig), "Configs/Gameplay/ExperienceForUpgradeConfig" },
             {typeof(LootListConfig), "Configs/Gameplay/Loot/LootListConfig" },
+            {typeof(StatsViewConfig), "Configs/Meta/Stats/StatsViewConfig" },
+            {typeof(PlayerStatsUpgradeConfig), "Configs/Meta/Stats/PlayerStatsUpgradeConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _Project.Develop.Runtime.UI.Core.TestPopup;
 using _Project.Develop.Runtime.UI.LevelsMenuPopup;
+using _Project.Develop.Runtime.UI.StatsUpgradePopup;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.UI.Core
@@ -15,7 +16,7 @@ namespace _Project.Develop.Runtime.UI.Core
         private readonly Dictionary<PopupPresenterBase, PopupInfo> _presenterToInfo = new();
 
         protected PopupService(
-            ViewsFactory viewsFactory,
+            ViewsFactory viewsFactory, 
             ProjectPresentersFactory presentersFactory)
         {
             ViewsFactory = viewsFactory;
@@ -40,6 +41,17 @@ namespace _Project.Develop.Runtime.UI.Core
             LevelsMenuPopupView view = ViewsFactory.Create<LevelsMenuPopupView>(ViewIDs.LevelsMenuPopup, PopupLayer);
 
             LevelsMenuPopupPresenter popup = _presentersFactory.CreateLevelsMenuPopupPresenter(view);
+
+            OnPopupCreated(popup, view);
+
+            return popup;
+        }
+
+        public StatsUpgradePopupPresenter OpenStatsUpgradePopup()
+        {
+            StatsUpgradePopupView view = ViewsFactory.Create<StatsUpgradePopupView>(ViewIDs.StatsUpgradePopupView, PopupLayer);
+
+            StatsUpgradePopupPresenter popup = _presentersFactory.CreateStatsUpgradePopupPresenter(view);
 
             OnPopupCreated(popup, view);
 

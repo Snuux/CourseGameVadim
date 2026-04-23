@@ -24,6 +24,8 @@ namespace _Project.Develop.Runtime.UI.Core
             {ViewIDs.MainHeroHealthBar, "UI/Gameplay/HealthBars/HeroHealthBar" },
             {ViewIDs.SelectableAbilityView, "UI/Gameplay/AbilitySelectPopup/SelectionAbilityView" },
             {ViewIDs.AbilitySelectPopup, "UI/Gameplay/AbilitySelectPopup/SelectionAbilityPopup" },
+            {ViewIDs.UpgradableStatView, "UI/StatsUpgradePopup/UpgradableStatView" },
+            {ViewIDs.StatsUpgradePopupView, "UI/StatsUpgradePopup/StatsUpgradePopupView" },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

@@ -39,18 +39,11 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _collidersRegistryService = _container.Resolve<CollidersRegistryService>();
         }
 
-        public Entity CreateHero(Vector3 position, HeroConfig config)
+        public Entity CreateHero(Vector3 position, HeroConfig config, Dictionary<StatTypes, float> baseStats)
         {
             Entity entity = CreateEmpty();
 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
-
-            Dictionary<StatTypes, float> baseStats = new()
-            {
-                {StatTypes.MoveSpeed, config.MoveSpeed},
-                {StatTypes.MaxHealth, config.MaxHealth},
-                {StatTypes.Damage, config.InstantAttackDamage},
-            };
 
             Dictionary<StatTypes, float> modifiedStats = new(baseStats);
 

@@ -1,4 +1,6 @@
-﻿using _Project.Develop.Runtime.Configs.Gameplay;
+﻿using System;
+using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Gameplay;
 using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
@@ -6,8 +8,10 @@ using _Project.Develop.Runtime.Gameplay.Features.AbilityFeature;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.AI.Selectors;
 using _Project.Develop.Runtime.Gameplay.Features.LevelUpFeature;
+using _Project.Develop.Runtime.Gameplay.Features.StatFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.StatsUpgrade;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
@@ -22,6 +26,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
         private readonly BrainsFactory _brainsFactory;
         private readonly ConfigsProviderService _configsProviderService;
         private readonly EntitiesLifeContext _entitiesLifeContext;
+        private readonly StatsUpgradeService _statsUpgradeService;
 
         public MainHeroFactory(DIContainer container)
         {
@@ -31,13 +36,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
             _brainsFactory = container.Resolve<BrainsFactory>();
             _configsProviderService = container.Resolve<ConfigsProviderService>();
             _entitiesLifeContext = container.Resolve<EntitiesLifeContext>();
+            _statsUpgradeService = container.Resolve<StatsUpgradeService>();
         }
 
         public Entity Create(Vector3 position)
         {
             HeroConfig config = _configsProviderService.GetConfig<HeroConfig>();
-
-            Entity entity = _entitiesFactory.CreateHero(position, config);
+            
+            Entity entity = _entitiesFactory.CreateHero(position, config, GetStats());
 
             entity
                 .AddIsMainHero()
@@ -71,6 +77,18 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
             _entitiesLifeContext.Add(entity);
 
             return entity;
+        }
+
+        private Dictionary<StatTypes, float> GetStats()
+        {
+            Dictionary<StatTypes, float> stats = new();
+
+            foreach (StatTypes statType in Enum.GetValues(typeof(StatTypes)))
+            {
+                stats.Add(statType, _statsUpgradeService.GetCurrentStatValueFor(statType));
+            }
+            
+            return stats;
         }
     }
 }
