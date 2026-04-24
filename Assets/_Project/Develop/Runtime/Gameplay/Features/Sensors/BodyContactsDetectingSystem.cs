@@ -23,8 +23,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
         public void OnUpdate(float deltaTime)
         {
             _contacts.Count = Physics.OverlapCapsuleNonAlloc(
-                _body.bounds.min,
-                _body.bounds.max,
+                _body.bounds.center + Vector3.up * Mathf.Max(0f, _body.bounds.extents.y - _body.radius),
+                _body.bounds.center - Vector3.up * Mathf.Max(0f, _body.bounds.extents.y - _body.radius),
                 _body.radius,
                 _contacts.Items,
                 _mask,
