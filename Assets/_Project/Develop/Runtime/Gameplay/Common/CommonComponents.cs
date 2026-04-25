@@ -18,4 +18,9 @@ namespace _Project.Develop.Runtime.Gameplay.Common
     {
         public ReactiveVariable<string> Value;
     }
+    
+    public class Owner : IEntityComponent
+    {
+        public ReactiveVariable<Entity> Value;
+    }
 }

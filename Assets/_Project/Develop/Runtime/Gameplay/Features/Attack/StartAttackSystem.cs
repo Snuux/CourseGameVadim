@@ -2,7 +2,6 @@
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
-using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 {
@@ -26,12 +25,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 
             _attackRequested.Value = false;
 
-            if (_canStartAttack.Evaluate())
-            {
+            if (_canStartAttack.Evaluate()) 
                 _attackStarted.Value = true;
-                Debug.Log("Атака начата");
-                return;
-            }
         }
     }
 }

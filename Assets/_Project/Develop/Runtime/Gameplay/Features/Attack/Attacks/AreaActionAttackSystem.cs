@@ -3,20 +3,19 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.Attack
+namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Attacks
 {
-    public class AreaAttackSystem : IInitializableSystem, IUpdatableSystem
+    public class AreaActionAttackSystem : IInitializableSystem, IUpdatableSystem
     {
         private readonly EntitiesFactory _entitiesFactory;
         
-        private Transform _sourceTransform;
-        
-        private ReactiveVariable<bool> _attackStarted;
+        private ReactiveVariable<bool> _hasReachedActionTime;
         private ReactiveVariable<bool> _attackCompleted;
         
+        private Transform _sourceTransform;
         private Entity _entity;
 
-        public AreaAttackSystem(EntitiesFactory entitiesFactory)
+        public AreaActionAttackSystem(EntitiesFactory entitiesFactory)
         {
             _entitiesFactory = entitiesFactory;
         }
@@ -25,17 +24,18 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
         {
             _entity = entity;
             _sourceTransform = entity.Transform;
-            _attackStarted = entity.AttackStarted;
+            _hasReachedActionTime = entity.HasReachedActionTime;
             _attackCompleted = entity.AttackCompleted;
         }
 
         public void OnUpdate(float deltaTime)
         {
-            if (_attackStarted.Value == false)
+            if (_hasReachedActionTime.Value == false)
                 return;
             
-            _attackStarted.Value = false;
-            _entitiesFactory.InstantDamageZone(_sourceTransform.position, _entity);
+            _hasReachedActionTime.Value = false;
+            
+            _entitiesFactory.CreateInstantDamageZone(_sourceTransform.position, _entity);
             
             _attackCompleted.Value = true;
         }

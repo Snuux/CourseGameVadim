@@ -36,15 +36,21 @@ namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies
             {
                 case GhostConfig ghostConfig:
                     entity = _entitiesFactory.CreateGhost(position, ghostConfig);
+                    entity.AddCurrentTarget(new ReactiveVariable<Entity>(_towerHolderService.Tower));
+                    _brainsFactory.CreateGhostBrain(entity);
+                    
+                    break;
+                case ArcherConfig archerConfigConfig:
+                    entity = _entitiesFactory.CreateArcher(position, archerConfigConfig);
+                    entity.AddCurrentTarget(new ReactiveVariable<Entity>(_towerHolderService.Tower));
+                    _brainsFactory.CreateArcherBrain(entity);
+                    
                     break;
                 default:
                     throw new ArgumentException($"Not support {config.GetType()} type config");
             }
 
             entity.AddTeam(new ReactiveVariable<Teams>(Teams.Enemies));
-            entity.AddCurrentTarget(new ReactiveVariable<Entity>(_towerHolderService.Tower));
-            
-            _brainsFactory.CreateGhostBrain(entity);
             
             _entitiesLifeContext.Add(entity);
 

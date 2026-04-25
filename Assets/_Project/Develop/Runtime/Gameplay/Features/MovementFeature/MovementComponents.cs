@@ -39,4 +39,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
     {
         public ICompositeCondition Value;
     }
+    
+    public class MaxTravelDistance : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+    
+    public class CurrentTravelDistance : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
 }

@@ -20,8 +20,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
                 return;
 
             _attackCompleted.Value = false;
-            
-            Debug.Log("Атака завершена");
         }
     }
 }
