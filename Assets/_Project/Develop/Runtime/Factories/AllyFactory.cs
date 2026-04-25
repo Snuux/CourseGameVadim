@@ -43,15 +43,30 @@ namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally
             return tower;
         }
 
-        public Entity CreateMine(Vector3 position, Entity owner)
+        public Entity CreateMine(Vector3 position)
         {
-            Entity mine = _entitiesFactory.CreateMine(position, owner);
-            mine.AddTeam(new ReactiveVariable<Teams>(owner.Team.Value));
+            MineConfig config = _configsProviderService.GetConfig<MineConfig>();
+            
+            Entity mine = _entitiesFactory.CreateMine(position, config);
+            mine.AddTeam(new ReactiveVariable<Teams>(Teams.Ally));
             
             _brainsFactory.CreateMineBrain(mine, new NearestDamageableTargetSelector(mine));
             _entitiesLifeContext.Add(mine);
 
             return mine;
+        }
+        
+        public Entity CreateTurret(Vector3 position)
+        {
+            TurretConfig config = _configsProviderService.GetConfig<TurretConfig>();
+            
+            Entity turret = _entitiesFactory.CreateTurret(position, config);
+            turret.AddTeam(new ReactiveVariable<Teams>(Teams.Ally));
+            
+            _brainsFactory.CreateTurretBrain(turret, new NearestDamageableTargetSelector(turret));
+            _entitiesLifeContext.Add(turret);
+
+            return turret;
         }
 
         public Entity CreateCursorAttacker()

@@ -207,7 +207,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             ICompositeCondition mustDie = new CompositeCondition(LogicOperations.Or)
                 .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
-                //.Add(new FuncCondition(() => entity.AttackCompleted.Value));
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value))
@@ -231,6 +230,83 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddSystem(new RigidbodyMovementSystem())
+                .AddSystem(new RigidbodyRotationSystem())
+                .AddSystem(new StartAttackSystem())
+                .AddSystem(new AttackProcessSystem())
+                .AddSystem(new ProjectileActionAttackSystem(this))
+                .AddSystem(new AttackCooldownTimerSystem())
+                .AddSystem(new ApplyDamageSystem())
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
+                .AddSystem(new EndAttackSystem());
+
+            return entity;
+        }
+        
+        public Entity CreateTurret(Vector3 position, TurretConfig config)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
+
+            entity
+                .AddID(new ReactiveVariable<string>(config.ID))
+                .AddRotationDirection()
+                .AddRotationSpeed(new ReactiveVariable<float>(config.RotationSpeed))
+                .AddMaxHealth(new ReactiveVariable<float>(config.MaxHealth))
+                .AddCurrentHealth(new ReactiveVariable<float>(config.MaxHealth))
+                .AddIsDead()
+                .AddInDeathProcess()
+                .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
+                .AddDeathProcessCurrentTime()
+                .AddAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
+                .AddTriggerRadius(new ReactiveVariable<float>(config.AttackTriggerRadius * 2))
+                .AddTakeDamageRequest()
+                .AddTakeDamageEvent()
+                .AddCurrentTarget()
+                
+                //attack
+                .AddAttackRequested()
+                .AddAttackStarted()
+                .AddAttackCooldownCurrentTime()
+                .AddAttackCooldownInitialTime(new ReactiveVariable<float>(config.AttackCooldown))
+                .AddInAttackCooldown()
+                .AddAttackProcessInitialTime(new ReactiveVariable<float>(config.AttackProcessTime))
+                .AddAttackProcessCurrentTime()
+                .AddInAttackProcess()
+                .AddAttackInitialActionTime(new ReactiveVariable<float>(config.AttackDelayTime))
+                .AddHasReachedActionTime()
+                .AddAttackCompleted()
+                ;
+
+            ICompositeCondition canRotate = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositeCondition mustDie = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
+
+            ICompositeCondition mustSelfRelease = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.InDeathProcess.Value == false));
+
+            ICompositeCondition canApplyDamage = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositeCondition canStartAttack = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false))
+                .Add(new FuncCondition(() => entity.InAttackProcess.Value == false));
+
+            entity
+                .AddCanRotate(canRotate)
+                .AddMustDie(mustDie)
+                .AddMustSelfRelease(mustSelfRelease)
+                .AddCanApplyDamage(canApplyDamage)
+                .AddCanStartAttack(canStartAttack);
+
+            entity
                 .AddSystem(new RigidbodyRotationSystem())
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AttackProcessSystem())
@@ -362,17 +438,14 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public Entity CreateMine(Vector3 position, Entity owner)
+        public Entity CreateMine(Vector3 position, MineConfig config)
         {
-            MineConfig config = _configsProviderService.GetConfig<MineConfig>();
-
             Entity entity = CreateEmpty();
 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
             entity
                 .AddID(new ReactiveVariable<string>(config.ID))
-                .AddOwner(new ReactiveVariable<Entity>(owner))
                 .AddAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
                 .AddAttackRadius(new ReactiveVariable<float>(config.AttackRadius))
                 .AddTriggerRadius(new ReactiveVariable<float>(config.TriggerRadius))

@@ -11,8 +11,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.Selectors
 {
     public class NearestDamageableTargetSelector : ITargetSelector
     {
-        private Entity _source;
-        private Transform _sourceTransform;
+        private readonly Entity _source;
+        private readonly Transform _sourceTransform;
 
         public NearestDamageableTargetSelector(Entity entity)
         {

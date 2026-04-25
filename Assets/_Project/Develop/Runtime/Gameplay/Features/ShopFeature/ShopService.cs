@@ -17,8 +17,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ShopFeature
         private readonly ShopConfig _shopConfig;
 
         private readonly Dictionary<Entity, IDisposable> _spawnedItemsToRemoveReason = new();
-        
-        private Entity _entityParent;
         private IDisposable _towerRegisteredDisposable;
 
         public ShopService(
@@ -33,18 +31,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ShopFeature
             _walletService = walletService;
             _entitiesLifeContext = entitiesLifeContext;
             _shopConfig = shopConfig;
-
-            if (_towerHolderService.Tower != null)
-                _entityParent = _towerHolderService.Tower;
-            else
-                _towerRegisteredDisposable = _towerHolderService.TowerRegistered.Subscribe(OnTowerRegistered);
         }
 
         public bool Buy(ShopItemTypes itemType, Vector3 position)
         {
-            if (_entityParent == null)
-                return false;
-
             (CurrencyType currencyType, int price) itemPrice = _shopConfig.GetPriceFor(itemType);
 
             if (_walletService.Enough(itemPrice.currencyType, itemPrice.price) == false)
@@ -79,19 +69,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ShopFeature
             _spawnedItemsToRemoveReason.Clear();
         }
 
-        private void OnTowerRegistered(Entity tower)
-        {
-            _entityParent = tower;
-            _towerRegisteredDisposable?.Dispose();
-            _towerRegisteredDisposable = null;
-        }
-
         private Entity SpawnItem(ShopItemTypes itemType, Vector3 position)
         {
             switch (itemType)
             {
                 case ShopItemTypes.Mine:
-                    return _allyFactory.CreateMine(position, _entityParent);
+                    return _allyFactory.CreateMine(position);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(itemType), itemType, "Unsupported shop item type");
             }

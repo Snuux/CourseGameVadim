@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI.Selectors;
 using _Project.Develop.Runtime.Gameplay.Features.AI.States;
-using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Conditions;
-using _Project.Develop.Runtime.Utilities.Timer;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI
@@ -79,6 +77,32 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
             StateMachineBrain brain = new StateMachineBrain(stateMachine);
 
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
+        }
+        
+        public StateMachineBrain CreateTurretBrain(Entity entity, ITargetSelector targetSelector)
+        {
+            List<IDisposable> disposables = new List<IDisposable>();
+            AIStateMachine stateMachine = new AIStateMachine(disposables);
+
+            AttackState attackState = new AttackState(entity);
+            FindTargetState findTargetState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
+
+            ICompositeCondition attackCondition = new CompositeCondition()
+                .Add(new FuncCondition(() => TargetInRange(entity)));
+            
+            ICompositeCondition ifNoTargetCondition = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => TargetInRange(entity) == false));
+            
+            stateMachine.AddState(findTargetState);
+            stateMachine.AddState(attackState);
+            
+            stateMachine.AddTransition(findTargetState, attackState, attackCondition);
+            stateMachine.AddTransition(attackState, findTargetState, ifNoTargetCondition);
+            
+            StateMachineBrain brain = new StateMachineBrain(stateMachine);
             _brainsContext.SetFor(entity, brain);
 
             return brain;

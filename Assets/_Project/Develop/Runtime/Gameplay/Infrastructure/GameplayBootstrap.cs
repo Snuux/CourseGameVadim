@@ -2,12 +2,14 @@
 using System.Collections;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
+using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.UI.Gameplay;
+using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
 using UnityEngine;
 
@@ -62,6 +64,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _brainsContext?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
             _gameplayStateContext?.Update(Time.deltaTime);
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                IInputService inputService = _container.Resolve<IInputService>();
+                _container.Resolve<AllyFactory>().CreateTurret(inputService.MouseWorldPosition);
+            }
         }
 
         private void LateUpdate()

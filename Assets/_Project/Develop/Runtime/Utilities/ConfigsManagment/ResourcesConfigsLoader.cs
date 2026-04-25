@@ -31,6 +31,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(InstantDamageZoneConfig), "Configs/Gameplay/Entities/Characters/InstantDamageZoneConfig" },
             {typeof(CursorAttackerConfig), "Configs/Gameplay/Entities/CursorAttackerConfig" },
             {typeof(MineConfig), "Configs/Gameplay/Entities/Characters/MineConfig" },
+            {typeof(TurretConfig), "Configs/Gameplay/Entities/Characters/TurretConfig" },
             
             {typeof(SpawnerEnemiesConfig), "Configs/Gameplay/Entities/SpawnerEnemiesConfig" },
             {typeof(ShopConfig), "Configs/Gameplay/Shop/ShopConfig" },
