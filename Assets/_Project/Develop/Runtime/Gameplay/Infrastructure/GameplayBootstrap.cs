@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
+using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
+using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
@@ -46,7 +48,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _brainsContext = _container.Resolve<AIBrainsContext>();
             _gameplayStateContext = _container.Resolve<GameplayStateContext>();
             _screenPresenter = _container.Resolve<GameplayScreenPresenter>();
-            
+
             _container.Resolve<AllyFactory>().CreateTower(Vector3.zero, _inputArgs.TowerMaxHealth);
 
             yield break;
@@ -65,10 +67,24 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _entitiesLifeContext?.Update(Time.deltaTime);
             _gameplayStateContext?.Update(Time.deltaTime);
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 IInputService inputService = _container.Resolve<IInputService>();
                 _container.Resolve<AllyFactory>().CreateTurret(inputService.MouseWorldPosition);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                IInputService inputService = _container.Resolve<IInputService>();
+                _container.Resolve<AllyFactory>().CreateMine(inputService.MouseWorldPosition);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                IInputService inputService = _container.Resolve<IInputService>();
+                _container.Resolve<EnemiesFactory>().Create(
+                    inputService.MouseWorldPosition,
+                    _container.Resolve<ConfigsProviderService>().GetConfig<ArcherConfig>());
             }
         }
 

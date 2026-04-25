@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: ClearAllEnemiesStage1
   m_EditorClassIdentifier: 
   _enemyItems:
-  - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: b948ca711dec0e845bfb9f6bc7c1b4c9,
-      type: 2}
   - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: ac4da768c466e3140878caacc8ea277b,
       type: 2}
   - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: ac4da768c466e3140878caacc8ea277b,

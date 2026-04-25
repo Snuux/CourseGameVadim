@@ -113,6 +113,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddAttackStarted()
                 .AddHasReachedActionTime()
                 .AddAttackCompleted()
+                .AddCurrentTarget()
                 
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent();
@@ -197,6 +198,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddAttackInitialActionTime(new ReactiveVariable<float>(config.AttackDelayTime))
                 .AddHasReachedActionTime()
                 .AddAttackCompleted()
+                .AddCurrentTarget()
                 ;
 
             ICompositeCondition canMove = new CompositeCondition()
@@ -451,6 +453,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTriggerRadius(new ReactiveVariable<float>(config.TriggerRadius))
                 .AddAttackRequested()
                 .AddAttackStarted()
+                .AddHasReachedActionTime()
                 .AddAttackCompleted()
                 .AddCurrentTarget()
                 .AddIsDead()
