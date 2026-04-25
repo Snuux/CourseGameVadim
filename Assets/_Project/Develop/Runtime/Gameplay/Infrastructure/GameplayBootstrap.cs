@@ -78,8 +78,14 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 IInputService inputService = _container.Resolve<IInputService>();
                 _container.Resolve<AllyFactory>().CreateMine(inputService.MouseWorldPosition);
             }
-
+            
             if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                IInputService inputService = _container.Resolve<IInputService>();
+                _container.Resolve<AllyFactory>().CreatePuddle(inputService.MouseWorldPosition);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 IInputService inputService = _container.Resolve<IInputService>();
                 _container.Resolve<EnemiesFactory>().Create(

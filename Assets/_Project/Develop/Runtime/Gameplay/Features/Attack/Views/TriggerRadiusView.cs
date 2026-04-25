@@ -23,9 +23,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 
         protected override void OnEntityStartedWork(Entity entity)
         {
-            SetStartSizeToRadiusFor(entity);
             _radiusEffect = Instantiate(_radiusEffectPrefab, _effectSpawnPoint.position, Quaternion.identity,
                 transform);
+            SetStartSizeToRadiusFor(entity);
 
             _isDead = entity.IsDead;
             _isDeadChangedDisposable = _isDead.Subscribe(OnIsDeadChanged);
@@ -40,8 +40,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 
         private void SetStartSizeToRadiusFor(Entity entity)
         {
-            var explosion = _radiusEffectPrefab.main;
-            explosion.startSize = entity.TriggerRadius.Value;
+            //ParticleSystem.MainModule explosion = _radiusEffectPrefab.main;
+            //explosion.startSize = entity.TriggerRadius.Value;
+
+            var radius = entity.TriggerRadius.Value;
+            _radiusEffect.transform.localScale = new Vector3(radius, 0, radius);
         }
 
         private void OnIsDeadChanged(bool arg1, bool isDead)

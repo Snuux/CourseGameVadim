@@ -32,6 +32,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(CursorAttackerConfig), "Configs/Gameplay/Entities/CursorAttackerConfig" },
             {typeof(MineConfig), "Configs/Gameplay/Entities/Characters/MineConfig" },
             {typeof(TurretConfig), "Configs/Gameplay/Entities/Characters/TurretConfig" },
+            {typeof(PuddleConfig), "Configs/Gameplay/Entities/Characters/PuddleConfig" },
             
             {typeof(SpawnerEnemiesConfig), "Configs/Gameplay/Entities/SpawnerEnemiesConfig" },
             {typeof(ShopConfig), "Configs/Gameplay/Shop/ShopConfig" },

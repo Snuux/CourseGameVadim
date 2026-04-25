@@ -68,6 +68,19 @@ namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally
 
             return turret;
         }
+        
+        public Entity CreatePuddle(Vector3 position)
+        {
+            PuddleConfig config = _configsProviderService.GetConfig<PuddleConfig>();
+            
+            Entity puddle = _entitiesFactory.CreatePuddle(position, config);
+            puddle.AddTeam(new ReactiveVariable<Teams>(Teams.Ally));
+            
+            _brainsFactory.CreatePuddleBrain(puddle, new NearestDamageableTargetSelector(puddle));
+            _entitiesLifeContext.Add(puddle);
+
+            return puddle;
+        }
 
         public Entity CreateCursorAttacker()
         {

@@ -92,9 +92,40 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             return brain;
         }
 
+        public IBrain CreatePuddleBrain(Entity entity, NearestDamageableTargetSelector targetSelector)
+        {
+            return CreateMineBrain(entity, targetSelector);
+        }
+
         public IBrain CreateMineBrain(Entity entity, ITargetSelector targetSelector)
         {
-            return CreateTurretBrain(entity, targetSelector);
+            EmptyState emptyState = new EmptyState();
+            AttackState attackState = new AttackState(entity);
+            
+            ICompositeCondition attackCondition = new CompositeCondition()
+                .Add(new FuncCondition(() => TargetInRange(entity)));
+
+            ICompositeCondition ifNoTargetCondition = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => TargetInRange(entity) == false));
+
+            AIStateMachine behaviour = new AIStateMachine();
+            
+            behaviour.AddState(emptyState);
+            behaviour.AddState(attackState);
+
+            behaviour.AddTransition(emptyState, attackState, attackCondition);
+            behaviour.AddTransition(attackState, emptyState, ifNoTargetCondition);
+            
+            FindTargetState findTargetState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
+            AIParallelState parallelState = new AIParallelState(findTargetState, behaviour);
+            
+            AIStateMachine rootStateMachine = new AIStateMachine();
+            rootStateMachine.AddState(parallelState);
+            
+            StateMachineBrain brain = new StateMachineBrain(rootStateMachine);
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
         }
 
         private AIStateMachine CreateMovementAttackStateMachine(Entity entity)

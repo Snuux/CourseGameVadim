@@ -323,6 +323,74 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             return entity;
         }
+        
+        public Entity CreatePuddle(Vector3 position, PuddleConfig config)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
+
+            entity
+                .AddID(new ReactiveVariable<string>(config.ID))
+                .AddIsDead()
+                .AddInDeathProcess()
+                .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
+                .AddDeathProcessCurrentTime()
+                .AddCurrentTarget()
+                .AddAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
+                .AddTriggerRadius(new ReactiveVariable<float>(config.AttackTriggerRadius))
+                .AddAttackRadius(new ReactiveVariable<float>(config.AttackTriggerRadius))
+                .AddTakeDamageRequest()
+                .AddTakeDamageEvent()
+                
+                //attack
+                .AddAttackRequested()
+                .AddAttackStarted()
+                .AddAttackCooldownCurrentTime()
+                .AddAttackCooldownInitialTime(new ReactiveVariable<float>(0))
+                .AddInAttackCooldown()
+                .AddAttackProcessInitialTime(new ReactiveVariable<float>(config.AttackEverySecond))
+                .AddAttackProcessCurrentTime()
+                .AddInAttackProcess()
+                .AddAttackInitialActionTime(new ReactiveVariable<float>(0))
+                .AddHasReachedActionTime()
+                .AddAttackCompleted();
+
+            ICompositeCondition mustDie = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => false));
+
+            ICompositeCondition mustSelfRelease = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.InDeathProcess.Value == false));
+
+            ICompositeCondition canApplyDamage = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositeCondition canStartAttack = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false))
+                .Add(new FuncCondition(() => entity.InAttackProcess.Value == false));
+
+            entity
+                .AddMustDie(mustDie)
+                .AddMustSelfRelease(mustSelfRelease)
+                .AddCanApplyDamage(canApplyDamage)
+                .AddCanStartAttack(canStartAttack);
+
+            entity
+                .AddSystem(new StartAttackSystem())
+                .AddSystem(new AttackProcessSystem())
+                .AddSystem(new AreaActionAttackSystem(this))
+                .AddSystem(new AttackCooldownTimerSystem())
+                //.AddSystem(new ApplyDamageSystem())
+                .AddSystem(new DeathSystem())
+                //.AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
+                .AddSystem(new EndAttackSystem());
+
+            return entity;
+        }
 
         public Entity CreateInstantDamageZone(Vector3 position, Entity owner)
         {
