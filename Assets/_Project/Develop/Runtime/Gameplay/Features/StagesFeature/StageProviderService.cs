@@ -10,11 +10,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 {
     public class StageProviderService : IDisposable
     {
-        private ReactiveVariable<int> _currentStageNumber = new();
-        private ReactiveVariable<StageResults> _currentStageResult = new();
+        public event Action StageCompleted;
+        
+        private readonly ReactiveVariable<int> _currentStageNumber = new();
+        private readonly ReactiveVariable<StageResults> _currentStageResult = new();
 
-        private GameplayInputArgs _inputArgs;
-        private StagesFactory _stagesFactory;
+        private readonly GameplayInputArgs _inputArgs;
+        private readonly StagesFactory _stagesFactory;
         private IStage _currentStage;
 
         private IDisposable _stageEndedDisposable;
@@ -22,7 +24,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
         public StageProviderService(GameplayInputArgs inputArgs, StagesFactory stagesFactory)
         {
             _inputArgs = inputArgs;
-            Debug.Log(inputArgs.ToString());
             _stagesFactory = stagesFactory;
         }
 
@@ -67,6 +68,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
         private void OnStageCompleted()
         {
             _currentStageResult.Value = StageResults.Completed;
+            StageCompleted?.Invoke();
         }
 
         public void UpdateCurrent(float deltaTime) => _currentStage.Update(deltaTime);

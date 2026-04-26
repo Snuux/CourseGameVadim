@@ -8,6 +8,7 @@ using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Gameplay.Features.Sensors;
+using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities;
@@ -26,6 +27,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         private readonly CollidersRegistryService _collidersRegistryService;
         private readonly MonoEntitiesFactory _monoEntitiesFactory;
         private readonly ConfigsProviderService _configsProviderService;
+        private readonly StageProviderService _stageProviderService;
 
         private const int BufferDefaultSize = 64;
 
@@ -36,6 +38,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _monoEntitiesFactory = _container.Resolve<MonoEntitiesFactory>();
             _collidersRegistryService = _container.Resolve<CollidersRegistryService>();
             _configsProviderService = _container.Resolve<ConfigsProviderService>();
+            _stageProviderService = _container.Resolve<StageProviderService>();
         }
 
         public Entity CreateTower(Vector3 position, TowerConfig towerConfig, float maxHealth)
@@ -383,8 +386,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new AreaActionAttackSystem(this))
                 .AddSystem(new AttackCooldownTimerSystem())
                 //.AddSystem(new ApplyDamageSystem())
+                .AddSystem(new DeathOnStageCompletedSystem(_stageProviderService))
                 .AddSystem(new DeathSystem())
-                //.AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
                 .AddSystem(new EndAttackSystem());
