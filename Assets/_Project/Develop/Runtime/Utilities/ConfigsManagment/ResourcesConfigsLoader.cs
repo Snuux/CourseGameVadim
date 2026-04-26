@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Configs.Gameplay.Shop;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
+using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Configs.Meta.Statistics;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
@@ -39,6 +40,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(SpawnerEnemiesConfig), "Configs/Gameplay/Entities/SpawnerEnemiesConfig" },
             {typeof(ShopItemsConfig), "Configs/Gameplay/Shop/ShopItemsConfig" },
             {typeof(ShopItemViewsConfig), "Configs/Gameplay/Shop/ShopItemViewsConfig" },
+            
+            {typeof(AbilitiesConfigsContainer), "Configs/Meta/Abilities/AbilitiesConfigsContainer" },
             
         };
 

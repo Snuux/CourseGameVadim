@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Configs.Meta.Statistics;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
@@ -26,8 +27,20 @@ namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
             {
                 WalletData = InitWalletData(),
                 StatisticsData = InitStatisticsData(),
-                CompletedLevels = new()
+                AbilitiesData = InitAbilitiesData()
             };
+        }
+
+        private Dictionary<string, bool> InitAbilitiesData()
+        {
+            Dictionary<string, bool> abilitiesData = new();
+            
+            AbilitiesConfigsContainer abilitiesConfigsContainer = _configsProviderService.GetConfig<AbilitiesConfigsContainer>();
+
+            foreach (AbilityConfig abilityConfig in abilitiesConfigsContainer.AbilityConfigs) 
+                abilitiesData[abilityConfig.ID] = false;
+            
+            return  abilitiesData;
         }
 
         private Dictionary<CurrencyType, int> InitWalletData()

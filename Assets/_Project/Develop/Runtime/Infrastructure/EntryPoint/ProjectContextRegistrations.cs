@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Factories.UI;
+using _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Abilities;
 using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
@@ -40,8 +42,22 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateProjectPresentersFactory);
             container.RegisterAsSingle(CreateViewsFactory);
             container.RegisterAsSingle(CreateTimerService);
+            container.RegisterAsSingle(CreateAbilitiesHolderService);
+            container.RegisterAsSingle(CreateAbilityFactory);
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
             container.RegisterAsSingle<ILevelConfigProviderService>(CreateRandomLevelProviderService);
+        }
+
+        private static AbilityFactory CreateAbilityFactory(DIContainer c)
+        {
+            return new AbilityFactory(c);
+        }
+
+        private static AbilitiesHolderService CreateAbilitiesHolderService(DIContainer c)
+        {
+            return new AbilitiesHolderService(
+                c.Resolve<PlayerDataProvider>(),
+                c.Resolve<ConfigsProviderService>());
         }
 
         private static RandomLevelConfigConfigProviderService CreateRandomLevelProviderService(DIContainer c)

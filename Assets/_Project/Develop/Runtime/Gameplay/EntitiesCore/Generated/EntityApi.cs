@@ -1206,6 +1206,30 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.ApplyDamage.CanApplyDamage() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent AbilitiesC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent>();
+
+		public _Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList Abilities => AbilitiesC.Value;
+
+		public bool TryGetAbilities(out _Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAbilities()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent() { Value = new _Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAbilities(_Project.Develop.Runtime.Configs.Gameplay.Abilities.AbilitiesList value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.AbilityFeature.AbilitiesComponent() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget CurrentTargetC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<_Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> CurrentTarget => CurrentTargetC.Value;

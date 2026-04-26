@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using _Project.Develop.Runtime.Configs.Gameplay.Entities;
+using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
@@ -9,6 +11,7 @@ using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Abilities;
 using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -68,9 +71,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _brainsContext?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
             _gameplayStateContext?.Update(Time.deltaTime);
-            
+
             //Debug:
-            
+
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 _container.Resolve<AllyFactory>().CreateMine(_inputService.MouseWorldPosition);
@@ -96,6 +99,22 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             {
                 _container.Resolve<StageProviderService>().TryAddEnemy(
                     _container.Resolve<ConfigsProviderService>().GetConfig<ArcherConfig>());
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                //var ability = _container.Resolve<AbilitiesHolderService>().AvailableAbilities[0];
+                
+                var abilityConfig = 
+                    _container.Resolve<ConfigsProviderService>().GetConfig<AbilitiesConfigsContainer>().GetConfigBy("MaxHealthSmall");
+                
+                _container.Resolve<AbilityFactory>()
+                    .CreateAbilityFor(_container.Resolve<TowerHolderService>().Tower, abilityConfig);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                _container.Resolve<TowerHolderService>().Tower.Abilities.Elements[0].Activate();
             }
         }
 

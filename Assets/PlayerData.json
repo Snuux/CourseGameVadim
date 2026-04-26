@@ -1,10 +1,13 @@
 {
   "WalletData": {
-    "Gold": 5190
+    "Gold": 110
   },
   "StatisticsData": {
-    "Wins": 155,
-    "Defeats": 24
+    "Wins": 3,
+    "Defeats": 1
   },
-  "CompletedLevels": []
+  "AbilitiesData": {
+    "MaxHealthSmall": false,
+    "MaxHealthBig": false
+  }
 }
