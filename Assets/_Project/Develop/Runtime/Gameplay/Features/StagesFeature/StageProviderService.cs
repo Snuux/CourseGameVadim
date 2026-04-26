@@ -1,5 +1,7 @@
 ﻿using System;
+using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
@@ -33,6 +35,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
         public bool HasNextStage() => CurrentStageNumber.Value < StagesCount;
         
         public void SetShopStateCompleted() => _currentStageResult.Value = StageResults.ShopCompleted;
+
+        public bool TryAddEnemy(EntityConfig enemyConfig)
+        {
+            if (_currentStage is not ClearAllEnemiesStage clearAllEnemiesStage)
+                return false;
+
+            return clearAllEnemiesStage.AddRuntimeEnemy(enemyConfig);
+        }
 
         public void SwitchToNext()
         {

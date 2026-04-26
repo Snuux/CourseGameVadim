@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
@@ -74,13 +75,17 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States
             _inProcess = false;
         }
 
-        private void SpawnEnemies()
+        public bool AddRuntimeEnemy(EntityConfig enemyConfig)
         {
-            foreach (EnemyItemConfig enemyItemConfig in _config.EnemyItems)
-                SpawnEnemy(enemyItemConfig);
+            if (_inProcess == false)
+                return false;
+
+            AddEnemy(new EnemyItemConfig(enemyConfig));
+
+            return true;
         }
 
-        private void SpawnEnemy(EnemyItemConfig enemyItemConfig)
+        private void AddEnemy(EnemyItemConfig enemyItemConfig)
         {
             Entity spawnedEnemy = _enemiesSpawnerService.Spawn(enemyItemConfig);
             
@@ -95,6 +100,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States
             });
 
             _spawnEnemiesToRemoveReason.Add(spawnedEnemy, removeReason);
+        }
+
+        private void SpawnEnemies()
+        {
+            foreach (EnemyItemConfig enemyItemConfig in _config.EnemyItems)
+                AddEnemy(enemyItemConfig);
         }
 
         private void ProcessEnd()
