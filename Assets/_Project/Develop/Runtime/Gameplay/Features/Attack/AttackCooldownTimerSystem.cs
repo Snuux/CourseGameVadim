@@ -23,7 +23,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
 
         public void OnUpdate(float deltaTime)
         {
-            if (_attackCompleted.Value == false || _inAttackCooldown.Value == false)
+            if (_attackCompleted.Value == false && _inAttackCooldown.Value == false)
                 return;
 
             if (_attackCompleted.Value == true)
