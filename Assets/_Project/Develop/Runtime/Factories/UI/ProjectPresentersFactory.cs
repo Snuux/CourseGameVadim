@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.Configs.Meta.Statistics;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Factories.UI;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Statistics;
 using _Project.Develop.Runtime.Meta.Features.Wallet;

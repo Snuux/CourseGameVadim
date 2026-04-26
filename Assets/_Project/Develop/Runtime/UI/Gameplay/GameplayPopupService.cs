@@ -1,6 +1,8 @@
 using System;
+using _Project.Develop.Runtime.Factories.UI;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Gameplay.ResultsPopup;
+using _Project.Develop.Runtime.UI.Gameplay.ShopPopup;
 using _Project.Develop.Runtime.UI.Gameplay.Stages;
 using UnityEngine;
 
@@ -49,6 +51,15 @@ namespace _Project.Develop.Runtime.UI.Gameplay
 
             ShopPopupPresenter popup = _gameplayPresentersFactory.CreateShopPopupPresenter(view);
             
+            OnPopupCreated(popup, view, closedCallback);
+            
+            return popup;
+        }
+        
+        public PlacePopupPresenter OpenPlacePopup(Action closedCallback = null)
+        {
+            PlacePopupView view = ViewsFactory.Create<PlacePopupView>(ViewIDs.PlacePopupView, PopupLayer);
+            PlacePopupPresenter popup = _gameplayPresentersFactory.CreatePlacePopupPresenter(view);
             OnPopupCreated(popup, view, closedCallback);
             
             return popup;

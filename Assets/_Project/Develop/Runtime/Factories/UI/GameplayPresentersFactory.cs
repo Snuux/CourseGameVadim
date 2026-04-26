@@ -1,14 +1,21 @@
+using _Project.Develop.Runtime.Configs.Gameplay.Shop;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Factories.UI;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using _Project.Develop.Runtime.Gameplay.Features.ShopFeature;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Levels;
+using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Gameplay.HealthDisplay;
 using _Project.Develop.Runtime.UI.Gameplay.ResultsPopup;
+using _Project.Develop.Runtime.UI.Gameplay.ShopPopup;
 using _Project.Develop.Runtime.UI.Gameplay.Stages;
+using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using _Project.Develop.Runtime.Utilities.SceneManagment;
 
@@ -42,13 +49,34 @@ namespace _Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<SceneSwitcherService>());
         }
 
+        public ShopItemPresenter CreateShopItemPresenter(ShopItemView view, ShopItemTypes shopItemType)
+        {
+            return new ShopItemPresenter(
+                view,
+                shopItemType,
+                _container.Resolve<ConfigsProviderService>().GetConfig<CurrencyIconsConfig>(),
+                _container.Resolve<ConfigsProviderService>().GetConfig<ShopItemViewsConfig>(),
+                _container.Resolve<ShopService>());
+        }
+
+        public PlacePopupPresenter CreatePlacePopupPresenter(PlacePopupView view)
+        {
+            return new PlacePopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                view,
+                _container.Resolve<ShopService>());
+        }
+
         public ShopPopupPresenter CreateShopPopupPresenter(ShopPopupView view)
         {
             return new ShopPopupPresenter(
                 _container.Resolve<ICoroutinesPerformer>(),
                 view,
-                _container.Resolve<ProjectPresentersFactory>(),
-                _container.Resolve<StageProviderService>());
+                _container.Resolve<StageProviderService>(),
+                _container.Resolve<GameplayPresentersFactory>(),
+                _container.Resolve<ShopService>(),
+                _container.Resolve<ViewsFactory>(),
+                _container.Resolve<GameplayPopupService>());
         }
 
         public StagePresenter CreateStagePresenter(IconTextView view)
@@ -60,7 +88,9 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         {
             return new GameplayScreenPresenter(
                 view,
-                _container.Resolve<GameplayPresentersFactory>());
+                _container.Resolve<GameplayPresentersFactory>(),
+                _container.Resolve<ProjectPresentersFactory>(),
+                _container.Resolve<WalletService>());
         }
 
         public EntityHealthPresenter CreateEntityHealthPresenter(Entity entity, BarWithText view)

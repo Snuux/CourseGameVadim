@@ -13,12 +13,12 @@ namespace _Project.Develop.Runtime.Configs.Meta.Wallet
 
         public Sprite GetSpriteFor(CurrencyType currencyType)
             => _configs.First(config => config.Type == currencyType).Sprite;
+    }
 
-        [Serializable]
-        private class CurrencyConfig
-        {
-            [field: SerializeField] public CurrencyType Type { get; private set; }
-            [field: SerializeField] public Sprite Sprite { get; private set; }
-        }
+    [Serializable]
+    public class CurrencyConfig
+    {
+        [field: SerializeField] public CurrencyType Type { get; private set; }
+        [field: SerializeField] public Sprite Sprite { get; private set; }
     }
 }

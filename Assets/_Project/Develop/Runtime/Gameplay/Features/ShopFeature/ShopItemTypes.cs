@@ -2,6 +2,8 @@
 {
     public enum ShopItemTypes
     {
-        Mine
+        Mine = 1,
+        Turret = 2,
+        Puddle = 3,
     }
 }

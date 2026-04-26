@@ -27,8 +27,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
         {
             base.Enter();
 
-            Debug.Log("Shopping!!!");
-
             _popupService.OpenShopPopup();
         }
 
@@ -38,7 +36,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States.States
                 return;
 
             if (_inputService.LeftMouseButtonDown)
-                _shopService.Buy(ShopItemTypes.Mine, _inputService.MouseWorldPosition);
+            {
+                if (_shopService.CanSpawn)
+                    _shopService.SpawnBoughtItem(_inputService.MouseWorldPosition);
+            }
         }
     }
 }

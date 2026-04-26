@@ -37,7 +37,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(PuddleConfig), "Configs/Gameplay/Entities/Characters/PuddleConfig" },
             
             {typeof(SpawnerEnemiesConfig), "Configs/Gameplay/Entities/SpawnerEnemiesConfig" },
-            {typeof(ShopConfig), "Configs/Gameplay/Shop/ShopConfig" },
+            {typeof(ShopItemsConfig), "Configs/Gameplay/Shop/ShopItemsConfig" },
+            {typeof(ShopItemViewsConfig), "Configs/Gameplay/Shop/ShopItemViewsConfig" },
             
         };
 

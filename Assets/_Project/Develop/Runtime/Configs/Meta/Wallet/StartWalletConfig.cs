@@ -13,12 +13,12 @@ namespace _Project.Develop.Runtime.Configs.Meta.Wallet
 
         public int GetValueFor(CurrencyType currencyType)
             => _values.First(currency => currency.Type == currencyType).Value;
-        
-        [Serializable]
-        public class Currency
-        {
-            [field: SerializeField] public CurrencyType Type { get; private set; }
-            [field: SerializeField] public int Value { get; private set; }
-        }
+    }
+
+    [Serializable]
+    public class Currency
+    {
+        [field: SerializeField] public CurrencyType Type { get; private set; }
+        [field: SerializeField] public int Value { get; private set; }
     }
 }

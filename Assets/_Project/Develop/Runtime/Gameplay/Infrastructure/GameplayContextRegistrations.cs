@@ -1,5 +1,6 @@
 using _Project.Develop.Runtime.Configs.Gameplay.Shop;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
+using _Project.Develop.Runtime.Factories.UI;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
@@ -110,11 +111,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private static ShopService CreateShopService(DIContainer c)
         {
             return new ShopService(
-                c.Resolve<TowerHolderService>(),
                 c.Resolve<AllyFactory>(),
                 c.Resolve<WalletService>(),
                 c.Resolve<EntitiesLifeContext>(),
-                c.Resolve<ConfigsProviderService>().GetConfig<ShopConfig>());
+                c.Resolve<ConfigsProviderService>().GetConfig<ShopItemsConfig>());
         }
 
         private static TowerHolderService CreateTowerHolderService(DIContainer c)

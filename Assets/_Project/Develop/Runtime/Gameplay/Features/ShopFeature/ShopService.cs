@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Develop.Runtime.Configs.Gameplay.Shop;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
@@ -10,41 +11,65 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ShopFeature
 {
     public class ShopService : IDisposable
     {
-        private readonly TowerHolderService _towerHolderService;
+        public event Action Bought;
+        public event Action Spawned;
+        
         private readonly WalletService _walletService;
         private readonly AllyFactory _allyFactory;
         private readonly EntitiesLifeContext _entitiesLifeContext;
-        private readonly ShopConfig _shopConfig;
+        private readonly ShopItemsConfig _shopItemsConfig;
 
         private readonly Dictionary<Entity, IDisposable> _spawnedItemsToRemoveReason = new();
         private IDisposable _towerRegisteredDisposable;
 
+        private ShopItemTypes _shopItemTypeToSpawn;
+
         public ShopService(
-            TowerHolderService towerHolderService,
             AllyFactory allyFactory,
             WalletService walletService,
             EntitiesLifeContext entitiesLifeContext,
-            ShopConfig shopConfig)
+            ShopItemsConfig shopItemsConfig)
         {
-            _towerHolderService = towerHolderService;
             _allyFactory = allyFactory;
             _walletService = walletService;
             _entitiesLifeContext = entitiesLifeContext;
-            _shopConfig = shopConfig;
+            _shopItemsConfig = shopItemsConfig;
         }
 
-        public bool Buy(ShopItemTypes itemType, Vector3 position)
-        {
-            (CurrencyType currencyType, int price) itemPrice = _shopConfig.GetPriceFor(itemType);
+        public IReadOnlyList<ShopItemTypes> AvailableShopItemTypes =>
+            _shopItemsConfig.Configs.Select(t => t.ItemType).ToList();
+        
+        public IReadOnlyList<ShopItemConfig> AvailableShopItemsConfigs => _shopItemsConfig.Configs;
+        
+        public bool CanSpawn { get; private set; }
 
-            if (_walletService.Enough(itemPrice.currencyType, itemPrice.price) == false)
+        public bool TryToPurchase(ShopItemTypes shopItemType)
+        {
+            ShopItemConfig shopItemConfig = _shopItemsConfig.GetPriceFor(shopItemType);
+            
+            if (_walletService.Enough(shopItemConfig.CurrencyType, shopItemConfig.Price) == false)
                 return false;
 
-            _walletService.Spend(itemPrice.currencyType, itemPrice.price);
-            Entity spawnedItem = SpawnItem(itemType, position);
-            RegisterSpawnedItem(spawnedItem);
-
+            Purchase(shopItemType);
+            
             return true;
+        }
+        
+        public void Purchase(ShopItemTypes shopItemType)
+        {
+            ShopItemConfig shopItemConfig = _shopItemsConfig.GetPriceFor(shopItemType);
+            _walletService.Spend(shopItemConfig.CurrencyType, shopItemConfig.Price);
+            _shopItemTypeToSpawn = shopItemType;
+
+            Bought?.Invoke();
+            CanSpawn = true;
+        }
+        
+        public void DeclinePurchase()
+        {
+            ShopItemConfig shopItemConfig = _shopItemsConfig.GetPriceFor(_shopItemTypeToSpawn);
+            _walletService.Add(shopItemConfig.CurrencyType, shopItemConfig.Price);
+            CanSpawn = false;
         }
 
         public void CleanupSpawnedItems()
@@ -69,15 +94,32 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ShopFeature
             _spawnedItemsToRemoveReason.Clear();
         }
 
-        private Entity SpawnItem(ShopItemTypes itemType, Vector3 position)
+        public Entity SpawnBoughtItem(Vector3 position)
         {
-            switch (itemType)
+            Entity entityToSpawn;
+
+            switch (_shopItemTypeToSpawn)
             {
                 case ShopItemTypes.Mine:
-                    return _allyFactory.CreateMine(position);
+                    entityToSpawn = _allyFactory.CreateMine(position);
+                    break;
+                case ShopItemTypes.Turret:
+                    entityToSpawn = _allyFactory.CreateTurret(position);
+                    break;
+                case ShopItemTypes.Puddle:
+                    entityToSpawn = _allyFactory.CreatePuddle(position);
+                    break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(itemType), itemType, "Unsupported shop item type");
+                    throw new ArgumentOutOfRangeException(nameof(_shopItemTypeToSpawn), _shopItemTypeToSpawn,
+                        "Unsupported shop item type");
             }
+
+            RegisterSpawnedItem(entityToSpawn);
+
+            Spawned?.Invoke();
+            CanSpawn = false;
+
+            return entityToSpawn;
         }
 
         private void RegisterSpawnedItem(Entity spawnedItem)

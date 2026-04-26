@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.Utilities.AssetsManagment;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace _Project.Develop.Runtime.UI.Core
+namespace _Project.Develop.Runtime.Factories.UI
 {
     public class ViewsFactory
     {
@@ -21,7 +22,10 @@ namespace _Project.Develop.Runtime.UI.Core
             { ViewIDs.DefeatPopup, "UI/Gameplay/ResultsPopup/DefeatPopup" },
             { ViewIDs.SimpleHealthBar, "UI/Gameplay/HealthBars/SimpleHealthBar" },
             { ViewIDs.MainHeroHealthBar, "UI/Gameplay/HealthBars/HeroHealthBar" },
-            { ViewIDs.ShopPopup, "UI/Gameplay/ResultsPopup/ShopPopup" }
+            { ViewIDs.ShopPopup, "UI/Gameplay/ShopPopup/ShopPopup" },
+            { ViewIDs.ShopItemView, "UI/Gameplay/ShopPopup/ShopItemView" },
+            { ViewIDs.ShopContinueButtonView, "UI/Gameplay/ShopPopup/ShopContinueButtonView" },
+            { ViewIDs.PlacePopupView, "UI/Gameplay/ShopPopup/PlacePopup" }
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)
@@ -32,7 +36,7 @@ namespace _Project.Develop.Runtime.UI.Core
         public TView Create<TView>(string viewID, Transform parent = null) where TView : MonoBehaviour, IView
         {
             if (_viewIDToResourcesPath.TryGetValue(viewID, out string resourcePath) == false)
-                throw new ArgumentException($"You didn;t set reource path for {typeof(TView)}, searched id: {viewID}");
+                throw new ArgumentException($"You did`t set resource path for {typeof(TView)}, searched id: {viewID}");
 
             GameObject prefap = _resourcesAssetsLoader.Load<GameObject>(resourcePath);
             GameObject instance = Object.Instantiate(prefap, parent);
