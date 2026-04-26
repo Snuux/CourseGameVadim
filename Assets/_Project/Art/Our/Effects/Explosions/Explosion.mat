@@ -13,7 +13,6 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHABLEND_ON
-  - _EMISSION
   - _FADING_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 0
@@ -55,7 +54,7 @@ Material:
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
     - _DstBlend: 1
-    - _EmissionEnabled: 1
+    - _EmissionEnabled: 0
     - _FlipbookMode: 0
     - _InvFade: 3
     - _LightingEnabled: 0
@@ -67,7 +66,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.899371, g: 0.26302347, b: 0.26302347, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 16.121708, g: 1.8757927, b: 1.8757927, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 2, b: 0, a: 0}

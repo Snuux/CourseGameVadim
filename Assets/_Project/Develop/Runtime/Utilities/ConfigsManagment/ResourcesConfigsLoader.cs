@@ -27,6 +27,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
             
             {typeof(TowerConfig), "Configs/Gameplay/Entities/Characters/TowerConfig" },
+            {typeof(ArcherConfig), "Configs/Gameplay/Entities/Characters/ArcherConfig" },
+            {typeof(GhostConfig), "Configs/Gameplay/Entities/Characters/GhostConfig" },
             
             {typeof(InstantDamageZoneConfig), "Configs/Gameplay/Entities/Characters/InstantDamageZoneConfig" },
             {typeof(CursorAttackerConfig), "Configs/Gameplay/Entities/CursorAttackerConfig" },

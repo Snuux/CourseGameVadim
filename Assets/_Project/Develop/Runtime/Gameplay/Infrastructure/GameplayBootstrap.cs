@@ -67,27 +67,24 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _entitiesLifeContext?.Update(Time.deltaTime);
             _gameplayStateContext?.Update(Time.deltaTime);
 
+            IInputService inputService = _container.Resolve<IInputService>();
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                IInputService inputService = _container.Resolve<IInputService>();
                 _container.Resolve<AllyFactory>().CreateTurret(inputService.MouseWorldPosition);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                IInputService inputService = _container.Resolve<IInputService>();
                 _container.Resolve<AllyFactory>().CreateMine(inputService.MouseWorldPosition);
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                IInputService inputService = _container.Resolve<IInputService>();
                 _container.Resolve<AllyFactory>().CreatePuddle(inputService.MouseWorldPosition);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                IInputService inputService = _container.Resolve<IInputService>();
                 _container.Resolve<EnemiesFactory>().Create(
                     inputService.MouseWorldPosition,
                     _container.Resolve<ConfigsProviderService>().GetConfig<ArcherConfig>());

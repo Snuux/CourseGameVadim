@@ -546,6 +546,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddSystem(new StartAttackSystem())
+                .AddSystem(new AttackInstantSystem())
                 .AddSystem(new AreaActionAttackSystem(this))
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())

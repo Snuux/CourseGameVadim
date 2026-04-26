@@ -33,7 +33,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             
             ICompositeCondition idleCondition = new CompositeCondition(LogicOperations.Or)
                 .Add(new FuncCondition(() => entity.CurrentTarget == null))
-                .Add(new FuncCondition(() => entity.CurrentTarget.Value.IsDead.Value));
+                .Add(new FuncCondition(() => entity.CurrentTarget.Value.IsDead.Value == true));
 
             AIStateMachine behaviour = new AIStateMachine();
 
