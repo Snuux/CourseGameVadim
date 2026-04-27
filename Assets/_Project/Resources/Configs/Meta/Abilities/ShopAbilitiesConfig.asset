@@ -36,10 +36,10 @@ MonoBehaviour:
     <CurrencyType>k__BackingField: 1
     <Price>k__BackingField: 2
     <ApplyToType>k__BackingField: 2
-    <ActivateOnType>k__BackingField: 2
+    <ActivateOnType>k__BackingField: 1
   - <AbilityConfig>k__BackingField: {fileID: 11400000, guid: 33d970e36ef22964cacb230b376967a5,
       type: 2}
     <CurrencyType>k__BackingField: 1
     <Price>k__BackingField: 2
     <ApplyToType>k__BackingField: 2
-    <ActivateOnType>k__BackingField: 2
+    <ActivateOnType>k__BackingField: 1

@@ -1,3 +1,4 @@
+using System;
 using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 
@@ -19,7 +20,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities
         public override void Activate()
         {
             _entity.MaxHealth.Value += _config.Amount;
-            _entity.CurrentHealth.Value += _config.Amount;
+            _entity.CurrentHealth.Value =
+                Math.Min(_entity.CurrentHealth.Value + _config.Amount, _entity.MaxHealth.Value);
         }
     }
 }

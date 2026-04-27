@@ -1,8 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Abilities;
 using _Project.Develop.Runtime.Meta.Features.Levels;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -42,12 +44,15 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             SceneSwitcherService sceneSwitcherService = container.Resolve<SceneSwitcherService>();
             PlayerDataProvider playerDataProvider = container.Resolve<PlayerDataProvider>();
             ConfigsProviderService configsProviderService = container.Resolve<ConfigsProviderService>();
+            AbilitiesShopService abilitiesShopService = container.Resolve<AbilitiesShopService>();
 
             loadingScreen.Show();
 
             Debug.Log("Начинается инициализация сервисов");
 
-            yield return container.Resolve<ConfigsProviderService>().LoadAsync();
+            yield return configsProviderService.LoadAsync();
+
+            abilitiesShopService.Setup(configsProviderService.GetConfig<ShopAbilitiesConfig>());
 
             bool isPlayerDataSaveExists = false;
 

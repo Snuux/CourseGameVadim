@@ -28,12 +28,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             EmptyState emptyState = new EmptyState();
 
             ICompositeCondition movementCondition = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.CurrentTarget != null))
-                .Add(new FuncCondition(() => entity.CurrentTarget.Value.IsDead.Value == false));
+                .Add(new FuncCondition(() => HasAliveTarget(entity)));
             
             ICompositeCondition idleCondition = new CompositeCondition(LogicOperations.Or)
-                .Add(new FuncCondition(() => entity.CurrentTarget == null))
-                .Add(new FuncCondition(() => entity.CurrentTarget.Value.IsDead.Value == true));
+                .Add(new FuncCondition(() => HasAliveTarget(entity) == false));
 
             AIStateMachine behaviour = new AIStateMachine();
 
@@ -164,6 +162,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
         private float CalcDistanceToTarget(Vector3 source, Vector3 target)
         {
             return (target - source).magnitude;
+        }
+
+        private bool HasAliveTarget(Entity entity)
+        {
+            Entity target = entity.CurrentTarget.Value;
+
+            return target != null && target.IsDead.Value == false;
         }
     }
 }

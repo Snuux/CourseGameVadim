@@ -5,28 +5,24 @@ using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.Utilities.DataManagment;
 using _Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using _Project.Develop.Runtime.Utilities.Reactive;
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Features.Abilities
 {
     public class AbilitiesShopService : IDataReader<PlayerData>, IDataWriter<PlayerData>
     {
         private readonly WalletService _walletService;
-        private readonly ShopAbilitiesConfig _shopAbilitiesConfig;
-        private readonly Dictionary<string, ReactiveVariable<bool>> _abilities = new();
+        private readonly Dictionary<string, bool> _abilities = new();
+
+        private ShopAbilitiesConfig _shopAbilitiesConfig;
 
         public event Action<string> Bought;
 
         public AbilitiesShopService(
             PlayerDataProvider playerDataProvider,
-            WalletService walletService,
-            ShopAbilitiesConfig shopAbilitiesConfig)
+            WalletService walletService)
         {
             _walletService = walletService;
-            _shopAbilitiesConfig = shopAbilitiesConfig;
-
-            foreach (ShopAbilityConfig abilityConfig in _shopAbilitiesConfig.Configs)
-                _abilities.Add(abilityConfig.ID, new ReactiveVariable<bool>());
 
             playerDataProvider.RegisterReader(this);
             playerDataProvider.RegisterWriter(this);
@@ -34,7 +30,17 @@ namespace _Project.Develop.Runtime.Meta.Features.Abilities
 
         public IReadOnlyList<ShopAbilityConfig> AvailableAbilitiesConfigs => _shopAbilitiesConfig.Configs;
 
-        public bool HasAbility(string abilityId) => _abilities[abilityId].Value;
+        public void Setup(ShopAbilitiesConfig shopAbilitiesConfig)
+        {
+            _shopAbilitiesConfig = shopAbilitiesConfig;
+
+            _abilities.Clear();
+
+            foreach (ShopAbilityConfig abilityConfig in _shopAbilitiesConfig.Configs)
+                _abilities.Add(abilityConfig.ID, false);
+        }
+
+        public bool HasAbility(string abilityId) => _abilities[abilityId];
 
         public bool CanPurchase(string abilityId)
         {
@@ -48,13 +54,19 @@ namespace _Project.Develop.Runtime.Meta.Features.Abilities
 
         public bool TryToPurchase(string abilityId)
         {
-            if (CanPurchase(abilityId) == false)
+            if (HasAbility(abilityId))
                 return false;
 
             ShopAbilityConfig shopAbilityConfig = _shopAbilitiesConfig.GetConfigBy(abilityId);
 
+            if (_walletService.Enough(shopAbilityConfig.CurrencyType, shopAbilityConfig.Price) == false)
+            {
+                Debug.Log($"Not enough {shopAbilityConfig.CurrencyType} to purchase ability {abilityId}. Need {shopAbilityConfig.Price}.");
+                return false;
+            }
+
             _walletService.Spend(shopAbilityConfig.CurrencyType, shopAbilityConfig.Price);
-            _abilities[abilityId].Value = true;
+            _abilities[abilityId] = true;
 
             Bought?.Invoke(abilityId);
             return true;
@@ -62,16 +74,16 @@ namespace _Project.Develop.Runtime.Meta.Features.Abilities
 
         public void ReadFrom(PlayerData data)
         {
-            foreach (ReactiveVariable<bool> ability in _abilities.Values)
-                ability.Value = false;
+            foreach (string abilityId in _abilities.Keys.ToList())
+                _abilities[abilityId] = false;
 
             if (data.AbilitiesData == null)
                 return;
 
             foreach (KeyValuePair<string, bool> abilityData in data.AbilitiesData)
             {
-                if (_abilities.TryGetValue(abilityData.Key, out ReactiveVariable<bool> ability))
-                    ability.Value = abilityData.Value;
+                if (_abilities.ContainsKey(abilityData.Key))
+                    _abilities[abilityData.Key] = abilityData.Value;
             }
         }
 
@@ -79,7 +91,7 @@ namespace _Project.Develop.Runtime.Meta.Features.Abilities
         {
             data.AbilitiesData = _abilities.ToDictionary(
                 pair => pair.Key,
-                pair => pair.Value.Value);
+                pair => pair.Value);
         }
     }
 }

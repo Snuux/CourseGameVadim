@@ -19,6 +19,8 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly ILevelConfigProviderService _levelConfigProviderService;
 
+        public readonly MainMenuPopupService _mainMenuPopupService;
+
         private readonly List<IPresenter> _childPresenters = new();
 
         public MainMenuScreenPresenter(
@@ -26,18 +28,21 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             ProjectPresentersFactory projectPresentersFactory, 
             SceneSwitcherService sceneSwitcherService, 
             ICoroutinesPerformer coroutinesPerformer, 
-            ILevelConfigProviderService levelConfigProviderService)
+            ILevelConfigProviderService levelConfigProviderService, 
+            MainMenuPopupService mainMenuPopupService)
         {
             _screen = screen;
             _projectPresentersFactory = projectPresentersFactory;
             _sceneSwitcherService = sceneSwitcherService;
             _coroutinesPerformer = coroutinesPerformer;
             _levelConfigProviderService = levelConfigProviderService;
+            _mainMenuPopupService = mainMenuPopupService;
         }
 
         public void Initialize()
         {
             _screen.StartMenuButtonClicked += OnStartMenuButtonClicked;
+            _screen.AbilitiesPopupButtonClicked += OnAbilitiesPopupButtonClicked;
 
             CreateWallet();
 
@@ -48,6 +53,7 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         public void Dispose()
         {
             _screen.StartMenuButtonClicked -= OnStartMenuButtonClicked;
+            _screen.AbilitiesPopupButtonClicked -= OnAbilitiesPopupButtonClicked;
 
             foreach (IPresenter presenter in _childPresenters)
                 presenter.Dispose();
@@ -64,7 +70,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _childPresenters.Add(statisticsPresenter);
         }
 
-        
         private void OnStartMenuButtonClicked()
         {
             LevelConfig levelConfig = _levelConfigProviderService.Get();
@@ -77,6 +82,11 @@ namespace _Project.Develop.Runtime.UI.MainMenu
                         levelConfig.Reward.Value,
                         levelConfig.TowerMaxHealth,
                         levelConfig.StageConfigs)));
+        }
+
+        private void OnAbilitiesPopupButtonClicked()
+        {
+            _mainMenuPopupService.OpenShopAbilitiesPopup();
         }
     }
 }

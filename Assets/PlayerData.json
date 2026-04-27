@@ -1,12 +1,16 @@
 {
   "WalletData": {
-    "Gold": 1010
+    "Gold": 410,
+    "Diamond": 12
   },
   "StatisticsData": {
-    "Wins": 4,
+    "Wins": 5,
     "Defeats": 1
   },
   "AbilitiesData": {
+    "DamageFirstEnemies": true,
+    "CursorDamageIncrease": true,
+    "Heal": true,
     "MaxHealthSmall": true,
     "MaxHealthBig": false
   }

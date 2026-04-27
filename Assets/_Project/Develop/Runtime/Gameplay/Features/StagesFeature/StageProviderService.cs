@@ -1,16 +1,15 @@
 ﻿using System;
 using _Project.Develop.Runtime.Configs.Gameplay.Entities;
-using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature.States;
 using _Project.Develop.Runtime.Gameplay.Infrastructure;
 using _Project.Develop.Runtime.Utilities.Reactive;
-using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
 {
     public class StageProviderService : IDisposable
     {
         public event Action StageCompleted;
+        public event Action<int> StageStarted;
         
         private readonly ReactiveVariable<int> _currentStageNumber = new();
         private readonly ReactiveVariable<StageResults> _currentStageResult = new();
@@ -63,6 +62,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
         {
             _stageEndedDisposable = _currentStage.Completed.Subscribe(OnStageCompleted);
             _currentStage.Start();
+            StageStarted?.Invoke(_currentStageNumber.Value);
         }
 
         private void OnStageCompleted()

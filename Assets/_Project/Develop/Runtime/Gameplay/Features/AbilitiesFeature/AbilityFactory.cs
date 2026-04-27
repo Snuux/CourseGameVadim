@@ -5,7 +5,6 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AbilityFeature;
 using _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
-using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.ConfigsManagment;
 
@@ -15,12 +14,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
     {
         private readonly DIContainer _container;
         private readonly ShopAbilitiesConfig _shopAbilitiesConfig;
-        private readonly EnemiesSpawnerService _enemiesSpawnerService;
+        private readonly EntitiesLifeContext _entitiesLifeContext;
 
         public AbilityFactory(DIContainer container)
         {
             _container = container;
-            _enemiesSpawnerService = container.Resolve<EnemiesSpawnerService>();
+            _entitiesLifeContext = container.Resolve<EntitiesLifeContext>();
             _shopAbilitiesConfig = container.Resolve<ConfigsProviderService>().GetConfig<ShopAbilitiesConfig>();
         }
 
@@ -42,7 +41,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
                     return entity;
                 
                 case ApplyDamageOnFirstEnemiesAbilityConfig damageOnFirstEnemiesAbilityConfig:
-                    entity.Abilities.Add(new DamageOnFirstEnemiesAbility(entity, damageOnFirstEnemiesAbilityConfig, _enemiesSpawnerService));
+                    entity.Abilities.Add(new ApplyDamageOnFirstEntitiesAbility(entity, damageOnFirstEnemiesAbilityConfig, _entitiesLifeContext));
                     return entity;
                 
                 case HealAbilityConfig healAbilityConfig:

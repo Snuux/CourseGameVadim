@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Factories.UI;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Abilities;
@@ -52,8 +51,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             return new AbilitiesShopService(
                 c.Resolve<PlayerDataProvider>(),
-                c.Resolve<WalletService>(),
-                c.Resolve<ConfigsProviderService>().GetConfig<ShopAbilitiesConfig>());
+                c.Resolve<WalletService>());
         }
 
         private static RandomLevelConfigConfigProviderService CreateRandomLevelProviderService(DIContainer c)

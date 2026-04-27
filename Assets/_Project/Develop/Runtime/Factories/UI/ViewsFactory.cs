@@ -25,7 +25,9 @@ namespace _Project.Develop.Runtime.Factories.UI
             { ViewIDs.ShopPopup, "UI/Gameplay/ShopPopup/ShopPopup" },
             { ViewIDs.ShopItemView, "UI/Gameplay/ShopPopup/ShopItemView" },
             { ViewIDs.ShopContinueButtonView, "UI/Gameplay/ShopPopup/ShopContinueButtonView" },
-            { ViewIDs.PlacePopupView, "UI/Gameplay/ShopPopup/PlacePopup" }
+            { ViewIDs.PlacePopupView, "UI/Gameplay/ShopPopup/PlacePopup" },
+            { ViewIDs.ShopAbilityItemView, "UI/ShopAbilitiesPopup/ShopAbilityItemView" },
+            { ViewIDs.ShopAbilitiesPopupView, "UI/ShopAbilitiesPopup/ShopAbilitiesPopup" }
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

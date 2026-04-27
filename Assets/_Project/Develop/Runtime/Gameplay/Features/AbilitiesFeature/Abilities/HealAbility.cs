@@ -20,7 +20,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities
         public override void Activate()
         {
             float newHealth = _entity.CurrentHealth.Value + _entity.CurrentHealth.Value * _config.HealPercent / 100f;
-            _entity.CurrentHealth.Value += Math.Min(newHealth, _entity.MaxHealth.Value);
+            _entity.CurrentHealth.Value = Math.Min(newHealth, _entity.MaxHealth.Value);
         }
     }
 }

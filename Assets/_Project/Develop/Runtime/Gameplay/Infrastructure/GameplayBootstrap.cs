@@ -105,11 +105,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
             if (Input.GetKeyDown(KeyCode.Alpha6))
                 _abilitiesShopService.TryToPurchase("MaxHealthSmall");
-
-            if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                _container.Resolve<TowerHolderService>().Tower.Abilities.Elements[0].Activate();
-            }
         }
 
         private void LateUpdate()

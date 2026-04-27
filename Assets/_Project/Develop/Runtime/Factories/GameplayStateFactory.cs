@@ -94,7 +94,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.States
             StageProcessState stageProcessState = CreateStageProcessState();
             CursorAttackState cursorAttackState = CreateCursorAttackState();
 
-            GameplayParallelState battleState = new GameplayParallelState(stageProcessState, cursorAttackState);
+            GameplayParallelState battleState = new GameplayParallelState(cursorAttackState, stageProcessState);
             ShopState shopState = CreateCursorShopState();
 
             GameplayStateMachine coreLoopState = new GameplayStateMachine();

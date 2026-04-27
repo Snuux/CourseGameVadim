@@ -15,5 +15,7 @@
         public const string ShopItemView = nameof(ShopItemView);
         public const string ShopContinueButtonView = nameof(ShopContinueButtonView);
         public const string PlacePopupView = nameof(PlacePopupView);
+        public const string ShopAbilityItemView = nameof(ShopAbilityItemView);
+        public const string ShopAbilitiesPopupView = nameof(ShopAbilitiesPopupView);
     }
 }

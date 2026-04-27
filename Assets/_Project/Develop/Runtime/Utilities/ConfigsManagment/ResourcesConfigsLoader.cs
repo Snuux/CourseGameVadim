@@ -42,7 +42,6 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(ShopItemViewsConfig), "Configs/Gameplay/Shop/ShopItemViewsConfig" },
             
             {typeof(ShopAbilitiesConfig), "Configs/Meta/Abilities/ShopAbilitiesConfig" },
-            
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

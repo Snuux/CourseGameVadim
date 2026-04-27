@@ -236,10 +236,12 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidbodyRotationSystem())
+                
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AttackProcessSystem())
                 .AddSystem(new ProjectileActionAttackSystem(this))
                 .AddSystem(new AttackCooldownTimerSystem())
+                
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
@@ -385,7 +387,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new AttackProcessSystem())
                 .AddSystem(new AreaActionAttackSystem(this))
                 .AddSystem(new AttackCooldownTimerSystem())
-                //.AddSystem(new ApplyDamageSystem())
+                
                 .AddSystem(new DeathOnStageCompletedSystem(_stageProviderService))
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())

@@ -1,4 +1,3 @@
-using System;
 using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
@@ -13,7 +12,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
         private readonly ShopAbilitiesConfig _shopAbilitiesConfig;
 
         private AbilitiesList _abilitiesList;
-        private IDisposable _disposable;
 
         public AbilityOnStateChangedActivatorSystem(
             StageProviderService stageProviderService,
@@ -26,10 +24,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
         public void OnInit(Entity entity)
         {
             _abilitiesList = entity.Abilities;
-            _disposable = _stageProviderService.CurrentStageNumber.Subscribe(OnStageNumberChanged);
+            _stageProviderService.StageStarted += OnStageStarted;
         }
 
-        private void OnStageNumberChanged(int arg1, int stageNumber)
+        private void OnStageStarted(int stageNumber)
         {
             if (_abilitiesList == null)
                 return;
@@ -57,7 +55,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
 
         public void OnDispose()
         {
-            _disposable?.Dispose();
+            _stageProviderService.StageStarted -= OnStageStarted;
         }
     }
 }

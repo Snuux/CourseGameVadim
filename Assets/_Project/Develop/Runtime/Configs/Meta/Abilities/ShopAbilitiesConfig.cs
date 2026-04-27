@@ -20,8 +20,8 @@ namespace _Project.Develop.Runtime.Configs.Meta.Abilities
     [Serializable]
     public class ShopAbilityConfig
     {
-        [field: SerializeField] public AbilityConfig AbilityConfig { get; private set; }
         public string ID => AbilityConfig.ID;
+        [field: SerializeField] public AbilityConfig AbilityConfig { get; private set; }
         [field: SerializeField] public CurrencyType CurrencyType { get; private set; } = CurrencyType.Gold;
         [field: SerializeField] public int Price { get; private set; } = 50;
 
