@@ -9,12 +9,12 @@ using _Project.Develop.Runtime.Utilities.Reactive;
 
 namespace _Project.Develop.Runtime.Meta.Features.Abilities
 {
-    public class AbilitiesHolderService : IDataReader<PlayerData>, IDataWriter<PlayerData>
+    public class AbilitiesService : IDataReader<PlayerData>, IDataWriter<PlayerData>
     {
         private readonly ConfigsProviderService _configsProviderService;
         private readonly Dictionary<Ability, ReactiveVariable<bool>> _abilities = new();
 
-        public AbilitiesHolderService(PlayerDataProvider playerDataProvider, ConfigsProviderService configsProviderService)
+        public AbilitiesService(PlayerDataProvider playerDataProvider, ConfigsProviderService configsProviderService)
         {
             _configsProviderService = configsProviderService;
 
@@ -23,12 +23,8 @@ namespace _Project.Develop.Runtime.Meta.Features.Abilities
         }
 
         public List<Ability> AvailableAbilities => _abilities.Keys.ToList();
-
-        public IReadOnlyVariable<bool> IsBought(Ability ability) => _abilities[ability];
-        
-        private AbilitiesConfigsContainer PlayerAbilityConfig => _configsProviderService.GetConfig<AbilitiesConfigsContainer>();
-
-        private AbilityConfig GetAbilityBy(string id) => PlayerAbilityConfig.AbilityConfigs.FirstOrDefault(p => p.ID == id);
+        public List<Ability> BoughtAbilities => _abilities.Where(x => x.Value.Value)
+            .Select(x => x.Key).ToList();
 
         public void ReadFrom(PlayerData data)
         {

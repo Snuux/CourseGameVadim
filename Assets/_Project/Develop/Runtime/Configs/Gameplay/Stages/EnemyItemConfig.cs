@@ -11,10 +11,7 @@ namespace _Project.Develop.Runtime.Configs.Gameplay.Stages
         {
         }
 
-        public EnemyItemConfig(EntityConfig enemyConfig)
-        {
-            EnemyConfig = enemyConfig;
-        }
+        public EnemyItemConfig(EntityConfig enemyConfig) => EnemyConfig = enemyConfig;
 
         [field: SerializeField] public EntityConfig EnemyConfig { get; private set; }
     }

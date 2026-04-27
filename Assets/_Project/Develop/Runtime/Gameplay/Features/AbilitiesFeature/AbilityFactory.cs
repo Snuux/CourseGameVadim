@@ -15,14 +15,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
             _container = container;
         }
 
-        public void CreateAbilityFor(Entity entity, AbilityConfig config)
+        public Entity CreateAbilityFor(Entity entity, AbilityConfig config)
         {
             switch (config)
             {
                 case HealthIncreaseAbilityConfig healthIncreaseAbilityConfig:
                     entity.AddAbilities();
                     entity.Abilities.Add(new HealthIncreaseAbility(entity, healthIncreaseAbilityConfig));
-                    return;
+                    return entity;
 
                 /*case AdditionalDirectionsShotAbilityConfig additionalDirectionsShotAbilityConfig:
                     return new AdditionalDirectionsShotAbility(additionalDirectionsShotAbilityConfig, entity, currentLevel);

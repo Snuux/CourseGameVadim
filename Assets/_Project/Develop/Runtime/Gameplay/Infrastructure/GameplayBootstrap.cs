@@ -103,7 +103,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
             if (Input.GetKeyDown(KeyCode.Alpha6))
             {
-                //var ability = _container.Resolve<AbilitiesHolderService>().AvailableAbilities[0];
+                //var ability = _container.Resolve<AbilitiesService>().AvailableAbilities[0];
                 
                 var abilityConfig = 
                     _container.Resolve<ConfigsProviderService>().GetConfig<AbilitiesConfigsContainer>().GetConfigBy("MaxHealthSmall");
