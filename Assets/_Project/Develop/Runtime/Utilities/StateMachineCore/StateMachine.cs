@@ -7,6 +7,8 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 {
     public abstract class StateMachine<TState> : State, IDisposable, IUpdatableState where TState : class, IState
     {
+        public event Action<IState> StateChanged;
+        
         private List<StateNode<TState>> _states = new();
 
         private StateNode<TState> _currentState;
@@ -42,6 +44,7 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
                 if (transition.Condition.Evaluate())
                 {
                     SwitchState(transition.ToState);
+                    StateChanged?.Invoke(transition.ToState.State);
                     break;
                 }
             }

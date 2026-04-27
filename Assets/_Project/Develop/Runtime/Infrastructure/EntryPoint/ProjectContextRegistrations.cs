@@ -36,16 +36,17 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateSceneLoaderService);
             container.RegisterAsSingle(CreateSceneSwitcherService);
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
-            container.RegisterAsSingle(CreateWalletService).NonLazy();
-            container.RegisterAsSingle(CreateStatisticsService).NonLazy();
             container.RegisterAsSingle(CreatePlayerDataProvider);
             container.RegisterAsSingle(CreateProjectPresentersFactory);
             container.RegisterAsSingle(CreateViewsFactory);
             container.RegisterAsSingle(CreateTimerService);
-            container.RegisterAsSingle(CreateAbilitiesHolderService);
             container.RegisterAsSingle(CreateAbilityFactory);
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
             container.RegisterAsSingle<ILevelConfigProviderService>(CreateRandomLevelProviderService);
+            
+            container.RegisterAsSingle(CreateWalletService).NonLazy();
+            container.RegisterAsSingle(CreateStatisticsService).NonLazy();
+            container.RegisterAsSingle(CreateAbilitiesService).NonLazy();
         }
 
         private static AbilityFactory CreateAbilityFactory(DIContainer c)
@@ -53,9 +54,9 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             return new AbilityFactory(c);
         }
 
-        private static AbilitiesHolderService CreateAbilitiesHolderService(DIContainer c)
+        private static AbilitiesService CreateAbilitiesService(DIContainer c)
         {
-            return new AbilitiesHolderService(
+            return new AbilitiesService(
                 c.Resolve<PlayerDataProvider>(),
                 c.Resolve<ConfigsProviderService>());
         }

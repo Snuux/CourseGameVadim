@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Configs.Meta.Abilities
@@ -12,5 +13,6 @@ namespace _Project.Develop.Runtime.Configs.Meta.Abilities
         public IReadOnlyList<AbilityConfig> AbilityConfigs => _abilityConfigs;
         
         public AbilityConfig GetConfigBy(string id) => _abilityConfigs.First(config => config.ID == id);
+        public AbilityConfig GetConfigBy(Ability ability) => _abilityConfigs.First(config => config.ID == ability.ID);
     }
 }

@@ -1,8 +1,10 @@
 using _Project.Develop.Runtime.Configs.Gameplay.Shop;
 using _Project.Develop.Runtime.Configs.Gameplay.Stages;
+using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Factories.UI;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.ShopFeature;
@@ -11,6 +13,7 @@ using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Features.Abilities;
 using _Project.Develop.Runtime.Meta.Features.Wallet;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.Core;
@@ -50,6 +53,16 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayPresentersFactory);
             container.RegisterAsSingle(CreateGameplayScreenPresenter).NonLazy();
             container.RegisterAsSingle(CreateGameplayPopupService);
+            container.RegisterAsSingle(CreateAbilityDistributionService);
+        }
+
+        private static AbilityDistributionService CreateAbilityDistributionService(DIContainer c)
+        {
+            return new AbilityDistributionService(
+                c.Resolve<EntitiesLifeContext>(),
+                c.Resolve<AbilitiesService>(),
+                c.Resolve<ConfigsProviderService>().GetConfig<AbilitiesConfigsContainer>(),
+                c.Resolve<AbilityFactory>());
         }
 
         private static GameplayPopupService CreateGameplayPopupService(DIContainer c)
