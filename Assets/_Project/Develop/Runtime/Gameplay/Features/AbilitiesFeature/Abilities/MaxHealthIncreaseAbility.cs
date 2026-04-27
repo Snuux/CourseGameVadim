@@ -3,21 +3,23 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities
 {
-    public class HealthIncreaseAbility : Ability
+    public class MaxHealthIncreaseAbility : Ability
     {
+        private readonly HealthIncreaseAbilityConfig _config;
         private readonly Entity _entity;
 
-        public HealthIncreaseAbility(
+        public MaxHealthIncreaseAbility(
             Entity entity,
             HealthIncreaseAbilityConfig config) : base(config.ID)
         {
             _entity = entity;
+            _config = config;
         }
 
         public override void Activate()
         {
-            _entity.MaxHealth.Value += 20;
-            _entity.CurrentHealth.Value += 20;
+            _entity.MaxHealth.Value += _config.Amount;
+            _entity.CurrentHealth.Value += _config.Amount;
         }
     }
 }

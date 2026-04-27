@@ -5,6 +5,7 @@ namespace _Project.Develop.Runtime.Configs.Meta.Abilities
         All,
         Ally,
         Tower,
-        Enemy
+        Enemies,
+        Cursor
     }
 }

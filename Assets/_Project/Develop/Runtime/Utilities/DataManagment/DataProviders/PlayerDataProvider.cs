@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Configs.Meta.Statistics;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
@@ -33,14 +34,9 @@ namespace _Project.Develop.Runtime.Utilities.DataManagment.DataProviders
 
         private Dictionary<string, bool> InitAbilitiesData()
         {
-            Dictionary<string, bool> abilitiesData = new();
-            
-            AbilitiesConfigsContainer abilitiesConfigsContainer = _configsProviderService.GetConfig<AbilitiesConfigsContainer>();
+            ShopAbilitiesConfig shopAbilitiesConfig = _configsProviderService.GetConfig<ShopAbilitiesConfig>();
 
-            foreach (AbilityConfig abilityConfig in abilitiesConfigsContainer.AbilityConfigs) 
-                abilitiesData[abilityConfig.ID] = false;
-            
-            return  abilitiesData;
+            return shopAbilitiesConfig.Configs.ToDictionary(config => config.ID, _ => false);
         }
 
         private Dictionary<CurrencyType, int> InitWalletData()

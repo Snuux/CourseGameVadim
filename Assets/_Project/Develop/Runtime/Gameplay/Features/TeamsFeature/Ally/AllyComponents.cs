@@ -6,4 +6,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally
     {
         
     }
+    
+    public class IsCursor : IEntityComponent
+    {
+        
+    }
 }

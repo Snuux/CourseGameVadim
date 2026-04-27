@@ -19,12 +19,16 @@ namespace _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Enemies
             _radius = spawnerEnemiesConfig.Radius;
             _randomOffset = spawnerEnemiesConfig.Offset;
         }
+        
+        public int Count { get; private set; }
 
         public Entity Spawn(EnemyItemConfig enemyItemConfig)
         {
             Vector2 randomEdgePoint = Random.insideUnitCircle.normalized * (_radius + Random.Range(_randomOffset.x, _randomOffset.y));
             Vector3 spawnPoint = _spawnCenterPosition + new Vector3(randomEdgePoint.x, 0, randomEdgePoint.y);
             Entity spawnedEnemy = _enemiesFactory.Create(spawnPoint, enemyItemConfig.EnemyConfig);
+            
+            Count++;
 
             return spawnedEnemy;
         }

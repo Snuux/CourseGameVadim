@@ -10,17 +10,17 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
     public class AbilityOnStateChangedActivatorSystem : IInitializableSystem, IDisposableSystem
     {
         private readonly StageProviderService _stageProviderService;
-        private readonly AbilitiesConfigsContainer _abilitiesConfigsContainer;
+        private readonly ShopAbilitiesConfig _shopAbilitiesConfig;
 
         private AbilitiesList _abilitiesList;
         private IDisposable _disposable;
 
         public AbilityOnStateChangedActivatorSystem(
             StageProviderService stageProviderService,
-            AbilitiesConfigsContainer abilitiesConfigsContainer)
+            ShopAbilitiesConfig shopAbilitiesConfig)
         {
             _stageProviderService = stageProviderService;
-            _abilitiesConfigsContainer = abilitiesConfigsContainer;
+            _shopAbilitiesConfig = shopAbilitiesConfig;
         }
 
         public void OnInit(Entity entity)
@@ -36,25 +36,28 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
 
             foreach (Ability ability in _abilitiesList.Elements)
             {
-                AbilityActivationTypes activationType = _abilitiesConfigsContainer.GetConfigBy(ability).ActivateOnType;
+                AbilityActivationTypes activationType = _shopAbilitiesConfig.GetConfigBy(ability.ID).ActivateOnType;
 
                 switch (activationType)
                 {
+                    case AbilityActivationTypes.OnAdd:
+                        break;
+
                     case AbilityActivationTypes.LevelBegin:
                         if (stageNumber == 1)
                             ability.Activate();
-                        return;
+                        break;
 
                     case AbilityActivationTypes.StageBegin:
                         ability.Activate();
-                        return;
+                        break;
                 }
             }
         }
 
         public void OnDispose()
         {
-            _disposable.Dispose();
+            _disposable?.Dispose();
         }
     }
 }

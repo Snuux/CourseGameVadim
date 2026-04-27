@@ -1285,5 +1285,12 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally.IsTower() ); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally.IsCursor IsCursorC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally.IsCursor>();
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsCursor()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Ally.IsCursor() ); 
+		}
+
 	}
 }

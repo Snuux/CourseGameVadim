@@ -48,20 +48,26 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayStateFactory);
             container.RegisterAsSingle(CreateGameplayStateContext);
             container.RegisterAsSingle(CreateEnemiesSpawnerService);
+            container.RegisterAsSingle(CreateAbilityFactory);
 
             container.RegisterAsSingle(CreateGameplayUIRoot).NonLazy();
             container.RegisterAsSingle(CreateGameplayPresentersFactory);
             container.RegisterAsSingle(CreateGameplayScreenPresenter).NonLazy();
             container.RegisterAsSingle(CreateGameplayPopupService);
-            container.RegisterAsSingle(CreateAbilityDistributionService);
+            
+            container.RegisterAsSingle(CreateAbilityDistributionService).NonLazy();
+        }
+
+        private static AbilityFactory CreateAbilityFactory(DIContainer c)
+        {
+            return new AbilityFactory(c);
         }
 
         private static AbilityDistributionService CreateAbilityDistributionService(DIContainer c)
         {
             return new AbilityDistributionService(
                 c.Resolve<EntitiesLifeContext>(),
-                c.Resolve<AbilitiesService>(),
-                c.Resolve<ConfigsProviderService>().GetConfig<AbilitiesConfigsContainer>(),
+                c.Resolve<AbilitiesShopService>(),
                 c.Resolve<AbilityFactory>());
         }
 

@@ -31,6 +31,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private ILevelConfigProviderService _randomLevelConfigProviderService;
         private GameplayScreenPresenter _screenPresenter;
         private IInputService _inputService;
+        private AbilitiesShopService _abilitiesShopService;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -53,6 +54,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _gameplayStateContext = _container.Resolve<GameplayStateContext>();
             _screenPresenter = _container.Resolve<GameplayScreenPresenter>();
             _inputService = _container.Resolve<IInputService>();
+            _abilitiesShopService = _container.Resolve<AbilitiesShopService>();
 
             _container.Resolve<AllyFactory>().CreateTower(Vector3.zero, _inputArgs.TowerMaxHealth);
 
@@ -102,15 +104,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                //var ability = _container.Resolve<AbilitiesService>().AvailableAbilities[0];
-                
-                var abilityConfig = 
-                    _container.Resolve<ConfigsProviderService>().GetConfig<AbilitiesConfigsContainer>().GetConfigBy("MaxHealthSmall");
-                
-                _container.Resolve<AbilityFactory>()
-                    .CreateAbilityFor(_container.Resolve<TowerHolderService>().Tower, abilityConfig);
-            }
+                _abilitiesShopService.TryToPurchase("MaxHealthSmall");
 
             if (Input.GetKeyDown(KeyCode.Alpha7))
             {

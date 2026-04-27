@@ -1,14 +1,20 @@
+using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
-using _Project.Develop.Runtime.Infrastructure.DI;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AbilityFeature
 {
     public class AbilityOnAddActivatorSystem : IInitializableSystem, IDisposableSystem
     {
+        private readonly ShopAbilitiesConfig _shopAbilitiesConfig;
         private AbilitiesList _abilitiesList;
+
+        public AbilityOnAddActivatorSystem(ShopAbilitiesConfig shopAbilitiesConfig)
+        {
+            _shopAbilitiesConfig = shopAbilitiesConfig;
+        }
 
         public void OnInit(Entity entity)
         {
@@ -16,18 +22,25 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AbilityFeature
 
             _abilitiesList.Added += OnAbilityAdd;
 
-            foreach (Ability ability in _abilitiesList.Elements) 
-                ability.Activate();
+            foreach (Ability ability in _abilitiesList.Elements)
+                TryActivate(ability);
         }
 
         public void OnDispose()
         {
-            _abilitiesList.Added -= OnAbilityAdd;
+            if (_abilitiesList != null)
+                _abilitiesList.Added -= OnAbilityAdd;
         }
 
         private void OnAbilityAdd(Ability ability)
         {
-            ability.Activate();
+            TryActivate(ability);
+        }
+
+        private void TryActivate(Ability ability)
+        {
+            if (_shopAbilitiesConfig.GetConfigBy(ability.ID).ActivateOnType == AbilityActivationTypes.OnAdd)
+                ability.Activate();
         }
     }
 }

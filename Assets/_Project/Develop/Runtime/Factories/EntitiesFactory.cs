@@ -568,6 +568,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddID(new ReactiveVariable<string>(config.ID))
+                .AddIsCursor()
                 .AddAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
                 .AddAttackRadius(new ReactiveVariable<float>(config.AttackRadius));
 

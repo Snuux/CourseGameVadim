@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Develop.Runtime.Configs.Meta.Abilities;
 using _Project.Develop.Runtime.Factories.UI;
-using _Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Features.Abilities;
 using _Project.Develop.Runtime.Meta.Features.Levels;
@@ -40,25 +40,20 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateProjectPresentersFactory);
             container.RegisterAsSingle(CreateViewsFactory);
             container.RegisterAsSingle(CreateTimerService);
-            container.RegisterAsSingle(CreateAbilityFactory);
             container.RegisterAsSingle<ISaveLoadSerivce>(CreateSaveLoadService);
             container.RegisterAsSingle<ILevelConfigProviderService>(CreateRandomLevelProviderService);
             
             container.RegisterAsSingle(CreateWalletService).NonLazy();
             container.RegisterAsSingle(CreateStatisticsService).NonLazy();
-            container.RegisterAsSingle(CreateAbilitiesService).NonLazy();
+            container.RegisterAsSingle(CreateAbilitiesShopService).NonLazy();
         }
 
-        private static AbilityFactory CreateAbilityFactory(DIContainer c)
+        private static AbilitiesShopService CreateAbilitiesShopService(DIContainer c)
         {
-            return new AbilityFactory(c);
-        }
-
-        private static AbilitiesService CreateAbilitiesService(DIContainer c)
-        {
-            return new AbilitiesService(
+            return new AbilitiesShopService(
                 c.Resolve<PlayerDataProvider>(),
-                c.Resolve<ConfigsProviderService>());
+                c.Resolve<WalletService>(),
+                c.Resolve<ConfigsProviderService>().GetConfig<ShopAbilitiesConfig>());
         }
 
         private static RandomLevelConfigConfigProviderService CreateRandomLevelProviderService(DIContainer c)

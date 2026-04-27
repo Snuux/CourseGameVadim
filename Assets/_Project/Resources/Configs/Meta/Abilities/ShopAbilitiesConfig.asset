@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48dbb0c71a6449b29e4abbc6ac320ea0, type: 3}
+  m_Name: ShopAbilitiesConfig
+  m_EditorClassIdentifier: 
+  _configs:
+  - <AbilityConfig>k__BackingField: {fileID: 11400000, guid: 70f319f8d0b26f941b6db222925ef217,
+      type: 2}
+    <CurrencyType>k__BackingField: 1
+    <Price>k__BackingField: 2
+    <ApplyToType>k__BackingField: 3
+    <ActivateOnType>k__BackingField: 2
+  - <AbilityConfig>k__BackingField: {fileID: 11400000, guid: ba2fff93b2d80e144a9916cc36df53c7,
+      type: 2}
+    <CurrencyType>k__BackingField: 1
+    <Price>k__BackingField: 2
+    <ApplyToType>k__BackingField: 4
+    <ActivateOnType>k__BackingField: 2
+  - <AbilityConfig>k__BackingField: {fileID: 11400000, guid: 028a0d472002c9b4a823db466b4a22ba,
+      type: 2}
+    <CurrencyType>k__BackingField: 1
+    <Price>k__BackingField: 2
+    <ApplyToType>k__BackingField: 2
+    <ActivateOnType>k__BackingField: 2
+  - <AbilityConfig>k__BackingField: {fileID: 11400000, guid: d35c268c00e493844aebc6e5e31de052,
+      type: 2}
+    <CurrencyType>k__BackingField: 1
+    <Price>k__BackingField: 2
+    <ApplyToType>k__BackingField: 2
+    <ActivateOnType>k__BackingField: 2
+  - <AbilityConfig>k__BackingField: {fileID: 11400000, guid: 33d970e36ef22964cacb230b376967a5,
+      type: 2}
+    <CurrencyType>k__BackingField: 1
+    <Price>k__BackingField: 2
+    <ApplyToType>k__BackingField: 2
+    <ActivateOnType>k__BackingField: 2

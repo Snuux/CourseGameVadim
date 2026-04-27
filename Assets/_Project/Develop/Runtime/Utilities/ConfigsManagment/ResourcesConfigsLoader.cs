@@ -41,7 +41,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(ShopItemsConfig), "Configs/Gameplay/Shop/ShopItemsConfig" },
             {typeof(ShopItemViewsConfig), "Configs/Gameplay/Shop/ShopItemViewsConfig" },
             
-            {typeof(AbilitiesConfigsContainer), "Configs/Meta/Abilities/AbilitiesConfigsContainer" },
+            {typeof(ShopAbilitiesConfig), "Configs/Meta/Abilities/ShopAbilitiesConfig" },
             
         };
 
